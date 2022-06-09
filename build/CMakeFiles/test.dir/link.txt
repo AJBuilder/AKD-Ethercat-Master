@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/test.dir/test.c.o  -o test   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 

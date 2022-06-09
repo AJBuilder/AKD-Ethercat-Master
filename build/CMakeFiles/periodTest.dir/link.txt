@@ -1,0 +1,1 @@
+/usr/bin/gcc -g   CMakeFiles/periodTest.dir/periodTest.c.o  -o periodTest   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 

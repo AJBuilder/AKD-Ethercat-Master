@@ -1,0 +1,23 @@
+#!/bin/bash
+
+ethercat slaves
+
+
+
+echo -n "(0x160FE) Dig Outputs:     "  
+ethercat upload -t uint32 0x60fe 1
+
+echo -n "(0x260FE) DigOut  Bitmask: "
+ethercat upload -t uint32 0x60fe 2
+
+echo -n "(0x01002) Mnf Status Reg:  "
+ethercat upload -t uint32 0x1002 0
+
+echo -n "(0x06040) CANOpen Control: "
+ethercat upload -t uint16 0x6040 0
+
+echo -n "(0x06041) CANOpen Status:  "
+ethercat upload -t uint16 0x6041 0
+
+echo -n "(0x06060) Operation Mode:  "
+ethercat upload -t uint8 0x6060 0

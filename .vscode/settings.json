@@ -1,0 +1,12 @@
+{
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "${workspaceFolder}/.",
+    "cmake.debugConfig": {
+        "args": [
+            "eno3"
+        ]
+    },
+    "files.associations": {
+        "queue.h": "c"
+    }
+}

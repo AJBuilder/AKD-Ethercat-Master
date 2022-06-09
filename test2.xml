@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<EtherCATInfo>
+  <!-- Slave 0 -->
+  <Vendor>
+    <Id>106</Id>
+  </Vendor>
+  <Descriptions>
+    <Devices>
+      <Device>
+        <Type ProductCode="#x00414b44" RevisionNo="#x00000002">AKD</Type>
+        <Name><![CDATA[AKD EtherCAT Drive (CoE)]]></Name>
+        <Sm Enable="1" StartAddress="#x1800" ControlByte="#x26" DefaultSize="1024" />
+        <Sm Enable="1" StartAddress="#x1c00" ControlByte="#x22" DefaultSize="1024" />
+        <Sm Enable="1" StartAddress="#x1100" ControlByte="#x24" DefaultSize="0" />
+        <Sm Enable="1" StartAddress="#x1140" ControlByte="#x20" DefaultSize="0" />
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1600</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+        </RxPdo>
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1601</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6060</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>8</BitLen>
+            <Name></Name>
+            <DataType>UINT8</DataType>
+          </Entry>
+        </RxPdo>
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1602</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x607a</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </RxPdo>
+        <RxPdo Sm="2" Fixed="1" Mandatory="1">
+          <Index>#x1603</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6040</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x60ff</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </RxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a00</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+        </TxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a01</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6061</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>8</BitLen>
+            <Name></Name>
+            <DataType>UINT8</DataType>
+          </Entry>
+        </TxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a02</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x6064</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </TxPdo>
+        <TxPdo Sm="3" Fixed="1" Mandatory="1">
+          <Index>#x1a03</Index>
+          <Name></Name>
+          <Entry>
+            <Index>#x6041</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>16</BitLen>
+            <Name></Name>
+            <DataType>UINT16</DataType>
+          </Entry>
+          <Entry>
+            <Index>#x606c</Index>
+            <SubIndex>0</SubIndex>
+            <BitLen>32</BitLen>
+            <Name></Name>
+            <DataType>UINT32</DataType>
+          </Entry>
+        </TxPdo>
+      </Device>
+    </Devices>
+  </Descriptions>
+</EtherCATInfo>

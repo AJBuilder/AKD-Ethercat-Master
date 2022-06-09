@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "Disabling rxPDO: "
+sudo ethercat download -t uint8 0x1C12 0 0
+
+#echo "Changing rxPDO assignment to 0x1725: "
+#sudo ethercat download -t uint16 0x1C12 1 0x1725
+
+echo "Changing rxPDO assignment to 0x1702: "
+sudo ethercat download -t uint16 0x1C12 1 0x1702
+
+echo "Enabling rxPDO: "
+sudo ethercat download -t uint8 0x1C12 0 1
+
+
+
+echo "Disabling txPDO: "
+sudo ethercat download -t uint8 0x1C13 0 0
+
+echo "Changing txPDO assignment to 0x1B01: "
+sudo ethercat download -t uint16 0x1C13 1 0x1B01
+
+echo "Enabling txPDO: "
+sudo ethercat download -t uint8 0x1C13 0 1
+
+echo "Setting for Profile Pos Mode"
+sudo ethercat download -t uint8 0x6060 0 1
