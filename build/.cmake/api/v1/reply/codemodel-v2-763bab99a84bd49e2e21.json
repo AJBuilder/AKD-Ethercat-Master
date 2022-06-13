@@ -17,8 +17,7 @@
 					[
 						0,
 						1,
-						2,
-						3
+						2
 					]
 				}
 			],
@@ -35,8 +34,7 @@
 					[
 						0,
 						1,
-						2,
-						3
+						2
 					]
 				}
 			],
@@ -45,29 +43,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "dcTest::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-dcTest-Debug-bb604a6b868b6ac4372f.json",
+					"jsonFile" : "target-dcTest-Debug-571531bcb337f1a38885.json",
 					"name" : "dcTest",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "periodTest::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-periodTest-Debug-64c26759b36c629be769.json",
+					"jsonFile" : "target-periodTest-Debug-c58ce113e94114fddcdb.json",
 					"name" : "periodTest",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-simpleMtrCtrl-Debug-a1a414b88543f3288153.json",
+					"jsonFile" : "target-simpleMtrCtrl-Debug-f1d0d81cd0c3989dce4b.json",
 					"name" : "simpleMtrCtrl",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "test::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-test-Debug-a9653dd6f7e6433e059d.json",
-					"name" : "test",
 					"projectIndex" : 0
 				}
 			]

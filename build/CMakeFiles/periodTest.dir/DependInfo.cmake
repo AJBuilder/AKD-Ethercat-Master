@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/bench/EtherCATBench/periodTest.c" "/home/bench/EtherCATBench/build/CMakeFiles/periodTest.dir/periodTest.c.o"
+  "/home/bench/EtherCATBench/src/periodTest.c" "/home/bench/EtherCATBench/build/CMakeFiles/periodTest.dir/src/periodTest.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/periodTest.dir/periodTest.c.o"
+  "CMakeFiles/periodTest.dir/src/periodTest.c.o"
   "periodTest"
   "periodTest.pdb"
 )

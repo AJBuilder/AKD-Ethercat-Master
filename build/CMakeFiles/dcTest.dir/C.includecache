@@ -68,7 +68,7 @@ stdint.h
 pthread.h
 -
 
-/home/bench/EtherCATBench/dcTest.c
+/home/bench/EtherCATBench/src/dcTest.c
 stdio.h
 -
 string.h
@@ -76,5 +76,5 @@ string.h
 inttypes.h
 -
 ethercat.h
-/home/bench/EtherCATBench/ethercat.h
+/home/bench/EtherCATBench/src/ethercat.h
 

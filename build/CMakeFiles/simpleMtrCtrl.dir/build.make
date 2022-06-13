@@ -57,27 +57,27 @@ include CMakeFiles/simpleMtrCtrl.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/simpleMtrCtrl.dir/flags.make
 
-CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o: CMakeFiles/simpleMtrCtrl.dir/flags.make
-CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o: ../simpleMtrCtrl.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o   -c /home/bench/EtherCATBench/simpleMtrCtrl.c
+CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o: CMakeFiles/simpleMtrCtrl.dir/flags.make
+CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o: ../src/simpleMtrCtrl.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o   -c /home/bench/EtherCATBench/src/simpleMtrCtrl.c
 
-CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/bench/EtherCATBench/simpleMtrCtrl.c > CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.i
+CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/bench/EtherCATBench/src/simpleMtrCtrl.c > CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.i
 
-CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/bench/EtherCATBench/simpleMtrCtrl.c -o CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.s
+CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/bench/EtherCATBench/src/simpleMtrCtrl.c -o CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.s
 
 # Object files for target simpleMtrCtrl
 simpleMtrCtrl_OBJECTS = \
-"CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o"
+"CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o"
 
 # External object files for target simpleMtrCtrl
 simpleMtrCtrl_EXTERNAL_OBJECTS =
 
-simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o
+simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o
 simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/build.make
 simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable simpleMtrCtrl"

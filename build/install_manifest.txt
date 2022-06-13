@@ -1,4 +1,3 @@
-/usr/local/build/test
 /usr/local/build/periodTest
 /usr/local/build/simpleMtrCtrl
 /usr/local/build/dcTest

@@ -57,27 +57,27 @@ include CMakeFiles/dcTest.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/dcTest.dir/flags.make
 
-CMakeFiles/dcTest.dir/dcTest.c.o: CMakeFiles/dcTest.dir/flags.make
-CMakeFiles/dcTest.dir/dcTest.c.o: ../dcTest.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/dcTest.dir/dcTest.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dcTest.dir/dcTest.c.o   -c /home/bench/EtherCATBench/dcTest.c
+CMakeFiles/dcTest.dir/src/dcTest.c.o: CMakeFiles/dcTest.dir/flags.make
+CMakeFiles/dcTest.dir/src/dcTest.c.o: ../src/dcTest.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/dcTest.dir/src/dcTest.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/dcTest.dir/src/dcTest.c.o   -c /home/bench/EtherCATBench/src/dcTest.c
 
-CMakeFiles/dcTest.dir/dcTest.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dcTest.dir/dcTest.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/bench/EtherCATBench/dcTest.c > CMakeFiles/dcTest.dir/dcTest.c.i
+CMakeFiles/dcTest.dir/src/dcTest.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dcTest.dir/src/dcTest.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/bench/EtherCATBench/src/dcTest.c > CMakeFiles/dcTest.dir/src/dcTest.c.i
 
-CMakeFiles/dcTest.dir/dcTest.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dcTest.dir/dcTest.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/bench/EtherCATBench/dcTest.c -o CMakeFiles/dcTest.dir/dcTest.c.s
+CMakeFiles/dcTest.dir/src/dcTest.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dcTest.dir/src/dcTest.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/bench/EtherCATBench/src/dcTest.c -o CMakeFiles/dcTest.dir/src/dcTest.c.s
 
 # Object files for target dcTest
 dcTest_OBJECTS = \
-"CMakeFiles/dcTest.dir/dcTest.c.o"
+"CMakeFiles/dcTest.dir/src/dcTest.c.o"
 
 # External object files for target dcTest
 dcTest_EXTERNAL_OBJECTS =
 
-dcTest: CMakeFiles/dcTest.dir/dcTest.c.o
+dcTest: CMakeFiles/dcTest.dir/src/dcTest.c.o
 dcTest: CMakeFiles/dcTest.dir/build.make
 dcTest: CMakeFiles/dcTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable dcTest"

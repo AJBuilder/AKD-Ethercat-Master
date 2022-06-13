@@ -48,5 +48,4 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/dcTest.dir/DependInfo.cmake"
   "CMakeFiles/simpleMtrCtrl.dir/DependInfo.cmake"
   "CMakeFiles/periodTest.dir/DependInfo.cmake"
-  "CMakeFiles/test.dir/DependInfo.cmake"
   )

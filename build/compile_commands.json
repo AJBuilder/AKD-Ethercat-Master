@@ -1,22 +1,17 @@
 [
 {
   "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/dcTest.dir/dcTest.c.o   -c /home/bench/EtherCATBench/dcTest.c",
-  "file": "/home/bench/EtherCATBench/dcTest.c"
+  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/dcTest.dir/src/dcTest.c.o   -c /home/bench/EtherCATBench/src/dcTest.c",
+  "file": "/home/bench/EtherCATBench/src/dcTest.c"
 },
 {
   "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o   -c /home/bench/EtherCATBench/simpleMtrCtrl.c",
-  "file": "/home/bench/EtherCATBench/simpleMtrCtrl.c"
+  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o   -c /home/bench/EtherCATBench/src/simpleMtrCtrl.c",
+  "file": "/home/bench/EtherCATBench/src/simpleMtrCtrl.c"
 },
 {
   "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/periodTest.dir/periodTest.c.o   -c /home/bench/EtherCATBench/periodTest.c",
-  "file": "/home/bench/EtherCATBench/periodTest.c"
-},
-{
-  "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/test.dir/test.c.o   -c /home/bench/EtherCATBench/test.c",
-  "file": "/home/bench/EtherCATBench/test.c"
+  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/periodTest.dir/src/periodTest.c.o   -c /home/bench/EtherCATBench/src/periodTest.c",
+  "file": "/home/bench/EtherCATBench/src/periodTest.c"
 }
 ]

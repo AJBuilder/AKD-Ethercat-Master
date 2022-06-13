@@ -1,1 +1,1 @@
-/usr/bin/gcc -g   CMakeFiles/dcTest.dir/dcTest.c.o  -o dcTest   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 
+/usr/bin/gcc -g   CMakeFiles/dcTest.dir/src/dcTest.c.o  -o dcTest   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 

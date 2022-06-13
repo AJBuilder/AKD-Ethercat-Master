@@ -7,4 +7,3 @@
 /home/bench/EtherCATBench/build/CMakeFiles/simpleMtrCtrl.dir
 /home/bench/EtherCATBench/build/CMakeFiles/edit_cache.dir
 /home/bench/EtherCATBench/build/CMakeFiles/periodTest.dir
-/home/bench/EtherCATBench/build/CMakeFiles/test.dir

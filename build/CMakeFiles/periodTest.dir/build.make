@@ -57,27 +57,27 @@ include CMakeFiles/periodTest.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/periodTest.dir/flags.make
 
-CMakeFiles/periodTest.dir/periodTest.c.o: CMakeFiles/periodTest.dir/flags.make
-CMakeFiles/periodTest.dir/periodTest.c.o: ../periodTest.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/periodTest.dir/periodTest.c.o"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/periodTest.dir/periodTest.c.o   -c /home/bench/EtherCATBench/periodTest.c
+CMakeFiles/periodTest.dir/src/periodTest.c.o: CMakeFiles/periodTest.dir/flags.make
+CMakeFiles/periodTest.dir/src/periodTest.c.o: ../src/periodTest.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/periodTest.dir/src/periodTest.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/periodTest.dir/src/periodTest.c.o   -c /home/bench/EtherCATBench/src/periodTest.c
 
-CMakeFiles/periodTest.dir/periodTest.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/periodTest.dir/periodTest.c.i"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/bench/EtherCATBench/periodTest.c > CMakeFiles/periodTest.dir/periodTest.c.i
+CMakeFiles/periodTest.dir/src/periodTest.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/periodTest.dir/src/periodTest.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/bench/EtherCATBench/src/periodTest.c > CMakeFiles/periodTest.dir/src/periodTest.c.i
 
-CMakeFiles/periodTest.dir/periodTest.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/periodTest.dir/periodTest.c.s"
-	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/bench/EtherCATBench/periodTest.c -o CMakeFiles/periodTest.dir/periodTest.c.s
+CMakeFiles/periodTest.dir/src/periodTest.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/periodTest.dir/src/periodTest.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/bench/EtherCATBench/src/periodTest.c -o CMakeFiles/periodTest.dir/src/periodTest.c.s
 
 # Object files for target periodTest
 periodTest_OBJECTS = \
-"CMakeFiles/periodTest.dir/periodTest.c.o"
+"CMakeFiles/periodTest.dir/src/periodTest.c.o"
 
 # External object files for target periodTest
 periodTest_EXTERNAL_OBJECTS =
 
-periodTest: CMakeFiles/periodTest.dir/periodTest.c.o
+periodTest: CMakeFiles/periodTest.dir/src/periodTest.c.o
 periodTest: CMakeFiles/periodTest.dir/build.make
 periodTest: CMakeFiles/periodTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable periodTest"

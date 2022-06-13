@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o"
+  "CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o"
   "simpleMtrCtrl"
   "simpleMtrCtrl.pdb"
 )

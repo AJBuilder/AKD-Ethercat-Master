@@ -195,126 +195,86 @@ periodTest/fast:
 	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/build
 .PHONY : periodTest/fast
 
-#=============================================================================
-# Target rules for targets named test
+src/dcTest.o: src/dcTest.c.o
 
-# Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test
-.PHONY : test
-
-# fast build rule for target.
-test/fast:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
-
-dcTest.o: dcTest.c.o
-
-.PHONY : dcTest.o
+.PHONY : src/dcTest.o
 
 # target to build an object file
-dcTest.c.o:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/dcTest.c.o
-.PHONY : dcTest.c.o
+src/dcTest.c.o:
+	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/src/dcTest.c.o
+.PHONY : src/dcTest.c.o
 
-dcTest.i: dcTest.c.i
+src/dcTest.i: src/dcTest.c.i
 
-.PHONY : dcTest.i
+.PHONY : src/dcTest.i
 
 # target to preprocess a source file
-dcTest.c.i:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/dcTest.c.i
-.PHONY : dcTest.c.i
+src/dcTest.c.i:
+	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/src/dcTest.c.i
+.PHONY : src/dcTest.c.i
 
-dcTest.s: dcTest.c.s
+src/dcTest.s: src/dcTest.c.s
 
-.PHONY : dcTest.s
+.PHONY : src/dcTest.s
 
 # target to generate assembly for a file
-dcTest.c.s:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/dcTest.c.s
-.PHONY : dcTest.c.s
+src/dcTest.c.s:
+	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/src/dcTest.c.s
+.PHONY : src/dcTest.c.s
 
-periodTest.o: periodTest.c.o
+src/periodTest.o: src/periodTest.c.o
 
-.PHONY : periodTest.o
+.PHONY : src/periodTest.o
 
 # target to build an object file
-periodTest.c.o:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/periodTest.c.o
-.PHONY : periodTest.c.o
+src/periodTest.c.o:
+	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/src/periodTest.c.o
+.PHONY : src/periodTest.c.o
 
-periodTest.i: periodTest.c.i
+src/periodTest.i: src/periodTest.c.i
 
-.PHONY : periodTest.i
+.PHONY : src/periodTest.i
 
 # target to preprocess a source file
-periodTest.c.i:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/periodTest.c.i
-.PHONY : periodTest.c.i
+src/periodTest.c.i:
+	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/src/periodTest.c.i
+.PHONY : src/periodTest.c.i
 
-periodTest.s: periodTest.c.s
+src/periodTest.s: src/periodTest.c.s
 
-.PHONY : periodTest.s
+.PHONY : src/periodTest.s
 
 # target to generate assembly for a file
-periodTest.c.s:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/periodTest.c.s
-.PHONY : periodTest.c.s
+src/periodTest.c.s:
+	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/src/periodTest.c.s
+.PHONY : src/periodTest.c.s
 
-simpleMtrCtrl.o: simpleMtrCtrl.c.o
+src/simpleMtrCtrl.o: src/simpleMtrCtrl.c.o
 
-.PHONY : simpleMtrCtrl.o
+.PHONY : src/simpleMtrCtrl.o
 
 # target to build an object file
-simpleMtrCtrl.c.o:
-	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o
-.PHONY : simpleMtrCtrl.c.o
+src/simpleMtrCtrl.c.o:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o
+.PHONY : src/simpleMtrCtrl.c.o
 
-simpleMtrCtrl.i: simpleMtrCtrl.c.i
+src/simpleMtrCtrl.i: src/simpleMtrCtrl.c.i
 
-.PHONY : simpleMtrCtrl.i
-
-# target to preprocess a source file
-simpleMtrCtrl.c.i:
-	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.i
-.PHONY : simpleMtrCtrl.c.i
-
-simpleMtrCtrl.s: simpleMtrCtrl.c.s
-
-.PHONY : simpleMtrCtrl.s
-
-# target to generate assembly for a file
-simpleMtrCtrl.c.s:
-	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.s
-.PHONY : simpleMtrCtrl.c.s
-
-test.o: test.c.o
-
-.PHONY : test.o
-
-# target to build an object file
-test.c.o:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.c.o
-.PHONY : test.c.o
-
-test.i: test.c.i
-
-.PHONY : test.i
+.PHONY : src/simpleMtrCtrl.i
 
 # target to preprocess a source file
-test.c.i:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.c.i
-.PHONY : test.c.i
+src/simpleMtrCtrl.c.i:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.i
+.PHONY : src/simpleMtrCtrl.c.i
 
-test.s: test.c.s
+src/simpleMtrCtrl.s: src/simpleMtrCtrl.c.s
 
-.PHONY : test.s
+.PHONY : src/simpleMtrCtrl.s
 
 # target to generate assembly for a file
-test.c.s:
-	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.c.s
-.PHONY : test.c.s
+src/simpleMtrCtrl.c.s:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.s
+.PHONY : src/simpleMtrCtrl.c.s
 
 # Help Target
 help:
@@ -331,19 +291,15 @@ help:
 	@echo "... simpleMtrCtrl"
 	@echo "... edit_cache"
 	@echo "... periodTest"
-	@echo "... test"
-	@echo "... dcTest.o"
-	@echo "... dcTest.i"
-	@echo "... dcTest.s"
-	@echo "... periodTest.o"
-	@echo "... periodTest.i"
-	@echo "... periodTest.s"
-	@echo "... simpleMtrCtrl.o"
-	@echo "... simpleMtrCtrl.i"
-	@echo "... simpleMtrCtrl.s"
-	@echo "... test.o"
-	@echo "... test.i"
-	@echo "... test.s"
+	@echo "... src/dcTest.o"
+	@echo "... src/dcTest.i"
+	@echo "... src/dcTest.s"
+	@echo "... src/periodTest.o"
+	@echo "... src/periodTest.i"
+	@echo "... src/periodTest.s"
+	@echo "... src/simpleMtrCtrl.o"
+	@echo "... src/simpleMtrCtrl.i"
+	@echo "... src/simpleMtrCtrl.s"
 .PHONY : help
 
 

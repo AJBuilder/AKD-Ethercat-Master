@@ -7,6 +7,8 @@
         ]
     },
     "files.associations": {
-        "queue.h": "c"
+        "queue.h": "c",
+        "ethercatdc.h": "c",
+        "ethercatsoe.h": "c"
     }
 }

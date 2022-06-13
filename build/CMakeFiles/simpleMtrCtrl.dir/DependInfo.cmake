@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/bench/EtherCATBench/simpleMtrCtrl.c" "/home/bench/EtherCATBench/build/CMakeFiles/simpleMtrCtrl.dir/simpleMtrCtrl.c.o"
+  "/home/bench/EtherCATBench/src/simpleMtrCtrl.c" "/home/bench/EtherCATBench/build/CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

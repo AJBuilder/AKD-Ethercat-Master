@@ -68,7 +68,7 @@ stdint.h
 pthread.h
 -
 
-/home/bench/EtherCATBench/simpleMtrCtrl.c
+/home/bench/EtherCATBench/src/simpleMtrCtrl.c
 stdio.h
 -
 stdlib.h
@@ -82,5 +82,5 @@ inttypes.h
 pthread.h
 -
 ethercat.h
-/home/bench/EtherCATBench/ethercat.h
+/home/bench/EtherCATBench/src/ethercat.h
 

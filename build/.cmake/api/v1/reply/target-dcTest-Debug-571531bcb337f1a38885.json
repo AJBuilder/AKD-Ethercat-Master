@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "test"
+			"path" : "dcTest"
 		}
 	],
 	"backtrace" : 1,
@@ -27,25 +27,25 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 8,
+				"line" : 10,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 31,
+				"line" : 30,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 14,
+				"line" : 20,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 13,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -73,7 +73,7 @@
 			]
 		}
 	],
-	"id" : "test::@6890427a1f51a3e7e1df",
+	"id" : "dcTest::@6890427a1f51a3e7e1df",
 	"install" : 
 	{
 		"destinations" : 
@@ -128,8 +128,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "test",
-	"nameOnDisk" : "test",
+	"name" : "dcTest",
+	"nameOnDisk" : "dcTest",
 	"paths" : 
 	{
 		"build" : ".",
@@ -150,7 +150,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "test.c",
+			"path" : "src/dcTest.c",
 			"sourceGroupIndex" : 0
 		}
 	],
