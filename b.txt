@@ -1,0 +1,1203 @@
+Starting simpleMtrCtrl wrapper for acrEcat
+Starting EtherCAT Master
+ec_init on (null) succeeded.
+1 slaves found. Configuring PDO assigments...
+PDO's configured!
+Configuring DC. Should be in PRE-OP. State: PRE_OP
+Found slaves with DC.
+Slaves mapped, state to SAFE_OP... State: SAFE_OP
+Calculated workcounter 3
+Talker started! Synccount needs to reach : 125
+Spawning Controller
+WKC:  0( 3)	DiffDC:            0	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8009760	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8009200	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8005600	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8008600	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8007040	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8003679	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8020880	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8006560	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8007520	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8060321	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8064400	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7987440	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8069560	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8009200	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000960	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8042000	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8004240	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7944721	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002800	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002560	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8001280	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8001840	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8004640	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7996080	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8021120	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7995280	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997520	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7996400	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7996240	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997840	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002240	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7993520	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7995200	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997440	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7994560	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7956800	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7996560	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8046000	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7995280	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7973680	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997600	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7991040	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8022720	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8055240	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002720	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997440	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8001480	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999120	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7994800	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8038720	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997200	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000480	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7998400	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7987840	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7995360	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000000	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7996001	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7998640	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999519	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999600	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7995040	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7998400	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997680	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000000	inSyncCount:    5	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7996080	inSyncCount:   11	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7997280	inSyncCount:   17	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8004000	inSyncCount:   24	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999120	inSyncCount:   30	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999520	inSyncCount:   36	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8012320	inSyncCount:   42	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002880	inSyncCount:    6	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002000	inSyncCount:   12	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7998960	inSyncCount:   18	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999280	inSyncCount:   25	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002120	inSyncCount:   31	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7992720	inSyncCount:   37	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8001440	inSyncCount:   43	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000680	inSyncCount:   50	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999440	inSyncCount:   56	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999761	inSyncCount:   62	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999999	inSyncCount:   68	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8013280	inSyncCount:   75	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000640	inSyncCount:   81	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8013040	inSyncCount:   87	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8003200	inSyncCount:   94	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8023120	inSyncCount:  100	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8000400	inSyncCount:  106	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8018000	inSyncCount:  112	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8004000	inSyncCount:  119	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      7999840	inSyncCount:  125	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:      8002640	inSyncCount:  131	In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+
+Master within sync window. Enabling sync0 generation!
+
+Requesting operational state for all slaves
+In control!		CoeCtrlWord is: 0
+WKC:  3( 3)	DiffDC:     14830800	inSyncCount:    0	In control!		CoeCtrlWord is: 0
+
+Operational state reached for all slaves. Starting controller...
+In control!		CoeCtrlWord is: 0
+In control!		CoeCtrlWord is: 0
+In control!	Updating!		CoeCtrlWord is: 10
+In control!		CoeCtrlWord is: 0
+In control!	Updating!		CoeCtrlWord is: 10
+In control!	Updating!		CoeCtrlWord is: 10
+
+CoE State: FAULT!                   (0x0218)	CoE Control: Fault Reset              (0x0090)
+WKC:  3( 3)	DiffDC:      8013600	inSyncCount:    7	In control!	Updating!		CoeCtrlWord is: 90
+In control!	Updating!		CoeCtrlWord is: 90
+In control!		CoeCtrlWord is: 80
+In control!	Updating!		CoeCtrlWord is: 90
+In control!	Updating!		CoeCtrlWord is: 90
+In control!	Updating!		CoeCtrlWord is: 90
+WKC:  3( 3)	DiffDC:      8001441	inSyncCount:   13	In control!		CoeCtrlWord is: 80
+In control!	Updating!		CoeCtrlWord is: 90
+In control!	Updating!		CoeCtrlWord is: 90
+In control!	Updating!		CoeCtrlWord is: 90
+In control!	Updating!		CoeCtrlWord is: 90
+In control!		CoeCtrlWord is: 80
+
+CoE State: Switch-On Disabled       (0x0250)	CoE Control: Shutdown                 (0x0016)
+WKC:  3( 3)	DiffDC:      8002800	inSyncCount:   19	In control!	Updating!		CoeCtrlWord is: 16
+In control!	Updating!		CoeCtrlWord is: 16
+In control!	Updating!		CoeCtrlWord is: 16
+In control!	Updating!		CoeCtrlWord is: 16
+In control!		CoeCtrlWord is: 6
+In control!	Updating!		CoeCtrlWord is: 16
+In control!	Updating!		CoeCtrlWord is: 16
+
+CoE State: Ready To Switch-On       (0x0231)	CoE Control: Switch-On                (0x0017)
+WKC:  3( 3)	DiffDC:      8001040	inSyncCount:   26	In control!	Updating!		CoeCtrlWord is: 17
+In control!	Updating!		CoeCtrlWord is: 17
+In control!		CoeCtrlWord is: 7
+In control!	Updating!		CoeCtrlWord is: 17
+In control!	Updating!		CoeCtrlWord is: 17
+In control!	Updating!		CoeCtrlWord is: 17
+
+CoE State: Switched-On              (0x0233)	CoE Control: Enable Operation         (0x001f)
+WKC:  3( 3)	DiffDC:      8000320	inSyncCount:   32	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7974639	inSyncCount:   38	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+
+CoE State: Op-Enabled               (0x1237)	CoE Control: Enable Operation         (0x001f)
+WKC:  3( 3)	DiffDC:      7993200	inSyncCount:   44	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8001601	inSyncCount:   51	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8002560	inSyncCount:   57	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996720	inSyncCount:   63	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998040	inSyncCount:   69	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7999920	inSyncCount:   76	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000160	inSyncCount:   82	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7994200	inSyncCount:   88	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8002320	inSyncCount:   94	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996400	inSyncCount:  101	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8013240	inSyncCount:  107	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7988480	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7991440	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7994320	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+
+CoE State: Op-Enabled               (0x0237)	CoE Control: Enable Operation         (0x001f)
+WKC:  3( 3)	DiffDC:      7991040	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+
+CoE State: Op-Enabled               (0x1237)	CoE Control: Enable Operation         (0x001f)
+WKC:  3( 3)	DiffDC:      7958320	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998960	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7992240	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7992560	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7994880	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7993840	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7994560	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7977200	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996080	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8056000	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996000	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8004440	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7995039	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8062560	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996160	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7993840	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8040480	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7981840	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000560	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8048720	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7999200	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7982480	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7974800	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7997360	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7994800	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8009679	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7997680	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7993760	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8004880	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8019840	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000319	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7997920	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000800	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998000	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996720	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8060800	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8003200	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8037281	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8003680	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998760	inSyncCount:    0	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998000	inSyncCount:    0	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8003360	inSyncCount:    7	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000240	inSyncCount:   13	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996640	inSyncCount:   19	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7994800	inSyncCount:   25	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7982399	inSyncCount:   32	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7999840	inSyncCount:   38	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7999120	inSyncCount:   44	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000240	inSyncCount:   50	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8001520	inSyncCount:   57	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998960	inSyncCount:   63	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8004560	inSyncCount:   69	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7999279	inSyncCount:   76	In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7982240	inSyncCount:   82	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7995120	inSyncCount:   88	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8059121	inSyncCount:   94	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7995920	inSyncCount:  101	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7997680	inSyncCount:  107	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998240	inSyncCount:  113	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7998479	inSyncCount:  119	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8014959	inSyncCount:  126	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8001120	inSyncCount:  132	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8000880	inSyncCount:  138	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8000960	inSyncCount:  145	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7996880	inSyncCount:  151	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      8002960	inSyncCount:  157	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7998560	inSyncCount:  163	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      7943400	inSyncCount:  170	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7999920	inSyncCount:  176	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8006160	inSyncCount:  183	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8004560	inSyncCount:  189	In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+WKC:  3( 3)	DiffDC:      7999359	inSyncCount:  195	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8001760	inSyncCount:  201	In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!		CoeCtrlWord is: f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+In control!	Updating!		CoeCtrlWord is: 1f
+WKC:  3( 3)	DiffDC:      8060320	inSyncCount:  208	
