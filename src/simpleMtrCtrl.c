@@ -53,8 +53,10 @@
 #define HM_PERRTHRESH    0x3482, 0
 
 /////////////////////// Profile Control Objects ///////////////////////
-#define PF_ACC          0x6083, 0
-#define PF_DEC          0x6084, 0
+#define MT_V          0x6081, 0
+#define MT_ACC          0x6083, 0
+#define MT_DEC          0x6084, 0
+#define PF_MAXCURRENT   0x6073, 0
 
 // CoE States (0x6041)
 #define NOTRDY2SWCH  0b00000000
@@ -647,12 +649,12 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
 
          // Configure Profile Position settings
          sdoBuff = 10;
-         ec_SDOwrite(1, PF_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
          sdoBuff = 10;
-         ec_SDOwrite(1, PF_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         ec_SDOwrite(1, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
          
-         sdoBuff = 500;
-         ec_SDOwrite(1, 0x6073, 0 , FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         sdoBuff = 1000;
+         ec_SDOwrite(1, MT_V, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
 
          // Set to stop state
          shared.state = stop;
@@ -1000,12 +1002,12 @@ int main(int argc, char *argv[])
 
          //0x1725
          //rxPDOs
-         uint16   ctrlWord; 
-         uint32   targetPos;
-         uint16   digOutputs;
-         int16    tqFdFwd;         
-         uint16   maxTorque;
-         uint32   EMPTY;
+         int   ctrlWord; 
+         int   targetPos;
+         int   digOutputs;
+         int    tqFdFwd;         
+         int   maxTorque;
+         int   EMPTY;
 
          //0x1702
          //uint32   targetVel;
@@ -1013,23 +1015,31 @@ int main(int argc, char *argv[])
 
          //0x1B20
          //txPDOs
-         int32    posActual;
-         int32    posFdback2;
-         int32    velActual;
-         uint32   digInputs;
-         uint32   followErr;
-         uint32   latchPos;
-         uint16   coeStatus;
-         int16    tqActual;
-         uint16   latchStatus;
-         int16    analogInput;
+         int    posActual;
+         int    posFdback2;
+         int    velActual;
+         int   digInputs;
+         int   followErr;
+         int   latchPos;
+         int   coeStatus;
+         int    tqActual;
+         int   latchStatus;
+         int    analogInput;
       } PDOs = {0};
       
-      
+      PDOs.ctrlWord = 1; 
+      PDOs.targetPos = 2;
+      PDOs.digOutputs = 3;
+      PDOs.tqFdFwd = 4;         
+      PDOs.maxTorque = 5;
+      PDOs.maxTorque = 6;
+      PDOs.targetPos = 7;
 
       ecat_Init(argv[1], &PDOs, sizeof(PDOs), rxPDOFixed, txPDOFixed);
       osal_usleep(10000);
-      ecat_Mode(1);
+      while(!ecat_Mode(1)){
+         printf("\nMode switch failed\n");
+      }
       ecat_Enable();
       //ecat_Home(0, 0, 60, 1000, 100, 0);
       printf("\nHomed\n");
