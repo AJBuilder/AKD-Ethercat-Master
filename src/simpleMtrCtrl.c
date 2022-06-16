@@ -235,8 +235,8 @@ static int ecat_Talker()
    int* dataToMap;
    char*    output_map_ptr;
    char*    input_map_ptr;
-   int*     output_buff_ptr;
-   int*     input_buff_ptr;
+   char*     output_buff_ptr;
+   char*     input_buff_ptr;
 
    // Buffers (To outside of thread)
    int8 wrkCounterb;
@@ -294,8 +294,7 @@ static int ecat_Talker()
             for(int i = 1 ; i <= shared.outSizes[0] ; i++){ 
                if(i != shared.coeCtrlIdx) cpyData(output_map_ptr, output_buff_ptr, shared.outSizes[i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by ecat_Controller)
                output_map_ptr += shared.outSizes[i];
-               if(shared.outSizes[i] <= sizeof(int*)) output_buff_ptr++;
-               else output_buff_ptr += 2;
+               output_buff_ptr += shared.outSizes[i];
             }
 
             // Update inputs from user buffers to IOmap
@@ -304,8 +303,7 @@ static int ecat_Talker()
             for(int i = 1 ; i <= shared.inSizes[0] ; i++){
                cpyData(input_buff_ptr, input_map_ptr, shared.inSizes[i]); // Copy input data to user's buffer
                input_map_ptr += shared.inSizes[i];
-               if(shared.inSizes[i] <= sizeof(int*)) input_buff_ptr++;
-               else input_buff_ptr += 2;
+               input_buff_ptr += shared.inSizes[i];
             }
 
             // Release caller of ecat_Update()
@@ -978,7 +976,7 @@ int main(int argc, char *argv[])
 
       
 
-      struct { 
+      struct __attribute__((__packed__)){ 
          //0x1722
          //rxPDOs
          //uint16   ctrlWord; 
@@ -990,12 +988,11 @@ int main(int argc, char *argv[])
 
          //0x1725
          //rxPDOs
-         int   ctrlWord; 
-         int   targetPos;
-         int   digOutputs;
-         int    tqFdFwd;         
-         int   maxTorque;
-         int   EMPTY;
+         uint16   ctrlWord; 
+         uint32   targetPos;
+         uint32   digOutputs;
+         uint16   tqFdFwd;         
+         uint16   maxTorque;
 
          //0x1702
          //uint32   targetVel;
@@ -1003,21 +1000,19 @@ int main(int argc, char *argv[])
 
          //0x1B20
          //txPDOs
-         int    posActual;
-         int    posFdback2;
-         int    velActual;
-         int   digInputs;
-         int   followErr;
-         int   latchPos;
-         int   coeStatus;
-         int    tqActual;
-         int   latchStatus;
-         int    analogInput;
+         int32    posActual;
+         int32    posFdback2;
+         int32    velActual;
+         uint32   digInputs;
+         int32    followErr;
+         uint16   latchPos;
+         uint16   coeStatus;
+         int16    tqActual;
+         uint16   latchStatus;
+         int16    analogInput;
       } PDOs = {0};
 
-      printf("Sizeof uint16: %d\n", sizeof(uint16));
-      printf("Sizeof int16: %d\n", sizeof(int16));
-      fflush(stdout);
+      
       ecat_Init(argv[1], &PDOs, sizeof(PDOs), rxPDOFixed, txPDOFixed);
       osal_usleep(10000);
       while(!ecat_Mode_PP(FALSE)){
