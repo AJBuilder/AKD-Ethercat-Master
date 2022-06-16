@@ -112,7 +112,7 @@ static struct ecat_Data_T{
    enum ecat_States{shutdown, stop, disable, enable} state;
 
    // Profile Control
-   enum ecat_OpModes {profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8} mode;
+   enum ecat_Modes {profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8} mode;
    
 
    // Debug 
@@ -312,21 +312,16 @@ static int ecat_Talker()
             pthread_cond_signal(&shared.updated);
             
          }
-         else{
-            // If not updating values, configure repeated data according to opmode
-            shared.coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
+         else {
+            if(shared.mode == profPos || shared.mode == homing) shared.coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
          }
-         
          
          // Update DS402 Control and Status variables for ecat_Controller
          cpyData(shared.coeCtrlMapPtr, &shared.coeCtrlWord, sizeof(shared.coeCtrlWord));
          cpyData(&shared.coeStatus, shared.coeStatusMapPtr, sizeof(shared.coeStatus));
          
-
          pthread_mutex_unlock(&shared.control);
          // CONTROL UNLOCKED
-
-         
       }
       
       
@@ -774,6 +769,25 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
    return FALSE;
 }
 
+
+boolean ecat_Update(boolean move){
+   int err;
+   struct timespec updateTimeout;
+
+   err = 0;
+   pthread_mutex_lock(&shared.control);
+
+   shared.update = TRUE;
+   if(move) shared.coeCtrlWord |= 0b0010000;
+
+   clock_gettime(CLOCK_MONOTONIC, &updateTimeout);
+   updateTimeout.tv_sec += 1;
+   err = pthread_cond_timedwait(&shared.updated, &shared.control, &updateTimeout); //Wait for talker thread to confirm update
+
+   pthread_mutex_unlock(&shared.control);
+   return err == 0; // Return TRUE if no error
+}
+
 static boolean ecat_COEState(enum ecat_States reqState){
 
    struct timespec timeout;
@@ -806,23 +820,45 @@ static boolean ecat_COEState(enum ecat_States reqState){
 }
 
 boolean ecat_Enable(){
-
    return ecat_COEState(enable);
-
 }
 
 boolean ecat_Disable(){
-
    return ecat_COEState(disable);
 }
 
 boolean ecat_Stop(){
-
    return ecat_COEState(stop);
-
 }
 
-boolean ecat_Mode(int reqMode){
+boolean ecat_Shutdown(){
+
+   pthread_mutex_lock(&shared.control);
+   shared.state = shutdown;
+   pthread_mutex_unlock(&shared.control);
+   pthread_join(shared.talker, NULL);
+   pthread_join(shared.controller, NULL);
+
+   printf("\nRequest init state for all slaves\n");
+   ec_slave[0].state = EC_STATE_INIT;
+   /* request INIT state for all slaves */
+   ec_writestate(0);
+
+   printf("End simple test, close socket\n");
+
+   pthread_mutex_destroy(&shared.control);
+   pthread_mutex_destroy(&shared.debug);
+
+   pthread_cond_destroy(&shared.updated);
+   pthread_cond_destroy(&shared.stopped);
+   pthread_cond_destroy(&shared.disabled);
+   pthread_cond_destroy(&shared.enabled);
+
+   /* stop SOEM, close socket */
+   ec_close();
+}
+
+static boolean ecat_OpMode(enum ecat_Modes reqMode){
 
    uint sdoBuffSize, sdoBuff;
 
@@ -834,9 +870,6 @@ boolean ecat_Mode(int reqMode){
       
       ecat_Enable();
    }
-
-   
-
    sdoBuffSize = 1; // Check if drive has acknowledged
    sdoBuff = 0;
    ec_SDOread(1, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
@@ -845,48 +878,51 @@ boolean ecat_Mode(int reqMode){
    else return FALSE;
 }
 
+boolean ecat_Mode_PP(boolean immediateMode){
 
-
-boolean ecat_Update(boolean move){
-   int err;
-   struct timespec updateTimeout;
-
-   err = 0;
    pthread_mutex_lock(&shared.control);
-
-   shared.update = TRUE;
-   if(move) shared.coeCtrlWord |= 0b0010000;
-
-   clock_gettime(CLOCK_MONOTONIC, &updateTimeout);
-   updateTimeout.tv_sec += 1;
-   err = pthread_cond_timedwait(&shared.updated, &shared.control, &updateTimeout); //Wait for talker thread to confirm update
-
+   int err = 0;
+   if(shared.mode != profPos){
+      pthread_mutex_unlock(&shared.control);
+      err = ecat_OpMode(profPos);
+      pthread_mutex_lock(&shared.control);
+   }
+   //if(err == 0 && immediateMode) shared.coeCtrlWord |= 0b0010000;
+   if(err == 0){
+      if(immediateMode) shared.coeCtrlWord |= 0b0010000;
+      else shared.coeCtrlWord &= ~0b0010000;
+   }
    pthread_mutex_unlock(&shared.control);
-   return err == 0; // Return TRUE if no error
+   return err == 0;
+}
+
+boolean ecat_Mode_PV(){
+   return ecat_OpMode(profVel);
+}
+
+boolean ecat_Mode_PT(){
+   return ecat_OpMode(profTor);
+}
+
+boolean ecat_Mode_SyncP(){
+   return ecat_OpMode(syncPos);
+}
+
+boolean ecat_Mode_IP(){
+   pthread_mutex_lock(&shared.control);
+   int err = 0;
+   if(shared.mode != profPos){
+      pthread_mutex_unlock(&shared.control);
+      err = ecat_OpMode(profPos);
+      pthread_mutex_lock(&shared.control);
+   }
+   if(err == 0) shared.coeCtrlWord |= 0b0010000;
+   pthread_mutex_unlock(&shared.control);
+   return err == 0;
 }
 
 boolean ecat_Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P){
-   /* Different HOME.MODE values
 
-      0 current pos
-
-      1 limit input
-      2 input limit then zero angle
-      3 input limit then index
-      4 home input
-      5 home input then zero
-      6 home input that index
-
-      7 find zero
-
-      8 move till exceed
-      9 move til exceed than zer
-      10 move till exceed then index
-
-      11 index
-
-      12 home input and hardstop
-   */
    uint sdoBuff, prevMode;
    struct timespec stopTimeout;
 
@@ -917,63 +953,15 @@ boolean ecat_Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int 
    sdoBuff = HOME_P;
    ec_SDOwrite(1, HM_P , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
 
-   ecat_Mode((int)homing);
+   ecat_OpMode(homing);
 
    ecat_Update(TRUE);
 
-   ecat_Mode(prevMode);
+   ecat_OpMode(prevMode);
 
    return TRUE;
 }
 
-boolean ecat_PP_ImmedPositioning(){
-
-   if(shared.mode == profPos){
-      pthread_mutex_lock(&shared.control);
-      shared.coeCtrlWord |= 0b0100000;
-      pthread_mutex_unlock(&shared.control);
-      return TRUE;
-   }
-   else return FALSE;
-}
-
-boolean ecat_PP_BufferedPositioning(){
-
-   if(shared.mode == profPos){
-      pthread_mutex_lock(&shared.control);
-      shared.coeCtrlWord &= ~0b0100000;
-      pthread_mutex_unlock(&shared.control);
-      return TRUE;
-   }
-   else return FALSE;
-}
-
-boolean ecat_Shutdown(){
-
-   pthread_mutex_lock(&shared.control);
-   shared.state = shutdown;
-   pthread_mutex_unlock(&shared.control);
-   pthread_join(shared.talker, NULL);
-   pthread_join(shared.controller, NULL);
-
-   printf("\nRequest init state for all slaves\n");
-   ec_slave[0].state = EC_STATE_INIT;
-   /* request INIT state for all slaves */
-   ec_writestate(0);
-
-   printf("End simple test, close socket\n");
-
-   pthread_mutex_destroy(&shared.control);
-   pthread_mutex_destroy(&shared.debug);
-
-   pthread_cond_destroy(&shared.updated);
-   pthread_cond_destroy(&shared.stopped);
-   pthread_cond_destroy(&shared.disabled);
-   pthread_cond_destroy(&shared.enabled);
-
-   /* stop SOEM, close socket */
-   ec_close();
-}
 
 
 
@@ -1026,29 +1014,24 @@ int main(int argc, char *argv[])
          int   latchStatus;
          int    analogInput;
       } PDOs = {0};
-      
-      PDOs.ctrlWord = 1; 
-      PDOs.targetPos = 2;
-      PDOs.digOutputs = 3;
-      PDOs.tqFdFwd = 4;         
-      PDOs.maxTorque = 5;
-      PDOs.maxTorque = 6;
-      PDOs.targetPos = 7;
 
+      printf("Sizeof uint16: %d\n", sizeof(uint16));
+      printf("Sizeof int16: %d\n", sizeof(int16));
+      fflush(stdout);
       ecat_Init(argv[1], &PDOs, sizeof(PDOs), rxPDOFixed, txPDOFixed);
       osal_usleep(10000);
-      while(!ecat_Mode(1)){
+      while(!ecat_Mode_PP(FALSE)){
          printf("\nMode switch failed\n");
       }
       ecat_Enable();
-      //ecat_Home(0, 0, 60, 1000, 100, 0);
+      ecat_Home(0, 0, 60, 1000, 100, 0);
       printf("\nHomed\n");
 
 
       PDOs.maxTorque = 1000;
       //PDOs.targetVel = 60*1000;
-      for(int i = 0, pos = 0; i < 1000; i++, pos += 10){
-         if (i % 100 == 0) PDOs.targetPos = pos;
+      for(int i = 0, pos = 0; i < 1000; i++, pos += 1000){
+         if (i % 100 == 0) PDOs.targetPos = 180;
          ecat_Update(TRUE);
          osal_usleep(10000);
       }
