@@ -95,7 +95,7 @@ static struct ecat_Data_T{
 
    // PDO buffers
    char IOmap[4096];//[4096];
-   int *pdoBuff;
+   char *pdoBuff;
    uint numOfPDOs;
    int coeCtrlIdx, coeStatusIdx;
    char *coeCtrlMapPtr, *coeStatusMapPtr;
@@ -113,7 +113,7 @@ static struct ecat_Data_T{
 
    // Profile Control
    enum ecat_Modes {profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8} mode;
-   
+   boolean moveAck, moveErr;
 
    // Debug 
    int64 gl_toff, gl_delta;
@@ -121,7 +121,8 @@ static struct ecat_Data_T{
 
    // Threading
    pthread_mutex_t debug, control;
-   pthread_cond_t updated, stopped, disabled, enabled;
+   pthread_cond_t IOUpdated;
+   pthread_cond_t moveSig, stateUpdated;
    pthread_t talker, controller;
 } shared;
 
@@ -226,7 +227,7 @@ static boolean ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int6
 }
 
 /* RT EtherCAT thread */
-static int ecat_Talker()
+static void* ecat_Talker(void* ptr)
 {
 
    // Local variables
@@ -285,8 +286,22 @@ static int ecat_Talker()
          shared.diffDCtime = ec_DCtime - prevDCtime;
          prevDCtime = ec_DCtime;  
 
+         // Update DS402 Control and Status variables for ecat_Controller
+         cpyData(shared.coeCtrlMapPtr, &shared.coeCtrlWord, sizeof(shared.coeCtrlWord));
+         cpyData(&shared.coeStatus, shared.coeStatusMapPtr, sizeof(shared.coeStatus));
+
+         if(shared.coeStatus & 0b01000000000000) {
+            shared.moveAck = TRUE;
+            pthread_cond_signal(&shared.moveSig);
+         } else shared.moveAck = FALSE;
+
+         if(shared.coeStatus & 0b10000000000000) {
+            shared.moveErr = TRUE;
+            pthread_cond_signal(&shared.moveSig);
+         } else shared.moveErr = FALSE;
+
          if(shared.update){
-            shared.update = FALSE;
+            
 
             // Update outputs from user buffers to IOmap
             output_map_ptr = ec_slave[1].outputs;
@@ -307,17 +322,14 @@ static int ecat_Talker()
             }
 
             // Release caller of ecat_Update()
-            pthread_cond_signal(&shared.updated);
+            shared.update = FALSE;
+            pthread_cond_signal(&shared.IOUpdated);
             
          }
          else {
             if(shared.mode == profPos || shared.mode == homing) shared.coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
          }
-         
-         // Update DS402 Control and Status variables for ecat_Controller
-         cpyData(shared.coeCtrlMapPtr, &shared.coeCtrlWord, sizeof(shared.coeCtrlWord));
-         cpyData(&shared.coeStatus, shared.coeStatusMapPtr, sizeof(shared.coeStatus));
-         
+
          pthread_mutex_unlock(&shared.control);
          // CONTROL UNLOCKED
       }
@@ -328,7 +340,7 @@ static int ecat_Talker()
 
 }
 
-static void ecat_Controller()
+static void* ecat_Controller(void* ptr)
 {
    printf("Spawning Controller\n");  
 
@@ -399,17 +411,15 @@ static void ecat_Controller()
                      break;
                   }
                   case RDY2SWITCH & 0b11011111:
-                  {
+                  { //Stop
                      coeCurrent = 2; 
-                     coeRequest = 1; // Switch on 
-                     pthread_cond_signal(&shared.stopped);
+                     coeRequest = 1; // Switch on
                      if((shared.state == enable) || (shared.state = disable)) shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10000111) | 0b0111; // Switch-On : 0bx---x111
                      break;
                   }
                   case SWITCHEDON  & 0b11011111:
-                  {
+                  { // Disable
                      coeCurrent = 3;
-                     pthread_cond_signal(&shared.disabled);
                      if((shared.state == stop) || (shared.state == shutdown)) {
                         coeRequest = 0; // Switch off
                         shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10001111) | 0b0110; // Ready2Switch : 0bx---x110
@@ -421,9 +431,8 @@ static void ecat_Controller()
                      break;
                   }
                   case OP_ENABLED  & 0b11011111:
-                  {
+                  { // Enable
                      coeCurrent = 4;
-                     pthread_cond_signal(&shared.enabled);
                      if (shared.state != enable) {
                         coeRequest = 4; // Disable operation
                         shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10001111) | 0b0111; // Operation Disabled : 0bx---0111
@@ -545,6 +554,8 @@ static void ecat_Controller()
       pthread_mutex_unlock(&shared.control);
       // CONTROL UNLOCKED
 
+      pthread_cond_signal(&shared.stateUpdated);
+
       osal_usleep(50000); // 100ms
       
    }
@@ -552,10 +563,7 @@ static void ecat_Controller()
 
 }
 
-
-
-
-boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uint16 inPDOObj){
+boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, uint16 inPDOObj){
 
    printf("Starting EtherCAT Master\n");
 
@@ -576,10 +584,9 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
          // Initialize threading resources
          pthread_mutex_init(&shared.control, NULL);
          pthread_mutex_init(&shared.debug, NULL);
-         pthread_cond_init(&shared.updated, NULL);
-         pthread_cond_init(&shared.stopped, NULL);
-         pthread_cond_init(&shared.disabled, NULL);
-         pthread_cond_init(&shared.enabled, NULL);
+         pthread_cond_init(&shared.IOUpdated, NULL);
+         pthread_cond_init(&shared.stateUpdated, NULL);
+         pthread_cond_init(&shared.moveSig, NULL);
 
          // Initialize shared data
          memset(&shared, 0, sizeof(shared));
@@ -641,36 +648,22 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
          ec_SDOwrite(1, HM_AUTOMOVE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable automove
 
          // Configure Profile Position settings
-         sdoBuff = 10;
-         ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-         sdoBuff = 10;
-         ec_SDOwrite(1, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         //sdoBuff = 10;
+         //ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         //sdoBuff = 10;
+         //ec_SDOwrite(1, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
          
-         sdoBuff = 1000;
-         ec_SDOwrite(1, MT_V, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         //sdoBuff = 10;
+         //ec_SDOwrite(1, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
 
          // Set to stop state
          shared.state = stop;
 
          // Set to default mode
-         shared.mode = DEFAULTOPMODE;
-         
-         
-
-
+         //shared.mode = DEFAULTOPMODE;
 
          ecx_context.manualstatechange = 1;
          ec_config_map(&shared.IOmap);
-         
-         /*
-         if(outputFrameSize != ec_slave[1].Obits){
-            printf("\nGenerated output frame does not fit in slave's IOmap! IOmap: %d, oFrame: %d\n\n", ec_slave[1].Obits, outputFrameSize);
-            return FALSE;
-         }
-         if(inputFrameSize != ec_slave[1].Ibits){
-            printf("\nRead input frame does not fit in slave's IOmap! IOmap: %d, iFrame: %d\n\n", ec_slave[1].Ibits, inputFrameSize);
-            return FALSE;
-         }*/
 
          
          // Find where the DS402 CoE control word is in IOmap
@@ -709,8 +702,8 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
          }*/
 
          /* Enable talker to handle slave PDOs in OP */
-         pthread_create(&shared.talker, NULL, &ecat_Talker, NULL);
-         pthread_create(&shared.controller, NULL, &ecat_Controller, NULL);
+         pthread_create(&shared.talker, NULL, ecat_Talker, NULL);
+         pthread_create(&shared.controller, NULL, ecat_Controller, NULL);
          printf("Talker started! Synccount needs to reach : %"PRIi64"\n", (uint64)SYNC_AQTIME_NS / CYCLE_NS);
          pthread_mutex_lock(&shared.control);
          while(shared.inSyncCount < (uint64)(SYNC_AQTIME_NS / CYCLE_NS)){
@@ -735,7 +728,7 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
          // Return results
          if (ec_slave[0].state == EC_STATE_OPERATIONAL )
 			{
-				printf("\nOperational state reached for all slaves. Starting controller...\n");
+				printf("\nOperational state reached for all slaves!\n");
             shared.inOP = TRUE;
             return TRUE;
          }
@@ -767,8 +760,8 @@ boolean ecat_Init(char *ifname, int* usrControl, int size, uint16 outPDOObj, uin
    return FALSE;
 }
 
-
-boolean ecat_Update(boolean move){
+// Blocks for timeout time
+boolean ecat_Update(boolean move, int timeout_ms){
    int err;
    struct timespec updateTimeout;
 
@@ -778,14 +771,20 @@ boolean ecat_Update(boolean move){
    shared.update = TRUE;
    if(move) shared.coeCtrlWord |= 0b0010000;
 
-   clock_gettime(CLOCK_MONOTONIC, &updateTimeout);
-   updateTimeout.tv_sec += 1;
-   err = pthread_cond_timedwait(&shared.updated, &shared.control, &updateTimeout); //Wait for talker thread to confirm update
+   clock_gettime(CLOCK_REALTIME, &updateTimeout);
+   add_timespec(&updateTimeout, (uint64)(timeout_ms * 1000000));
+
+   while(shared.update == TRUE && err == 0)
+      err = pthread_cond_timedwait(&shared.IOUpdated, &shared.control, &updateTimeout); //Wait for talker thread to confirm update to IOmap
+   while(shared.moveAck == FALSE && shared.moveErr == FALSE && err == 0 && shared.mode != intPos)
+      err = pthread_cond_timedwait(&shared.moveSig, &shared.control, &updateTimeout); //Wait for talker thread to confirm setpoint acknoledgement
+   
 
    pthread_mutex_unlock(&shared.control);
-   return err == 0; // Return TRUE if no error
+   return err == 0 && !shared.moveErr; // Return 1 if no error
 }
-
+ 
+ // Blocks for max of 1 sec;
 static boolean ecat_COEState(enum ecat_States reqState){
 
    struct timespec timeout;
@@ -795,19 +794,24 @@ static boolean ecat_COEState(enum ecat_States reqState){
    pthread_mutex_lock(&shared.control);
    if(shared.state != reqState){
       shared.state = reqState;
-      clock_gettime(CLOCK_MONOTONIC, &timeout);
-      timeout.tv_sec += 10;
+      clock_gettime(CLOCK_REALTIME, &timeout);
+      timeout.tv_sec += 1;
+      
       switch(reqState){ //Wait for talker thread to confirm update
          case stop :
-            err = pthread_cond_timedwait(&shared.stopped, &shared.control, &timeout);
+            while(((shared.coeStatus & 0b1101111) != (RDY2SWITCH & 0b1101111)) && err == 0)
+               err = pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
          break;
          case disable :
-            err = pthread_cond_timedwait(&shared.disabled, &shared.control, &timeout);
+            while(((shared.coeStatus & 0b1101111) != (SWITCHEDON & 0b1101111)) && err == 0)
+               err = pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
          break;
          case enable :
-            err = pthread_cond_timedwait(&shared.enabled, &shared.control, &timeout);
+            while(((shared.coeStatus & 0b1101111) != (OP_ENABLED & 0b1101111)) && err == 0)
+               err = pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
          break;
          default :
+            err = -1;
          break;
       }
    }
@@ -847,81 +851,87 @@ boolean ecat_Shutdown(){
    pthread_mutex_destroy(&shared.control);
    pthread_mutex_destroy(&shared.debug);
 
-   pthread_cond_destroy(&shared.updated);
-   pthread_cond_destroy(&shared.stopped);
-   pthread_cond_destroy(&shared.disabled);
-   pthread_cond_destroy(&shared.enabled);
+   pthread_cond_destroy(&shared.IOUpdated);
+   pthread_cond_destroy(&shared.stateUpdated);
+   pthread_cond_destroy(&shared.moveSig);
 
    /* stop SOEM, close socket */
    ec_close();
 }
 
+// Blocks for 1 sec
 static boolean ecat_OpMode(enum ecat_Modes reqMode){
 
    uint sdoBuffSize, sdoBuff;
+   struct timespec timeout, curtime;
 
-   if(ecat_Disable()){ // Don't assign if not disabled
+   pthread_mutex_lock(&shared.control);
+   if(shared.mode != reqMode){
+      pthread_mutex_unlock(&shared.control);
+      if(ecat_Disable()){ // Don't assign if not disabled   
 
-      sdoBuffSize = 1;
-      sdoBuff = reqMode;
-      ec_SDOwrite(1, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
-      
-      ecat_Enable();
+         clock_gettime(CLOCK_MONOTONIC, &timeout);
+         timeout.tv_sec += 1;
+         do{
+            sdoBuffSize = 1;
+            sdoBuff = reqMode;
+            ec_SDOwrite(1, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
+            sdoBuffSize = 1; // Check if drive has acknowledged
+            sdoBuff = 0;
+            ec_SDOread(1, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+            clock_gettime(CLOCK_MONOTONIC, &curtime);
+         } while(sdoBuff != reqMode && curtime.tv_sec < timeout.tv_sec);
+
+         ecat_Enable();
+      }
    }
-   sdoBuffSize = 1; // Check if drive has acknowledged
-   sdoBuff = 0;
-   ec_SDOread(1, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+   else pthread_mutex_unlock(&shared.control);
 
-   if(sdoBuff == reqMode) return TRUE;
+   if(sdoBuff == reqMode) {
+      shared.mode = reqMode;
+      return TRUE;
+   }
    else return FALSE;
 }
 
 boolean ecat_Mode_PP(boolean immediateMode){
 
-   pthread_mutex_lock(&shared.control);
-   int err = 0;
-   if(shared.mode != profPos){
-      pthread_mutex_unlock(&shared.control);
-      err = ecat_OpMode(profPos);
+   if(ecat_OpMode(profPos)){
       pthread_mutex_lock(&shared.control);
+      if(immediateMode) shared.coeCtrlWord |= 0b00100000;
+      else shared.coeCtrlWord &= ~0b00100000;
+      pthread_mutex_unlock(&shared.control);
+      return TRUE;
    }
-   //if(err == 0 && immediateMode) shared.coeCtrlWord |= 0b0010000;
-   if(err == 0){
-      if(immediateMode) shared.coeCtrlWord |= 0b0010000;
-      else shared.coeCtrlWord &= ~0b0010000;
-   }
-   pthread_mutex_unlock(&shared.control);
-   return err == 0;
+   return FALSE;
 }
 
-boolean ecat_Mode_PV(){
+boolean ecat_OpMode_PV(){
    return ecat_OpMode(profVel);
 }
 
-boolean ecat_Mode_PT(){
+boolean ecat_OpMode_PT(){
    return ecat_OpMode(profTor);
 }
 
-boolean ecat_Mode_SyncP(){
+boolean ecat_OpMode_SyncP(){
    return ecat_OpMode(syncPos);
 }
 
-boolean ecat_Mode_IP(){
-   pthread_mutex_lock(&shared.control);
-   int err = 0;
-   if(shared.mode != profPos){
-      pthread_mutex_unlock(&shared.control);
-      err = ecat_OpMode(profPos);
+boolean ecat_OpMode_IP(){
+
+   if(ecat_OpMode(intPos)){
       pthread_mutex_lock(&shared.control);
+      shared.coeCtrlWord |= 0b00010000;
+      pthread_mutex_unlock(&shared.control);
+      return TRUE;
    }
-   if(err == 0) shared.coeCtrlWord |= 0b0010000;
-   pthread_mutex_unlock(&shared.control);
-   return err == 0;
+   return FALSE;
 }
 
-boolean ecat_Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P){
+int ecat_Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms){
 
-   uint sdoBuff, prevMode;
+   uint sdoBuff, prevMode, err = 0;
    struct timespec stopTimeout;
 
    pthread_mutex_lock(&shared.control);
@@ -951,15 +961,22 @@ boolean ecat_Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int 
    sdoBuff = HOME_P;
    ec_SDOwrite(1, HM_P , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
 
-   ecat_OpMode(homing);
+   
+   if(!ecat_OpMode(homing)) return FALSE;
 
-   ecat_Update(TRUE);
+   if(!ecat_Update(TRUE, timeout_ms)) return FALSE;
 
-   ecat_OpMode(prevMode);
+   if(!ecat_OpMode(prevMode)) return FALSE;
 
    return TRUE;
 }
 
+boolean ecat_Fault(){
+   pthread_mutex_lock(&shared.control);
+   boolean fault = (shared.coeStatus & 0b1000) != 0;
+   pthread_mutex_unlock(&shared.control);
+   return fault;
+}
 
 
 
@@ -1012,24 +1029,37 @@ int main(int argc, char *argv[])
          int16    analogInput;
       } PDOs = {0};
 
-      
+
       ecat_Init(argv[1], &PDOs, sizeof(PDOs), rxPDOFixed, txPDOFixed);
       osal_usleep(10000);
+      printf("\nWaiting for fault to clear!\n");
+      while(!ecat_Fault()){}
+      printf("\nFault cleared!\n");
+      while(!ecat_Enable()){
+         printf("\nEnable failed\n");
+      }
       while(!ecat_Mode_PP(FALSE)){
          printf("\nMode switch failed\n");
       }
-      ecat_Enable();
-      ecat_Home(0, 0, 60, 1000, 100, 0);
+      
+      ecat_Home(0, 0, 60, 1000, 0, 0, 1000);
+      
       printf("\nHomed\n");
 
 
       PDOs.maxTorque = 1000;
       //PDOs.targetVel = 60*1000;
-      for(int i = 0, pos = 0; i < 1000; i++, pos += 1000){
-         if (i % 100 == 0) PDOs.targetPos = 180;
+      /*for(int i = 0, pos = 0; i < 10; i++, pos += 100){
+         PDOs.targetPos = pos;
          ecat_Update(TRUE);
-         osal_usleep(10000);
-      }
+         osal_usleep(1000000);
+      }*/
+
+      PDOs.targetPos = 360;
+      ecat_Update(TRUE, 10000000);
+      printf("\nSetpoint set\n");
+      osal_usleep(10000000);
+
      ecat_Shutdown();
       
    }
