@@ -27,6 +27,7 @@
 #define ACTOPMODE    0x6061, 0
 #define MnfStatus    0x1002
 #define COStatus     0x6041
+#define QSTOP_OPT    0x605A, 0
 
 /////////////////////// Homing Objects ///////////////////////
 #define HM_MODE          0x50CB, 0
@@ -46,14 +47,13 @@
 #define HM_FEEDRATE      0x6099, 2
 #define HM_TPOSWND       0x5406, 0
 
-
 // Homing Mode : Hardstop
 #define HM_IPEAKACTIVE   0x5403, 0
 #define HM_IPEAK         0x35E2, 0
 #define HM_PERRTHRESH    0x3482, 0
 
 /////////////////////// Profile Control Objects ///////////////////////
-#define MT_V          0x6081, 0
+#define MT_V            0x6081, 0
 #define MT_ACC          0x6083, 0
 #define MT_DEC          0x6084, 0
 #define PF_MAXCURRENT   0x6073, 0
@@ -77,11 +77,30 @@
 #define DEFAULTOPMODE profPos
 
 // Operation
-#define DEBUG_MODE TRUE
+#define DEBUG_MODE FALSE
 
 
 
-
+char coeStateReadable[9][25] = {
+      "Not Ready To Switch-On",  //0
+      "Switch-On Disabled",      //1
+      "Ready To Switch-On",      //2
+      "Switched-On",             //3
+      "Op-Enabled",              //4
+      "FAULT!",                  //5
+      "Fault Reaction Active",   //6
+      "QUICK STOP ACTIVE",       //7
+      "Unknown State"            //8
+   };
+   char coeCtrlReadable[7][20] = {
+      "Shutdown",                //0
+      "Switch-On",               //1
+      "Disable Voltage",         //2
+      "Quick Stop",              //3
+      "Disable Operation",       //4
+      "Enable Operation",        //5
+      "Fault Reset"              //6
+   };
 
 
 
@@ -95,7 +114,7 @@ static struct ecat_Data_T{
 
    // PDO buffers
    char IOmap[4096];//[4096];
-   char *pdoBuff;
+   int *pdoBuff;
    uint numOfPDOs;
    int coeCtrlIdx, coeStatusIdx;
    char *coeCtrlMapPtr, *coeStatusMapPtr;
@@ -104,13 +123,14 @@ static struct ecat_Data_T{
    // Assuming 1 byte minimum, up to 8 objects can be assigned per PDO. For PDOs max.
 
    // Control signals
-   boolean inOP, update;
+   boolean inOP, update, clearFault, quickStop;
    uint inSyncCount;
    int8 wrkCounter, expectedWKC;
    uint16 coeCtrlWord, coeStatus;
    uint64 diffDCtime;
-   enum ecat_States{shutdown, stop, disable, enable} state;
-
+   enum ecat_States{shutdown, stop, disable, enable} masterState;
+   enum coeState{NotReady = 0, SwitchDisabled = 1, Ready = 2, SwitchedOn = 3, OpEnabled = 4, Fault = 5, FaultReaction = 6, QuickStop = 7, Unknown = 8} coeCurrentState;
+   enum coeStateTrans{Shutdown = 0, SwitchOn = 1, DisableVolt = 2, TrigQuickStop = 3, DisableOp = 4, EnableOp = 5, ResetFault = 6} coeStateTransition;
    // Profile Control
    enum ecat_Modes {profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8} mode;
    boolean moveAck, moveErr;
@@ -124,6 +144,9 @@ static struct ecat_Data_T{
    pthread_cond_t IOUpdated;
    pthread_cond_t moveSig, stateUpdated;
    pthread_t talker, controller;
+
+
+   // Constants
 } shared;
 
 
@@ -277,7 +300,7 @@ static void* ecat_Talker(void* ptr)
       
       if(pthread_mutex_trylock(&shared.control) == 0){
          // CONTROL LOCKED
-         if(shared.state == shutdown) {
+         if(shared.masterState == shutdown) {
             pthread_mutex_unlock(&shared.control);
             break;
          }
@@ -285,6 +308,10 @@ static void* ecat_Talker(void* ptr)
          shared.wrkCounter = wrkCounterb;
          shared.diffDCtime = ec_DCtime - prevDCtime;
          prevDCtime = ec_DCtime;  
+
+         if(shared.quickStop){
+            shared.coeCtrlWord &= ~0b100; 
+         }
 
          // Update DS402 Control and Status variables for ecat_Controller
          cpyData(shared.coeCtrlMapPtr, &shared.coeCtrlWord, sizeof(shared.coeCtrlWord));
@@ -305,7 +332,7 @@ static void* ecat_Talker(void* ptr)
 
             // Update outputs from user buffers to IOmap
             output_map_ptr = ec_slave[1].outputs;
-            output_buff_ptr = shared.pdoBuff;
+            output_buff_ptr = (char*)shared.pdoBuff;
             for(int i = 1 ; i <= shared.outSizes[0] ; i++){ 
                if(i != shared.coeCtrlIdx) cpyData(output_map_ptr, output_buff_ptr, shared.outSizes[i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by ecat_Controller)
                output_map_ptr += shared.outSizes[i];
@@ -314,7 +341,7 @@ static void* ecat_Talker(void* ptr)
 
             // Update inputs from user buffers to IOmap
             input_map_ptr = ec_slave[1].inputs;
-            input_buff_ptr = shared.pdoBuff + shared.outSizes[0] + 1;
+            input_buff_ptr = (char*)(shared.pdoBuff + shared.outSizes[0] + 1);
             for(int i = 1 ; i <= shared.inSizes[0] ; i++){
                cpyData(input_buff_ptr, input_map_ptr, shared.inSizes[i]); // Copy input data to user's buffer
                input_map_ptr += shared.inSizes[i];
@@ -342,31 +369,13 @@ static void* ecat_Talker(void* ptr)
 
 static void* ecat_Controller(void* ptr)
 {
-   printf("Spawning Controller\n");  
+   printf("ECAT: Controller Spawned\n");  
 
    // Local variables
    uint16 prevcStatus = -1;
-   char coeStateReadable[9][25] = {
-      "Not Ready To Switch-On",  //0
-      "Switch-On Disabled",      //1
-      "Ready To Switch-On",      //2
-      "Switched-On",             //3
-      "Op-Enabled",              //4
-      "FAULT!",                  //5
-      "Fault Reaction Active",   //6
-      "QUICK STOP ACTIVE",       //7
-      "Unknown State"            //8
-   };
-   char coeCtrlReadable[7][20] = {
-      "Shutdown",                //0
-      "Switch-On",               //1
-      "Disable Voltage",         //2
-      "Quick Stop",              //3
-      "Disable Operation",       //4
-      "Enable Operation",        //5
-      "Fault Reset"              //6
-   };
-   uint coeCurrent, coeRequest, currentgroup, noDCCount;
+   
+   uint currentgroup, noDCCount;
+   
 
    
 
@@ -374,104 +383,105 @@ static void* ecat_Controller(void* ptr)
    {
       // CONTROL LOCKED
       pthread_mutex_lock(&shared.control);
-      if(shared.state == shutdown){
+      if(shared.masterState == shutdown){
          pthread_mutex_unlock(&shared.control);  
          break;
       }
       if(shared.diffDCtime == 0) noDCCount++;
       else noDCCount = 0;
-      if(noDCCount > 20) shared.state = stop;
+      if(noDCCount > 20) shared.masterState = stop;
       
 
-      if(shared.inOP){
+      
 
-         // CANopen state machine
-         switch(shared.coeStatus & 0b01101111){
-            case QUICKSTOP :
-            {
-               coeCurrent = 7;
-               coeRequest = 4;
-               shared.coeCtrlWord = shared.coeCtrlWord & 0b100;
-               break;
-            }
-            default :
-            {
-               switch(shared.coeStatus & 0b01001111){
-                  case NOTRDY2SWCH : 
-                  {
-                     coeCurrent = 0;
-                     coeRequest = 0; // Ready to switch
-                     break;
-                  }
-                  case SWCHDISABLED : 
-                  {
-                     coeCurrent = 1;
-                     coeRequest = 0; // Ready to switch
-                     shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10000111) | 0b110; // Ready2Switch/Shutdown : 0bx---x110
-                     break;
-                  }
-                  case RDY2SWITCH & 0b11011111:
-                  { //Stop
-                     coeCurrent = 2; 
-                     coeRequest = 1; // Switch on
-                     if((shared.state == enable) || (shared.state = disable)) shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10000111) | 0b0111; // Switch-On : 0bx---x111
-                     break;
-                  }
-                  case SWITCHEDON  & 0b11011111:
-                  { // Disable
-                     coeCurrent = 3;
-                     if((shared.state == stop) || (shared.state == shutdown)) {
-                        coeRequest = 0; // Switch off
-                        shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10001111) | 0b0110; // Ready2Switch : 0bx---x110
-                     }
-                     else if(shared.state == enable){
-                        coeRequest = 5; // Operation enable
-                        shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10001111) | 0b1111; // Operation Enabled : 0bx---1111
-                     }
-                     break;
-                  }
-                  case OP_ENABLED  & 0b11011111:
-                  { // Enable
-                     coeCurrent = 4;
-                     if (shared.state != enable) {
-                        coeRequest = 4; // Disable operation
-                        shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10001111) | 0b0111; // Operation Disabled : 0bx---0111
-                     }
-                     break;
-                  }
-                  case FAULT :
-                  {
-                     coeCurrent = 5;
-                     coeRequest = 6;
-                     shared.coeCtrlWord = shared.coeCtrlWord | 0b10000000 ; // Clear Fault : 0b1---xxxx
-                     break;
-                  }
-                  case FAULTREACT :
-                  {
-                     coeCurrent = 6;
-                     coeRequest = 0;
-                     shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10000111) | 0b110; // Ready2Switch/Shutdown : 0bx---x110
-                     break;
-                  }
-                  default :
-                  {
-                     coeCurrent = 8;
-                     coeRequest = 0;
-                     shared.coeCtrlWord = (shared.coeCtrlWord & ~0b10000111) | 0b110; // Shutddown : 0bx---x110
-                     break;
-                  }
+      // CANopen state machine
+      switch(shared.coeStatus & 0b01101111){
+         case QUICKSTOP :
+         {
+            shared.coeCurrentState = QuickStop;
+            if(!shared.quickStop) {
+               shared.coeStateTransition = EnableOp;
+               shared.coeCtrlWord |= 0b100; // Disable quickstop
+            } 
+            else shared.coeStateTransition = TrigQuickStop;
+            break;
+         }
+         default :
+         {
+            switch(shared.coeStatus & 0b01001111){
+               case NOTRDY2SWCH & 0b01001111: 
+               {
+                  shared.coeCurrentState = NotReady;
+                  shared.coeStateTransition = Shutdown; // Ready to switch
+                  break;
                }
-               
+               case SWCHDISABLED & 0b01001111: 
+               {
+                  shared.coeCurrentState = SwitchDisabled;
+                  shared.coeStateTransition = Shutdown; // Ready to switch
+                  shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b110; // Ready2Switch/Shutdown : 0bx---x110
+                  break;
+               }
+               case RDY2SWITCH & 0b01001111:
+               { //Stop
+                  shared.coeCurrentState = Ready; 
+                  shared.coeStateTransition = SwitchOn; // Switch on
+                  if((shared.masterState == enable) || (shared.masterState = disable)) shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b0111; // Switch-On : 0bx---x111
+                  break;
+               }
+               case SWITCHEDON  & 0b01001111:
+               { // Disable
+                  shared.coeCurrentState = SwitchedOn;
+                  if((shared.masterState == stop) || (shared.masterState == shutdown)) {
+                     shared.coeStateTransition = Shutdown; // Switch off
+                     shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b0110; // Ready2Switch : 0bx---x110
+                  }
+                  else if(shared.masterState == enable){
+                     shared.coeStateTransition = EnableOp; // Operation enable
+                     shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b1111; // Operation Enabled : 0bx---1111
+                  }
+                  break;
+               }
+               case OP_ENABLED  & 0b11011111:
+               { // Enable
+                  shared.coeCurrentState = OpEnabled;
+                  if (shared.masterState != enable) {
+                     shared.coeStateTransition = DisableOp; // Disable operation
+                     shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b0111; // Operation Disabled : 0bx---0111
+                  }
+                  break;
+               }
+               case FAULT :
+               {
+                  shared.coeCurrentState = Fault;
+                  shared.coeStateTransition = DisableOp;
+                  shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b0111; // Operation Disabled : 0bx---0111
+                  break;
+               }
+               case FAULTREACT :
+               {
+                  shared.coeCurrentState = FaultReaction;
+                  shared.coeStateTransition = Shutdown;
+                  break;
+               }
+               default :
+               {
+                  shared.coeCurrentState = Unknown;
+                  shared.coeStateTransition = Shutdown;
+                  shared.coeCtrlWord = (shared.coeCtrlWord & ~0b00001111) | 0b110; // Shutddown : 0bx---x110
+                  break;
+               }
             }
          }
-         #if DEBUG_MODE
-         if(prevcStatus != shared.coeStatus){
-            printf("\nCoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", coeStateReadable[coeCurrent], shared.coeStatus, coeCtrlReadable[coeRequest], shared.coeCtrlWord);
-            prevcStatus = shared.coeStatus;
-         }
-         #endif
+      }
+      #if DEBUG_MODE
+      if(prevcStatus != shared.coeStatus){
+         printf("\nCoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", coeStateReadable[coeCurrent], shared.coeStatus, coeCtrlReadable[coeRequest], shared.coeCtrlWord);
+         prevcStatus = shared.coeStatus;
+      }
+      #endif
 
-         if((shared.wrkCounter < shared.expectedWKC) || ec_group[currentgroup].docheckstate)
+      if(shared.inOP && (shared.wrkCounter < shared.expectedWKC) || ec_group[currentgroup].docheckstate)
          {
             /* one ore more slaves are not responding */
             ec_group[currentgroup].docheckstate = FALSE;
@@ -483,13 +493,13 @@ static void* ecat_Controller(void* ptr)
                   ec_group[currentgroup].docheckstate = TRUE;
                   if (ec_slave[slave].state == (EC_STATE_SAFE_OP + EC_STATE_ERROR))
                   {
-                     printf("\nERROR : slave %d is in SAFE_OP + ERROR, attempting ack.\n", slave);
+                     printf("\nECAT: (ERROR) slave %d is in SAFE_OP + ERROR, attempting ack.\n", slave);
                      ec_slave[slave].state = (EC_STATE_SAFE_OP + EC_STATE_ACK);
                      ec_writestate(slave);
                   }
                   else if(ec_slave[slave].state == EC_STATE_SAFE_OP)
                   {
-                     printf("\nWARNING : slave %d is in SAFE_OP, change to OPERATIONAL.\n", slave);
+                     printf("\nECAT: (WARNING) slave %d is in SAFE_OP, change to OPERATIONAL.\n", slave);
                      ec_slave[slave].state = EC_STATE_OPERATIONAL;
                      ec_writestate(slave);
                   }
@@ -498,7 +508,7 @@ static void* ecat_Controller(void* ptr)
                      if (ec_reconfig_slave(slave, EC_TIMEOUTMON))
                      {
                         ec_slave[slave].islost = FALSE;
-                        printf("\nMESSAGE : slave %d reconfigured\n",slave);
+                        printf("\nECAT: (MESSAGE) slave %d reconfigured\n",slave);
                      }
                   }
                   else if(!ec_slave[slave].islost)
@@ -508,7 +518,7 @@ static void* ecat_Controller(void* ptr)
                      if (ec_slave[slave].state == EC_STATE_NONE)
                      {
                         ec_slave[slave].islost = TRUE;
-                        printf("\nERROR : slave %d lost\n",slave);
+                        printf("\nECAT: (ERROR) slave %d lost\n",slave);
                      }
                   }
                }
@@ -519,21 +529,20 @@ static void* ecat_Controller(void* ptr)
                      if (ec_recover_slave(slave, EC_TIMEOUTMON))
                      {
                         ec_slave[slave].islost = FALSE;
-                        printf("\nMESSAGE : slave %d recovered\n",slave);
+                        printf("\nECAT: (MESSAGE) slave %d recovered\n",slave);
                      }
                   }
                   else
                   {
                      ec_slave[slave].islost = FALSE;
-                     printf("\nMESSAGE : slave %d found\n",slave);
+                     printf("\nECAT: (MESSAGE) slave %d found\n",slave);
                   }
                }
             }
             if(!ec_group[currentgroup].docheckstate)
-               printf("\nOK : all slaves resumed OPERATIONAL.\n");
+               printf("\nECAT: (OK) all slaves resumed OPERATIONAL.\n");
          }
-         
-      }
+        
       
       
       #if DEBUG_MODE
@@ -565,7 +574,7 @@ static void* ecat_Controller(void* ptr)
 
 boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, uint16 inPDOObj){
 
-   printf("Starting EtherCAT Master\n");
+   printf("ECAT: Starting EtherCAT Master\n");
 
    uint32 sdoBuff;
    uint sdoBuffSize;
@@ -576,7 +585,7 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
    /* initialise SOEM, bind socket to ifname */
    if (ec_init(ifname))
    {
-      printf("ec_init on %s succeeded.\n",shared.ifname);
+      printf("ECAT: ec_init on %s succeeded.\n",shared.ifname);
       /* find and auto-config slaves */
 
        if ( ec_config_init(FALSE) > 0 )
@@ -594,7 +603,7 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
          shared.ifname = ifname;
 
          // Configure PDO assignments
-         printf("%d slaves found. Configuring PDO assigments...\n",ec_slavecount);
+         printf("ECAT: %d slaves found. Configuring PDO assigments...\n",ec_slavecount);
          for(int i = 1; sdosNotConfigured != 0 && i <=10 ; i++){
             if(i != 1) osal_usleep(100000); // If looping, wait 100ms
             sdosNotConfigured = 0;
@@ -635,7 +644,7 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
             readPDOAssignments(1,0x1C13, shared.inSizes, shared.numOfPDOs);
             shared.numOfPDOs += sdoBuff;
 
-            if(sdosNotConfigured != 0) printf("\rPDO assignments failed to configure %2d time(s). Retrying...\n", i);
+            if(sdosNotConfigured != 0) printf("\rECAT: PDO assignments failed to configure %2d time(s). Retrying...  ", i);
          }
          if(sdosNotConfigured == 0) printf("PDO's configured!\n");
          else {
@@ -647,6 +656,10 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
          sdoBuff = 0;
          ec_SDOwrite(1, HM_AUTOMOVE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable automove
 
+         sdoBuff = 6;
+         ec_SDOwrite(1, QSTOP_OPT , FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+         
+
          // Configure Profile Position settings
          //sdoBuff = 10;
          //ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
@@ -657,7 +670,7 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
          //ec_SDOwrite(1, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
 
          // Set to stop state
-         shared.state = stop;
+         shared.masterState = stop;
 
          // Set to default mode
          //shared.mode = DEFAULTOPMODE;
@@ -680,20 +693,20 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
 
          
          // Config DC (In PREOP)
-         printf("Configuring DC. Should be in PRE-OP. ");
+         printf("ECAT: Configuring DC. Should be in PRE-OP. ");
          printf(ec_statecheck(0, EC_STATE_PRE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_PRE_OP ? "State: PRE_OP\n" : "ERR! NOT IN PRE_OP!\n") ;
-         printf(ec_configdc() ? "Found slaves with DC.\n" : "Did not find slaves with DC.\n") ;
+         printf(ec_configdc() ? "ECAT: Found slaves with DC.\n" : "ECAT: Did not find slaves with DC.\n") ;
          ec_dcsync0(1, FALSE, CYCLE_NS, 0);
          
          
          
          // Syncing (In SAFEOP)
-         printf("Slaves mapped, state to SAFE_OP... ");
+         printf("ECAT: Slaves mapped, state to SAFE_OP... ");
          ec_slave[0].state = EC_STATE_SAFE_OP;
          ec_writestate(0);
          printf(ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_SAFE_OP ? "State: SAFE_OP\n" : "ERR! NOT IN SAFE_OP!\n") ;
          shared.expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
-         printf("Calculated workcounter %d\n", shared.expectedWKC);
+         printf("ECAT: Calculated workcounter %d\n", shared.expectedWKC);
          
          /*for(int i = 0 ; i < 100 ; i++){ // Send 10,000 cycles of process data to tune other slaves
             ec_send_processdata();
@@ -704,7 +717,7 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
          /* Enable talker to handle slave PDOs in OP */
          pthread_create(&shared.talker, NULL, ecat_Talker, NULL);
          pthread_create(&shared.controller, NULL, ecat_Controller, NULL);
-         printf("Talker started! Synccount needs to reach : %"PRIi64"\n", (uint64)SYNC_AQTIME_NS / CYCLE_NS);
+         printf("ECAT: Talker started! Synccount needs to reach : %"PRIi64"\n", (uint64)SYNC_AQTIME_NS / CYCLE_NS);
          pthread_mutex_lock(&shared.control);
          while(shared.inSyncCount < (uint64)(SYNC_AQTIME_NS / CYCLE_NS)){
             pthread_mutex_unlock(&shared.control);
@@ -712,12 +725,12 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
             pthread_mutex_lock(&shared.control);
          }
          pthread_mutex_unlock(&shared.control);
-         printf("\nMaster within sync window. Enabling sync0 generation!\n");
+         printf("\nECAT: Master within sync window. Enabling sync0 generation!\n");
          ec_dcsync0(1, TRUE, CYCLE_NS, 0); //Enable sync0 generation
 
 
          // Go into OPERATIONAL
-         printf("\nRequesting operational state for all slaves\n");
+         printf("\nECAT: Requesting operational state for all slaves\n");
          ec_slave[0].state = EC_STATE_OPERATIONAL;
          ec_send_processdata();  // Send one valid data to prep slaves for OP state
          ec_receive_processdata(EC_TIMEOUTRET);
@@ -728,20 +741,20 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
          // Return results
          if (ec_slave[0].state == EC_STATE_OPERATIONAL )
 			{
-				printf("\nOperational state reached for all slaves!\n");
+				printf("\nECAT: Operational state reached for all slaves!\n");
             shared.inOP = TRUE;
             return TRUE;
          }
          else
          {
-            printf("\nNot all slaves reached operational state.\n");
+            printf("\nECAT: Not all slaves reached operational state.\n");
             ec_readstate();
             for(int i = 1; i<=ec_slavecount ; i++)
             {
                ec_dcsync0(i+1, FALSE, 0, 0); // SYNC0,1
                if(ec_slave[i].state != EC_STATE_OPERATIONAL)
                {
-                  printf("Slave %d State=0x%2.2x StatusCode=0x%4.4x : %s\n",
+                  printf("ECAT: Slave %d State=0x%2.2x StatusCode=0x%4.4x : %s\n",
                         i, ec_slave[i].state, ec_slave[i].ALstatuscode, ec_ALstatuscode2string(ec_slave[i].ALstatuscode));
                }
             }
@@ -749,12 +762,12 @@ boolean ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, ui
       }
       else
         {
-            printf("No slaves found!\n");
+            printf("ECAT: No slaves found!\n");
         }
    }
    else
    {
-      printf("No socket connection on %s\nExecute as root\n", shared.ifname);
+      printf("ECAT: No socket connection on %s. Execute as root!\n", shared.ifname);
    }
 
    return FALSE;
@@ -792,22 +805,24 @@ static boolean ecat_COEState(enum ecat_States reqState){
    int err = 0;
 
    pthread_mutex_lock(&shared.control);
-   if(shared.state != reqState){
-      shared.state = reqState;
+   if(shared.masterState != reqState){
+      shared.masterState = reqState;
       clock_gettime(CLOCK_REALTIME, &timeout);
       timeout.tv_sec += 1;
+
+      shared.quickStop = FALSE;
       
       switch(reqState){ //Wait for talker thread to confirm update
          case stop :
-            while(((shared.coeStatus & 0b1101111) != (RDY2SWITCH & 0b1101111)) && err == 0)
+            while((shared.coeCurrentState != Ready) && err == 0)
                err = pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
          break;
          case disable :
-            while(((shared.coeStatus & 0b1101111) != (SWITCHEDON & 0b1101111)) && err == 0)
+            while((shared.coeCurrentState != SwitchedOn) && err == 0)
                err = pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
          break;
          case enable :
-            while(((shared.coeStatus & 0b1101111) != (OP_ENABLED & 0b1101111)) && err == 0)
+            while((shared.coeCurrentState != OpEnabled) && err == 0)
                err = pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
          break;
          default :
@@ -836,17 +851,17 @@ boolean ecat_Stop(){
 boolean ecat_Shutdown(){
 
    pthread_mutex_lock(&shared.control);
-   shared.state = shutdown;
+   shared.masterState = shutdown;
    pthread_mutex_unlock(&shared.control);
    pthread_join(shared.talker, NULL);
    pthread_join(shared.controller, NULL);
 
-   printf("\nRequest init state for all slaves\n");
+   printf("\nECAT: Requesting init state for all slaves\n");
    ec_slave[0].state = EC_STATE_INIT;
    /* request INIT state for all slaves */
    ec_writestate(0);
 
-   printf("End simple test, close socket\n");
+   printf("ECAT: End simple test, close socket\n");
 
    pthread_mutex_destroy(&shared.control);
    pthread_mutex_destroy(&shared.debug);
@@ -857,6 +872,24 @@ boolean ecat_Shutdown(){
 
    /* stop SOEM, close socket */
    ec_close();
+}
+
+//Blocking
+boolean ecat_QuickStop(boolean enableQuickStop){ 
+   pthread_mutex_lock(&shared.control);
+   if(enableQuickStop){
+      shared.quickStop = TRUE;
+      while(shared.coeCurrentState != QuickStop){
+         pthread_cond_wait(&shared.stateUpdated, &shared.control);
+      }
+   } else {
+      shared.quickStop = FALSE;
+      while(shared.coeCurrentState != OpEnabled){
+         pthread_cond_wait(&shared.stateUpdated, &shared.control);
+      }
+   }
+   pthread_mutex_unlock(&shared.control);
+   return TRUE;
 }
 
 // Blocks for 1 sec
@@ -971,12 +1004,27 @@ int ecat_Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME
    return TRUE;
 }
 
-boolean ecat_Fault(){
+// Returns TRUE if fault
+boolean ecat_Fault(boolean clearFault){
    pthread_mutex_lock(&shared.control);
-   boolean fault = (shared.coeStatus & 0b1000) != 0;
+
+   
+   boolean fault = (shared.coeCurrentState == Fault);
+   
+   if(clearFault && fault){
+      struct timespec timeout;
+      clock_gettime(CLOCK_MONOTONIC, &timeout);
+      timeout.tv_sec += 1;
+      shared.coeCtrlWord |= 0b10000000 ; // Clear Fault : 0b1---xxxx
+      while(shared.coeCurrentState == Fault) {
+         pthread_cond_timedwait(&shared.stateUpdated, &shared.control, &timeout);
+      }
+   }
+   else shared.coeCtrlWord &= ~0b10000000 ; // Don't Clear Fault : 0b0---xxxx
    pthread_mutex_unlock(&shared.control);
    return fault;
 }
+
 
 
 
@@ -1032,9 +1080,12 @@ int main(int argc, char *argv[])
 
       ecat_Init(argv[1], &PDOs, sizeof(PDOs), rxPDOFixed, txPDOFixed);
       osal_usleep(10000);
-      printf("\nWaiting for fault to clear!\n");
-      while(!ecat_Fault()){}
-      printf("\nFault cleared!\n");
+      if(ecat_Fault(FALSE)){
+         printf("\nWaiting for fault to clear!\n");
+         while(!ecat_Fault(TRUE)){}
+         printf("\nFault cleared!\n");
+         ecat_Fault(FALSE);
+      }
       while(!ecat_Enable()){
          printf("\nEnable failed\n");
       }
@@ -1056,9 +1107,20 @@ int main(int argc, char *argv[])
       }*/
 
       PDOs.targetPos = 360;
-      ecat_Update(TRUE, 10000000);
+      ecat_Update(TRUE, 5000); // 5 sec
       printf("\nSetpoint set\n");
-      osal_usleep(10000000);
+      osal_usleep(5000000); // 5 sec
+      
+      //ecat_QuickStop(TRUE);
+      printf("Quickstop!\n");
+      osal_usleep(5000000); // 5 sec
+      printf("Re-enable\n");
+      ecat_QuickStop(FALSE);
+      
+
+      ecat_Update(TRUE, 5000); // 5 sec
+      printf("Ending\n");
+      osal_usleep(5000000000); // 5 sec
 
      ecat_Shutdown();
       
