@@ -16,8 +16,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -33,8 +32,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -42,22 +40,15 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "dcTest::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-dcTest-Debug-571531bcb337f1a38885.json",
-					"name" : "dcTest",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "periodTest::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-periodTest-Debug-c58ce113e94114fddcdb.json",
-					"name" : "periodTest",
+					"id" : "DS402::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DS402-Debug-51c76775e7bf830784e2.json",
+					"name" : "DS402",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-simpleMtrCtrl-Debug-f1d0d81cd0c3989dce4b.json",
+					"jsonFile" : "target-simpleMtrCtrl-Debug-c1d73fa97fe72f0410b7.json",
 					"name" : "simpleMtrCtrl",
 					"projectIndex" : 0
 				}

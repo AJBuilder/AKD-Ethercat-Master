@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o"
+  "CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o"
   "simpleMtrCtrl"
   "simpleMtrCtrl.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang C)
+foreach(lang CXX)
   include(CMakeFiles/simpleMtrCtrl.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

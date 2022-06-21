@@ -1,17 +1,12 @@
 [
 {
   "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/dcTest.dir/src/dcTest.c.o   -c /home/bench/EtherCATBench/src/dcTest.c",
-  "file": "/home/bench/EtherCATBench/src/dcTest.c"
+  "command": "/usr/bin/g++   -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o -c /home/bench/EtherCATBench/src/DS402EcatController.cpp",
+  "file": "/home/bench/EtherCATBench/src/DS402EcatController.cpp"
 },
 {
   "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o   -c /home/bench/EtherCATBench/src/simpleMtrCtrl.c",
-  "file": "/home/bench/EtherCATBench/src/simpleMtrCtrl.c"
-},
-{
-  "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/gcc  -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/periodTest.dir/src/periodTest.c.o   -c /home/bench/EtherCATBench/src/periodTest.c",
-  "file": "/home/bench/EtherCATBench/src/periodTest.c"
+  "command": "/usr/bin/g++   -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o -c /home/bench/EtherCATBench/src/simpleMtrCtrl.cpp",
+  "file": "/home/bench/EtherCATBench/src/simpleMtrCtrl.cpp"
 }
 ]

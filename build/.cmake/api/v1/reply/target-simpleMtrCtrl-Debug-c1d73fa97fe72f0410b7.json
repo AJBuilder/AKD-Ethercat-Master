@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "dcTest"
+			"path" : "simpleMtrCtrl"
 		}
 	],
 	"backtrace" : 1,
@@ -13,7 +13,8 @@
 			"add_executable",
 			"install",
 			"target_link_directories",
-			"target_include_directories"
+			"target_include_directories",
+			"target_link_libraries"
 		],
 		"files" : 
 		[
@@ -27,25 +28,31 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 10,
+				"line" : 8,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 30,
+				"line" : 20,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 20,
+				"line" : 14,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 19,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 18,
 				"parent" : 0
 			}
 		]
@@ -66,14 +73,20 @@
 					"path" : "/home/bench/EtherCATBench/SOEM/install/include/soem"
 				}
 			],
-			"language" : "C",
+			"language" : "CXX",
 			"sourceIndexes" : 
 			[
 				0
 			]
 		}
 	],
-	"id" : "dcTest::@6890427a1f51a3e7e1df",
+	"dependencies" : 
+	[
+		{
+			"id" : "DS402::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
 	"install" : 
 	{
 		"destinations" : 
@@ -126,10 +139,10 @@
 				"role" : "libraries"
 			}
 		],
-		"language" : "C"
+		"language" : "CXX"
 	},
-	"name" : "dcTest",
-	"nameOnDisk" : "dcTest",
+	"name" : "simpleMtrCtrl",
+	"nameOnDisk" : "simpleMtrCtrl",
 	"paths" : 
 	{
 		"build" : ".",
@@ -143,6 +156,13 @@
 			[
 				0
 			]
+		},
+		{
+			"name" : "Object Libraries",
+			"sourceIndexes" : 
+			[
+				1
+			]
 		}
 	],
 	"sources" : 
@@ -150,8 +170,14 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/dcTest.c",
+			"path" : "src/simpleMtrCtrl.cpp",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 5,
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

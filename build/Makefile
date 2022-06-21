@@ -80,6 +80,17 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -112,17 +123,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -157,17 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named dcTest
+# Target rules for targets named DS402
 
 # Build rule for target.
-dcTest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 dcTest
-.PHONY : dcTest
+DS402: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DS402
+.PHONY : DS402
 
 # fast build rule for target.
-dcTest/fast:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/build
-.PHONY : dcTest/fast
+DS402/fast:
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/build
+.PHONY : DS402/fast
 
 #=============================================================================
 # Target rules for targets named simpleMtrCtrl
@@ -182,99 +182,59 @@ simpleMtrCtrl/fast:
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/build
 .PHONY : simpleMtrCtrl/fast
 
-#=============================================================================
-# Target rules for targets named periodTest
+src/DS402EcatController.o: src/DS402EcatController.cpp.o
 
-# Build rule for target.
-periodTest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 periodTest
-.PHONY : periodTest
-
-# fast build rule for target.
-periodTest/fast:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/build
-.PHONY : periodTest/fast
-
-src/dcTest.o: src/dcTest.c.o
-
-.PHONY : src/dcTest.o
+.PHONY : src/DS402EcatController.o
 
 # target to build an object file
-src/dcTest.c.o:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/src/dcTest.c.o
-.PHONY : src/dcTest.c.o
+src/DS402EcatController.cpp.o:
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o
+.PHONY : src/DS402EcatController.cpp.o
 
-src/dcTest.i: src/dcTest.c.i
+src/DS402EcatController.i: src/DS402EcatController.cpp.i
 
-.PHONY : src/dcTest.i
-
-# target to preprocess a source file
-src/dcTest.c.i:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/src/dcTest.c.i
-.PHONY : src/dcTest.c.i
-
-src/dcTest.s: src/dcTest.c.s
-
-.PHONY : src/dcTest.s
-
-# target to generate assembly for a file
-src/dcTest.c.s:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/src/dcTest.c.s
-.PHONY : src/dcTest.c.s
-
-src/periodTest.o: src/periodTest.c.o
-
-.PHONY : src/periodTest.o
-
-# target to build an object file
-src/periodTest.c.o:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/src/periodTest.c.o
-.PHONY : src/periodTest.c.o
-
-src/periodTest.i: src/periodTest.c.i
-
-.PHONY : src/periodTest.i
+.PHONY : src/DS402EcatController.i
 
 # target to preprocess a source file
-src/periodTest.c.i:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/src/periodTest.c.i
-.PHONY : src/periodTest.c.i
+src/DS402EcatController.cpp.i:
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/src/DS402EcatController.cpp.i
+.PHONY : src/DS402EcatController.cpp.i
 
-src/periodTest.s: src/periodTest.c.s
+src/DS402EcatController.s: src/DS402EcatController.cpp.s
 
-.PHONY : src/periodTest.s
+.PHONY : src/DS402EcatController.s
 
 # target to generate assembly for a file
-src/periodTest.c.s:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/src/periodTest.c.s
-.PHONY : src/periodTest.c.s
+src/DS402EcatController.cpp.s:
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/src/DS402EcatController.cpp.s
+.PHONY : src/DS402EcatController.cpp.s
 
-src/simpleMtrCtrl.o: src/simpleMtrCtrl.c.o
+src/simpleMtrCtrl.o: src/simpleMtrCtrl.cpp.o
 
 .PHONY : src/simpleMtrCtrl.o
 
 # target to build an object file
-src/simpleMtrCtrl.c.o:
-	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o
-.PHONY : src/simpleMtrCtrl.c.o
+src/simpleMtrCtrl.cpp.o:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o
+.PHONY : src/simpleMtrCtrl.cpp.o
 
-src/simpleMtrCtrl.i: src/simpleMtrCtrl.c.i
+src/simpleMtrCtrl.i: src/simpleMtrCtrl.cpp.i
 
 .PHONY : src/simpleMtrCtrl.i
 
 # target to preprocess a source file
-src/simpleMtrCtrl.c.i:
-	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.i
-.PHONY : src/simpleMtrCtrl.c.i
+src/simpleMtrCtrl.cpp.i:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.i
+.PHONY : src/simpleMtrCtrl.cpp.i
 
-src/simpleMtrCtrl.s: src/simpleMtrCtrl.c.s
+src/simpleMtrCtrl.s: src/simpleMtrCtrl.cpp.s
 
 .PHONY : src/simpleMtrCtrl.s
 
 # target to generate assembly for a file
-src/simpleMtrCtrl.c.s:
-	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.s
-.PHONY : src/simpleMtrCtrl.c.s
+src/simpleMtrCtrl.cpp.s:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.s
+.PHONY : src/simpleMtrCtrl.cpp.s
 
 # Help Target
 help:
@@ -284,19 +244,15 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
+	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... dcTest"
+	@echo "... DS402"
 	@echo "... simpleMtrCtrl"
-	@echo "... edit_cache"
-	@echo "... periodTest"
-	@echo "... src/dcTest.o"
-	@echo "... src/dcTest.i"
-	@echo "... src/dcTest.s"
-	@echo "... src/periodTest.o"
-	@echo "... src/periodTest.i"
-	@echo "... src/periodTest.s"
+	@echo "... src/DS402EcatController.o"
+	@echo "... src/DS402EcatController.i"
+	@echo "... src/DS402EcatController.s"
 	@echo "... src/simpleMtrCtrl.o"
 	@echo "... src/simpleMtrCtrl.i"
 	@echo "... src/simpleMtrCtrl.s"

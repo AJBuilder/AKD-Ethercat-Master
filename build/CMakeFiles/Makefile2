@@ -53,9 +53,8 @@ CMAKE_BINARY_DIR = /home/bench/EtherCATBench/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/dcTest.dir/all
+all: CMakeFiles/DS402.dir/all
 all: CMakeFiles/simpleMtrCtrl.dir/all
-all: CMakeFiles/periodTest.dir/all
 
 .PHONY : all
 
@@ -65,52 +64,51 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/dcTest.dir/clean
+clean: CMakeFiles/DS402.dir/clean
 clean: CMakeFiles/simpleMtrCtrl.dir/clean
-clean: CMakeFiles/periodTest.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/dcTest.dir
+# Target rules for target CMakeFiles/DS402.dir
 
 # All Build rule for target.
-CMakeFiles/dcTest.dir/all:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/depend
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=1,2 "Built target dcTest"
-.PHONY : CMakeFiles/dcTest.dir/all
+CMakeFiles/DS402.dir/all:
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/depend
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=1 "Built target DS402"
+.PHONY : CMakeFiles/DS402.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/dcTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dcTest.dir/all
+CMakeFiles/DS402.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/DS402.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 0
-.PHONY : CMakeFiles/dcTest.dir/rule
+.PHONY : CMakeFiles/DS402.dir/rule
 
 # Convenience name for target.
-dcTest: CMakeFiles/dcTest.dir/rule
+DS402: CMakeFiles/DS402.dir/rule
 
-.PHONY : dcTest
+.PHONY : DS402
 
 # clean rule for target.
-CMakeFiles/dcTest.dir/clean:
-	$(MAKE) -f CMakeFiles/dcTest.dir/build.make CMakeFiles/dcTest.dir/clean
-.PHONY : CMakeFiles/dcTest.dir/clean
+CMakeFiles/DS402.dir/clean:
+	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/clean
+.PHONY : CMakeFiles/DS402.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/simpleMtrCtrl.dir
 
 # All Build rule for target.
-CMakeFiles/simpleMtrCtrl.dir/all:
+CMakeFiles/simpleMtrCtrl.dir/all: CMakeFiles/DS402.dir/all
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/depend
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=5,6 "Built target simpleMtrCtrl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=2,3 "Built target simpleMtrCtrl"
 .PHONY : CMakeFiles/simpleMtrCtrl.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/simpleMtrCtrl.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/simpleMtrCtrl.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 0
 .PHONY : CMakeFiles/simpleMtrCtrl.dir/rule
@@ -124,33 +122,6 @@ simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/rule
 CMakeFiles/simpleMtrCtrl.dir/clean:
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/clean
 .PHONY : CMakeFiles/simpleMtrCtrl.dir/clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/periodTest.dir
-
-# All Build rule for target.
-CMakeFiles/periodTest.dir/all:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/depend
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=3,4 "Built target periodTest"
-.PHONY : CMakeFiles/periodTest.dir/all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/periodTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/periodTest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 0
-.PHONY : CMakeFiles/periodTest.dir/rule
-
-# Convenience name for target.
-periodTest: CMakeFiles/periodTest.dir/rule
-
-.PHONY : periodTest
-
-# clean rule for target.
-CMakeFiles/periodTest.dir/clean:
-	$(MAKE) -f CMakeFiles/periodTest.dir/build.make CMakeFiles/periodTest.dir/clean
-.PHONY : CMakeFiles/periodTest.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

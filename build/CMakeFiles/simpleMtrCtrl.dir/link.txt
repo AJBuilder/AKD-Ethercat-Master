@@ -1,1 +1,1 @@
-/usr/bin/gcc -g   CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.c.o  -o simpleMtrCtrl   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 
+/usr/bin/g++  -g   CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o  -o simpleMtrCtrl   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 
