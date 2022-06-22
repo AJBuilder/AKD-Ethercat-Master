@@ -27,7 +27,7 @@ int DS402Controller::cpyData(void* dest, void* source, int bytes){
 return bytes;
 }
 
-void DS402Controller::readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint pdoAssignments)
+void DS402Controller::readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint* pdoAssignments, int* ctrlIndex, int* statIndex)
 {
    uint16 idxloop, nidx, subidxloop, rdat, idx, subidx;
    uint8 subcnt, sizeIndex = 0;
@@ -37,7 +37,7 @@ void DS402Controller::readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* 
    rdl = sizeof(rdat); rdat = 0;
    /* read PDO assign subindex 0 ( = number of PDO's) */
    wkc = ec_SDOread(Slave, PDOassign, 0x00, FALSE, &rdl, &rdat, EC_TIMEOUTRXM);
-   pdoAssignments = rdat;
+   *pdoAssignments = rdat;
    /* positive result from slave ? */
    if ((wkc > 0) && (rdat > 0))
    {
@@ -66,8 +66,8 @@ void DS402Controller::readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* 
                /* read SDO that is mapped in PDO */
                wkc = ec_SDOread(Slave, idx, (uint8)subidxloop, FALSE, &rdl, &rdat2, EC_TIMEOUTRXM);
                /* extract bitlength of SDO */
-               if(((rdat2 & 0xFFFF0000) >> 16) == COControl) this->coeCtrlIdx = subidxloop;
-               if(((rdat2 & 0xFFFF0000) >> 16) == COStatus) this->coeStatusIdx = subidxloop;
+               if(((rdat2 & 0xFFFF0000) >> 16) == COControl) *ctrlIndex = subidxloop;
+               if(((rdat2 & 0xFFFF0000) >> 16) == COStatus) *statIndex = subidxloop;
                sizeList[sizeIndex + subidxloop] = (rdat2 & 0xFF) / 8;
             }
          }
@@ -192,19 +192,21 @@ void* DS402Controller::ecat_Talker(void* THIS)
 
          if(This->update){
             
-
+            for(){
+               
+            }
             // Update outputs from user buffers to IOmap
             output_map_ptr = ec_slave[1].outputs;
             output_buff_ptr = This->pdoBuff;
             for(int i = 1 ; i <= This->outSizes[0] ; i++){ 
-               if(i != This->coeCtrlIdx) This->cpyData(output_map_ptr, output_buff_ptr, This->outSizes[i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by DS402Controller::Controller)
+               if(i != This->coeCtrlPos) This->cpyData(output_map_ptr, output_buff_ptr, This->outSizes[i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by DS402Controller::Controller)
                output_map_ptr += This->outSizes[i];
                output_buff_ptr += This->outSizes[i];
             }
 
             // Update inputs from user buffers to IOmap
             input_map_ptr = ec_slave[1].inputs;
-            input_buff_ptr = This->pdoBuff + This->outSizes[0] + 1;
+            input_buff_ptr = This->pdoBuff + ec_slave[1].Obytes;
             for(int i = 1 ; i <= This->inSizes[0] ; i++){
                This->cpyData(input_buff_ptr, input_map_ptr, This->inSizes[i]); // Copy input data to user's buffer
                input_map_ptr += This->inSizes[i];
@@ -441,7 +443,7 @@ bool DS402Controller::ecat_Init(char *ifname, void* usrControl, int size, uint16
    uint32 sdoBuff;
    int sdoBuffSize;
    int sdosNotConfigured = 1;
-   uint8 inputFrameSize, outputFrameSize;
+   int largestOut = 0, largestIn = 0;
 
 
    /* initialise SOEM, bind socket to ifname */
@@ -464,93 +466,116 @@ bool DS402Controller::ecat_Init(char *ifname, void* usrControl, int size, uint16
          this->pdoBuff = (uint8*)usrControl;
          this->ifname = ifname;
 
-         // Configure PDO assignments
-         printf("ECAT: %d slaves found. Configuring PDO assigments...\n",ec_slavecount);
-         for(int i = 1; sdosNotConfigured != 0 && i <=10 ; i++){
-            if(i != 1) osal_usleep(100000); // If looping, wait 100ms
-            sdosNotConfigured = 0;
-
-            sdoBuff = 0;
-            ec_SDOwrite(1, rxPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable rxPDO
-            ec_SDOwrite(1, txPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable txPDO
-
-            sdoBuff = outPDOObj;
-            ec_SDOwrite(1, rxPDOAssign1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
-            sdoBuff = inPDOObj;
-            ec_SDOwrite(1, txPDOAssign1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign txPDO1
-
-            sdoBuff = 1;
-            ec_SDOwrite(1, rxPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable rxPDO
-            ec_SDOwrite(1, txPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable txPDO
-
-            sdoBuffSize = 1;
-            sdoBuff = 0;
-            ec_SDOread(1, rxPDOEnable, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check rxPDO assignment = 1
-            if(sdoBuff != 1) sdosNotConfigured++;
-            sdoBuffSize = 1;
-            sdoBuff = 0;
-            ec_SDOread(1, txPDOEnable, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check txPDO assignment = 1
-            if(sdoBuff != 1) sdosNotConfigured++;
-
-            sdoBuffSize = 2;
-            sdoBuff = 0;
-            ec_SDOread(1, rxPDOAssign1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
-            if(sdoBuff != outPDOObj) sdosNotConfigured++;
-            sdoBuffSize = 2;
-            sdoBuff = 0;
-            ec_SDOread(1, txPDOAssign1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
-            if(sdoBuff != inPDOObj) sdosNotConfigured++;
-            
-            readPDOAssignments(1,0x1C12, this->outSizes, this->numOfPDOs);
-            sdoBuff = this->numOfPDOs;
-            readPDOAssignments(1,0x1C13, this->inSizes, this->numOfPDOs);
-            this->numOfPDOs += sdoBuff;
-
-            if(sdosNotConfigured != 0) printf("\rECAT: PDO assignments failed to configure %2d time(s). Retrying...  ", i);
-         }
-         if(sdosNotConfigured == 0) printf("PDO's configured!\n");
-         else {
-            printf("PDO's failed to configure.\n");
-            return FALSE;
-         }
-
-         // Configure Homing settings
-         sdoBuff = 0;
-         ec_SDOwrite(1, HM_AUTOMOVE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable automove
-
-         sdoBuff = 6;
-         ec_SDOwrite(1, QSTOP_OPT , FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-         
-
-         // Configure Profile Position settings
-         //sdoBuff = 10;
-         //ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-         //sdoBuff = 10;
-         //ec_SDOwrite(1, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-         
-         //sdoBuff = 10;
-         //ec_SDOwrite(1, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-
          // Set to stop state
          this->masterState = ms_stop;
 
-         // Set to default mode
-         //this->mode = DEFAULTOPMODE;
+         // Configure PDO assignments
+         printf("ECAT: %d slaves found. Configuring PDO assigments...\n",ec_slavecount);
+
+         // Determine size of PDO entries.
+         coeCtrlMapPtr = new uint8* [ec_slavecount];
+         coeStatusMapPtr = new uint8* [ec_slavecount];
+         coeCtrlPos =  new int [ec_slavecount];
+         coeStatusPos =  new int [ec_slavecount];
+         outSizes = new uint8* [ec_slavecount];
+         inSizes = new uint8* [ec_slavecount];
+
+         for(int i = 1 ; i <= ec_slavecount ; i++){
+            if(ec_slave[i].Obytes > largestOut) largestOut = ec_slave[i].Obytes;
+            if(ec_slave[i].Ibytes > largestIn) largestIn = ec_slave[i].Ibytes;
+         }
+         
+         for(int i = 1 ; i < ec_slavecount){
+            outSizes[i] = new uint8 [largestOut + 1];
+            inSizes[i]  = new uint8 [largestIn  + 1];
+         }
+
+         this->numOfPDOs = 0;
+         for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
+
+            for(int i = 1; sdosNotConfigured != 0 && i <=10 ; i++){
+               if(i != 1) osal_usleep(100000); // If looping, wait 100ms
+               sdosNotConfigured = 0;
+
+               sdoBuff = 0;
+               ec_SDOwrite(slaveNum, rxPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable rxPDO
+               ec_SDOwrite(slaveNum, txPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable txPDO
+
+               sdoBuff = outPDOObj;
+               ec_SDOwrite(slaveNum, rxPDOAssign1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
+               sdoBuff = inPDOObj;
+               ec_SDOwrite(slaveNum, txPDOAssign1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign txPDO1
+
+               sdoBuff = 1;
+               ec_SDOwrite(slaveNum, rxPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable rxPDO
+               ec_SDOwrite(slaveNum, txPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable txPDO
+
+               sdoBuffSize = 1;
+               sdoBuff = 0;
+               ec_SDOread(slaveNum, rxPDOEnable, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check rxPDO assignment = 1
+               if(sdoBuff != 1) sdosNotConfigured++;
+               sdoBuffSize = 1;
+               sdoBuff = 0;
+               ec_SDOread(slaveNum, txPDOEnable, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check txPDO assignment = 1
+               if(sdoBuff != 1) sdosNotConfigured++;
+
+               sdoBuffSize = 2;
+               sdoBuff = 0;
+               ec_SDOread(slaveNum, rxPDOAssign1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
+               if(sdoBuff != outPDOObj) sdosNotConfigured++;
+               sdoBuffSize = 2;
+               sdoBuff = 0;
+               ec_SDOread(slaveNum, txPDOAssign1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
+               if(sdoBuff != inPDOObj) sdosNotConfigured++;
+
+               if(sdosNotConfigured != 0) printf("\rECAT: PDO assignments failed to configure %2d time(s). Retrying...  ", i);
+            }
+            if(sdosNotConfigured == 0) printf("PDO's configured!\n");
+            else {
+               printf("PDO's failed to configure.\n");
+               return FALSE;
+            }
+
+            readPDOAssignments(slaveNum, 0x1C12, this->outSizes[slaveNum], &sdoBuff, &(this->coeCtrlPos[slaveNum]), &(this->coeStatusPos[slaveNum]));
+            this->numOfPDOs += sdoBuff;
+            readPDOAssignments(slaveNum, 0x1C13, this->inSizes[slaveNum], &sdoBuff, &(this->coeCtrlPos[slaveNum]), &(this->coeStatusPos[slaveNum]));
+            this->numOfPDOs += sdoBuff;
+
+            // Configure Homing settings
+            sdoBuff = 0;
+            ec_SDOwrite(slaveNum, HM_AUTOMOVE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable automove
+
+            sdoBuff = 6;
+            ec_SDOwrite(slaveNum, QSTOP_OPT , FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+            
+/*
+             Configure Profile Position settings
+            sdoBuff = 10;
+            ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+            sdoBuff = 10;
+            ec_SDOwrite(1, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+                        sdoBuff = 10;
+            ec_SDOwrite(1, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+*/
+         }
+
 
          ecx_context.manualstatechange = 1;
          ec_config_map(&this->IOmap);
 
-         
-         // Find where the DS402 CoE control word is in IOmap
-         this->coeCtrlMapPtr = ec_slave[1].outputs;
-         for(int i = 1; i < this->coeCtrlIdx; i++){
-            this->coeCtrlMapPtr = this->coeCtrlMapPtr + this->outSizes[i]; 
-         }
+         // Find position in IO map of CoE objects
+         for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
+            // Find where the DS402 CoE control word is in IOmap
+            this->coeCtrlMapPtr[slaveNum] = ec_slave[slaveNum].outputs;
+            for(int i = 1; i < this->coeCtrlPos[slaveNum]; i++){
+               this->coeCtrlMapPtr[slaveNum] += this->outSizes[slaveNum][i]; 
+            }
 
-         // Find where the DS402 CoE status word is in IOmap
-         this->coeStatusMapPtr = ec_slave[1].inputs;
-         for(int i = 1; i < this->coeStatusIdx; i++){
-            this->coeStatusMapPtr = this->coeStatusMapPtr + this->inSizes[i]; 
+            // Find where the DS402 CoE status word is in IOmap
+            this->coeStatusMapPtr[slaveNum] = ec_slave[slaveNum].inputs;
+            for(int i = 1; i < this->coeStatusPos[slaveNum]; i++){
+               this->coeStatusMapPtr[slaveNum] += this->inSizes[slaveNum][i]; 
+            }
          }
 
          
@@ -758,7 +783,7 @@ bool DS402Controller::QuickStop(bool enableQuickStop){
 }
 
 // Blocks for 1 sec
-bool DS402Controller::setOpMode(ecat_OpModes reqMode){
+bool DS402Controller::setOpMode(int slave, ecat_OpModes reqMode){
 
    int sdoBuffSize, sdoBuff;
    struct timespec timeout, curtime;
@@ -773,10 +798,10 @@ bool DS402Controller::setOpMode(ecat_OpModes reqMode){
          do{
             sdoBuffSize = 1;
             sdoBuff = reqMode;
-            ec_SDOwrite(1, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
+            ec_SDOwrite(slave, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
             sdoBuffSize = 1; // Check if drive has acknowledged
             sdoBuff = 0;
-            ec_SDOread(1, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+            ec_SDOread(slave, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
             clock_gettime(CLOCK_MONOTONIC, &curtime);
          } while(sdoBuff != reqMode && curtime.tv_sec < timeout.tv_sec);
 

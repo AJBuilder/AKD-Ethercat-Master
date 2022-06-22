@@ -24,15 +24,7 @@ int main(int argc, char *argv[])
 
       
 
-      struct __attribute__((__packed__)){ 
-         //0x1722
-         //rxPDOs
-         //uint16   ctrlWord; 
-         //uint32  targetPos;
-         //uint16   latchCtrl;
-         //int16    tqFdFwd;
-         //uint16   digOutputs;
-         //uint16   maxTorque;
+      struct __attribute__((__packed__)){
 
          //0x1725
          //rxPDOs

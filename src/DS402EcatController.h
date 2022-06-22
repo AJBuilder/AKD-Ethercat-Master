@@ -95,7 +95,7 @@ class DS402Controller{
     bool Disable();
     bool Stop();
     bool Shutdown();
-    bool setOpMode(ecat_OpModes reqMode);
+    bool setOpMode(int slave, ecat_OpModes reqMode);
     bool ConfProfPosMode(bool moveImmediate_u);
     bool clearFault(bool persistClear);
     bool readFault();
@@ -114,12 +114,11 @@ class DS402Controller{
     char IOmap[4096];//[4096];
     uint8 *pdoBuff;
     uint numOfPDOs;
-    int coeCtrlIdx, coeStatusIdx;
-    uint8 *coeCtrlMapPtr, *coeStatusMapPtr;
-    uint8 outSizes[4*8 + 4], inSizes[4*8 + 4]; // 0 is num of entries to a PDO, followed by byte size of object entry.
-                                // Repeats for each PDO
-    // Assuming 1 byte minimum, up to 8 objects can be assigned per PDO. For PDOs max.
-
+    int *coeCtrlPos, *coeStatusPos;
+    uint8 **coeCtrlMapPtr, **coeStatusMapPtr;
+    uint8 **outSizes, **inSizes; //Pointer to 2D array. 1st dimension is slave. 2nd is PDO entry sizes. 
+                                //Index 0 of 2nd dimension specifies number of entries
+    
     // Control signals
     bool inOP, update, quickStop, moveImmediate;
     uint inSyncCount;
@@ -168,7 +167,7 @@ class DS402Controller{
     // Utility Methods
     int cpyData(void* dest, void* source, int bytes);
     void add_timespec(struct timespec *ts, int64 addtime);
-    void readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint pdoAssignments);
+    void readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint* pdoAssignments, int* ctrlIndex, int* statIndex);
     bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i);
 
     // Main Methods
