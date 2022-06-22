@@ -192,26 +192,28 @@ void* DS402Controller::ecat_Talker(void* THIS)
 
          if(This->update){
             
-            for(){
-               
-            }
-            // Update outputs from user buffers to IOmap
-            output_map_ptr = ec_slave[1].outputs;
             output_buff_ptr = This->pdoBuff;
-            for(int i = 1 ; i <= This->outSizes[0] ; i++){ 
-               if(i != This->coeCtrlPos) This->cpyData(output_map_ptr, output_buff_ptr, This->outSizes[i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by DS402Controller::Controller)
-               output_map_ptr += This->outSizes[i];
-               output_buff_ptr += This->outSizes[i];
-            }
-
-            // Update inputs from user buffers to IOmap
-            input_map_ptr = ec_slave[1].inputs;
             input_buff_ptr = This->pdoBuff + ec_slave[1].Obytes;
-            for(int i = 1 ; i <= This->inSizes[0] ; i++){
-               This->cpyData(input_buff_ptr, input_map_ptr, This->inSizes[i]); // Copy input data to user's buffer
-               input_map_ptr += This->inSizes[i];
-               input_buff_ptr += This->inSizes[i];
+            for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
+
+               // Update outputs from user buffers to IOmap
+               output_map_ptr = ec_slave[slaveNum].outputs;
+               for(int i = 1 ; i <= This->outSizes[slaveNum][0] ; i++){ 
+                  if(i != This->coeCtrlPos[slaveNum]) This->cpyData(output_map_ptr, output_buff_ptr, This->outSizes[slaveNum][i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by DS402Controller::Controller)
+                  output_map_ptr += This->outSizes[slaveNum][i];
+                  output_buff_ptr += This->outSizes[slaveNum][i];
+               }
+
+               // Update inputs from user buffers to IOmap
+               input_map_ptr = ec_slave[slaveNum].inputs;
+               for(int i = 1 ; i <= This->inSizes[slaveNum][0] ; i++){
+                  This->cpyData(input_buff_ptr, input_map_ptr, This->inSizes[slaveNum][i]); // Copy input data to user's buffer
+                  input_map_ptr += This->inSizes[slaveNum][i];
+                  input_buff_ptr += This->inSizes[slaveNum][i];
+               }   
+
             }
+            
 
             // Release caller of DS402Controller::Update()
             This->update = FALSE;
@@ -485,7 +487,7 @@ bool DS402Controller::ecat_Init(char *ifname, void* usrControl, int size, uint16
             if(ec_slave[i].Ibytes > largestIn) largestIn = ec_slave[i].Ibytes;
          }
          
-         for(int i = 1 ; i < ec_slavecount){
+         for(int i = 1 ; i <= ec_slavecount ; i++){
             outSizes[i] = new uint8 [largestOut + 1];
             inSizes[i]  = new uint8 [largestIn  + 1];
          }
@@ -826,7 +828,7 @@ bool DS402Controller::ConfProfPosMode(bool moveImmediate_u){
    return TRUE;
 }
 
-int DS402Controller::Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms){
+int DS402Controller::Home(int slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms){
 
    uint sdoBuff, err = 0;
    ecat_OpModes prevMode;
@@ -837,34 +839,34 @@ int DS402Controller::Home(int HOME_MODE, int HOME_DIR, int speed, int accelerati
    pthread_mutex_unlock(&this->control);
 
    sdoBuff = HOME_MODE;
-   ec_SDOwrite(1, HM_MODE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM);
+   ec_SDOwrite(slave, HM_MODE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM);
    
    // HOME.DIR
    sdoBuff = HOME_DIR;
-   ec_SDOwrite(1, HM_DIR , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); 
+   ec_SDOwrite(slave, HM_DIR , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); 
 
    // HOME.V
    sdoBuff = speed;
-   ec_SDOwrite(1, HM_V , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); 
+   ec_SDOwrite(slave, HM_V , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); 
 
    // HOME.ACC/HOME.DEC
    sdoBuff = acceleration;
-   ec_SDOwrite(1, HMACCEL , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
+   ec_SDOwrite(slave, HMACCEL , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
 
    // HOME.DIST
    sdoBuff = HOME_DIST;
-   ec_SDOwrite(1, HM_DIST , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
+   ec_SDOwrite(slave, HM_DIST , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
 
    // HOME.P
    sdoBuff = HOME_P;
-   ec_SDOwrite(1, HM_P , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
+   ec_SDOwrite(slave, HM_P , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
 
    
-   if(!DS402Controller::setOpMode(homing)) return FALSE;
+   if(!DS402Controller::setOpMode(slave, homing)) return FALSE;
 
    if(!DS402Controller::Update(TRUE, timeout_ms)) return FALSE;
 
-   if(!DS402Controller::setOpMode(prevMode)) return FALSE;
+   if(!DS402Controller::setOpMode(slave, prevMode)) return FALSE;
 
    return TRUE;
 }

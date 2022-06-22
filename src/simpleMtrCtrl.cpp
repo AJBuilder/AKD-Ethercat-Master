@@ -68,11 +68,11 @@ int main(int argc, char *argv[])
       while(!master1.Enable()){
          printf("\nEnable failed\n");
       }
-      while(!master1.setOpMode(profPos)){
+      while(!master1.setOpMode(0, profPos)){
          printf("\nMode switch failed\n");
       }
       
-      master1.Home(0, 0, 60, 1000, 0, 0, 1000);
+      master1.Home(0, 0, 0, 60, 1000, 0, 0, 1000);
       
       printf("\nHomed\n");
 

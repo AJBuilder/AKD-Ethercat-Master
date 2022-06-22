@@ -100,7 +100,7 @@ class DS402Controller{
     bool clearFault(bool persistClear);
     bool readFault();
     bool readFaultList();
-    int  Home(int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
+    int  Home(int slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
     bool Update(bool move, int timeout_ms);
     bool QuickStop(bool enableQuickStop);
 
@@ -123,11 +123,11 @@ class DS402Controller{
     bool inOP, update, quickStop, moveImmediate;
     uint inSyncCount;
     int8 wrkCounter, expectedWKC;
-    uint16 coeCtrlWord, coeStatus;
+    uint16 *coeCtrlWord, *coeStatus;
     uint64 diffDCtime;
     ecat_masterStates masterState;
-    ecat_coeStates coeCurrentState;
-    ecat_coeStateTrans coeStateTransition;
+    ecat_coeStates *coeCurrentState;
+    ecat_coeStateTrans *coeStateTransition;
 
     // Profile Control
     ecat_OpModes mode;
