@@ -1120,7 +1120,7 @@ int main(int argc, char *argv[])
 
       ecat_Update(TRUE, 5000); // 5 sec
       printf("Ending\n");
-      osal_usleep(5000); // 5 sec
+      osal_usleep(5000000); // 5 sec
 
      ecat_Shutdown();
       
