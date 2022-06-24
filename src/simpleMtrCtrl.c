@@ -1106,7 +1106,7 @@ int main(int argc, char *argv[])
          osal_usleep(1000000);
       }*/
 
-      PDOs.targetPos = 360;
+      PDOs.targetPos = 100;
       ecat_Update(TRUE, 5000); // 5 sec
       printf("\nSetpoint set\n");
       osal_usleep(5000000); // 5 sec
@@ -1120,7 +1120,7 @@ int main(int argc, char *argv[])
 
       ecat_Update(TRUE, 5000); // 5 sec
       printf("Ending\n");
-      osal_usleep(5000000000); // 5 sec
+      osal_usleep(5000); // 5 sec
 
      ecat_Shutdown();
       
