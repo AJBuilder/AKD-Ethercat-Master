@@ -81,6 +81,8 @@ inttypes.h
 -
 pthread.h
 -
+vector
+-
 ethercat.h
 /home/bench/EtherCATBench/src/ethercat.h
 

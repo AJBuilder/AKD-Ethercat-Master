@@ -4,12 +4,10 @@
 
 //////////////////// PDO Assignment Objects ////////////////////
 #define rxPDOEnable 0x1C12, 0
-#define rxPDOAssign1 0x1C12, 1
-#define rxPDOFixed   0x1725
+#define rxPDOAssign1 0x1C12
 
 #define txPDOEnable 0x1C13, 0
-#define txPDOAssign1 0x1C13, 1
-#define txPDOFixed   0x1B20
+#define txPDOAssign1 0x1C13
 
 ///////////////// Control and Status Objects //////////////////
 #define COControl    0x6040
@@ -64,10 +62,20 @@
 #define SYNC_AQTIME_NS (1000*1000*1000) // 1000ms
 #define SYNC_DIST (2000*1000) // 2ms
 
-#define DEFAULTOPMODE profPos
+#define DEFAULT_OPMODE  profPos
+#define DEFAULT_RXPDO   0x1701
+#define DEFAULT_TXPDO   0x1B01
 
 // Operation
-#define DEBUG_MODE FALSE
+#define DEBUG_MODE TRUE
+
+////////////////////// Error Codes //////////////////////
+
+// Generic (errno.h)
+#define DS402_ETIMEDOUT 110
+
+// Update()
+#define DS402_MOVEERR -1
 
 
 #include <stdio.h>
@@ -76,6 +84,7 @@
 #include <sys/queue.h>
 #include <inttypes.h>
 #include <pthread.h>
+#include <vector>
 
 #include "ethercat.h"
 
@@ -89,49 +98,74 @@ class DS402Controller{
     enum ecat_coeStates:int8{cs_NotReady = 0, cs_SwitchDisabled = 1, cs_Ready = 2, cs_SwitchedOn = 3, cs_OpEnabled = 4, cs_Fault = 5, cs_FaultReaction = 6, cs_QuickStop = 7, cs_Unknown = 8};
     enum ecat_coeStateTrans:int8{cst_Shutdown = 0, cst_SwitchOn = 1, cst_DisableVolt = 2, cst_TrigQuickStop = 3, cst_DisableOp = 4, cst_EnableOp = 5, cst_ResetFault = 6};
 
-    bool ecat_Init(char *ifname, void* usrControl, int size, uint16 outPDOObj, uint16 inPDOObj);
-    bool State(ecat_masterStates reqState);
+    bool ecat_Init(char *ifname);
+    bool ecat_Start(void* usrControl, int size);
     bool Enable();
     bool Disable();
     bool Stop();
     bool Shutdown();
-    bool setOpMode(int slave, ecat_OpModes reqMode);
-    bool ConfProfPosMode(bool moveImmediate_u);
-    bool clearFault(bool persistClear);
-    bool readFault();
+    bool setOpMode(uint slave, ecat_OpModes reqMode);
+    bool ConfProfPosImm(uint slave, bool moveImmediate_u);
+    bool clearFault(uint slave, bool persistClear);
+    bool readFault(uint slave);
     bool readFaultList();
-    int  Home(int slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
-    bool Update(bool move, int timeout_ms);
-    bool QuickStop(bool enableQuickStop);
+    int  Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
+    int  Update(uint slave, bool move, int timeout_ms);
+    bool QuickStop(uint slave, bool enableQuickStop);
+    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1);
+    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2);
+    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3);
+    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3, uint16 rxPDO4, uint16 txPDO4);
+    
 
     
     private:
        
     // Init
     char* ifname;
+    bool initialized;
 
     // PDO buffers
-    char IOmap[4096];//[4096];
-    uint8 *pdoBuff;
-    uint numOfPDOs;
-    int *coeCtrlPos, *coeStatusPos;
-    uint8 **coeCtrlMapPtr, **coeStatusMapPtr;
-    uint8 **outSizes, **inSizes; //Pointer to 2D array. 1st dimension is slave. 2nd is PDO entry sizes. 
-                                //Index 0 of 2nd dimension specifies number of entries
+    uint8 IOmap[4096];//[4096];
     
-    // Control signals
-    bool inOP, update, quickStop, moveImmediate;
+    
+    // Slave Data Struct Array
+    struct ecat_slave{
+
+        // PDO Data
+        uint8 *outUserBuff, *inUserBuff;
+        int coeCtrlPos, coeStatusPos;
+        uint numOfPDOs;
+        uint8 *outSizes, *inSizes; //Pointer to array. Index 0 specifies number of entries
+        uint8 *coeCtrlMapPtr, *coeStatusMapPtr;
+
+        // PDO Assign
+        uint16 rxPDO, txPDO;
+
+        // Slave Control Signals
+        bool update, quickStop, moveImmediate;
+        
+        uint16 coeCtrlWord, coeStatus;
+        ecat_coeStates coeCurrentState;
+        ecat_coeStateTrans coeStateTransition;
+
+        // Profile Control
+        ecat_OpModes mode;
+        bool moveAck, moveErr;
+    } *slaves;
+    struct slavePDOs{
+        uint8 pdos;
+        uint16 rxPDO[4];
+        uint16 txPDO[4];
+    };
+    std::vector<slavePDOs> PDOAssignments;
+
+    // Control Signals
+    bool inOP;
     uint inSyncCount;
     int8 wrkCounter, expectedWKC;
-    uint16 *coeCtrlWord, *coeStatus;
     uint64 diffDCtime;
     ecat_masterStates masterState;
-    ecat_coeStates *coeCurrentState;
-    ecat_coeStateTrans *coeStateTransition;
-
-    // Profile Control
-    ecat_OpModes mode;
-    bool moveAck, moveErr;
 
     // Debug 
     int64 gl_toff, gl_delta;
@@ -143,7 +177,7 @@ class DS402Controller{
     pthread_cond_t moveSig, stateUpdated;
     pthread_t talker, controller;
 
-    char coeStateReadable[9][25] = {
+    char coeStateReadable[9][23] = {
         "Not Ready To Switch-On",  //0
         "Switch-On Disabled",      //1
         "Ready To Switch-On",      //2
@@ -154,7 +188,7 @@ class DS402Controller{
         "QUICK STOP ACTIVE",       //7
         "Unknown State"            //8
     };
-    char coeCtrlReadable[7][20] = {
+    char coeCtrlReadable[7][18] = {
         "Shutdown",                //0
         "Switch-On",               //1
         "Disable Voltage",         //2
@@ -169,6 +203,8 @@ class DS402Controller{
     void add_timespec(struct timespec *ts, int64 addtime);
     void readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint* pdoAssignments, int* ctrlIndex, int* statIndex);
     bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i);
+    bool State(ecat_masterStates reqState);
+    void _confSlavePDOs(uint slave, uint8 num, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3, uint16 rxPDO4, uint16 txPDO4);
 
     // Main Methods
     static void* ecat_Talker(void* THIS);

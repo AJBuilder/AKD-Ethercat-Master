@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jun 22 12:48:04 2022
+# Make data base, printed on Fri Jun 24 12:39:29 2022
 
 # Variables
 
@@ -55,7 +57,7 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /root
 # environment
-SSH_CONNECTION = 192.168.137.1 55141 192.168.137.167 22
+SSH_CONNECTION = 192.168.137.1 49640 192.168.137.27 22
 # environment
 PATH = /root/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
@@ -63,7 +65,7 @@ XDG_RUNTIME_DIR = /run/user/0
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-2c01db6b-bfb7-43fd-9837-32c1a821ac6f.sock
+VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-36400cef-cacb-4dfa-b3c7-62718bb7ebff.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -103,7 +105,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 0
 # environment
-XDG_SESSION_ID = 220
+XDG_SESSION_ID = 53
 # environment
 USER = root
 # makefile
@@ -121,7 +123,7 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 192.168.137.1 55141 22
+SSH_CLIENT = 192.168.137.1 49640 22
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -217,8 +219,6 @@ GNUmakefile:
 # strcache performance: lookups = 36 / hit rate = 8%
 # hash-table stats:
 # Load=33/8192=0%, Rehash=0, Collisions=2/36=6%
-# Finished Make data base on Wed Jun 22 12:48:04 2022
+# Finished Make data base on Fri Jun 24 12:39:29 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-

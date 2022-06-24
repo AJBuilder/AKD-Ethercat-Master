@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
          int32    velActual;
          uint32   digInputs;
          int32    followErr;
-         uint16   latchPos;
+         uint32   latchPos;
          uint16   coeStatus;
          int16    tqActual;
          uint16   latchStatus;
@@ -53,50 +53,51 @@ int main(int argc, char *argv[])
       } PDOs = {0};
 
 
-      master1.ecat_Init(argv[1], &PDOs, sizeof(PDOs), rxPDOFixed, txPDOFixed);
+      master1.confSlavePDOs(1, 0x1725, 0x1B20);
+      if(!master1.ecat_Init(argv[1])) return -1;
+
+      if (!master1.ecat_Start(&PDOs, sizeof(PDOs))) return -2;
       osal_usleep(10000);
 
-      if(master1.readFault()){
+      if(master1.readFault(1)){
          printf("\nWaiting for fault to clear!\n");
          do{
-            master1.clearFault(FALSE);
+            master1.clearFault(1,FALSE);
 
-         }while(master1.readFault());
+         }while(master1.readFault(1));
          printf("\nFault cleared!\n");
       }
 
       while(!master1.Enable()){
          printf("\nEnable failed\n");
       }
+      printf("\nEnabled!\n");
+
+      PDOs.maxTorque = 1000;
+
       while(!master1.setOpMode(0, profPos)){
          printf("\nMode switch failed\n");
       }
+      printf("\nMode switched!\n");
+      if(master1.Home(0, 0, 0, 60, 1000, 0, 0, 1000)){
+         printf("\nHomed\n");
+      }else{
+         printf("\nFailed to home\n");
+      }
       
-      master1.Home(0, 0, 0, 60, 1000, 0, 0, 1000);
-      
-      printf("\nHomed\n");
-
-
-      PDOs.maxTorque = 1000;
-      //PDOs.targetVel = 60*1000;
-      /*for(int i = 0, pos = 0; i < 10; i++, pos += 100){
-         PDOs.targetPos = pos;
-         ecat_Update(TRUE);
-         osal_usleep(1000000);
-      }*/
 
       PDOs.targetPos = 360;
-      master1.Update(TRUE, 5000); // 5 sec
+      master1.Update(1, TRUE, 5000); // 5 sec
       printf("\nSetpoint set\n");
-      osal_usleep(5000000); // 5 sec
+      osal_usleep(50000000); // 50 sec
       
-      master1.QuickStop(TRUE); printf("Quickstop!\n");
+      master1.QuickStop(1, TRUE); printf("Quickstop!\n");
       osal_usleep(5000000); // 5 sec
       printf("Re-enable\n");
-      master1.QuickStop(FALSE);
+      master1.QuickStop(1, FALSE);
       
 
-      master1.Update(TRUE, 5000); // 5 sec
+      master1.Update(1, TRUE, 5000); // 5 sec
       printf("Ending\n");
       osal_usleep(5000000); // 5 sec
 
