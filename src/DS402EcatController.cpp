@@ -891,11 +891,11 @@ bool DS402Controller::setOpMode(uint slave, ecat_OpModes reqMode){
             do{
                sdoBuffSize = 1;
                sdoBuff = reqMode;
-               ec_SDOwrite(slaveNum, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
+               ec_SDOwrite(slaveNum + 1, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
 
                sdoBuffSize = 1; // Check if drive has acknowledged
                sdoBuff = 0;
-               ec_SDOread(slaveNum, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+               ec_SDOread(slaveNum + 1, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
 
                clock_gettime(CLOCK_MONOTONIC, &curtime);
                if(curtime.tv_sec > timeout.tv_sec){

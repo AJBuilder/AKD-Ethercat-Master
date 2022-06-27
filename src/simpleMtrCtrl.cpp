@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
       }else{
          printf("\nFailed to home\n");
       }
-      
+       osal_usleep(5000000); // 5 sec
 
       PDOs.targetPos = 360;
       master1.Update(1, TRUE, 5000); // 5 sec
