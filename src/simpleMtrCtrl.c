@@ -77,7 +77,7 @@
 #define DEFAULTOPMODE profPos
 
 // Operation
-#define DEBUG_MODE FALSE
+#define DEBUG_MODE TRUE
 
 
 
@@ -476,7 +476,7 @@ static void* ecat_Controller(void* ptr)
       }
       #if DEBUG_MODE
       if(prevcStatus != shared.coeStatus){
-         printf("\nCoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", coeStateReadable[coeCurrent], shared.coeStatus, coeCtrlReadable[coeRequest], shared.coeCtrlWord);
+         printf("\nCoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", coeStateReadable[shared.coeCurrentState], shared.coeStatus, coeCtrlReadable[shared.coeStateTransition], shared.coeCtrlWord);
          prevcStatus = shared.coeStatus;
       }
       #endif
