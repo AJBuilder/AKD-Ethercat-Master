@@ -83,7 +83,7 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "DS402::@6890427a1f51a3e7e1df"
+			"id" : "AKD::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
@@ -176,7 +176,7 @@
 		{
 			"backtrace" : 5,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o",
+			"path" : "build/CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o",
 			"sourceGroupIndex" : 1
 		}
 	],

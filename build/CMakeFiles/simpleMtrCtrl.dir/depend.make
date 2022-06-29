@@ -15,6 +15,6 @@ CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../SOEM/install/include/so
 CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../SOEM/install/include/soem/nicdrv.h
 CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../SOEM/install/include/soem/osal.h
 CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../SOEM/install/include/soem/osal_defs.h
-CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../src/DS402EcatController.h
+CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../src/AKDEcatController.h
 CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o: ../src/simpleMtrCtrl.cpp
 

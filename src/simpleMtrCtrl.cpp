@@ -6,7 +6,7 @@
 #include <inttypes.h>
 #include <pthread.h>
 
-#include "DS402EcatController.h"
+#include "AKDEcatController.h"
 #include "ethercat.h"
 
 
@@ -20,12 +20,10 @@ int main(int argc, char *argv[])
 
    if (argc > 1)
    {
-      DS402Controller master1;
+      AKDController master1;
 
       
-
       struct __attribute__((__packed__)){
-
          //0x1725
          //rxPDOs
          uint16   ctrlWord; 
@@ -33,11 +31,7 @@ int main(int argc, char *argv[])
          uint32   digOutputs;
          uint16   tqFdFwd;         
          uint16   maxTorque;
-
-         //0x1702
-         //uint32   targetVel;
-         //uint16   ctrlWord;
-
+         
          //0x1B20
          //txPDOs
          int32    posActual;
@@ -50,13 +44,16 @@ int main(int argc, char *argv[])
          int16    tqActual;
          uint16   latchStatus;
          int16    analogInput;
-      } PDOs = {0};
+      } s1;
 
 
-      master1.confSlavePDOs(1, 0x1725, 0x1B20);
+
+      
       if(!master1.ecat_Init(argv[1])) return -1;
+      master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
+      //master1.confSlavePDOs(2, &s2, sizeof(s1), 0x1725, 0x1B20);
 
-      if (!master1.ecat_Start(&PDOs, sizeof(PDOs))) return -2;
+      if (!master1.ecat_Start()) return -2;
       osal_usleep(10000);
 
       if(master1.readFault(1)){
@@ -73,7 +70,9 @@ int main(int argc, char *argv[])
       }
       printf("\nEnabled!\n");
 
-      PDOs.maxTorque = 1000;
+      s1.maxTorque = 1000;
+      s1.targetPos = 1;
+      s1.digOutputs = 3 << 0;
 
       while(!master1.setOpMode(0, profPos)){
          printf("\nMode switch failed\n");
@@ -86,16 +85,21 @@ int main(int argc, char *argv[])
       }
        osal_usleep(5000000); // 5 sec
 
-      PDOs.targetPos = 360;
-      master1.Update(1, TRUE, 5000); // 5 sec
+      s1.targetPos = 1;
+      printf("\nSetpoint update: %d",master1.Update(1, TRUE, 500000)); // 5 sec
+      master1.confProfPosImm(1, TRUE);
       printf("\nSetpoint set\n");
-      osal_usleep(50000000); // 50 sec
+      osal_usleep(5000000); // 5 sec
+      printf("\nSetpoint update: %d",master1.Update(1, TRUE, 500000)); // 5 sec
+      printf("\nSetpoint set\n");
+      osal_usleep(5000000); // 5 sec
       
+      /*
       master1.QuickStop(1, TRUE); printf("Quickstop!\n");
       osal_usleep(5000000); // 5 sec
       printf("Re-enable\n");
       master1.QuickStop(1, FALSE);
-      
+      */
 
       master1.Update(1, TRUE, 5000); // 5 sec
       printf("Ending\n");

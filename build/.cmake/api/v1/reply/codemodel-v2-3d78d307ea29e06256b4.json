@@ -40,15 +40,15 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "DS402::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-DS402-Debug-51c76775e7bf830784e2.json",
-					"name" : "DS402",
+					"id" : "AKD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-AKD-Debug-5aedde0eed4978185ed9.json",
+					"name" : "AKD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-simpleMtrCtrl-Debug-c1d73fa97fe72f0410b7.json",
+					"jsonFile" : "target-simpleMtrCtrl-Debug-e11e51d26c12c48ccb78.json",
 					"name" : "simpleMtrCtrl",
 					"projectIndex" : 0
 				}

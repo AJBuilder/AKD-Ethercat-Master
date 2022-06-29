@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/bench/EtherCATBench/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/DS402.dir/all
+all: CMakeFiles/AKD.dir/all
 all: CMakeFiles/simpleMtrCtrl.dir/all
 
 .PHONY : all
@@ -64,43 +64,43 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/DS402.dir/clean
+clean: CMakeFiles/AKD.dir/clean
 clean: CMakeFiles/simpleMtrCtrl.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/DS402.dir
+# Target rules for target CMakeFiles/AKD.dir
 
 # All Build rule for target.
-CMakeFiles/DS402.dir/all:
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/depend
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=1 "Built target DS402"
-.PHONY : CMakeFiles/DS402.dir/all
+CMakeFiles/AKD.dir/all:
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/depend
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=1 "Built target AKD"
+.PHONY : CMakeFiles/AKD.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/DS402.dir/rule: cmake_check_build_system
+CMakeFiles/AKD.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/DS402.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/AKD.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 0
-.PHONY : CMakeFiles/DS402.dir/rule
+.PHONY : CMakeFiles/AKD.dir/rule
 
 # Convenience name for target.
-DS402: CMakeFiles/DS402.dir/rule
+AKD: CMakeFiles/AKD.dir/rule
 
-.PHONY : DS402
+.PHONY : AKD
 
 # clean rule for target.
-CMakeFiles/DS402.dir/clean:
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/clean
-.PHONY : CMakeFiles/DS402.dir/clean
+CMakeFiles/AKD.dir/clean:
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/clean
+.PHONY : CMakeFiles/AKD.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/simpleMtrCtrl.dir
 
 # All Build rule for target.
-CMakeFiles/simpleMtrCtrl.dir/all: CMakeFiles/DS402.dir/all
+CMakeFiles/simpleMtrCtrl.dir/all: CMakeFiles/AKD.dir/all
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/depend
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=2,3 "Built target simpleMtrCtrl"

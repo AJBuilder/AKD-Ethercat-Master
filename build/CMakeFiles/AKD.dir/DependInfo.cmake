@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/bench/EtherCATBench/src/AKDEcatController.cpp" "/home/bench/EtherCATBench/build/CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o"
+  "/home/bench/EtherCATBench/src/AKDEcatController.cpp" "/home/bench/EtherCATBench/build/CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

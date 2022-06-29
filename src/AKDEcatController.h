@@ -62,9 +62,14 @@
 #define SYNC_AQTIME_NS (1000*1000*1000) // 1000ms
 #define SYNC_DIST (2000*1000) // 2ms
 
-#define DEFAULT_OPMODE  profPos
-#define DEFAULT_RXPDO   0x1701
-#define DEFAULT_TXPDO   0x1B01
+#define UNINIT_OPMODE   0
+#define UNINIT_RXPDO    0
+#define UNINIT_TXPDO    0
+#define DEFAULT_QSCODE  6
+#define DEFAULT_MOVIMM  FALSE
+#define DEFAULT_DIGOUT  0
+#define DEFAULT_HMAUTOMOVE 0
+
 
 // Operation
 #define DEBUG_MODE TRUE
@@ -75,7 +80,7 @@
 #define DS402_ETIMEDOUT 110
 
 // Update()
-#define DS402_MOVEERR -1
+#define AKD_MOVEERR -1
 
 
 #include <stdio.h>
@@ -91,7 +96,7 @@
     
     enum ecat_OpModes:int8{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
 
-class DS402Controller{
+class AKDController{
     public:
 
     enum ecat_masterStates:int8{ms_shutdown, ms_stop, ms_disable, ms_enable};
@@ -99,23 +104,26 @@ class DS402Controller{
     enum ecat_coeStateTrans:int8{cst_Shutdown = 0, cst_SwitchOn = 1, cst_DisableVolt = 2, cst_TrigQuickStop = 3, cst_DisableOp = 4, cst_EnableOp = 5, cst_ResetFault = 6};
 
     bool ecat_Init(char *ifname);
-    bool ecat_Start(void* usrControl, int size);
+    bool ecat_Start();
+
     bool Enable();
     bool Disable();
     bool Stop();
     bool Shutdown();
-    bool setOpMode(uint slave, ecat_OpModes reqMode);
-    bool ConfProfPosImm(uint slave, bool moveImmediate_u);
+
     bool clearFault(uint slave, bool persistClear);
     bool readFault(uint slave);
     bool readFaultList();
+
     int  Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
     int  Update(uint slave, bool move, int timeout_ms);
     bool QuickStop(uint slave, bool enableQuickStop);
-    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1);
-    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2);
-    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3);
-    void confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3, uint16 rxPDO4, uint16 txPDO4);
+
+    void confSlavePDOs(uint slave, void* usrControl, int size, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4);
+    bool confProfPosImm(uint slave, bool moveImmediate_u);
+    void confDigOutputs(uint slave, uint32 bitmask, uint8 out1Mode, uint8 out2Mode);
+    bool setOpMode(uint slave, ecat_OpModes reqMode);
+
     
 
     
@@ -130,20 +138,29 @@ class DS402Controller{
     
     
     // Slave Data Struct Array
-    struct ecat_slave{
+    class ecat_slave{
+        public:
 
         // PDO Data
         uint8 *outUserBuff, *inUserBuff;
-        int coeCtrlPos, coeStatusPos;
-        uint numOfPDOs;
-        uint8 *outSizes, *inSizes; //Pointer to array. Index 0 specifies number of entries
         uint8 *coeCtrlMapPtr, *coeStatusMapPtr;
+        int coeCtrlOffset, coeStatusOffset;
 
         // PDO Assign
-        uint16 rxPDO, txPDO;
+        struct mappings_t{
+            uint8  numOfPDOs;
+            uint16 mapObject[4];
+            uint8  bytes;
+        }rxPDO, txPDO;
+        uint8 totalBytes;
+
+        // Config
+        bool moveImmediate = DEFAULT_MOVIMM; // Only applies in ProfPos mode.
+        uint8 digOutBitmask, digOut1Mode = DEFAULT_DIGOUT, digOut2Mode = DEFAULT_DIGOUT;
+        uint16 quickStopOption = DEFAULT_QSCODE;
 
         // Slave Control Signals
-        bool update, quickStop, moveImmediate;
+        bool update, quickStop;
         
         uint16 coeCtrlWord, coeStatus;
         ecat_coeStates coeCurrentState;
@@ -153,12 +170,6 @@ class DS402Controller{
         ecat_OpModes mode;
         bool moveAck, moveErr;
     } *slaves;
-    struct slavePDOs{
-        uint8 pdos;
-        uint16 rxPDO[4];
-        uint16 txPDO[4];
-    };
-    std::vector<slavePDOs> PDOAssignments;
 
     // Control Signals
     bool inOP;
@@ -199,18 +210,11 @@ class DS402Controller{
     };
 
     // Utility Methods
-    int cpyData(void* dest, void* source, int bytes);
     void add_timespec(struct timespec *ts, int64 addtime);
-    void readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint* pdoAssignments, int* ctrlIndex, int* statIndex);
     bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i);
     bool State(ecat_masterStates reqState);
-    void _confSlavePDOs(uint slave, uint8 num, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3, uint16 rxPDO4, uint16 txPDO4);
 
     // Main Methods
     static void* ecat_Talker(void* THIS);
     static void* ecat_Controller(void* THIS);
-
-
-    
-    
 };

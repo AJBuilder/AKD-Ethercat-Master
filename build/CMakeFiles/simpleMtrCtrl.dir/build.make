@@ -76,10 +76,10 @@ simpleMtrCtrl_OBJECTS = \
 
 # External object files for target simpleMtrCtrl
 simpleMtrCtrl_EXTERNAL_OBJECTS = \
-"/home/bench/EtherCATBench/build/CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o"
+"/home/bench/EtherCATBench/build/CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o"
 
 simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o
-simpleMtrCtrl: CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o
+simpleMtrCtrl: CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o
 simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/build.make
 simpleMtrCtrl: CMakeFiles/simpleMtrCtrl.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable simpleMtrCtrl"

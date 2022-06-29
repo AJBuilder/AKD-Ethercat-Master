@@ -80,17 +80,6 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -123,6 +112,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -157,17 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named DS402
+# Target rules for targets named AKD
 
 # Build rule for target.
-DS402: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 DS402
-.PHONY : DS402
+AKD: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 AKD
+.PHONY : AKD
 
 # fast build rule for target.
-DS402/fast:
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/build
-.PHONY : DS402/fast
+AKD/fast:
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/build
+.PHONY : AKD/fast
 
 #=============================================================================
 # Target rules for targets named simpleMtrCtrl
@@ -182,32 +182,32 @@ simpleMtrCtrl/fast:
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/build
 .PHONY : simpleMtrCtrl/fast
 
-src/DS402EcatController.o: src/DS402EcatController.cpp.o
+src/AKDEcatController.o: src/AKDEcatController.cpp.o
 
-.PHONY : src/DS402EcatController.o
+.PHONY : src/AKDEcatController.o
 
 # target to build an object file
-src/DS402EcatController.cpp.o:
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o
-.PHONY : src/DS402EcatController.cpp.o
+src/AKDEcatController.cpp.o:
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o
+.PHONY : src/AKDEcatController.cpp.o
 
-src/DS402EcatController.i: src/DS402EcatController.cpp.i
+src/AKDEcatController.i: src/AKDEcatController.cpp.i
 
-.PHONY : src/DS402EcatController.i
+.PHONY : src/AKDEcatController.i
 
 # target to preprocess a source file
-src/DS402EcatController.cpp.i:
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/src/DS402EcatController.cpp.i
-.PHONY : src/DS402EcatController.cpp.i
+src/AKDEcatController.cpp.i:
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/src/AKDEcatController.cpp.i
+.PHONY : src/AKDEcatController.cpp.i
 
-src/DS402EcatController.s: src/DS402EcatController.cpp.s
+src/AKDEcatController.s: src/AKDEcatController.cpp.s
 
-.PHONY : src/DS402EcatController.s
+.PHONY : src/AKDEcatController.s
 
 # target to generate assembly for a file
-src/DS402EcatController.cpp.s:
-	$(MAKE) -f CMakeFiles/DS402.dir/build.make CMakeFiles/DS402.dir/src/DS402EcatController.cpp.s
-.PHONY : src/DS402EcatController.cpp.s
+src/AKDEcatController.cpp.s:
+	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/src/AKDEcatController.cpp.s
+.PHONY : src/AKDEcatController.cpp.s
 
 src/simpleMtrCtrl.o: src/simpleMtrCtrl.cpp.o
 
@@ -244,15 +244,15 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... DS402"
+	@echo "... edit_cache"
+	@echo "... AKD"
 	@echo "... simpleMtrCtrl"
-	@echo "... src/DS402EcatController.o"
-	@echo "... src/DS402EcatController.i"
-	@echo "... src/DS402EcatController.s"
+	@echo "... src/AKDEcatController.o"
+	@echo "... src/AKDEcatController.i"
+	@echo "... src/AKDEcatController.s"
 	@echo "... src/simpleMtrCtrl.o"
 	@echo "... src/simpleMtrCtrl.i"
 	@echo "... src/simpleMtrCtrl.s"

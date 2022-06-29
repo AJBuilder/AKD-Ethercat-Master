@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o"
+			"path" : "CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o"
 		}
 	],
 	"backtrace" : 1,
@@ -59,8 +59,8 @@
 			]
 		}
 	],
-	"id" : "DS402::@6890427a1f51a3e7e1df",
-	"name" : "DS402",
+	"id" : "AKD::@6890427a1f51a3e7e1df",
+	"name" : "AKD",
 	"paths" : 
 	{
 		"build" : ".",
@@ -88,12 +88,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/DS402EcatController.cpp",
+			"path" : "src/AKDEcatController.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/DS402EcatController.h",
+			"path" : "src/AKDEcatController.h",
 			"sourceGroupIndex" : 1
 		}
 	],

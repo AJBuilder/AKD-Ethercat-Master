@@ -1,8 +1,8 @@
 [
 {
   "directory": "/home/bench/EtherCATBench/build",
-  "command": "/usr/bin/g++   -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o -c /home/bench/EtherCATBench/src/DS402EcatController.cpp",
-  "file": "/home/bench/EtherCATBench/src/DS402EcatController.cpp"
+  "command": "/usr/bin/g++   -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o -c /home/bench/EtherCATBench/src/AKDEcatController.cpp",
+  "file": "/home/bench/EtherCATBench/src/AKDEcatController.cpp"
 },
 {
   "directory": "/home/bench/EtherCATBench/build",

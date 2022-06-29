@@ -57,20 +57,20 @@ include CMakeFiles/DS402.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/DS402.dir/flags.make
 
-CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o: CMakeFiles/DS402.dir/flags.make
-CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o: ../src/DS402EcatController.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o -c /home/bench/EtherCATBench/src/DS402EcatController.cpp
+CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o: CMakeFiles/DS402.dir/flags.make
+CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o: ../src/AKDEcatController.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o -c /home/bench/EtherCATBench/src/AKDEcatController.cpp
 
-CMakeFiles/DS402.dir/src/DS402EcatController.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DS402.dir/src/DS402EcatController.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bench/EtherCATBench/src/DS402EcatController.cpp > CMakeFiles/DS402.dir/src/DS402EcatController.cpp.i
+CMakeFiles/DS402.dir/src/AKDEcatController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DS402.dir/src/AKDEcatController.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bench/EtherCATBench/src/AKDEcatController.cpp > CMakeFiles/DS402.dir/src/AKDEcatController.cpp.i
 
-CMakeFiles/DS402.dir/src/DS402EcatController.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DS402.dir/src/DS402EcatController.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bench/EtherCATBench/src/DS402EcatController.cpp -o CMakeFiles/DS402.dir/src/DS402EcatController.cpp.s
+CMakeFiles/DS402.dir/src/AKDEcatController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DS402.dir/src/AKDEcatController.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bench/EtherCATBench/src/AKDEcatController.cpp -o CMakeFiles/DS402.dir/src/AKDEcatController.cpp.s
 
-DS402: CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o
+DS402: CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o
 DS402: CMakeFiles/DS402.dir/build.make
 
 .PHONY : DS402

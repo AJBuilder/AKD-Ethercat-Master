@@ -6,7 +6,7 @@
 #include <inttypes.h>
 #include <pthread.h>
 
-#include "DS402EcatController.h"
+#include "AKDEcatController.h"
 #include "ethercat.h"
 
 
@@ -14,71 +14,8 @@
 
 
 
-
-int DS402Controller::cpyData(void* dest, void* source, int bytes){
-
-   switch(bytes){
-      case 1: *(uint8*)dest = *(uint8*)source; break;
-      case 2: *(uint16*)dest = *(uint16*)source; break;
-      case 4: *(uint32*)dest = *(uint32*)source; break;
-      case 8: *(uint64*)dest = *(uint64*)source; break;
-      default: return -1; 
-   }
-return bytes;
-}
-
-void DS402Controller::readPDOAssignments(uint16 Slave, uint16 PDOassign, uint8* sizeList, uint* pdoAssignments, int* ctrlIndex, int* statIndex)
-{
-   uint16 idxloop, nidx, subidxloop, rdat, idx, subidx;
-   uint8 subcnt, sizeIndex = 0;
-   int wkc, rdl;
-   int32 rdat2;
-
-   rdl = sizeof(rdat); rdat = 0;
-   /* read PDO assign subindex 0 ( = number of PDO's) */
-   wkc = ec_SDOread(Slave, PDOassign, 0x00, FALSE, &rdl, &rdat, EC_TIMEOUTRXM);
-   *pdoAssignments = rdat;
-   /* positive result from slave ? */
-   if ((wkc > 0) && (rdat > 0))
-   {
-      /* number of available sub indexes */
-      nidx = rdat;
-      /* read all PDO's */
-      for (idxloop = 1; idxloop <= nidx; idxloop++)
-      {
-         rdl = sizeof(rdat); rdat = 0;
-         /* read PDO assign */
-         wkc = ec_SDOread(Slave, PDOassign, (uint8)idxloop, FALSE, &rdl, &rdat, EC_TIMEOUTRXM);
-         /* result is index of PDO */
-         idx = rdat;
-         
-         if (idx > 0)
-         {
-            rdl = sizeof(subcnt); subcnt = 0;
-            /* read number of subindexes of PDO */
-            wkc = ec_SDOread(Slave, idx, 0x00, FALSE, &rdl, &subcnt, EC_TIMEOUTRXM);
-            subidx = subcnt;
-            sizeList[sizeIndex] = subidx;
-            /* for each subindex */
-            for (subidxloop = 1; subidxloop <= subidx; subidxloop++)
-            {
-               rdl = sizeof(rdat2); rdat2 = 0;
-               /* read SDO that is mapped in PDO */
-               wkc = ec_SDOread(Slave, idx, (uint8)subidxloop, FALSE, &rdl, &rdat2, EC_TIMEOUTRXM);
-               /* extract bitlength of SDO */
-               if(((rdat2 & 0xFFFF0000) >> 16) == COControl) *ctrlIndex = subidxloop;
-               if(((rdat2 & 0xFFFF0000) >> 16) == COStatus) *statIndex = subidxloop;
-               sizeList[sizeIndex + subidxloop] = (rdat2 & 0xFF) / 8;
-            }
-         }
-         sizeIndex += subidx + 1;
-      }
-   }
-}
-
-
 /* add ns to timespec */
-void DS402Controller::add_timespec(struct timespec *ts, int64 addtime)
+void AKDController::add_timespec(struct timespec *ts, int64 addtime)
 {
    int64 sec, nsec;
 
@@ -95,7 +32,7 @@ void DS402Controller::add_timespec(struct timespec *ts, int64 addtime)
 }
 
 /* PI calculation to get linux time synced to DC time */
- bool DS402Controller::ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i)
+ bool AKDController::ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i)
 {
    static int64 integral = 0;
    int64 delta;
@@ -111,10 +48,10 @@ void DS402Controller::add_timespec(struct timespec *ts, int64 addtime)
 }
 
 /* RT EtherCAT thread */
-void* DS402Controller::ecat_Talker(void* THIS)
+void* AKDController::ecat_Talker(void* THIS)
 {
 
-   DS402Controller* This = (DS402Controller*)THIS;
+   AKDController* This = (AKDController*)THIS;
 
    // Local variables
    struct timespec   ts;
@@ -173,12 +110,9 @@ void* DS402Controller::ecat_Talker(void* THIS)
          prevDCtime = ec_DCtime;
 
 
-         // Update DS402 Control and Status variables for Controller
+         // Update AKD Control and Status variables for Controller
          for(int slaveNum = 0 ; slaveNum < ec_slavecount ; slaveNum++){
-            This->cpyData(This->slaves[slaveNum].coeCtrlMapPtr, &This->slaves[slaveNum].coeCtrlWord, sizeof(This->slaves[slaveNum].coeCtrlWord));
-            This->cpyData(&This->slaves[slaveNum].coeStatus, This->slaves[slaveNum].coeStatusMapPtr, sizeof(This->slaves[slaveNum].coeStatus));
-            if(This->slaves[slaveNum].quickStop)
-               This->slaves[slaveNum].coeCtrlWord &= ~0b100;
+            
          }
          
          for(int slaveNum = 0 ; slaveNum < ec_slavecount ; slaveNum++){
@@ -198,55 +132,52 @@ void* DS402Controller::ecat_Talker(void* THIS)
                
                output_buff_ptr = This->slaves[slaveNum].outUserBuff;
                input_buff_ptr = This->slaves[slaveNum].inUserBuff;
+               output_map_ptr = ec_slave[slaveNum].outputs;
+               input_map_ptr = ec_slave[slaveNum].inputs;
 
                // Update outputs from user buffers to IOmap
-               output_map_ptr = ec_slave[slaveNum].outputs;
-               for(int i = 1 ; i <= This->slaves[slaveNum].outSizes[0] ; i++){ 
-                  if(i != This->slaves[slaveNum].coeCtrlPos) This->cpyData(output_map_ptr, output_buff_ptr, This->slaves[slaveNum].outSizes[i]); // Copy data from user's input to IOmap. (Skipping Ctrl Word used by DS402Controller::Controller)
-                  output_map_ptr += This->slaves[slaveNum].outSizes[i];
-                  output_buff_ptr += This->slaves[slaveNum].outSizes[i];
-               }
+                // Copy data from user's input to IOmap. (Skipping Ctrl Word used by AKDController::Controller)
+               memcpy(output_map_ptr, output_buff_ptr, This->slaves[slaveNum].rxPDO.bytes);
 
                // Update inputs from user buffers to IOmap
-               input_map_ptr = ec_slave[slaveNum].inputs;
-               for(int i = 1 ; i <= This->slaves[slaveNum].inSizes[0] ; i++){
-                  This->cpyData(input_buff_ptr, input_map_ptr, This->slaves[slaveNum].inSizes[i]); // Copy input data to user's buffer
-                  input_map_ptr += This->slaves[slaveNum].inSizes[i];
-                  input_buff_ptr += This->slaves[slaveNum].inSizes[i];
-               }   
-
+               memcpy(input_buff_ptr, input_map_ptr, This->slaves[slaveNum].txPDO.bytes); // Copy input data to user's buffer
                
+
+               This->slaves[slaveNum].update = FALSE;
                
             }
             else {
                if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
             }
 
-            // Release caller of Update()
-            This->slaves[slaveNum].update = FALSE;
-            pthread_cond_signal(&This->IOUpdated);
+            memcpy(This->slaves[slaveNum].coeCtrlMapPtr, &This->slaves[slaveNum].coeCtrlWord, sizeof(This->slaves[slaveNum].coeCtrlWord));
+            memcpy(&This->slaves[slaveNum].coeStatus, This->slaves[slaveNum].coeStatusMapPtr, sizeof(This->slaves[slaveNum].coeStatus));
+            if(This->slaves[slaveNum].quickStop)
+               This->slaves[slaveNum].coeCtrlWord &= ~0b100;
+            
          }
          
+         // Release caller of Update()
+         pthread_cond_signal(&This->IOUpdated);
          
 
          pthread_mutex_unlock(&This->control);
          // CONTROL UNLOCKED
       }
       
-      
       ec_send_processdata();
    }
    return nullptr;
 }
 
-void* DS402Controller::ecat_Controller(void* THIS)
+void* AKDController::ecat_Controller(void* THIS)
 {
    printf("ECAT: Controller Spawned\n");  
 
    // Local variables
    uint16 prevcStatus = -1;
    uint currentgroup, noDCCount;
-   DS402Controller* This = (DS402Controller*)THIS;
+   AKDController* This = (AKDController*)THIS;
 
    
 
@@ -444,7 +375,13 @@ void* DS402Controller::ecat_Controller(void* THIS)
    return nullptr;
 }
 
-bool DS402Controller::ecat_Init(char *ifname){
+bool AKDController::ecat_Init(char *ifname){
+
+   if(initialized){
+      printf("ECAT: Already initialized. Shutdown before restarting.\n");
+      return FALSE;
+   }
+
    if (ec_init(ifname))
    {
       printf("ECAT: ec_init on %s succeeded.\n",this->ifname);
@@ -452,6 +389,8 @@ bool DS402Controller::ecat_Init(char *ifname){
 
       if( ec_config_init(FALSE) > 0 ) {
          initialized = TRUE;
+         // Allocate slave data
+         this->slaves = new ecat_slave [ec_slavecount]();
          return TRUE;
       }
       else
@@ -463,25 +402,19 @@ bool DS402Controller::ecat_Init(char *ifname){
       return FALSE;
 }
 
-bool DS402Controller::ecat_Start(void* usrControl, int size){
+bool AKDController::ecat_Start(){
 
    printf("ECAT: Starting EtherCAT Master\n");
 
    uint32 sdoBuff;
    int sdoBuffSize;
    int sdosNotConfigured = 1;
-   int largestOut = 0, largestIn = 0, totalBytes = 0;
+   int PDOAssign, pdoObject, pdoCnt, entry, entryCnt, bytesTillCoE;
+   struct ecat_slave::mappings_t *pdoMappings;
+   
 
    if(!this->initialized){
-      printf("ECAT: Not initialized. Calling ecat_Init()\n");
-      return FALSE;
-   }
-   if(this->PDOAssignments.size() == 0){
-      printf("ECAT: PDOs not configured. Call confSlavePDOs()\n");
-      return FALSE;
-   }
-   if(this->PDOAssignments.size() != ec_slavecount){
-      printf("ECAT: Not all PDOs configured. Call confSlavePDOs() for each slave. Use slaveCount() for number of found devices.\n");
+      printf("ECAT: Not initialized. Call ecat_Init()\n");
       return FALSE;
    }
       
@@ -499,43 +432,76 @@ bool DS402Controller::ecat_Start(void* usrControl, int size){
          if(i != 1) osal_usleep(100000); // If looping, wait 100ms
          sdosNotConfigured = 0;
 
+         //////// Write Config ////////
+
          // Assign PDOs
+
+         //Disable
          sdoBuff = 0;
          ec_SDOwrite(slaveNum, rxPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable rxPDO
          ec_SDOwrite(slaveNum, txPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable txPDO
 
-         for(int i = 0 ; i < this->PDOAssignments[slaveNum - 1].pdos ; i++){
-            sdoBuff = this->PDOAssignments[slaveNum - 1].rxPDO[i];
+         //Write
+         for(int i = 0 ; i < this->slaves[slaveNum - 1].rxPDO.numOfPDOs ; i++){
+            sdoBuff = this->slaves[slaveNum - 1].rxPDO.mapObject[i];
             ec_SDOwrite(slaveNum, rxPDOAssign1, i + 1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
-            sdoBuff = this->PDOAssignments[slaveNum - 1].txPDO[i];
+         }
+         for(int i = 0 ; i < this->slaves[slaveNum - 1].txPDO.numOfPDOs ; i++){
+            sdoBuff = this->slaves[slaveNum - 1].txPDO.mapObject[i];
             ec_SDOwrite(slaveNum, txPDOAssign1, i + 1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign txPDO1
          }
 
-         sdoBuff = this->PDOAssignments[slaveNum - 1].pdos;
+         // Set num of pdos
+         sdoBuff = this->slaves[slaveNum - 1].rxPDO.numOfPDOs;
          ec_SDOwrite(slaveNum, rxPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Enable rxPDO
+         sdoBuff = this->slaves[slaveNum - 1].txPDO.numOfPDOs;
          ec_SDOwrite(slaveNum, txPDOEnable, FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Enable txPDO
 
-         // Verify Assignments
+         // Configure Homing settings
+         sdoBuff = DEFAULT_HMAUTOMOVE;
+         ec_SDOwrite(slaveNum, HM_AUTOMOVE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable automove
+
+         // Configure QuickStop
+         sdoBuff = DEFAULT_QSCODE;
+         ec_SDOwrite(slaveNum, QSTOP_OPT , FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set Quickstop option
+
+         //////// Verify Assignments ////////
+
+         // Verify PDOs
          sdoBuffSize = 1;
          sdoBuff = 0;
          ec_SDOread(slaveNum, rxPDOEnable, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check rxPDO enabled
-         if(sdoBuff != 1) sdosNotConfigured++;
+         if(sdoBuff != this->slaves[slaveNum - 1].rxPDO.numOfPDOs) sdosNotConfigured++;
+
          sdoBuffSize = 1;
          sdoBuff = 0;
          ec_SDOread(slaveNum, txPDOEnable, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check txPDO enabled
-         if(sdoBuff != 1) sdosNotConfigured++;
+         if(sdoBuff != this->slaves[slaveNum - 1].txPDO.numOfPDOs) sdosNotConfigured++;
 
-         for(int i = 0 ; i < this->PDOAssignments[slaveNum - 1].pdos ; i++){
+         for(int i = 0 ; i < this->slaves[slaveNum - 1].rxPDO.numOfPDOs ; i++){
             sdoBuffSize = 2;
             sdoBuff = 0;
             ec_SDOread(slaveNum, rxPDOAssign1, i + 1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Read rxPDO1
-            if(sdoBuff != this->PDOAssignments[slaveNum - 1].rxPDO[i]) sdosNotConfigured++;
-
+            if(sdoBuff != this->slaves[slaveNum - 1].rxPDO.mapObject[i]) sdosNotConfigured++;
+         }
+         for(int i = 0 ; i < this->slaves[slaveNum - 1].txPDO.numOfPDOs ; i++){
             sdoBuffSize = 2;
             sdoBuff = 0;
             ec_SDOread(slaveNum, txPDOAssign1, i + 1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Read txPDO1
-            if(sdoBuff != this->PDOAssignments[slaveNum - 1].txPDO[i]) sdosNotConfigured++;
+            if(sdoBuff != this->slaves[slaveNum - 1].txPDO.mapObject[i]) sdosNotConfigured++;
          }
+
+         // Verify Homing Config
+         sdoBuffSize = 1;
+         sdoBuff = 0;
+         ec_SDOread(slaveNum, HM_AUTOMOVE , FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check homing automove
+         if(sdoBuff != DEFAULT_HMAUTOMOVE) sdosNotConfigured++;
+
+         // Verify QuickStop Config
+         sdoBuffSize = 2;
+         sdoBuff = 0;
+         ec_SDOread(slaveNum, QSTOP_OPT , FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Check txPDO enabled
+         if(sdoBuff != DEFAULT_QSCODE) sdosNotConfigured++;
 
          if(sdosNotConfigured != 0) printf("\rECAT: PDO assignments failed to configure %2d time(s). Retrying...  ", i);
       }
@@ -545,12 +511,7 @@ bool DS402Controller::ecat_Start(void* usrControl, int size){
          return FALSE;
       }
 
-      // Configure Homing settings
-      sdoBuff = 0;
-      ec_SDOwrite(slaveNum, HM_AUTOMOVE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); // Disable automove
-
-      sdoBuff = 6;
-      ec_SDOwrite(slaveNum, QSTOP_OPT , FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Set Quickstop option
+      
       
    }
 
@@ -558,49 +519,120 @@ bool DS402Controller::ecat_Start(void* usrControl, int size){
    ecx_context.manualstatechange = 1;
    ec_config_map(&this->IOmap);
    
-
+   // Compare user buffer size to actual size. Also calculate larges???
    for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
-      if(ec_slave[slaveNum].Obytes > largestOut) largestOut = ec_slave[slaveNum].Obytes;
-      if(ec_slave[slaveNum].Ibytes > largestIn) largestIn = ec_slave[slaveNum].Ibytes;
-      totalBytes += ec_slave[slaveNum].Obytes;
-      totalBytes += ec_slave[slaveNum].Ibytes;
-   }
-   if(size != totalBytes) {
-      printf("Input struct is of incorrect size. Is %i. Needs to be %i", size, totalBytes);
-      return FALSE;
+      if(slaves[slaveNum-1].totalBytes != (ec_slave[slaveNum].Obytes + ec_slave[slaveNum].Ibytes)){
+         printf("ECAT: Input struct is of incorrect size. Is %i. Needs to be %i", slaves[slaveNum-1].totalBytes, (ec_slave[slaveNum].Obytes + ec_slave[slaveNum].Ibytes));
+         return FALSE;
+      }
    }
 
-   // Allocate slave data
-   this->slaves = new ecat_slave [ec_slavecount]();
+   
 
    for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
-      slaves[slaveNum - 1].outSizes = new uint8 [largestOut + 1];
-      slaves[slaveNum - 1].inSizes  = new uint8 [largestIn  + 1];
+      slaves[slaveNum-1].coeCtrlOffset= -1;
+      slaves[slaveNum-1].coeStatusOffset = -1;
 
-      readPDOAssignments(slaveNum, 0x1C12, this->slaves[slaveNum - 1].outSizes, &sdoBuff, &(this->slaves[slaveNum - 1].coeCtrlPos), &(this->slaves[slaveNum - 1].coeStatusPos));
-      this->slaves[slaveNum - 1].numOfPDOs += sdoBuff;
-      readPDOAssignments(slaveNum, 0x1C13, this->slaves[slaveNum - 1].inSizes, &sdoBuff, &(this->slaves[slaveNum - 1].coeCtrlPos), &(this->slaves[slaveNum - 1].coeStatusPos));
-      this->slaves[slaveNum - 1].numOfPDOs += sdoBuff;
+      pdoMappings = &slaves[slaveNum - 1].rxPDO;
+      PDOAssign = rxPDOAssign1;
+      while(1){
+
+         bytesTillCoE = 0;
+         pdoMappings->bytes = 0;
+         
+         //Read PDO assign subindex 0 ( = number of PDO's)
+         sdoBuffSize = 2; sdoBuff = 0;         
+         ec_SDOread(slaveNum, PDOAssign, 0x00, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+
+         if (sdoBuff > 0)
+         {
+            // Check to see if read value matches user's specified
+            if(sdoBuff != pdoMappings->numOfPDOs){
+               printf("ECAT: Number of user specified PDOs(%i) does not match the number of read PDOs(%i). Aborting Start()\n", pdoCnt, sdoBuff);
+               return FALSE;
+            }
+
+            // Read all PDO assignments
+            for (int idxloop = 1; idxloop <= pdoMappings->numOfPDOs; idxloop++)
+            {
+               // Read PDO map object
+               sdoBuffSize = 2; sdoBuff = 0;
+               ec_SDOread(slaveNum, PDOAssign, (uint8)idxloop, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+               pdoObject = sdoBuff;
+
+               
+               if (pdoObject > 0)
+               {
+                  // Read number of entries mapped
+                  sdoBuffSize = 2; sdoBuff = 0;
+                  ec_SDOread(slaveNum, pdoObject, 0x00, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+                  entryCnt = sdoBuff;
+
+                  // Read each entries size
+                  for (int subidxloop = 1; subidxloop <= entryCnt; subidxloop++)
+                  {
+                     // Read object
+                     sdoBuffSize = 4; sdoBuff = 0;
+                     ec_SDOread(slaveNum, pdoObject, (uint8)subidxloop, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+                     
+                     //extract bitlength of SDO
+                     if(PDOAssign == rxPDOAssign1){
+                        if(((sdoBuff & 0xFFFF0000) >> 16) == COControl){
+                           if(slaves[slaveNum-1].coeCtrlOffset!= -1){
+                              printf("ECAT: Found multiple CoE control word mappings when reading Slave %i's mapping. Aborting Start().\n", slaveNum);
+                              return FALSE;
+                           }
+                           slaves[slaveNum-1].coeCtrlOffset= bytesTillCoE;
+                        }
+                        else{
+                           bytesTillCoE += (sdoBuff & 0xFF) / 8;
+                        }
+                     }
+                     else{
+                        if(((sdoBuff & 0xFFFF0000) >> 16) == COStatus){
+                           if(slaves[slaveNum-1].coeStatusOffset != -1){
+                              printf("ECAT: Found multiple CoE status mappings when reading Slave %i's mapping. Aborting Start().\n", slaveNum);
+                              return FALSE;
+                           }  
+                           slaves[slaveNum-1].coeStatusOffset = bytesTillCoE;
+                        }
+                        else{
+                           bytesTillCoE += (sdoBuff & 0xFF) / 8;
+                        }
+                     }
+                     pdoMappings->bytes += (sdoBuff & 0xFF) / 8;
+                  }
+               }
+               else{
+                  printf("ECAT: Tried to read PDO mapping. Slave %i, assign 0x%x, PDO %i is zero? Aborting Start().\n", slaveNum, PDOAssign, idxloop);
+                  return FALSE;
+               }
+            }
+         }
+         else{
+            printf("ECAT: Tried to read PDO assignments. Slave %i, assign 0x%x is disabled? Aborting Start().\n", slaveNum, PDOAssign);
+            return FALSE;
+         }
+
+         // Repeat but with txPDOs
+         pdoMappings = &slaves[slaveNum - 1].txPDO;
+         if(PDOAssign == txPDOAssign1) break;
+         PDOAssign = txPDOAssign1;
+         
+      }
    }
 
    // Find IOmap info and build user buff info
    for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
    
-      // Populate User Buffer PDO maps
-      this->slaves[slaveNum - 1].outUserBuff = (uint8*)usrControl + (ec_slave[slaveNum].outputs - this->IOmap);
-      this->slaves[slaveNum - 1].inUserBuff = (uint8*)usrControl + (ec_slave[slaveNum].inputs - this->IOmap);
+      // Finish Populating User Buffer PDO maps
+      this->slaves[slaveNum - 1].inUserBuff = this->slaves[slaveNum - 1].outUserBuff + ec_slave[slaveNum].Obytes;
 
-      // Find where the DS402 CoE control word is in IOmap
-      this->slaves[slaveNum - 1].coeCtrlMapPtr = ec_slave[slaveNum].outputs;
-      for(int i = 1; i < this->slaves[slaveNum - 1].coeCtrlPos; i++){
-         this->slaves[slaveNum - 1].coeCtrlMapPtr += this->slaves[slaveNum - 1].outSizes[i]; 
-      }
+      // Find where the AKD CoE control word is in IOmap
+      this->slaves[slaveNum - 1].coeCtrlMapPtr = ec_slave[slaveNum].outputs + this->slaves[slaveNum - 1].coeCtrlOffset;
 
-      // Find where the DS402 CoE status word is in IOmap
-      this->slaves[slaveNum - 1].coeStatusMapPtr = ec_slave[slaveNum].inputs;
-      for(int i = 1; i < this->slaves[slaveNum - 1].coeStatusPos; i++){
-         this->slaves[slaveNum - 1].coeStatusMapPtr += this->slaves[slaveNum - 1].inSizes[i]; 
-      }
+      // Find where the AKD CoE status word is in IOmap
+      this->slaves[slaveNum - 1].coeStatusMapPtr = ec_slave[slaveNum].inputs + this->slaves[slaveNum - 1].coeStatusOffset;
    }
 
    
@@ -634,7 +666,7 @@ bool DS402Controller::ecat_Start(void* usrControl, int size){
    pthread_cond_init(&this->moveSig, NULL);
 
    /* Enable talker to handle slave PDOs in OP */
-   pthread_create(&this->talker, NULL, &DS402Controller::ecat_Talker, this);
+   pthread_create(&this->talker, NULL, &AKDController::ecat_Talker, this);
    pthread_create(&this->controller, NULL, &ecat_Controller, this);
    printf( "ECAT: Talker started! Synccount needs to reach : %" PRIi64 "\n", (uint64)SYNC_AQTIME_NS / CYCLE_NS);
    pthread_mutex_lock(&this->control);
@@ -685,7 +717,7 @@ bool DS402Controller::ecat_Start(void* usrControl, int size){
 }
 
 // Blocks for timeout time
-int DS402Controller::Update(uint slave, bool move, int timeout_ms){
+int AKDController::Update(uint slave, bool move, int timeout_ms){
    int err = 0, slaveNum;
    struct timespec timeout, temptime;
    bool allUpdated = FALSE;
@@ -739,7 +771,7 @@ int DS402Controller::Update(uint slave, bool move, int timeout_ms){
             break;
          }
          if(this->slaves[slaveNum].moveErr) {
-            return DS402_MOVEERR;
+            return AKD_MOVEERR;
             break;
          }
 
@@ -753,7 +785,7 @@ int DS402Controller::Update(uint slave, bool move, int timeout_ms){
 }
  
  // Blocks for max of 1 sec;
-bool DS402Controller::State(ecat_masterStates reqState){
+bool AKDController::State(ecat_masterStates reqState){
 
    struct timespec timeout;
    uint sdoBuffSize, sdoBuff;
@@ -835,33 +867,33 @@ bool DS402Controller::State(ecat_masterStates reqState){
 
 }
 
-bool DS402Controller::Enable(){
-   return DS402Controller::State(ms_enable);
+bool AKDController::Enable(){
+   return AKDController::State(ms_enable);
 }
 
-bool DS402Controller::Disable(){
-   return DS402Controller::State(ms_disable);
+bool AKDController::Disable(){
+   return AKDController::State(ms_disable);
 }
 
-bool DS402Controller::Stop(){
-   return DS402Controller::State(ms_stop);
+bool AKDController::Stop(){
+   return AKDController::State(ms_stop);
 }
 
-bool DS402Controller::Shutdown(){
-   return DS402Controller::State(ms_shutdown);
+bool AKDController::Shutdown(){
+   return AKDController::State(ms_shutdown);
 }
 
 // Blocking until quick stop engaged
-bool DS402Controller::QuickStop(uint slave, bool enableQuickStop){ 
+bool AKDController::QuickStop(uint slave, bool enableQuickStop){ 
    pthread_mutex_lock(&this->control);
    if(enableQuickStop){
       this->slaves[slave-1].quickStop = TRUE;
-      while(this->slaves[slave].coeCurrentState != cs_QuickStop){
+      while(this->slaves[slave-1].coeCurrentState != cs_QuickStop){
          pthread_cond_wait(&this->stateUpdated, &this->control);
       }
    } else {
       this->slaves[slave-1].quickStop = FALSE;
-      while(this->slaves[slave].coeCurrentState != cs_OpEnabled){
+      while(this->slaves[slave-1].coeCurrentState != cs_OpEnabled){
          pthread_cond_wait(&this->stateUpdated, &this->control);
       }
    }
@@ -870,7 +902,7 @@ bool DS402Controller::QuickStop(uint slave, bool enableQuickStop){
 }
 
 // Can block for 1 sec
-bool DS402Controller::setOpMode(uint slave, ecat_OpModes reqMode){
+bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
 
    int sdoBuffSize, sdoBuff, slaveNum;
    struct timespec timeout, curtime;
@@ -878,7 +910,7 @@ bool DS402Controller::setOpMode(uint slave, ecat_OpModes reqMode){
    timeout.tv_sec += 1;
 
    
-   if(DS402Controller::State(ms_disable)){ // Don't assign if not disabled 
+   if(AKDController::State(ms_disable)){ // Don't assign if not disabled 
       
       pthread_mutex_lock(&this->control);
       
@@ -912,7 +944,7 @@ bool DS402Controller::setOpMode(uint slave, ecat_OpModes reqMode){
       }while((slaveNum < ec_slavecount) && (slave == 0));
 
       pthread_mutex_unlock(&this->control);
-      DS402Controller::State(ms_enable);
+      AKDController::State(ms_enable);
    }
 
    
@@ -920,7 +952,8 @@ bool DS402Controller::setOpMode(uint slave, ecat_OpModes reqMode){
    return TRUE;
 }
 
-bool DS402Controller::ConfProfPosImm(uint slave, bool moveImmediate_u){
+bool AKDController::confProfPosImm(uint slave, bool moveImmediate_u){
+
    pthread_mutex_lock(&this->control);
    /*
       Configure Profile Position settings
@@ -944,49 +977,72 @@ bool DS402Controller::ConfProfPosImm(uint slave, bool moveImmediate_u){
    return TRUE;
 }
 
-void DS402Controller::confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1){
-   _confSlavePDOs(slave, 1, rxPDO1, txPDO1, 0, 0, 0, 0, 0, 0);
-}
 
-void DS402Controller::confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2){
-   _confSlavePDOs(slave, 2, rxPDO1, txPDO1, rxPDO2, txPDO2, 0, 0, 0, 0);
-}
-
-void DS402Controller::confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3){
-   _confSlavePDOs(slave, 3, rxPDO1, txPDO1, rxPDO2, txPDO2, rxPDO3, txPDO3, 0, 0);
-}
-
-void DS402Controller::confSlavePDOs(uint slave, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3, uint16 rxPDO4, uint16 txPDO4){
-   _confSlavePDOs(slave, 4, rxPDO1, txPDO1, rxPDO2, txPDO2, rxPDO3, txPDO3, rxPDO4, txPDO4);
-}
-
-void DS402Controller::_confSlavePDOs(uint slave, uint8 num, uint16 rxPDO1, uint16 txPDO1, uint16 rxPDO2, uint16 txPDO2, uint16 rxPDO3, uint16 txPDO3, uint16 rxPDO4, uint16 txPDO4){
-   int slaveNum;
+void AKDController::confSlavePDOs(uint slave, void* usrControl, int bufferSize, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4){
+   int slaveNum, rx = 0, tx = 0;
    
-   if(slave != 0) slaveNum = slave;
-   else slaveNum = 1;
+   if(!initialized) return;
+
+   if(rxPDO1 != 0) rx++;
+   if(rxPDO2 != 0) rx++;
+   if(rxPDO3 != 0) rx++;
+   if(rxPDO4 != 0) rx++;
+
+   if(txPDO1 != 0) tx++;
+   if(txPDO2 != 0) tx++;
+   if(txPDO3 != 0) tx++;
+   if(txPDO4 != 0) tx++;
+
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
    do{
 
-      if(this->PDOAssignments.size() < slaveNum) this->PDOAssignments.resize(slaveNum, slavePDOs{0,{},{}});
+      slaves[slaveNum].rxPDO.numOfPDOs = rx;
+      slaves[slaveNum].txPDO.numOfPDOs = tx;
 
-      this->PDOAssignments[slaveNum - 1].pdos = num;
+      slaves[slaveNum].rxPDO.mapObject[0] = rxPDO1;
+      slaves[slaveNum].rxPDO.mapObject[1] = rxPDO2;
+      slaves[slaveNum].rxPDO.mapObject[2] = rxPDO3;
+      slaves[slaveNum].rxPDO.mapObject[3] = rxPDO4;
+      
+      slaves[slaveNum].txPDO.mapObject[0] = txPDO1;
+      slaves[slaveNum].txPDO.mapObject[1] = txPDO2;
+      slaves[slaveNum].txPDO.mapObject[2] = txPDO3;
+      slaves[slaveNum].txPDO.mapObject[3] = txPDO4;
 
-      this->PDOAssignments[slaveNum - 1].rxPDO[0] = rxPDO1;
-      this->PDOAssignments[slaveNum - 1].txPDO[0] = txPDO1;
-      this->PDOAssignments[slaveNum - 1].rxPDO[1] = rxPDO2;
-      this->PDOAssignments[slaveNum - 1].txPDO[1] = txPDO2;
-      this->PDOAssignments[slaveNum - 1].rxPDO[2] = rxPDO3;
-      this->PDOAssignments[slaveNum - 1].txPDO[2] = txPDO3;
-      this->PDOAssignments[slaveNum - 1].rxPDO[3] = rxPDO4;
-      this->PDOAssignments[slaveNum - 1].txPDO[3] = txPDO4;
+      slaves[slaveNum].totalBytes = bufferSize;
+
+      slaves[slaveNum].outUserBuff = (uint8*)usrControl;
       
       slaveNum++;
-   } while((slaveNum <= ec_slavecount) && (slave == 0));
+   } while((slaveNum < ec_slavecount) && (slave == 0));
    
 }
 
+void AKDController::confDigOutputs(uint slave, uint32 bitmask, uint8 out1Mode, uint8 out2Mode){
+
+   int slaveNum;
+   
+   if(!initialized) return;
+
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
+   do{
+
+      slaves[slaveNum].digOutBitmask = bitmask;
+      slaves[slaveNum].digOut1Mode = out1Mode;
+      slaves[slaveNum].digOut2Mode = out2Mode;
+      
+      slaveNum++;
+   } while((slaveNum < ec_slavecount) && (slave == 0));
+
+
+
+}
+
+
 // Can block for timeout_ms
-int DS402Controller::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms){
+int AKDController::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms){
 
    uint sdoBuff, err = 0, slaveNum;
    ecat_OpModes prevMode;
@@ -1027,17 +1083,17 @@ int DS402Controller::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, in
    }
    pthread_mutex_unlock(&this->control);
 
-   if(!DS402Controller::setOpMode(slave, homing)) return FALSE;
+   if(!AKDController::setOpMode(slave, homing)) return FALSE;
 
-   if(DS402Controller::Update(slave, TRUE, timeout_ms) != 0) return FALSE;
+   if(AKDController::Update(slave, TRUE, timeout_ms) != 0) return FALSE;
 
-   if(!DS402Controller::setOpMode(slave, prevMode)) return FALSE;
+   if(!AKDController::setOpMode(slave, prevMode)) return FALSE;
 
    return TRUE;
 }
 
 // Returns TRUE if fault
-bool DS402Controller::readFault(uint slave){
+bool AKDController::readFault(uint slave){
    int slaveNum;
 
    pthread_mutex_lock(&this->control);
@@ -1059,7 +1115,7 @@ bool DS402Controller::readFault(uint slave){
    return FALSE;
 }
 
-bool DS402Controller::clearFault(uint slave, bool persistClear){
+bool AKDController::clearFault(uint slave, bool persistClear){
 
    pthread_mutex_lock(&this->control);
 

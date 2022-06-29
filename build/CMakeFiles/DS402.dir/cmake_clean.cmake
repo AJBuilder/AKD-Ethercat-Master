@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/DS402.dir/src/DS402EcatController.cpp.o"
+  "CMakeFiles/DS402.dir/src/AKDEcatController.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -9,6 +9,10 @@
     "files.associations": {
         "queue.h": "c",
         "ethercatdc.h": "c",
-        "ethercatsoe.h": "c"
+        "ethercatsoe.h": "c",
+        "array": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp"
     }
 }
