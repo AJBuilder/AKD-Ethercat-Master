@@ -11,11 +11,14 @@
 
 ///////////////// Control and Status Objects //////////////////
 #define COControl    0x6040
-#define REQOPMODE    0x6060, 0
-#define ACTOPMODE    0x6061, 0
 #define MnfStatus    0x1002
 #define COStatus     0x6041
+
 #define QSTOP_OPT    0x605A, 0
+#define REQOPMODE    0x6060, 0
+#define ACTOPMODE    0x6061, 0
+#define MOTOR_RATIO  0x6091, 1
+#define SHAFT_RATIO  0x6091, 2
 
 /////////////////////// Homing Objects ///////////////////////
 #define HM_MODE          0x50CB, 0
@@ -56,17 +59,22 @@
 #define FAULTREACT   0b00001111
 #define QUICKSTOP    0b00000111
 
-// Config
+////// Config //////
+//Talker
 #define CYCLE_NS (8*1000*1000) //8ms
 #define SYNC_WINDOW_NS (100*1000) //.1ms
 #define SYNC_AQTIME_NS (1000*1000*1000) // 1000ms
 #define SYNC_DIST (2000*1000) // 2ms
+
+//Controller
+#define CNTRL_CYCLEMS   500
 
 #define UNINIT_OPMODE   0
 #define UNINIT_RXPDO    0
 #define UNINIT_TXPDO    0
 #define DEFAULT_QSCODE  6
 #define DEFAULT_MOVIMM  FALSE
+#define DEFAULT_MOVREL  FALSE
 #define DEFAULT_DIGOUT  0
 #define DEFAULT_HMAUTOMOVE 0
 
@@ -77,7 +85,7 @@
 ////////////////////// Error Codes //////////////////////
 
 // Generic (errno.h)
-#define DS402_ETIMEDOUT 110
+#define ECAT_ETIMEDOUT 110
 
 // Update()
 #define AKD_MOVEERR -1
@@ -118,20 +126,22 @@ class AKDController{
     int  Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
     int  Update(uint slave, bool move, int timeout_ms);
     bool QuickStop(uint slave, bool enableQuickStop);
+    bool waitForTarget(uint slave, uint timeout_ms);
 
     void confSlavePDOs(uint slave, void* usrControl, int size, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4);
-    bool confProfPosImm(uint slave, bool moveImmediate_u);
+    bool confProfPos(uint slave, bool moveImmediate, bool moveRelative);
+    bool confMotionTask(uint slave, uint vel, uint acc, uint dec);
     void confDigOutputs(uint slave, uint32 bitmask, uint8 out1Mode, uint8 out2Mode);
+    bool confUnits(uint slave, uint32 motorRev, uint32 shaftRev);
     bool setOpMode(uint slave, ecat_OpModes reqMode);
 
     
 
     
     private:
-       
-    // Init
-    char* ifname;
-    bool initialized;
+
+    // Const
+    uint slaveCount;
 
     // PDO buffers
     uint8 IOmap[4096];//[4096];
@@ -140,7 +150,17 @@ class AKDController{
     // Slave Data Struct Array
     class ecat_slave{
         public:
-
+        /*ecat_slave(){
+            coeCtrlWord = (DEFAULT_MOVIMM << 5) | (DEFAULT_MOVREL << 6);
+            rxPDO = (struct mappings_t){0};
+            txPDO = (struct mappings_t){0};
+            quickStopOption = DEFAULT_QSCODE;
+            digOut1Mode = DEFAULT_DIGOUT;
+            digOut2Mode = DEFAULT_DIGOUT;
+            update = FALSE;
+            quickStop = FALSE;
+            mode = (ecat_OpModes)UNINIT_OPMODE;
+        }*/
         // PDO Data
         uint8 *outUserBuff, *inUserBuff;
         uint8 *coeCtrlMapPtr, *coeStatusMapPtr;
@@ -155,20 +175,19 @@ class AKDController{
         uint8 totalBytes;
 
         // Config
-        bool moveImmediate = DEFAULT_MOVIMM; // Only applies in ProfPos mode.
-        uint8 digOutBitmask, digOut1Mode = DEFAULT_DIGOUT, digOut2Mode = DEFAULT_DIGOUT;
-        uint16 quickStopOption = DEFAULT_QSCODE;
+        uint8 digOutBitmask, digOut1Mode, digOut2Mode;
+        uint16 quickStopOption;
 
         // Slave Control Signals
-        bool update, quickStop;
+        bool update, quickStop, statusChanged;
         
-        uint16 coeCtrlWord, coeStatus;
+        uint16 coeCtrlWord, coeStatus, prevCoeStatus;
         ecat_coeStates coeCurrentState;
         ecat_coeStateTrans coeStateTransition;
 
         // Profile Control
         ecat_OpModes mode;
-        bool moveAck, moveErr;
+        bool moveFin, moveAck, moveErr;
     } *slaves;
 
     // Control Signals
@@ -184,8 +203,7 @@ class AKDController{
 
     // Threading
     pthread_mutex_t debug, control;
-    pthread_cond_t IOUpdated;
-    pthread_cond_t moveSig, stateUpdated;
+    pthread_cond_t IOUpdated, stateUpdated, statusUpdated;
     pthread_t talker, controller;
 
     char coeStateReadable[9][23] = {
@@ -210,8 +228,6 @@ class AKDController{
     };
 
     // Utility Methods
-    void add_timespec(struct timespec *ts, int64 addtime);
-    bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i);
     bool State(ecat_masterStates reqState);
 
     // Main Methods

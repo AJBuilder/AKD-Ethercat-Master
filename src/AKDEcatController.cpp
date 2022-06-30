@@ -15,7 +15,7 @@
 
 
 /* add ns to timespec */
-void AKDController::add_timespec(struct timespec *ts, int64 addtime)
+void add_timespec(struct timespec *ts, int64 addtime)
 {
    int64 sec, nsec;
 
@@ -32,7 +32,7 @@ void AKDController::add_timespec(struct timespec *ts, int64 addtime)
 }
 
 /* PI calculation to get linux time synced to DC time */
- bool AKDController::ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i)
+ bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i)
 {
    static int64 integral = 0;
    int64 delta;
@@ -50,13 +50,12 @@ void AKDController::add_timespec(struct timespec *ts, int64 addtime)
 /* RT EtherCAT thread */
 void* AKDController::ecat_Talker(void* THIS)
 {
-
+   int tempCount = 0;
    AKDController* This = (AKDController*)THIS;
 
    // Local variables
    struct timespec   ts;
    uint64 prevDCtime;
-   int* dataToMap;
    uint8*   output_map_ptr;
    uint8*   input_map_ptr;
    uint8*   output_buff_ptr;
@@ -75,13 +74,13 @@ void* AKDController::ecat_Talker(void* THIS)
       wrkCounterb = ec_receive_processdata(EC_TIMEOUTRET);
       
       /* calculate next cycle start */
-      This->add_timespec(&ts, CYCLE_NS+ toff);
+      add_timespec(&ts, CYCLE_NS+ toff);
 
       /* wait to cycle start */
       clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &ts, NULL);
 
       /* calulate toff to get linux time and DC synced */
-      if(This->ec_sync(ec_DCtime, CYCLE_NS, &toff, SYNC_DIST, SYNC_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
+      if(ec_sync(ec_DCtime, CYCLE_NS, &toff, SYNC_DIST, SYNC_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
          if (inSyncCountb != UINT32_MAX) inSyncCountb++; // Count number of cycles in window
       }
       else inSyncCountb = 0;
@@ -108,16 +107,10 @@ void* AKDController::ecat_Talker(void* THIS)
          This->wrkCounter = wrkCounterb;
          This->diffDCtime = ec_DCtime - prevDCtime;
          prevDCtime = ec_DCtime;
-
-
-         // Update AKD Control and Status variables for Controller
-         for(int slaveNum = 0 ; slaveNum < ec_slavecount ; slaveNum++){
-            
-         }
          
-         for(int slaveNum = 0 ; slaveNum < ec_slavecount ; slaveNum++){
+         for(int slaveNum = 0 ; slaveNum < This->slaveCount ; slaveNum++){
             
-
+            /*
             if(This->slaves[slaveNum].coeStatus & 0b01000000000000) {
                This->slaves[slaveNum].moveAck = TRUE;
                pthread_cond_signal(&This->moveSig);
@@ -128,7 +121,14 @@ void* AKDController::ecat_Talker(void* THIS)
                pthread_cond_signal(&This->moveSig);
             } else This->slaves[slaveNum].moveErr = FALSE;
 
+            if(This->slaves[slaveNum].coeStatus & 0b00010000000000) {
+               This->slaves[slaveNum].moveErr = TRUE;
+               pthread_cond_signal(&This->moveSig);
+            } else This->slaves[slaveNum].moveErr = FALSE;*/
+            
             if(This->slaves[slaveNum].update){
+               tempCount++;
+               
                
                output_buff_ptr = This->slaves[slaveNum].outUserBuff;
                input_buff_ptr = This->slaves[slaveNum].inUserBuff;
@@ -136,35 +136,52 @@ void* AKDController::ecat_Talker(void* THIS)
                input_map_ptr = ec_slave[slaveNum].inputs;
 
                // Update outputs from user buffers to IOmap
-                // Copy data from user's input to IOmap. (Skipping Ctrl Word used by AKDController::Controller)
+               // Copy data from user's input to IOmap.
                memcpy(output_map_ptr, output_buff_ptr, This->slaves[slaveNum].rxPDO.bytes);
 
                // Update inputs from user buffers to IOmap
-               memcpy(input_buff_ptr, input_map_ptr, This->slaves[slaveNum].txPDO.bytes); // Copy input data to user's buffer
-               
+               memcpy(input_buff_ptr, input_map_ptr, This->slaves[slaveNum].txPDO.bytes);
 
+               // Reset update flag
                This->slaves[slaveNum].update = FALSE;
-               
             }
             else {
-               if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
+            if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
             }
 
+            
+
+            // Overwrite CoE control and status words with controllers data.
             memcpy(This->slaves[slaveNum].coeCtrlMapPtr, &This->slaves[slaveNum].coeCtrlWord, sizeof(This->slaves[slaveNum].coeCtrlWord));
             memcpy(&This->slaves[slaveNum].coeStatus, This->slaves[slaveNum].coeStatusMapPtr, sizeof(This->slaves[slaveNum].coeStatus));
+
+            if(This->slaves[slaveNum].coeStatus != This->slaves[slaveNum].prevCoeStatus){
+               This->slaves[slaveNum].statusChanged = TRUE;
+               pthread_cond_signal(&This->statusUpdated);
+            }
+            This->slaves[slaveNum].prevCoeStatus = This->slaves[slaveNum].coeStatus;
+
             if(This->slaves[slaveNum].quickStop)
                This->slaves[slaveNum].coeCtrlWord &= ~0b100;
-            
          }
          
-         // Release caller of Update()
+
+         // Signal that IOmap has been updated (Possibly user buff)
+         // Called before unlocking control so that whatever is waiting
+         // on the signal has priority. (Pretty sure this is how it works...)
          pthread_cond_signal(&This->IOUpdated);
          
 
          pthread_mutex_unlock(&This->control);
          // CONTROL UNLOCKED
       }
-      
+      else {
+         for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
+            if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
+         }
+         
+      }
+      //printf("\nMode: %i CoeStatus: 0x%x CoeCtrl: 0x%x\n", This->slaves[0].mode, This->slaves[0].coeStatus, This->slaves[0].coeCtrlWord);
       ec_send_processdata();
    }
    return nullptr;
@@ -175,9 +192,11 @@ void* AKDController::ecat_Controller(void* THIS)
    printf("ECAT: Controller Spawned\n");  
 
    // Local variables
-   uint16 prevcStatus = -1;
-   uint currentgroup, noDCCount;
    AKDController* This = (AKDController*)THIS;
+   uint currentgroup = 0, noDCCount, err = 0;
+   bool statusChange;
+   struct timespec cycleTimeout;
+   
 
    
 
@@ -192,12 +211,18 @@ void* AKDController::ecat_Controller(void* THIS)
       if(This->diffDCtime == 0) noDCCount++;
       else noDCCount = 0;
       if(noDCCount > 20) This->masterState = ms_stop;
-      
-      
-      for(int slaveNum = 0 ; slaveNum < ec_slavecount ; slaveNum++){
 
-         // CANopen state machine
-         switch(This->slaves[slaveNum].coeStatus & 0b01101111){
+      clock_gettime(CLOCK_REALTIME, &cycleTimeout);
+      add_timespec(&cycleTimeout, (int64)CNTRL_CYCLEMS * 1000 * 1000);
+
+      err = pthread_cond_timedwait(&This->statusUpdated, &This->control, &cycleTimeout);
+
+      for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
+         if (This->slaves[slaveNum].statusChanged){
+            This->slaves[slaveNum].statusChanged = FALSE;
+
+            // CANopen state machine
+            switch(This->slaves[slaveNum].coeStatus & 0b01101111){
             case QUICKSTOP :
             {
                This->slaves[slaveNum].coeCurrentState = cs_QuickStop;
@@ -276,12 +301,11 @@ void* AKDController::ecat_Controller(void* THIS)
                }
             }
          }
-         #if DEBUG_MODE
-         if(prevcStatus != This->slaves[slaveNum].coeStatus){
-            printf("\nCoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", This->coeStateReadable[This->slaves[slaveNum].coeCurrentState], This->slaves[slaveNum].coeStatus, This->coeCtrlReadable[This->slaves[slaveNum].coeStateTransition], This->slaves[slaveNum].coeCtrlWord);
-            prevcStatus = This->slaves[slaveNum].coeStatus;
+         
+            #if DEBUG_MODE
+            printf("\n(Slave %i)CoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", slaveNum + 1, This->coeStateReadable[This->slaves[slaveNum].coeCurrentState], This->slaves[slaveNum].coeStatus, This->coeCtrlReadable[This->slaves[slaveNum].coeStateTransition], This->slaves[slaveNum].coeCtrlWord);
+            #endif
          }
-         #endif
       }
 
       if(This->inOP && (This->wrkCounter < This->expectedWKC) || ec_group[currentgroup].docheckstate)
@@ -289,7 +313,7 @@ void* AKDController::ecat_Controller(void* THIS)
             /* one ore more slaves are not responding */
             ec_group[currentgroup].docheckstate = FALSE;
             ec_readstate();
-            for (int slave = 1; slave <= ec_slavecount; slave++)
+            for (int slave = 1; slave <= This->slaveCount; slave++)
             {
                if ((ec_slave[slave].group == currentgroup) && (ec_slave[slave].state != EC_STATE_OPERATIONAL))
                {
@@ -367,8 +391,6 @@ void* AKDController::ecat_Controller(void* THIS)
       // CONTROL UNLOCKED
 
       pthread_cond_signal(&This->stateUpdated);
-
-      osal_usleep(50000); // 100ms
       
    }
    
@@ -377,27 +399,37 @@ void* AKDController::ecat_Controller(void* THIS)
 
 bool AKDController::ecat_Init(char *ifname){
 
-   if(initialized){
+   if(this->masterState != ms_shutdown){
       printf("ECAT: Already initialized. Shutdown before restarting.\n");
       return FALSE;
    }
 
    if (ec_init(ifname))
    {
-      printf("ECAT: ec_init on %s succeeded.\n",this->ifname);
+      printf("ECAT: ec_init on %s succeeded.\n", ifname);
       /* find and auto-config slaves */
 
       if( ec_config_init(FALSE) > 0 ) {
-         initialized = TRUE;
+         this->masterState = ms_stop;
+
          // Allocate slave data
-         this->slaves = new ecat_slave [ec_slavecount]();
+         this->slaveCount = ec_slavecount;
+         this->slaves = new ecat_slave [this->slaveCount];
+
+         // Initialize threading resources
+         pthread_mutex_init(&this->control, NULL);
+         pthread_mutex_init(&this->debug, NULL);
+         pthread_cond_init(&this->IOUpdated, NULL);
+         pthread_cond_init(&this->stateUpdated, NULL);
+         pthread_cond_init(&this->statusUpdated, NULL);
+
          return TRUE;
       }
       else
          printf("ECAT: No slaves found!\n");
    }
    else
-      printf("ECAT: No socket connection on %s. Execute as root!\n", this->ifname);
+      printf("ECAT: No socket connection on %s. Execute as root!\n", ifname);
 
       return FALSE;
 }
@@ -413,20 +445,17 @@ bool AKDController::ecat_Start(){
    struct ecat_slave::mappings_t *pdoMappings;
    
 
-   if(!this->initialized){
+   if(this->masterState == ms_shutdown){
       printf("ECAT: Not initialized. Call ecat_Init()\n");
       return FALSE;
    }
-      
-   // Set to stop state
-   this->masterState = ms_stop;
 
 
    // Configure PDO assignments
-   printf("ECAT: %d slaves found. Configuring PDO assigments...\n",ec_slavecount);
+   printf("ECAT: %d slaves found. Configuring PDO assigments...\n",slaveCount);
 
 
-   for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
+   for(int slaveNum = 1 ; slaveNum <= this->slaveCount ; slaveNum++){
       
       for(int i = 1; sdosNotConfigured != 0 && i <=10 ; i++){
          if(i != 1) osal_usleep(100000); // If looping, wait 100ms
@@ -520,16 +549,12 @@ bool AKDController::ecat_Start(){
    ec_config_map(&this->IOmap);
    
    // Compare user buffer size to actual size. Also calculate larges???
-   for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
+   for(int slaveNum = 1 ; slaveNum <= this->slaveCount ; slaveNum++){
       if(slaves[slaveNum-1].totalBytes != (ec_slave[slaveNum].Obytes + ec_slave[slaveNum].Ibytes)){
          printf("ECAT: Input struct is of incorrect size. Is %i. Needs to be %i", slaves[slaveNum-1].totalBytes, (ec_slave[slaveNum].Obytes + ec_slave[slaveNum].Ibytes));
          return FALSE;
       }
-   }
 
-   
-
-   for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
       slaves[slaveNum-1].coeCtrlOffset= -1;
       slaves[slaveNum-1].coeStatusOffset = -1;
 
@@ -620,10 +645,6 @@ bool AKDController::ecat_Start(){
          PDOAssign = txPDOAssign1;
          
       }
-   }
-
-   // Find IOmap info and build user buff info
-   for(int slaveNum = 1 ; slaveNum <= ec_slavecount ; slaveNum++){
    
       // Finish Populating User Buffer PDO maps
       this->slaves[slaveNum - 1].inUserBuff = this->slaves[slaveNum - 1].outUserBuff + ec_slave[slaveNum].Obytes;
@@ -633,9 +654,13 @@ bool AKDController::ecat_Start(){
 
       // Find where the AKD CoE status word is in IOmap
       this->slaves[slaveNum - 1].coeStatusMapPtr = ec_slave[slaveNum].inputs + this->slaves[slaveNum - 1].coeStatusOffset;
+
+      
    }
 
+
    
+
    // Config DC (In PREOP)
    printf("ECAT: Configuring DC. Should be in PRE-OP. ");
    printf(ec_statecheck(0, EC_STATE_PRE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_PRE_OP ? "State: PRE_OP\n" : "ERR! NOT IN PRE_OP!\n") ;
@@ -658,12 +683,7 @@ bool AKDController::ecat_Start(){
       printf("\rSending 100 process cycles: %5d WKC : %d", i, wkc);
    }*/
 
-   // Initialize threading resources
-   pthread_mutex_init(&this->control, NULL);
-   pthread_mutex_init(&this->debug, NULL);
-   pthread_cond_init(&this->IOUpdated, NULL);
-   pthread_cond_init(&this->stateUpdated, NULL);
-   pthread_cond_init(&this->moveSig, NULL);
+   
 
    /* Enable talker to handle slave PDOs in OP */
    pthread_create(&this->talker, NULL, &AKDController::ecat_Talker, this);
@@ -700,7 +720,7 @@ bool AKDController::ecat_Start(){
    {
       printf("\nECAT: Not all slaves reached operational state.\n");
       ec_readstate();
-      for(int i = 1; i<=ec_slavecount ; i++)
+      for(int i = 1; i <= this->slaveCount ; i++)
       {
          ec_dcsync0(i+1, FALSE, 0, 0); // SYNC0,1
          if(ec_slave[i].state != EC_STATE_OPERATIONAL)
@@ -718,14 +738,19 @@ bool AKDController::ecat_Start(){
 
 // Blocks for timeout time
 int AKDController::Update(uint slave, bool move, int timeout_ms){
+
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+
    int err = 0, slaveNum;
-   struct timespec timeout, temptime;
+   struct timespec timeout;
    bool allUpdated = FALSE;
 
    clock_gettime(CLOCK_REALTIME, &timeout);
-   add_timespec(&timeout, (int64)timeout_ms * 1000000 * 100);
-
-   pthread_mutex_lock(&this->control);
+   add_timespec(&timeout, (int64)timeout_ms * 1000 * 1000);
 
    if(slave != 0) slaveNum = slave - 1;
    else slaveNum = 0;
@@ -736,12 +761,13 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
          this->slaves[slaveNum].coeCtrlWord |= 0b0010000; // Should only be used if in homing, interpolated or profPos mode.
 
       slaveNum++;
-   } while((slaveNum < ec_slavecount) && (slave == 0));
+   } while((slaveNum < this->slaveCount) && (slave == 0));
 
    allUpdated = FALSE;
    while(!allUpdated && err == 0){ // Check and make sure all slave update flags were recognized.
 
-      err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to IOmap
+      if(timeout_ms != 0) err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to IOmap
+      else pthread_cond_wait(&this->IOUpdated, &this->control);
 
       allUpdated = TRUE;
       if(slave != 0) slaveNum = slave - 1;
@@ -753,30 +779,32 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
          }
 
          slaveNum++;
-      }while((slaveNum < ec_slavecount) && (slave == 0));
+      }while((slaveNum < this->slaveCount) && (slave == 0));
 
    }
 
    allUpdated = FALSE;
    while(!allUpdated && err == 0 && move){ // Check to see if update was acknowledged or error
 
-      err = pthread_cond_timedwait(&this->moveSig, &this->control, &timeout); //Wait for talker thread to confirm update to IOmap
+      
+      if(timeout_ms != 0) err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to move status.
+      else pthread_cond_wait(&this->IOUpdated, &this->control);
 
       allUpdated = TRUE;
       if(slave != 0) slaveNum = slave - 1;
       else slaveNum = 0;
       do{
-         if (this->slaves[slaveNum].moveAck == FALSE && this->slaves[slaveNum].mode != intPos){
+         if (!(this->slaves[slaveNum].coeStatus & (1 << 12)) && this->slaves[slaveNum].mode != intPos){
             allUpdated = FALSE;
             break;
          }
-         if(this->slaves[slaveNum].moveErr) {
+         if(this->slaves[slaveNum].coeStatus & (1 << 13)) {
             return AKD_MOVEERR;
             break;
          }
 
          slaveNum++;
-      }while((slaveNum < ec_slavecount) && (slave == 0));
+      }while((slaveNum < this->slaveCount) && (slave == 0));
          
    }
    
@@ -787,6 +815,12 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
  // Blocks for max of 1 sec;
 bool AKDController::State(ecat_masterStates reqState){
 
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+
    struct timespec timeout;
    uint sdoBuffSize, sdoBuff;
    int err = 0;
@@ -794,7 +828,6 @@ bool AKDController::State(ecat_masterStates reqState){
    ecat_coeStates waitingFor;
    ecat_masterStates oldState;
 
-   pthread_mutex_lock(&this->control);
    if(this->masterState != reqState){
          if(reqState != ms_shutdown){
 
@@ -821,7 +854,7 @@ bool AKDController::State(ecat_masterStates reqState){
 
             while(!allStatesChanged && err == 0){
                allStatesChanged = TRUE;
-               for(int slaveNum = 0 ; slaveNum < ec_slavecount ; slaveNum++){
+               for(int slaveNum = 0 ; slaveNum < this->slaveCount ; slaveNum++){
                   if (this->slaves[slaveNum].coeCurrentState != waitingFor){
                      
                      if(this->slaves[slaveNum].coeCurrentState == cs_Fault){
@@ -855,12 +888,12 @@ bool AKDController::State(ecat_masterStates reqState){
 
             pthread_cond_destroy(&this->IOUpdated);
             pthread_cond_destroy(&this->stateUpdated);
-            pthread_cond_destroy(&this->moveSig);
+            //pthread_cond_destroy(&this->moveSig);
 
             /* stop SOEM, close socket */
             ec_close();
         }
-    }
+   }
 
    pthread_mutex_unlock(&this->control);
    return err == 0;
@@ -885,24 +918,39 @@ bool AKDController::Shutdown(){
 
 // Blocking until quick stop engaged
 bool AKDController::QuickStop(uint slave, bool enableQuickStop){ 
+
    pthread_mutex_lock(&this->control);
-   if(enableQuickStop){
-      this->slaves[slave-1].quickStop = TRUE;
-      while(this->slaves[slave-1].coeCurrentState != cs_QuickStop){
-         pthread_cond_wait(&this->stateUpdated, &this->control);
-      }
-   } else {
-      this->slaves[slave-1].quickStop = FALSE;
-      while(this->slaves[slave-1].coeCurrentState != cs_OpEnabled){
-         pthread_cond_wait(&this->stateUpdated, &this->control);
-      }
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
    }
+
+   int slaveNum;
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
+   do{
+
+      if(enableQuickStop)
+         this->slaves[slaveNum].quickStop = TRUE;
+      else
+         this->slaves[slaveNum].quickStop = FALSE;
+
+      slaveNum++;
+   }while((slaveNum < this->slaveCount) && (slave == 0));
+
    pthread_mutex_unlock(&this->control);
    return TRUE;
 }
 
 // Can block for 1 sec
 bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
+
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+   pthread_mutex_unlock(&this->control);
 
    int sdoBuffSize, sdoBuff, slaveNum;
    struct timespec timeout, curtime;
@@ -914,8 +962,8 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
       
       pthread_mutex_lock(&this->control);
       
-      if(slave != 0) slaveNum = slave - 1;
-      else slaveNum = 0;
+      if(slave != 0) slaveNum = slave;
+      else slaveNum = 1;
       do{
 
          if(this->slaves[slaveNum].mode != reqMode){  
@@ -923,11 +971,11 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
             do{
                sdoBuffSize = 1;
                sdoBuff = reqMode;
-               ec_SDOwrite(slaveNum + 1, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
+               ec_SDOwrite(slaveNum, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
 
                sdoBuffSize = 1; // Check if drive has acknowledged
                sdoBuff = 0;
-               ec_SDOread(slaveNum + 1, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
+               ec_SDOread(slaveNum, ACTOPMODE, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
 
                clock_gettime(CLOCK_MONOTONIC, &curtime);
                if(curtime.tv_sec > timeout.tv_sec){
@@ -937,11 +985,11 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
 
             } while(sdoBuff != reqMode && curtime.tv_sec < timeout.tv_sec);
 
-            this->slaves[slaveNum].mode = reqMode;
+            this->slaves[slaveNum-1].mode = reqMode;
          }
 
          slaveNum++;
-      }while((slaveNum < ec_slavecount) && (slave == 0));
+      }while((slaveNum <= this->slaveCount) && (slave == 0));
 
       pthread_mutex_unlock(&this->control);
       AKDController::State(ms_enable);
@@ -952,36 +1000,112 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
    return TRUE;
 }
 
-bool AKDController::confProfPosImm(uint slave, bool moveImmediate_u){
+bool AKDController::confProfPos(uint slave, bool moveImmediate, bool moveRelative){
 
    pthread_mutex_lock(&this->control);
-   /*
-      Configure Profile Position settings
-   sdoBuff = 10;
-   ec_SDOwrite(1, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-   sdoBuff = 10;
-   ec_SDOwrite(1, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-               sdoBuff = 10;
-   ec_SDOwrite(1, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-   */
-  int slaveNum;
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+
+   int slaveNum;
    if(slave != 0) slaveNum = slave - 1;
    else slaveNum = 0;
    do{
-      if(moveImmediate_u && this->slaves[slaveNum].mode == profPos) this->slaves[slaveNum].coeCtrlWord |= 0b00100000;
+      if(this->slaves[slaveNum].mode != profPos){
+         pthread_mutex_unlock(&this->control);
+         return FALSE;
+      }
+
+      if(moveImmediate) this->slaves[slaveNum].coeCtrlWord |= 0b00100000;
       else this->slaves[slaveNum].coeCtrlWord &= ~0b00100000;
+
+      if(moveRelative) this->slaves[slaveNum].coeCtrlWord |= 0b01000000;
+      else this->slaves[slaveNum].coeCtrlWord &= ~0b01000000;
+
       slaveNum++;
-   } while((slaveNum < ec_slavecount) && (slave == 0));
+   } while((slaveNum < this->slaveCount) && (slave == 0));
    pthread_mutex_unlock(&this->control);
    
    return TRUE;
 }
 
+bool AKDController::confUnits(uint slave, uint32 motorRev, uint32 shaftRev){
+
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+   pthread_mutex_unlock(&this->control);
+
+   int slaveNum, sdoBuff, sdoBuffSize;
+   
+   if(slave != 0) slaveNum = slave;
+   else slaveNum = 1;
+   do{ 
+      sdoBuff = motorRev;
+      ec_SDOwrite(slaveNum, MOTOR_RATIO , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+      sdoBuff = shaftRev;
+      ec_SDOwrite(slaveNum, SHAFT_RATIO , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set decceleration for profile position mode
+      
+      sdoBuffSize = 4;
+      ec_SDOread(slaveNum, MOTOR_RATIO, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
+      if(sdoBuff != motorRev) return FALSE;
+      sdoBuffSize = 4;
+      ec_SDOread(slaveNum, SHAFT_RATIO, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
+      if(sdoBuff != shaftRev) return FALSE;
+   
+      slaveNum++;
+   } while((slaveNum <= this->slaveCount) && (slave == 0));
+
+   return TRUE;
+}
+
+bool AKDController::confMotionTask(uint slave, uint vel, uint acc, uint dec){
+
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+   pthread_mutex_unlock(&this->control);
+
+   int slaveNum, sdoBuff, sdoBuffSize;
+   if(slave != 0) slaveNum = slave;
+   else slaveNum = 1;
+   do{ 
+      sdoBuff = acc;
+      ec_SDOwrite(slaveNum, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
+      sdoBuff = dec;
+      ec_SDOwrite(slaveNum, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set decceleration for profile position mode
+      sdoBuff = vel;
+      ec_SDOwrite(slaveNum, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set velocity for profile position mode
+
+      sdoBuffSize = 4;
+      ec_SDOread(slaveNum, MT_ACC, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
+      if(sdoBuff != acc) return FALSE;
+      sdoBuffSize = 4;
+      ec_SDOread(slaveNum, MT_DEC, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
+      if(sdoBuff != dec)  return FALSE;
+      sdoBuffSize = 4;
+      ec_SDOread(slaveNum, MT_V, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
+      if(sdoBuff != vel)  return FALSE;
+   
+      slaveNum++;
+   } while((slaveNum <= this->slaveCount) && (slave == 0));
+
+   return TRUE;
+}
 
 void AKDController::confSlavePDOs(uint slave, void* usrControl, int bufferSize, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4){
    int slaveNum, rx = 0, tx = 0;
    
-   if(!initialized) return;
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return;
+   }
 
    if(rxPDO1 != 0) rx++;
    if(rxPDO2 != 0) rx++;
@@ -1015,15 +1139,21 @@ void AKDController::confSlavePDOs(uint slave, void* usrControl, int bufferSize, 
       slaves[slaveNum].outUserBuff = (uint8*)usrControl;
       
       slaveNum++;
-   } while((slaveNum < ec_slavecount) && (slave == 0));
+   } while((slaveNum < this->slaveCount) && (slave == 0));
    
+
+   pthread_mutex_unlock(&this->control);
 }
 
 void AKDController::confDigOutputs(uint slave, uint32 bitmask, uint8 out1Mode, uint8 out2Mode){
 
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return;
+   }
+
    int slaveNum;
-   
-   if(!initialized) return;
 
    if(slave != 0) slaveNum = slave - 1;
    else slaveNum = 0;
@@ -1034,82 +1164,178 @@ void AKDController::confDigOutputs(uint slave, uint32 bitmask, uint8 out1Mode, u
       slaves[slaveNum].digOut2Mode = out2Mode;
       
       slaveNum++;
-   } while((slaveNum < ec_slavecount) && (slave == 0));
+   } while((slaveNum < this->slaveCount) && (slave == 0));
 
-
+   pthread_mutex_unlock(&this->control);
 
 }
-
 
 // Can block for timeout_ms
 int AKDController::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms){
 
-   uint sdoBuff, err = 0, slaveNum;
-   ecat_OpModes prevMode;
-
    pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
 
-   if(slave == 0) slaveNum = 0;
-   else slaveNum = slave - 1;
-   while(slaveNum < ec_slavecount){ // Configure Homing parameters.
+   uint sdoBuff, err = 0, slaveNum;
+   int subTimeout;
+   ecat_OpModes prevMode[slaveCount];
+   struct timespec timeout1, timeout2;
 
-      prevMode = this->slaves[slaveNum].mode;
+   clock_gettime(CLOCK_REALTIME, &timeout1);
+   add_timespec(&timeout1, (int64)timeout_ms * 1000 * 1000);
+   
 
+   if(slave != 0) slaveNum = slave;
+   else slaveNum = 1;
+   do{ 
+      prevMode[slaveNum-1] = this->slaves[slaveNum-1].mode;
+
+      // Configure Homing parameters.
       sdoBuff = HOME_MODE;
-      ec_SDOwrite(slaveNum + 1, HM_MODE , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM);
+      ec_SDOwrite(slaveNum, HM_MODE , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
       
       // HOME.DIR
       sdoBuff = HOME_DIR;
-      ec_SDOwrite(slaveNum + 1, HM_DIR , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); 
+      ec_SDOwrite(slaveNum, HM_DIR , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
 
       // HOME.V
       sdoBuff = speed;
-      ec_SDOwrite(slaveNum + 1, HM_V , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM); 
+      ec_SDOwrite(slaveNum, HM_V , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
 
       // HOME.ACC/HOME.DEC
       sdoBuff = acceleration;
-      ec_SDOwrite(slaveNum + 1, HMACCEL , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
+      ec_SDOwrite(slaveNum, HMACCEL , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
 
       // HOME.DIST
       sdoBuff = HOME_DIST;
-      ec_SDOwrite(slaveNum + 1, HM_DIST , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
+      ec_SDOwrite(slaveNum, HM_DIST , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM);
 
       // HOME.P
       sdoBuff = HOME_P;
-      ec_SDOwrite(slaveNum + 1, HM_P , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
+      ec_SDOwrite(slaveNum, HM_P , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); 
 
-      if(slave == 0) slaveNum++;
-      else break;
-   }
+      slaveNum++;
+   } while((slaveNum <= this->slaveCount) && (slave == 0));
+
+   
    pthread_mutex_unlock(&this->control);
 
-   if(!AKDController::setOpMode(slave, homing)) return FALSE;
+   if(!setOpMode(slave, homing)) {
+      #if DEBUG_MODE
+         printf("\nECAT: [Home] Failed to set homing mode.\n");
+      #endif
+      return FALSE;
+   }
 
-   if(AKDController::Update(slave, TRUE, timeout_ms) != 0) return FALSE;
+   if(timeout_ms != 0){
+      clock_gettime(CLOCK_REALTIME, &timeout2);
+      timeout2.tv_sec = timeout1.tv_sec - timeout2.tv_sec;
+      timeout2.tv_nsec = timeout1.tv_nsec - timeout2.tv_nsec;
+      subTimeout = (timeout2.tv_sec * 1000) + (timeout2.tv_nsec / 1000000);
+   }
+   else{
+      subTimeout = 0;
+   }
+   
+   if(Update(slave, TRUE, subTimeout) != 0){
+      #if DEBUG_MODE
+         printf("\nECAT: [Home] Update() failed.\n");
+      #endif
+      return FALSE;
+   }
 
-   if(!AKDController::setOpMode(slave, prevMode)) return FALSE;
+   if(timeout_ms != 0){
+      clock_gettime(CLOCK_REALTIME, &timeout2);
+      timeout2.tv_sec = timeout1.tv_sec - timeout2.tv_sec;
+      timeout2.tv_nsec = timeout1.tv_nsec - timeout2.tv_nsec;
+      subTimeout = (timeout2.tv_sec * 1000) + (timeout2.tv_nsec / 1000000);
+   }
+   else{
+      subTimeout = 0;
+   }
+   if(!waitForTarget(slave, subTimeout)) return FALSE;
+
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
+   do{ 
+      if(!setOpMode(slaveNum+1, prevMode[slaveNum])) {
+         #if DEBUG_MODE
+            printf("\nECAT: [Home] Failed to revert opmode.\n");
+         #endif
+         return FALSE;
+      }
+      slaveNum++;
+   } while((slaveNum < this->slaveCount) && (slave == 0));
 
    return TRUE;
 }
 
-// Returns TRUE if fault
-bool AKDController::readFault(uint slave){
-   int slaveNum;
+bool AKDController::waitForTarget(uint slave, uint timeout_ms){
 
    pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+   int slaveNum, err = 0;
+   bool allFin = FALSE;
+   struct timespec timeout;
 
-   if(slave == 0) slaveNum = 0;
-   else slaveNum = slave - 1;
-   while(slaveNum < ec_slavecount){
+   clock_gettime(CLOCK_REALTIME, &timeout);
+   add_timespec(&timeout, (int64)timeout_ms * 1000 * 1000);
+
+   
+   while(!allFin && err == 0){ // Check to see if update was acknowledged or error
+
+      if(timeout_ms != 0) err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to move status.
+      else err = pthread_cond_wait(&this->IOUpdated, &this->control);
+
+      allFin = TRUE;
+      if(slave != 0) slaveNum = slave - 1;
+      else slaveNum = 0;
+      do{
+         if ( !(this->slaves[slaveNum].coeStatus & (1 << 10)) && ((this->slaves[slaveNum].mode == profPos) || (this->slaves[slaveNum].mode == homing) || (this->slaves[slaveNum].mode == profVel))){
+            allFin = FALSE;
+            break;
+         }
+         if ( (this->slaves[slaveNum].coeStatus & (1 << 11)) && ((this->slaves[slaveNum].mode == profPos) || (this->slaves[slaveNum].mode == homing) || (this->slaves[slaveNum].mode == profVel))){
+            err = -1; // If internal limit active, return -1;
+            break;
+         }
+
+         slaveNum++;
+      }while((slaveNum < this->slaveCount) && (slave == 0));
+   }
+
+   pthread_mutex_unlock(&this->control);
+   return err == 0;
+}
+
+// Returns TRUE if fault
+bool AKDController::readFault(uint slave){
+
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+
+   int slaveNum;
+
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
+   do{ 
 
       if(this->slaves[slave - 1].coeCurrentState == cs_Fault){
          pthread_mutex_unlock(&this->control);
          return TRUE;
       }
-
-      if(slave == 0) slaveNum++;
-      else break;
-   } 
+   
+      slaveNum++;
+   } while((slaveNum < this->slaveCount) && (slave == 0));
 
    pthread_mutex_unlock(&this->control);
    return FALSE;
@@ -1118,6 +1344,11 @@ bool AKDController::readFault(uint slave){
 bool AKDController::clearFault(uint slave, bool persistClear){
 
    pthread_mutex_lock(&this->control);
+   if(this->masterState == ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return FALSE;
+   }
+
 
    int err = 0, slaveNum;
    bool noFaults;
@@ -1126,38 +1357,36 @@ bool AKDController::clearFault(uint slave, bool persistClear){
    timeout.tv_sec += 1;
 
    // Loop through all slaves and set clear fault bit
-   if(slave == 0) slaveNum = 0;
-   else slaveNum = slave - 1;
-   while(slaveNum < ec_slavecount){
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
+   do{
       this->slaves[slaveNum].coeCtrlWord |= 0b10000000; // Clear Fault : 0b1---xxxx
-      if(slave == 0) slaveNum++;
-      else break;
-   } 
+      slaveNum++;
+   } while((slaveNum < this->slaveCount) && (slave == 0));
 
    // Loop through all slaves and check that all are out of fault.
    while(!noFaults && err == 0) {
       noFaults = TRUE;
-      if(slave == 0) slaveNum = 0;
-      else slaveNum = slave - 1;
-      while(slaveNum < ec_slavecount){
+
+      err = pthread_cond_timedwait(&this->stateUpdated, &this->control, &timeout);
+
+      if(slave != 0) slaveNum = slave - 1;
+      else slaveNum = 0;
+      do{
          if(this->slaves[slaveNum].coeCurrentState == cs_Fault){
             noFaults = FALSE;
             break;
          }
-         if(slave == 0) slaveNum++;
-         else break;
-      } 
-      err = pthread_cond_timedwait(&this->stateUpdated, &this->control, &timeout);
+         slaveNum++;
+      } while((slaveNum < this->slaveCount) && (slave == 0));
    }
 
-   if(slave == 0) slaveNum = 0;
-   else slaveNum = slave - 1;
-   while(slaveNum < ec_slavecount){
+   if(slave != 0) slaveNum = slave - 1;
+   else slaveNum = 0;
+   do{
       if(!persistClear) this->slaves[slave - 1].coeCtrlWord &= ~0b10000000; // Clear Fault : 0b1---xxxx
-      if(slave == 0) slaveNum++;
-      else break;
-   } 
-   
+      slaveNum++;
+   } while((slaveNum < this->slaveCount) && (slave == 0));
 
    pthread_mutex_unlock(&this->control);
 

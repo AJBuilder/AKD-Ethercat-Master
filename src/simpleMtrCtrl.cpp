@@ -16,12 +16,11 @@ int main(int argc, char *argv[])
 
 
    
-   int currentgroup = 0;
 
    if (argc > 1)
    {
       AKDController master1;
-
+      int err = 0;
       
       struct __attribute__((__packed__)){
          //0x1725
@@ -51,6 +50,10 @@ int main(int argc, char *argv[])
       
       if(!master1.ecat_Init(argv[1])) return -1;
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
+      master1.confUnits(1, 1, 360);
+      master1.confMotionTask(1, 2000, 10000, 10000);
+      master1.confProfPos(1, TRUE, FALSE);
+      
       //master1.confSlavePDOs(2, &s2, sizeof(s1), 0x1725, 0x1B20);
 
       if (!master1.ecat_Start()) return -2;
@@ -65,34 +68,41 @@ int main(int argc, char *argv[])
          printf("\nFault cleared!\n");
       }
 
-      while(!master1.Enable()){
+      if(!master1.Enable()){
          printf("\nEnable failed\n");
+         return -3;
       }
       printf("\nEnabled!\n");
 
       s1.maxTorque = 1000;
-      s1.targetPos = 1;
-      s1.digOutputs = 3 << 0;
 
-      while(!master1.setOpMode(0, profPos)){
+      if(!master1.setOpMode(0, profPos)){
          printf("\nMode switch failed\n");
+         return -4;
       }
+
+
       printf("\nMode switched!\n");
-      if(master1.Home(0, 0, 0, 60, 1000, 0, 0, 1000)){
-         printf("\nHomed\n");
-      }else{
-         printf("\nFailed to home\n");
+
+      err = master1.Home(1, 0, 0, 6000, 1000, 0, 0, 0);
+      if(err != TRUE){
+         printf("\nFailed to home. %i\n", err);
+         return -5;
       }
+      printf("\nHomed\n");
+
        osal_usleep(5000000); // 5 sec
 
-      s1.targetPos = 1;
-      printf("\nSetpoint update: %d",master1.Update(1, TRUE, 500000)); // 5 sec
-      master1.confProfPosImm(1, TRUE);
-      printf("\nSetpoint set\n");
-      osal_usleep(5000000); // 5 sec
-      printf("\nSetpoint update: %d",master1.Update(1, TRUE, 500000)); // 5 sec
-      printf("\nSetpoint set\n");
-      osal_usleep(5000000); // 5 sec
+      
+      //s1.digOutputs = 3 << 0;
+         s1.targetPos = 180*7;
+      for(int i = 0; i < 3; i++){
+         s1.targetPos = -s1.targetPos;
+         master1.Update(1, TRUE, 500000); // 5 sec
+         printf("\nSetpoint set\n");
+         master1.waitForTarget(1,0);
+         osal_usleep(5000);
+      }
       
       /*
       master1.QuickStop(1, TRUE); printf("Quickstop!\n");

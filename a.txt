@@ -1,5 +1,5 @@
 Starting simpleMtrCtrl wrapper for acrEcat
-ECAT: ec_init on (null) succeeded.
+ECAT: ec_init on eno3 succeeded.
 ECAT: Starting EtherCAT Master
 ECAT: 1 slaves found. Configuring PDO assigments...
 PDO's configured!
@@ -9,1701 +9,3954 @@ ECAT: Slaves mapped, state to SAFE_OP... State: SAFE_OP
 ECAT: Calculated workcounter 3
 ECAT: Talker started! Synccount needs to reach : 125
 ECAT: Controller Spawned
-0
-0
-0
-0
-0
-0
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
+
+Mode: 0 CoeStatus: 0x0 CoeCtrl: 0x0
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x0
+
+(Slave 1)CoE State: FAULT!                   (0x1618)	CoE Control: Disable Operation        (0x0007)
+WKC:  3( 3)	DiffDC:      8089760	inSyncCount:    0	
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+WKC:  3( 3)	DiffDC:      7995680	inSyncCount:   10	
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+WKC:  3( 3)	DiffDC:      7999760	inSyncCount:   35	
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+WKC:  3( 3)	DiffDC:      8003680	inSyncCount:   53	
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+WKC:  3( 3)	DiffDC:      8008400	inSyncCount:   37	
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+WKC:  3( 3)	DiffDC:      7999600	inSyncCount:   99	
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
 
 ECAT: Master within sync window. Enabling sync0 generation!
 
 ECAT: Requesting operational state for all slaves
-7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
 
 ECAT: Operational state reached for all slaves!
-7
-7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
 
 Waiting for fault to clear!
-87
-87
-87
-87
-87
-87
-7
-87
-7
-87
 
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x87
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x87
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x87
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x87
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x87
+
+Mode: 0 CoeStatus: 0x1618 CoeCtrl: 0x87
+
+Mode: 0 CoeStatus: 0x1650 CoeCtrl: 0x87
+
+(Slave 1)CoE State: Switch-On Disabled       (0x1650)	CoE Control: Shutdown                 (0x0086)
+WKC:  3( 3)	DiffDC:     15999240	inSyncCount:    9	
 Fault cleared!
-6
-6
-6
-6
-6
-6
-7
-7
-7
-7
-7
-7
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
 
+Mode: 0 CoeStatus: 0x1650 CoeCtrl: 0x6
+
+Mode: 0 CoeStatus: 0x1650 CoeCtrl: 0x6
+
+Mode: 0 CoeStatus: 0x1650 CoeCtrl: 0x6
+
+Mode: 0 CoeStatus: 0x1631 CoeCtrl: 0x6
+
+(Slave 1)CoE State: Ready To Switch-On       (0x1631)	CoE Control: Switch-On                (0x0007)
+WKC:  3( 3)	DiffDC:      8002400	inSyncCount:   13	
+Mode: 0 CoeStatus: 0x1631 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1631 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1631 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1631 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1631 CoeCtrl: 0x7
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0x7
+
+(Slave 1)CoE State: Switched-On              (0x1633)	CoE Control: Enable Operation         (0x000f)
+WKC:  3( 3)	DiffDC:      8014480	inSyncCount:   19	
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1633 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+(Slave 1)CoE State: Op-Enabled               (0x1637)	CoE Control: Enable Operation         (0x000f)
+WKC:  3( 3)	DiffDC:      7992000	inSyncCount:   27	
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8003600	inSyncCount:   89	
 Enabled!
-f
-f
-f
-f
-f
-f
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7998400	inSyncCount:  152	
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
 
 Mode switched!
-f
-f
-f
-f
-f
-f
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-1f
-f
-f
-f
-f
-f
-f
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-7
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 0 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7989680	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0x1f
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7995360	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7999840	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
 
 Homed
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-1f
-f
-f
-f
-f
 
-Setpoint update: 0
-Setpoint set
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-1f
-f
-f
-f
-f
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
 
-Setpoint update: 0
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8061040	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8001680	inSyncCount:    7	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7999520	inSyncCount:   70	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7999840	inSyncCount:  132	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8000320	inSyncCount:  195	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8000160	inSyncCount:  257	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7998800	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7994400	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7995760	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7998560	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0x1f
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
 Setpoint set
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
-f
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0x1f
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Setpoint set
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0x1f
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Setpoint set
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0x1f
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+Ending
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7985360	inSyncCount:   15	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8005480	inSyncCount:   78	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8000640	inSyncCount:  140	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7997200	inSyncCount:  203	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7993680	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8032640	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7994800	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7998800	inSyncCount:    0	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      8001440	inSyncCount:    5	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7999360	inSyncCount:   67	
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+
+Mode: 6 CoeStatus: 0x1637 CoeCtrl: 0xf
+WKC:  3( 3)	DiffDC:      7985920	inSyncCount:   80	
+ECAT: Requesting init state for all slaves
+ECAT: End simple test, close socket
+End program
