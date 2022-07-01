@@ -32,7 +32,7 @@ void add_timespec(struct timespec *ts, int64 addtime)
 }
 
 /* PI calculation to get linux time synced to DC time */
- bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i)
+ bool AKDController::ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i)
 {
    static int64 integral = 0;
    int64 delta;
@@ -47,10 +47,78 @@ void add_timespec(struct timespec *ts, int64 addtime)
    return (*d < window) && (*d > (-window)) ; // Return TRUE if error is within window
 }
 
+
+
+#if DEBUG_MODE
+
+void AKDController::addToDebugBuff(char *str){
+
+   strcpy(debugBuffer[buffTail], str);
+
+   buffTail++; // Inc to next free index
+   if(buffTail >= 20) buffTail = 0; // Loop around if necessary
+
+   if(buffTail == buffHead) buffHead++; // If overflowing, inc head to next oldest data
+   if(buffHead >= 20) buffHead = 0; // Loop around if necessary
+
+   return;
+}
+
+void AKDController::printDebugBuff(){
+
+   int i = 1;
+   while(buffTail != buffHead && i < 20){
+      printf("%s",debugBuffer[buffHead]);
+      buffHead++;
+      if(buffHead >= 20) buffHead = 0;
+      i++;
+   }
+
+   return;
+}
+
+char* AKDController::getReadableStatus(uint16 status){
+
+   switch (status & 0b01101111){
+      case QUICKSTOP: return (this->coeStatusReadable[7]);
+      default:
+      switch (status & 0b01001111){
+         case NOTRDY2SWCH  & 0b01001111   :  return this->coeStatusReadable[0];
+         case SWCHDISABLED & 0b01001111   :  return this->coeStatusReadable[1];
+         case RDY2SWITCH   & 0b01001111   :  return this->coeStatusReadable[2];
+         case SWITCHEDON   & 0b01001111   :  return this->coeStatusReadable[3];
+         case OP_ENABLED   & 0b01001111   :  return this->coeStatusReadable[4];
+         case FAULT        & 0b01001111   :  return this->coeStatusReadable[5];
+         case FAULTREACT   & 0b01001111   :  return this->coeStatusReadable[6];
+         default: return this->coeStatusReadable[8];
+      }
+   }
+
+}
+
+char* AKDController::getReadableCtrl(uint16 ctrl){
+   static bool wasEnabled = FALSE;
+   wasEnabled = wasEnabled;
+
+   if((ctrl & CTRL_FAULTRESET_bit) == TRUE )   {return this->coeCtrlReadable[6];}
+   if((ctrl & CTRL_DIS_VOL_bit)    == FALSE)   {return this->coeCtrlReadable[2];}
+   if((ctrl & CTRL_QSTOP_bit)      == FALSE)   {return this->coeCtrlReadable[3];}
+   if((ctrl & CTRL_SHUTDOWN_bit)   == FALSE)   {return this->coeCtrlReadable[0];}
+   if((ctrl & CTRL_ENABLED_bit)    == FALSE){
+      if(wasEnabled) {return this->coeCtrlReadable[4];}
+      else {return this->coeCtrlReadable[1];}
+   }else {
+      wasEnabled = TRUE;
+      return this->coeCtrlReadable[5];
+   }
+
+}
+
+#endif
+
 /* RT EtherCAT thread */
 void* AKDController::ecat_Talker(void* THIS)
 {
-   int tempCount = 0;
    AKDController* This = (AKDController*)THIS;
 
    // Local variables
@@ -60,6 +128,10 @@ void* AKDController::ecat_Talker(void* THIS)
    uint8*   input_map_ptr;
    uint8*   output_buff_ptr;
    uint8*   input_buff_ptr;
+   #if DEBUG_MODE
+      char buffer[150];
+      uint16 prevStatus[This->slaveCount], prevCtrl[This->slaveCount];
+   #endif
 
    // Buffers (To outside of thread)
    int8 wrkCounterb;
@@ -80,21 +152,38 @@ void* AKDController::ecat_Talker(void* THIS)
       clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &ts, NULL);
 
       /* calulate toff to get linux time and DC synced */
-      if(ec_sync(ec_DCtime, CYCLE_NS, &toff, SYNC_DIST, SYNC_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
+      if(This->ec_sync(ec_DCtime, CYCLE_NS, &toff, SYNC_DIST, SYNC_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
          if (inSyncCountb != UINT32_MAX) inSyncCountb++; // Count number of cycles in window
       }
       else inSyncCountb = 0;
 
+      for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
+         if(*This->slaves[slaveNum].coeStatusMapPtr & (1 << 12)) // If acknowledged...
+            *This->slaves[slaveNum].coeCtrlMapPtr &= ~(1 << 4); // Clear move bit. So there are not double setpoints
+      }
+
       #if DEBUG_MODE
       // Try to update debug info
-      if(pthread_mutex_trylock(&This->debug) == 0){
+      if(pthread_mutex_lock(&This->debug) == 0){
          This->gl_toff = toff;
          This->gl_delta = sync_delta;
          This->gl_integral = sync_integral;
+
+         for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
+            
+            if((prevStatus[slaveNum] != *This->slaves[slaveNum].coeStatusMapPtr) || (prevCtrl[slaveNum] != *This->slaves[slaveNum].coeCtrlMapPtr)){
+               sprintf(buffer, "\n[Slave %i] CoE State: (0x%04x) %-24s \tCoE Control:(0x%04x) %-24s \n", slaveNum + 1, *This->slaves[slaveNum].coeStatusMapPtr, This->getReadableStatus(*This->slaves[slaveNum].coeStatusMapPtr), This->slaves[slaveNum].coeCtrlWord, This->getReadableCtrl(This->slaves[slaveNum].coeCtrlWord));
+               This->addToDebugBuff(buffer);
+               prevStatus[slaveNum] = *This->slaves[slaveNum].coeStatusMapPtr;
+               prevCtrl[slaveNum] = *This->slaves[slaveNum].coeCtrlMapPtr;
+            }
+         }
          pthread_mutex_unlock(&This->debug);
       }
+
       #endif
 
+      
       
       
       if(pthread_mutex_trylock(&This->control) == 0){
@@ -110,25 +199,7 @@ void* AKDController::ecat_Talker(void* THIS)
          
          for(int slaveNum = 0 ; slaveNum < This->slaveCount ; slaveNum++){
             
-            /*
-            if(This->slaves[slaveNum].coeStatus & 0b01000000000000) {
-               This->slaves[slaveNum].moveAck = TRUE;
-               pthread_cond_signal(&This->moveSig);
-            } else This->slaves[slaveNum].moveAck = FALSE;
-
-            if(This->slaves[slaveNum].coeStatus & 0b10000000000000) {
-               This->slaves[slaveNum].moveErr = TRUE;
-               pthread_cond_signal(&This->moveSig);
-            } else This->slaves[slaveNum].moveErr = FALSE;
-
-            if(This->slaves[slaveNum].coeStatus & 0b00010000000000) {
-               This->slaves[slaveNum].moveErr = TRUE;
-               pthread_cond_signal(&This->moveSig);
-            } else This->slaves[slaveNum].moveErr = FALSE;*/
-            
-            if(This->slaves[slaveNum].update){
-               tempCount++;
-               
+            if(This->slaves[slaveNum].update){              
                
                output_buff_ptr = This->slaves[slaveNum].outUserBuff;
                input_buff_ptr = This->slaves[slaveNum].inUserBuff;
@@ -146,23 +217,15 @@ void* AKDController::ecat_Talker(void* THIS)
                This->slaves[slaveNum].update = FALSE;
             }
             else {
-            if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
+               // If not updating a setpoint, turn off move bit. (Only when in Profile Position or Homing)
+               if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; 
             }
-
-            
 
             // Overwrite CoE control and status words with controllers data.
             memcpy(This->slaves[slaveNum].coeCtrlMapPtr, &This->slaves[slaveNum].coeCtrlWord, sizeof(This->slaves[slaveNum].coeCtrlWord));
             memcpy(&This->slaves[slaveNum].coeStatus, This->slaves[slaveNum].coeStatusMapPtr, sizeof(This->slaves[slaveNum].coeStatus));
 
-            if(This->slaves[slaveNum].coeStatus != This->slaves[slaveNum].prevCoeStatus){
-               This->slaves[slaveNum].statusChanged = TRUE;
-               pthread_cond_signal(&This->statusUpdated);
-            }
-            This->slaves[slaveNum].prevCoeStatus = This->slaves[slaveNum].coeStatus;
-
-            if(This->slaves[slaveNum].quickStop)
-               This->slaves[slaveNum].coeCtrlWord &= ~0b100;
+               
          }
          
 
@@ -175,13 +238,7 @@ void* AKDController::ecat_Talker(void* THIS)
          pthread_mutex_unlock(&This->control);
          // CONTROL UNLOCKED
       }
-      else {
-         for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
-            if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit. In homing : start_homing, In profPos : new_setpoint, In intPos : Interpolate
-         }
-         
-      }
-      //printf("\nMode: %i CoeStatus: 0x%x CoeCtrl: 0x%x\n", This->slaves[0].mode, This->slaves[0].coeStatus, This->slaves[0].coeCtrlWord);
+
       ec_send_processdata();
    }
    return nullptr;
@@ -193,11 +250,7 @@ void* AKDController::ecat_Controller(void* THIS)
 
    // Local variables
    AKDController* This = (AKDController*)THIS;
-   uint currentgroup = 0, noDCCount, err = 0;
-   bool statusChange;
-   struct timespec cycleTimeout;
-   
-
+   uint currentgroup = 0, noDCCount;
    
 
    while(1)
@@ -212,99 +265,36 @@ void* AKDController::ecat_Controller(void* THIS)
       else noDCCount = 0;
       if(noDCCount > 20) This->masterState = ms_stop;
 
-      clock_gettime(CLOCK_REALTIME, &cycleTimeout);
-      add_timespec(&cycleTimeout, (int64)CNTRL_CYCLEMS * 1000 * 1000);
-
-      err = pthread_cond_timedwait(&This->statusUpdated, &This->control, &cycleTimeout);
 
       for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
-         if (This->slaves[slaveNum].statusChanged){
-            This->slaves[slaveNum].statusChanged = FALSE;
 
-            // CANopen state machine
-            switch(This->slaves[slaveNum].coeStatus & 0b01101111){
-            case QUICKSTOP :
-            {
-               This->slaves[slaveNum].coeCurrentState = cs_QuickStop;
-               if(!This->slaves[slaveNum].quickStop) {
-                  This->slaves[slaveNum].coeStateTransition = cst_EnableOp;
-                  This->slaves[slaveNum].coeCtrlWord |= 0b100; // Disable quickstop
-               } 
-               else This->slaves[slaveNum].coeStateTransition = cst_TrigQuickStop;
-               break;
-            }
+         // CANopen state machine
+         switch(This->slaves[slaveNum].coeStatus & 0b01101111){
+            case QUICKSTOP : break;
             default :
             {
                switch(This->slaves[slaveNum].coeStatus & 0b01001111){
-                  case NOTRDY2SWCH & 0b01001111: 
-                  {
-                     This->slaves[slaveNum].coeCurrentState = cs_NotReady;
-                     This->slaves[slaveNum].coeStateTransition = cst_Shutdown; // Ready to switch
+                  case NOTRDY2SWCH  & 0b01001111: 
+                  case SWCHDISABLED & 0b01001111:
+                     if(This->masterState != ms_shutdown)This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; break; // Ready2Switch : 0bx---x110
                      break;
-                  }
-                  case SWCHDISABLED & 0b01001111: 
-                  {
-                     This->slaves[slaveNum].coeCurrentState = cs_SwitchDisabled;
-                     This->slaves[slaveNum].coeStateTransition = cst_Shutdown; // Ready to switch
-                     This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b110; // Ready2Switch/Shutdown : 0bx---x110
-                     break;
-                  }
-                  case RDY2SWITCH & 0b01001111:
-                  { //Stop
-                     This->slaves[slaveNum].coeCurrentState = cs_Ready; 
-                     This->slaves[slaveNum].coeStateTransition = cst_SwitchOn; // Switch on
-                     if((This->masterState == ms_enable) || (This->masterState = ms_disable)) This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; // Switch-On : 0bx---x111
-                     break;
-                  }
-                  case SWITCHEDON  & 0b01001111:
-                  { // Disable
-                     This->slaves[slaveNum].coeCurrentState = cs_SwitchedOn;
-                     if((This->masterState == ms_stop) || (This->masterState == ms_shutdown)) {
-                        This->slaves[slaveNum].coeStateTransition = cst_Shutdown; // Switch off
-                        This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0110; // Ready2Switch : 0bx---x110
-                     }
-                     else if(This->masterState == ms_enable){
-                        This->slaves[slaveNum].coeStateTransition = cst_EnableOp; // Operation enable
-                        This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b1111; // Operation Enabled : 0bx---1111
+                  case RDY2SWITCH   & 0b01001111:
+                  case SWITCHEDON   & 0b01001111:
+                  case OP_ENABLED   & 0b11011111:
+                     switch(This->masterState){
+                        default :
+                        case ms_shutdown :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111);          break; // SwitchOnDisabled : 0bx---xx0x
+                        case ms_stop     :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; break; // Ready2Switch : 0bx---x110
+                        case ms_disable  :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; break; // SwitchedOn/OpDisable : 0bx---0111
+                        case ms_enable   :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b1111; break; // OpEnabled : 0bx---1111
                      }
                      break;
-                  }
-                  case OP_ENABLED  & 0b11011111:
-                  { // Enable
-                     This->slaves[slaveNum].coeCurrentState = cs_OpEnabled;
-                     if (This->masterState != ms_enable) {
-                        This->slaves[slaveNum].coeStateTransition = cst_DisableOp; // Disable operation
-                        This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; // Operation Disabled : 0bx---0111
-                     }
-                     break;
-                  }
-                  case FAULT :
-                  {
-                     This->slaves[slaveNum].coeCurrentState = cs_Fault;
-                     This->slaves[slaveNum].coeStateTransition = cst_DisableOp;
-                     This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; // Operation Disabled : 0bx---0111
-                     break;
-                  }
-                  case FAULTREACT :
-                  {
-                     This->slaves[slaveNum].coeCurrentState = cs_FaultReaction;
-                     This->slaves[slaveNum].coeStateTransition = cst_Shutdown;
-                     break;
-                  }
-                  default :
-                  {
-                     This->slaves[slaveNum].coeCurrentState = cs_Unknown;
-                     This->slaves[slaveNum].coeStateTransition = cst_Shutdown;
-                     This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b110; // Shutddown : 0bx---x110
-                     break;
-                  }
+                  case FAULT : This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; // SwitchedOn/OpDisable : 0bx---0111
+                  case FAULTREACT : break;
+                  default : This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; // Ready2Switch : 0bx---x110
+                  
                }
             }
-         }
-         
-            #if DEBUG_MODE
-            printf("\n(Slave %i)CoE State: %-24s (0x%04x)\tCoE Control: %-24s (0x%04x)\n", slaveNum + 1, This->coeStateReadable[This->slaves[slaveNum].coeCurrentState], This->slaves[slaveNum].coeStatus, This->coeCtrlReadable[This->slaves[slaveNum].coeStateTransition], This->slaves[slaveNum].coeCtrlWord);
-            #endif
          }
       }
 
@@ -374,6 +364,8 @@ void* AKDController::ecat_Controller(void* THIS)
       
       #if DEBUG_MODE
       pthread_mutex_lock(&This->debug);
+
+      This->printDebugBuff();
       
       printf("\r");
       printf("WKC: %2i(%2i)\t", This->wrkCounter, This->expectedWKC);
@@ -381,6 +373,8 @@ void* AKDController::ecat_Controller(void* THIS)
       printf("inSyncCount: %4i\t", This->inSyncCount);
       //printf("coeStatus: 0x%04"PRIx16"\t", This->coeStatus);
       //printf("CtrlWord: 0x%04"PRIx16"\t", This->coeCtrlWord);
+
+      
 
       if(This->gl_toff*((This->gl_toff>0) - (This->gl_toff<0)) > (CYCLE_NS / 2)) printf("\tClock slipping! toff = %" PRIi64 "  CYCLE_NS/2 = %d\n", This->gl_toff, CYCLE_NS / 2);
       pthread_mutex_unlock(&This->debug);
@@ -391,6 +385,10 @@ void* AKDController::ecat_Controller(void* THIS)
       // CONTROL UNLOCKED
 
       pthread_cond_signal(&This->stateUpdated);
+
+      
+
+      osal_usleep(50000);
       
    }
    
@@ -421,7 +419,6 @@ bool AKDController::ecat_Init(char *ifname){
          pthread_mutex_init(&this->debug, NULL);
          pthread_cond_init(&this->IOUpdated, NULL);
          pthread_cond_init(&this->stateUpdated, NULL);
-         pthread_cond_init(&this->statusUpdated, NULL);
 
          return TRUE;
       }
@@ -534,7 +531,7 @@ bool AKDController::ecat_Start(){
 
          if(sdosNotConfigured != 0) printf("\rECAT: PDO assignments failed to configure %2d time(s). Retrying...  ", i);
       }
-      if(sdosNotConfigured == 0) printf("PDO's configured!\n");
+      if(sdosNotConfigured == 0) printf("ECAT:PDO's configured!\n");
       else {
          printf("PDO's failed to configure.\n");
          return FALSE;
@@ -650,10 +647,10 @@ bool AKDController::ecat_Start(){
       this->slaves[slaveNum - 1].inUserBuff = this->slaves[slaveNum - 1].outUserBuff + ec_slave[slaveNum].Obytes;
 
       // Find where the AKD CoE control word is in IOmap
-      this->slaves[slaveNum - 1].coeCtrlMapPtr = ec_slave[slaveNum].outputs + this->slaves[slaveNum - 1].coeCtrlOffset;
+      this->slaves[slaveNum - 1].coeCtrlMapPtr = (uint16*)(ec_slave[slaveNum].outputs + this->slaves[slaveNum - 1].coeCtrlOffset);
 
       // Find where the AKD CoE status word is in IOmap
-      this->slaves[slaveNum - 1].coeStatusMapPtr = ec_slave[slaveNum].inputs + this->slaves[slaveNum - 1].coeStatusOffset;
+      this->slaves[slaveNum - 1].coeStatusMapPtr = (uint16*)(ec_slave[slaveNum].inputs + this->slaves[slaveNum - 1].coeStatusOffset);
 
       
    }
@@ -731,8 +728,6 @@ bool AKDController::ecat_Start(){
       }
    }
 
-   
-
    return FALSE;
 }
 
@@ -762,6 +757,7 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
 
       slaveNum++;
    } while((slaveNum < this->slaveCount) && (slave == 0));
+
 
    allUpdated = FALSE;
    while(!allUpdated && err == 0){ // Check and make sure all slave update flags were recognized.
@@ -802,6 +798,10 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
             return AKD_MOVEERR;
             break;
          }
+         if(this->slaves[slaveNum].coeStatus & (1 << 3)){
+            return AKD_MOVEERR;
+            break;
+         }
 
          slaveNum++;
       }while((slaveNum < this->slaveCount) && (slave == 0));
@@ -823,9 +823,8 @@ bool AKDController::State(ecat_masterStates reqState){
 
    struct timespec timeout;
    uint sdoBuffSize, sdoBuff;
-   int err = 0;
+   int err = 0, waitingFor;
    bool allStatesChanged = FALSE;
-   ecat_coeStates waitingFor;
    ecat_masterStates oldState;
 
    if(this->masterState != reqState){
@@ -835,32 +834,31 @@ bool AKDController::State(ecat_masterStates reqState){
             this->masterState = reqState;
 
             clock_gettime(CLOCK_REALTIME, &timeout);
-            timeout.tv_sec += 1; // 1 sec timeout
+            timeout.tv_sec += 5; // 1 sec timeout
             
             switch(reqState){ //Wait for talker thread to confirm update
-                  case ms_stop :
-                     waitingFor = cs_Ready;
-                  break;
-                  case ms_disable :
-                     waitingFor = cs_SwitchedOn;
-                  break;
-                  case ms_enable :
-                     waitingFor = cs_OpEnabled;
-                  break;
-                  default :
-                     err = -1;
-                  break;
+               case ms_stop :
+                  waitingFor = RDY2SWITCH & 0b11001111;
+               break;
+               case ms_disable :
+                  waitingFor = SWITCHEDON & 0b11001111;
+               break;
+               case ms_enable :
+                  waitingFor = OP_ENABLED & 0b11001111;
+               break;
+               default :
+                  err = -1;
             }
 
             while(!allStatesChanged && err == 0){
                allStatesChanged = TRUE;
                for(int slaveNum = 0 ; slaveNum < this->slaveCount ; slaveNum++){
-                  if (this->slaves[slaveNum].coeCurrentState != waitingFor){
+                  if ((this->slaves[slaveNum].coeStatus & 0b11001111) != waitingFor){
                      
-                     if(this->slaves[slaveNum].coeCurrentState == cs_Fault){
+                     if(this->slaves[slaveNum].coeStatus & (1 << 3)){ // Check fault bit
                         pthread_mutex_unlock(&this->control);
                         this->masterState = oldState; // Reset state
-                        return FALSE; // If a slave is in fault, return 
+                        return FALSE; // If a slave is in fault, return failed
                      }
 
                      allStatesChanged = FALSE;
@@ -931,9 +929,9 @@ bool AKDController::QuickStop(uint slave, bool enableQuickStop){
    do{
 
       if(enableQuickStop)
-         this->slaves[slaveNum].quickStop = TRUE;
+         this->slaves[slaveNum].coeCtrlWord &= ~0b100;
       else
-         this->slaves[slaveNum].quickStop = FALSE;
+         this->slaves[slaveNum].coeCtrlWord |= 0b100; // Disable quickstop
 
       slaveNum++;
    }while((slaveNum < this->slaveCount) && (slave == 0));
@@ -955,10 +953,10 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
    int sdoBuffSize, sdoBuff, slaveNum;
    struct timespec timeout, curtime;
    clock_gettime(CLOCK_MONOTONIC, &timeout);
-   timeout.tv_sec += 1;
+   timeout.tv_sec += 5;
 
    
-   if(AKDController::State(ms_disable)){ // Don't assign if not disabled 
+   if(Disable()){ // Don't assign if not disabled 
       
       pthread_mutex_lock(&this->control);
       
@@ -992,7 +990,7 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
       }while((slaveNum <= this->slaveCount) && (slave == 0));
 
       pthread_mutex_unlock(&this->control);
-      AKDController::State(ms_enable);
+      Enable();
    }
 
    
@@ -1229,6 +1227,9 @@ int AKDController::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int 
       #endif
       return FALSE;
    }
+   #if DEBUG_MODE
+      printf("\nECAT: [HOME] Opmode to homing.\n");
+   #endif
 
    if(timeout_ms != 0){
       clock_gettime(CLOCK_REALTIME, &timeout2);
@@ -1246,6 +1247,9 @@ int AKDController::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int 
       #endif
       return FALSE;
    }
+   #if DEBUG_MODE
+      printf("\nECAT: [HOME] Updated.\n");
+   #endif
 
    if(timeout_ms != 0){
       clock_gettime(CLOCK_REALTIME, &timeout2);
@@ -1256,7 +1260,15 @@ int AKDController::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int 
    else{
       subTimeout = 0;
    }
-   if(!waitForTarget(slave, subTimeout)) return FALSE;
+   if(!waitForTarget(slave, subTimeout)){
+      #if DEBUG_MODE
+         printf("\nECAT: [HOME] Timedout waiting to reach target.\n");
+      #endif
+      return FALSE;
+   }
+   #if DEBUG_MODE
+      printf("\nECAT: [HOME] Target reached.\n");
+   #endif
 
    if(slave != 0) slaveNum = slave - 1;
    else slaveNum = 0;
@@ -1269,6 +1281,10 @@ int AKDController::Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int 
       }
       slaveNum++;
    } while((slaveNum < this->slaveCount) && (slave == 0));
+
+   #if DEBUG_MODE
+      printf("\nECAT: [HOME] Reverted to previous opmode. Finished!\n");
+   #endif
 
    return TRUE;
 }
@@ -1297,10 +1313,12 @@ bool AKDController::waitForTarget(uint slave, uint timeout_ms){
       if(slave != 0) slaveNum = slave - 1;
       else slaveNum = 0;
       do{
+         // Check target reached bit
          if ( !(this->slaves[slaveNum].coeStatus & (1 << 10)) && ((this->slaves[slaveNum].mode == profPos) || (this->slaves[slaveNum].mode == homing) || (this->slaves[slaveNum].mode == profVel))){
             allFin = FALSE;
             break;
          }
+         // Check internal limit active bit
          if ( (this->slaves[slaveNum].coeStatus & (1 << 11)) && ((this->slaves[slaveNum].mode == profPos) || (this->slaves[slaveNum].mode == homing) || (this->slaves[slaveNum].mode == profVel))){
             err = -1; // If internal limit active, return -1;
             break;
@@ -1329,7 +1347,7 @@ bool AKDController::readFault(uint slave){
    else slaveNum = 0;
    do{ 
 
-      if(this->slaves[slave - 1].coeCurrentState == cs_Fault){
+      if(this->slaves[slaveNum].coeStatus & (1 << 3)){
          pthread_mutex_unlock(&this->control);
          return TRUE;
       }
@@ -1354,7 +1372,7 @@ bool AKDController::clearFault(uint slave, bool persistClear){
    bool noFaults;
    struct timespec timeout;
    clock_gettime(CLOCK_MONOTONIC, &timeout);
-   timeout.tv_sec += 1;
+   timeout.tv_sec += 5;
 
    // Loop through all slaves and set clear fault bit
    if(slave != 0) slaveNum = slave - 1;
@@ -1373,7 +1391,7 @@ bool AKDController::clearFault(uint slave, bool persistClear){
       if(slave != 0) slaveNum = slave - 1;
       else slaveNum = 0;
       do{
-         if(this->slaves[slaveNum].coeCurrentState == cs_Fault){
+         if(this->slaves[slaveNum].coeStatus & (1 << 3)){
             noFaults = FALSE;
             break;
          }
@@ -1389,6 +1407,7 @@ bool AKDController::clearFault(uint slave, bool persistClear){
    } while((slaveNum < this->slaveCount) && (slave == 0));
 
    pthread_mutex_unlock(&this->control);
+
 
    return err == 0;
 }

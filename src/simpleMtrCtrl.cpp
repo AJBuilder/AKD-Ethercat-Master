@@ -98,6 +98,7 @@ int main(int argc, char *argv[])
          s1.targetPos = 180*7;
       for(int i = 0; i < 3; i++){
          s1.targetPos = -s1.targetPos;
+         printf("\nSetting pos = %d\n", s1.targetPos);
          master1.Update(1, TRUE, 500000); // 5 sec
          printf("\nSetpoint set\n");
          master1.waitForTarget(1,0);
@@ -113,7 +114,6 @@ int main(int argc, char *argv[])
 
       master1.Update(1, TRUE, 5000); // 5 sec
       printf("Ending\n");
-      osal_usleep(5000000); // 5 sec
 
       master1.Shutdown();
       

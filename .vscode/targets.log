@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun 30 12:36:07 2022
+# Make data base, printed on Fri Jul  1 12:47:01 2022
 
 # Variables
 
@@ -57,7 +55,7 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /root
 # environment
-SSH_CONNECTION = 192.168.137.1 57621 192.168.137.95 22
+SSH_CONNECTION = 192.168.137.1 51310 192.168.137.95 22
 # environment
 PATH = /root/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
@@ -65,7 +63,7 @@ XDG_RUNTIME_DIR = /run/user/0
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-12d2e644-24d0-462c-8fc3-bee9d24f017e.sock
+VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-d499ab17-d414-428a-8d42-42a7c24f821e.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -105,7 +103,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 0
 # environment
-XDG_SESSION_ID = 90
+XDG_SESSION_ID = 122
 # environment
 USER = root
 # makefile
@@ -123,7 +121,7 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 192.168.137.1 57621 22
+SSH_CLIENT = 192.168.137.1 51310 22
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -219,6 +217,8 @@ GNUmakefile:
 # strcache performance: lookups = 38 / hit rate = 7%
 # hash-table stats:
 # Load=35/8192=0%, Rehash=0, Collisions=2/38=5%
-# Finished Make data base on Thu Jun 30 12:36:07 2022
+# Finished Make data base on Fri Jul  1 12:47:01 2022
 
  
+make: *** No rule to make target 'all'.  Stop.
+

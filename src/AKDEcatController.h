@@ -59,6 +59,13 @@
 #define FAULTREACT   0b00001111
 #define QUICKSTOP    0b00000111
 
+// CoE Control (0x6040)
+#define CTRL_SHUTDOWN_bit   0b0001
+#define CTRL_DIS_VOL_bit    0b0010
+#define CTRL_QSTOP_bit      0b0100
+#define CTRL_ENABLED_bit    0b1000
+#define CTRL_FAULTRESET_bit 0b10000000
+
 ////// Config //////
 //Talker
 #define CYCLE_NS (8*1000*1000) //8ms
@@ -108,9 +115,7 @@ class AKDController{
     public:
 
     enum ecat_masterStates:int8{ms_shutdown, ms_stop, ms_disable, ms_enable};
-    enum ecat_coeStates:int8{cs_NotReady = 0, cs_SwitchDisabled = 1, cs_Ready = 2, cs_SwitchedOn = 3, cs_OpEnabled = 4, cs_Fault = 5, cs_FaultReaction = 6, cs_QuickStop = 7, cs_Unknown = 8};
-    enum ecat_coeStateTrans:int8{cst_Shutdown = 0, cst_SwitchOn = 1, cst_DisableVolt = 2, cst_TrigQuickStop = 3, cst_DisableOp = 4, cst_EnableOp = 5, cst_ResetFault = 6};
-
+    
     bool ecat_Init(char *ifname);
     bool ecat_Start();
 
@@ -163,7 +168,7 @@ class AKDController{
         }*/
         // PDO Data
         uint8 *outUserBuff, *inUserBuff;
-        uint8 *coeCtrlMapPtr, *coeStatusMapPtr;
+        uint16 *coeCtrlMapPtr, *coeStatusMapPtr;
         int coeCtrlOffset, coeStatusOffset;
 
         // PDO Assign
@@ -179,11 +184,9 @@ class AKDController{
         uint16 quickStopOption;
 
         // Slave Control Signals
-        bool update, quickStop, statusChanged;
+        bool update, quickStop;
         
-        uint16 coeCtrlWord, coeStatus, prevCoeStatus;
-        ecat_coeStates coeCurrentState;
-        ecat_coeStateTrans coeStateTransition;
+        uint16 coeCtrlWord, coeStatus;
 
         // Profile Control
         ecat_OpModes mode;
@@ -197,16 +200,15 @@ class AKDController{
     uint64 diffDCtime;
     ecat_masterStates masterState;
 
-    // Debug 
-    int64 gl_toff, gl_delta;
-    uint8 gl_integral;
+    
 
     // Threading
     pthread_mutex_t debug, control;
-    pthread_cond_t IOUpdated, stateUpdated, statusUpdated;
+    pthread_cond_t IOUpdated, stateUpdated;
     pthread_t talker, controller;
 
-    char coeStateReadable[9][23] = {
+    #if DEBUG_MODE
+    char coeStatusReadable[9][23] = {
         "Not Ready To Switch-On",  //0
         "Switch-On Disabled",      //1
         "Ready To Switch-On",      //2
@@ -227,8 +229,24 @@ class AKDController{
         "Fault Reset"              //6
     };
 
+    // Debug 
+    int64 gl_toff, gl_delta;
+    uint8 gl_integral;
+    uint buffHead = 0, buffTail = 0;
+    char debugBuffer[20][150] = {0};
+
+    void addToDebugBuff(char *str);
+    void printDebugBuff();
+    char* getReadableStatus(uint16 status);
+    char* getReadableCtrl(uint16 ctrl);
+    
+
+    #endif
+
     // Utility Methods
     bool State(ecat_masterStates reqState);
+    bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i);
+    
 
     // Main Methods
     static void* ecat_Talker(void* THIS);
