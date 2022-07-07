@@ -46,5 +46,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/AKD.dir/DependInfo.cmake"
+  "CMakeFiles/simpleMtrCtrlx2.dir/DependInfo.cmake"
   "CMakeFiles/simpleMtrCtrl.dir/DependInfo.cmake"
   )

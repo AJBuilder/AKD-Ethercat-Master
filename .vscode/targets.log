@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  1 12:47:01 2022
+# Make data base, printed on Thu Jul  7 13:09:41 2022
 
 # Variables
 
@@ -55,7 +57,7 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /root
 # environment
-SSH_CONNECTION = 192.168.137.1 51310 192.168.137.95 22
+SSH_CONNECTION = 192.168.137.1 55481 192.168.137.110 22
 # environment
 PATH = /root/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
@@ -63,7 +65,7 @@ XDG_RUNTIME_DIR = /run/user/0
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-d499ab17-d414-428a-8d42-42a7c24f821e.sock
+VSCODE_IPC_HOOK_CLI = /run/user/0/vscode-ipc-9248aad7-5f41-4740-aee2-5f9ffa5e66bf.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -87,7 +89,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = root
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 +F = $(notdir $+)
 # environment
@@ -103,7 +105,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 0
 # environment
-XDG_SESSION_ID = 122
+XDG_SESSION_ID = 66
 # environment
 USER = root
 # makefile
@@ -121,7 +123,7 @@ MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_CLIENT = 192.168.137.1 51310 22
+SSH_CLIENT = 192.168.137.1 55481 22
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -159,9 +161,9 @@ MOTD_SHOWN = pam
 
 # Directories
 
-# . (device 2050, inode 14682478): 27 files, no impossibilities.
+# . (device 2050, inode 14682478): 33 files, no impossibilities.
 
-# 27 files, no impossibilities in 1 directories.
+# 33 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -211,14 +213,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 315 B / avg = 9 B
-# current buf: size = 8162 B / used = 315 B / count = 35 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 41 / storage = 351 B / avg = 8 B
+# current buf: size = 8162 B / used = 351 B / count = 41 / avg = 8 B
 
-# strcache performance: lookups = 38 / hit rate = 7%
+# strcache performance: lookups = 44 / hit rate = 6%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=2/38=5%
-# Finished Make data base on Fri Jul  1 12:47:01 2022
+# Load=41/8192=1%, Rehash=0, Collisions=8/44=18%
+# Finished Make data base on Thu Jul  7 13:09:41 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-

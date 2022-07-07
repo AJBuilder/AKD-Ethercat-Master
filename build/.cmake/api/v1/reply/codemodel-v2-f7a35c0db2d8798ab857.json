@@ -16,7 +16,8 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					]
 				}
 			],
@@ -32,7 +33,8 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					]
 				}
 			],
@@ -41,15 +43,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "AKD::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-AKD-Debug-5aedde0eed4978185ed9.json",
+					"jsonFile" : "target-AKD-Debug-77598784dc727b32e0a7.json",
 					"name" : "AKD",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-simpleMtrCtrl-Debug-e11e51d26c12c48ccb78.json",
+					"jsonFile" : "target-simpleMtrCtrl-Debug-3cecf01cc7202df3b2ba.json",
 					"name" : "simpleMtrCtrl",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "simpleMtrCtrlx2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-simpleMtrCtrlx2-Debug-8857ed7f796d6d634eb1.json",
+					"name" : "simpleMtrCtrlx2",
 					"projectIndex" : 0
 				}
 			]

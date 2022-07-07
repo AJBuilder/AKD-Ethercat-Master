@@ -1,102 +1,10 @@
-//////////////////////////// Timing ////////////////////////////
-#define NSEC_PER_SEC 1000000000
-#define EC_TIMEOUTMON 500
+#ifndef DEBUG_MODE
+#define DEBUG_MODE  TRUE
 
-//////////////////// PDO Assignment Objects ////////////////////
-#define rxPDOEnable 0x1C12, 0
-#define rxPDOAssign1 0x1C12
+#define DEBUG_BUFF_SIZE 50
+#define DEBUG_BUFF_WIDTH 200
 
-#define txPDOEnable 0x1C13, 0
-#define txPDOAssign1 0x1C13
-
-///////////////// Control and Status Objects //////////////////
-#define COControl    0x6040
-#define MnfStatus    0x1002
-#define COStatus     0x6041
-
-#define QSTOP_OPT    0x605A, 0
-#define REQOPMODE    0x6060, 0
-#define ACTOPMODE    0x6061, 0
-#define MOTOR_RATIO  0x6091, 1
-#define SHAFT_RATIO  0x6091, 2
-
-/////////////////////// Homing Objects ///////////////////////
-#define HM_MODE          0x50CB, 0
-#define HM_DIR           0x50C5, 0 
-#define HM_SET           0x35F0, 0 // Start home
-#define HM_ACC           0x3502, 0
-#define HM_DEC           0x3524, 0 
-#define HMACCEL          0x609A, 0 // Bidirectional acceleration
-#define HM_AUTOMOVE      0x36D7, 0 // Automove after startup
-#define HM_DIST          0x3484, 0 // Aditional move after home
-#define HM_P             0x607C, 0 // Encoder offset after home
-
-// Homeing Mode : Limitswitch
-#define HM_V             0x6099, 1
-
-// Homing Mode : Position
-#define HM_FEEDRATE      0x6099, 2
-#define HM_TPOSWND       0x5406, 0
-
-// Homing Mode : Hardstop
-#define HM_IPEAKACTIVE   0x5403, 0
-#define HM_IPEAK         0x35E2, 0
-#define HM_PERRTHRESH    0x3482, 0
-
-/////////////////////// Profile Control Objects ///////////////////////
-#define MT_V            0x6081, 0
-#define MT_ACC          0x6083, 0
-#define MT_DEC          0x6084, 0
-#define PF_MAXCURRENT   0x6073, 0
-
-// CoE States (0x6041)
-#define NOTRDY2SWCH  0b00000000
-#define SWCHDISABLED 0b01000000
-#define RDY2SWITCH   0b00100001
-#define SWITCHEDON   0b00100011
-#define OP_ENABLED   0b00100111
-#define FAULT        0b00001000
-#define FAULTREACT   0b00001111
-#define QUICKSTOP    0b00000111
-
-// CoE Control (0x6040)
-#define CTRL_SHUTDOWN_bit   0b0001
-#define CTRL_DIS_VOL_bit    0b0010
-#define CTRL_QSTOP_bit      0b0100
-#define CTRL_ENABLED_bit    0b1000
-#define CTRL_FAULTRESET_bit 0b10000000
-
-////// Config //////
-//Talker
-#define CYCLE_NS (8*1000*1000) //8ms
-#define SYNC_WINDOW_NS (100*1000) //.1ms
-#define SYNC_AQTIME_NS (1000*1000*1000) // 1000ms
-#define SYNC_DIST (2000*1000) // 2ms
-
-//Controller
-#define CNTRL_CYCLEMS   500
-
-#define UNINIT_OPMODE   0
-#define UNINIT_RXPDO    0
-#define UNINIT_TXPDO    0
-#define DEFAULT_QSCODE  6
-#define DEFAULT_MOVIMM  FALSE
-#define DEFAULT_MOVREL  FALSE
-#define DEFAULT_DIGOUT  0
-#define DEFAULT_HMAUTOMOVE 0
-
-
-// Operation
-#define DEBUG_MODE TRUE
-
-////////////////////// Error Codes //////////////////////
-
-// Generic (errno.h)
-#define ECAT_ETIMEDOUT 110
-
-// Update()
-#define AKD_MOVEERR -1
-
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -128,7 +36,7 @@ class AKDController{
     bool readFault(uint slave);
     bool readFaultList();
 
-    int  Home(uint slave, int HOME_MODE, int HOME_DIR, int speed, int acceleration, int HOME_DIST, int HOME_P, int timeout_ms);
+    bool Home(uint slave, int mode, int dir, int speed, int acc, int dist, int pos, int timeout_ms);
     int  Update(uint slave, bool move, int timeout_ms);
     bool QuickStop(uint slave, bool enableQuickStop);
     bool waitForTarget(uint slave, uint timeout_ms);
@@ -136,7 +44,7 @@ class AKDController{
     void confSlavePDOs(uint slave, void* usrControl, int size, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4);
     bool confProfPos(uint slave, bool moveImmediate, bool moveRelative);
     bool confMotionTask(uint slave, uint vel, uint acc, uint dec);
-    void confDigOutputs(uint slave, uint32 bitmask, uint8 out1Mode, uint8 out2Mode);
+    bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8 out1Mode, uint8 out2Mode);
     bool confUnits(uint slave, uint32 motorRev, uint32 shaftRev);
     bool setOpMode(uint slave, ecat_OpModes reqMode);
 
@@ -146,7 +54,7 @@ class AKDController{
     private:
 
     // Const
-    uint slaveCount;
+    uint slaveCount, configuredSlaves;
 
     // PDO buffers
     uint8 IOmap[4096];//[4096];
@@ -180,8 +88,6 @@ class AKDController{
         uint8 totalBytes;
 
         // Config
-        uint8 digOutBitmask, digOut1Mode, digOut2Mode;
-        uint16 quickStopOption;
 
         // Slave Control Signals
         bool update, quickStop;
@@ -198,7 +104,7 @@ class AKDController{
     uint inSyncCount;
     int8 wrkCounter, expectedWKC;
     uint64 diffDCtime;
-    ecat_masterStates masterState;
+    ecat_masterStates masterState = ms_shutdown;
 
     
 
@@ -233,7 +139,7 @@ class AKDController{
     int64 gl_toff, gl_delta;
     uint8 gl_integral;
     uint buffHead = 0, buffTail = 0;
-    char debugBuffer[20][150] = {0};
+    char debugBuffer[DEBUG_BUFF_SIZE][DEBUG_BUFF_WIDTH] = {0};
 
     void addToDebugBuff(char *str);
     void printDebugBuff();

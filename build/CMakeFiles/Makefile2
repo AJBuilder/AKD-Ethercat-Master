@@ -54,6 +54,7 @@ CMAKE_BINARY_DIR = /home/bench/EtherCATBench/build
 
 # The main recursive "all" target.
 all: CMakeFiles/AKD.dir/all
+all: CMakeFiles/simpleMtrCtrlx2.dir/all
 all: CMakeFiles/simpleMtrCtrl.dir/all
 
 .PHONY : all
@@ -65,6 +66,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/AKD.dir/clean
+clean: CMakeFiles/simpleMtrCtrlx2.dir/clean
 clean: CMakeFiles/simpleMtrCtrl.dir/clean
 
 .PHONY : clean
@@ -95,6 +97,33 @@ AKD: CMakeFiles/AKD.dir/rule
 CMakeFiles/AKD.dir/clean:
 	$(MAKE) -f CMakeFiles/AKD.dir/build.make CMakeFiles/AKD.dir/clean
 .PHONY : CMakeFiles/AKD.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/simpleMtrCtrlx2.dir
+
+# All Build rule for target.
+CMakeFiles/simpleMtrCtrlx2.dir/all: CMakeFiles/AKD.dir/all
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/depend
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bench/EtherCATBench/build/CMakeFiles --progress-num=4,5 "Built target simpleMtrCtrlx2"
+.PHONY : CMakeFiles/simpleMtrCtrlx2.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/simpleMtrCtrlx2.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/simpleMtrCtrlx2.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bench/EtherCATBench/build/CMakeFiles 0
+.PHONY : CMakeFiles/simpleMtrCtrlx2.dir/rule
+
+# Convenience name for target.
+simpleMtrCtrlx2: CMakeFiles/simpleMtrCtrlx2.dir/rule
+
+.PHONY : simpleMtrCtrlx2
+
+# clean rule for target.
+CMakeFiles/simpleMtrCtrlx2.dir/clean:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/clean
+.PHONY : CMakeFiles/simpleMtrCtrlx2.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/simpleMtrCtrl.dir

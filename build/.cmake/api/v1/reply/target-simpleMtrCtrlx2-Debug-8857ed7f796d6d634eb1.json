@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "simpleMtrCtrl"
+			"path" : "simpleMtrCtrlx2"
 		}
 	],
 	"backtrace" : 1,
@@ -12,8 +12,6 @@
 		[
 			"add_executable",
 			"install",
-			"target_link_directories",
-			"target_include_directories",
 			"target_link_libraries"
 		],
 		"files" : 
@@ -28,31 +26,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 8,
+				"line" : 9,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 20,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 14,
-				"parent" : 0
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 12,
-				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 18,
+				"line" : 15,
 				"parent" : 0
 			}
 		]
@@ -69,7 +55,7 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 3,
 					"path" : "/home/bench/EtherCATBench/SOEM/install/include/soem"
 				}
 			],
@@ -86,7 +72,7 @@
 			"id" : "AKD::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "simpleMtrCtrl::@6890427a1f51a3e7e1df",
+	"id" : "simpleMtrCtrlx2::@6890427a1f51a3e7e1df",
 	"install" : 
 	{
 		"destinations" : 
@@ -114,15 +100,6 @@
 				"role" : "flags"
 			},
 			{
-				"backtrace" : 3,
-				"fragment" : "-L/home/bench/EtherCATBench/SOEM/install/lib",
-				"role" : "libraryPath"
-			},
-			{
-				"fragment" : "-Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib:",
-				"role" : "libraries"
-			},
-			{
 				"fragment" : "-Wl,-Bstatic",
 				"role" : "libraries"
 			},
@@ -141,8 +118,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "simpleMtrCtrl",
-	"nameOnDisk" : "simpleMtrCtrl",
+	"name" : "simpleMtrCtrlx2",
+	"nameOnDisk" : "simpleMtrCtrlx2",
 	"paths" : 
 	{
 		"build" : ".",
@@ -170,11 +147,11 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/simpleMtrCtrl.cpp",
+			"path" : "src/simpleMtrCtrlx2.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 5,
+			"backtrace" : 3,
 			"isGenerated" : true,
 			"path" : "build/CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o",
 			"sourceGroupIndex" : 1

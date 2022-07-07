@@ -6,6 +6,11 @@
 },
 {
   "directory": "/home/bench/EtherCATBench/build",
+  "command": "/usr/bin/g++   -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/simpleMtrCtrlx2.dir/src/simpleMtrCtrlx2.cpp.o -c /home/bench/EtherCATBench/src/simpleMtrCtrlx2.cpp",
+  "file": "/home/bench/EtherCATBench/src/simpleMtrCtrlx2.cpp"
+},
+{
+  "directory": "/home/bench/EtherCATBench/build",
   "command": "/usr/bin/g++   -I/home/bench/EtherCATBench/SOEM/install/include/soem  -g   -o CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.o -c /home/bench/EtherCATBench/src/simpleMtrCtrl.cpp",
   "file": "/home/bench/EtherCATBench/src/simpleMtrCtrl.cpp"
 }

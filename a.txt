@@ -2,197 +2,2485 @@ Starting simpleMtrCtrl wrapper for acrEcat
 ECAT: ec_init on eno3 succeeded.
 ECAT: Starting EtherCAT Master
 ECAT: 1 slaves found. Configuring PDO assigments...
-PDO's configured!
+ECAT:PDO's configured!
 ECAT: Configuring DC. Should be in PRE-OP. State: PRE_OP
 ECAT: Found slaves with DC.
 ECAT: Slaves mapped, state to SAFE_OP... State: SAFE_OP
 ECAT: Calculated workcounter 3
-ECAT: Talker started! Synccount needs to reach : 125
+Sending 100 process cycles:     0 WKC : 2Sending 100 process cycles:     1 WKC : 3Sending 100 process cycles:     2 WKC : 3Sending 100 process cycles:     3 WKC : 3Sending 100 process cycles:     4 WKC : 3Sending 100 process cycles:     5 WKC : 3Sending 100 process cycles:     6 WKC : 3Sending 100 process cycles:     7 WKC : 3Sending 100 process cycles:     8 WKC : 3Sending 100 process cycles:     9 WKC : 3Sending 100 process cycles:    10 WKC : 3Sending 100 process cycles:    11 WKC : 3Sending 100 process cycles:    12 WKC : 3Sending 100 process cycles:    13 WKC : 3Sending 100 process cycles:    14 WKC : 3Sending 100 process cycles:    15 WKC : 3Sending 100 process cycles:    16 WKC : 3Sending 100 process cycles:    17 WKC : 3Sending 100 process cycles:    18 WKC : 3Sending 100 process cycles:    19 WKC : 3Sending 100 process cycles:    20 WKC : 3Sending 100 process cycles:    21 WKC : 3Sending 100 process cycles:    22 WKC : 3Sending 100 process cycles:    23 WKC : 3Sending 100 process cycles:    24 WKC : 3Sending 100 process cycles:    25 WKC : 3Sending 100 process cycles:    26 WKC : 3Sending 100 process cycles:    27 WKC : 3Sending 100 process cycles:    28 WKC : 3Sending 100 process cycles:    29 WKC : 3Sending 100 process cycles:    30 WKC : 3Sending 100 process cycles:    31 WKC : 3Sending 100 process cycles:    32 WKC : 3Sending 100 process cycles:    33 WKC : 3Sending 100 process cycles:    34 WKC : 3Sending 100 process cycles:    35 WKC : 3Sending 100 process cycles:    36 WKC : 3Sending 100 process cycles:    37 WKC : 3Sending 100 process cycles:    38 WKC : 3Sending 100 process cycles:    39 WKC : 3Sending 100 process cycles:    40 WKC : 3Sending 100 process cycles:    41 WKC : 3Sending 100 process cycles:    42 WKC : 3Sending 100 process cycles:    43 WKC : 3Sending 100 process cycles:    44 WKC : 3Sending 100 process cycles:    45 WKC : 3Sending 100 process cycles:    46 WKC : 3Sending 100 process cycles:    47 WKC : 3Sending 100 process cycles:    48 WKC : 3Sending 100 process cycles:    49 WKC : 3Sending 100 process cycles:    50 WKC : 3Sending 100 process cycles:    51 WKC : 3Sending 100 process cycles:    52 WKC : 3Sending 100 process cycles:    53 WKC : 3Sending 100 process cycles:    54 WKC : 3Sending 100 process cycles:    55 WKC : 3Sending 100 process cycles:    56 WKC : 3Sending 100 process cycles:    57 WKC : 3Sending 100 process cycles:    58 WKC : 3Sending 100 process cycles:    59 WKC : 3Sending 100 process cycles:    60 WKC : 3Sending 100 process cycles:    61 WKC : 3Sending 100 process cycles:    62 WKC : 3Sending 100 process cycles:    63 WKC : 3Sending 100 process cycles:    64 WKC : 3Sending 100 process cycles:    65 WKC : 3Sending 100 process cycles:    66 WKC : 3Sending 100 process cycles:    67 WKC : 3Sending 100 process cycles:    68 WKC : 3Sending 100 process cycles:    69 WKC : 3Sending 100 process cycles:    70 WKC : 3Sending 100 process cycles:    71 WKC : 3Sending 100 process cycles:    72 WKC : 3Sending 100 process cycles:    73 WKC : 3Sending 100 process cycles:    74 WKC : 3Sending 100 process cycles:    75 WKC : 3Sending 100 process cycles:    76 WKC : 3Sending 100 process cycles:    77 WKC : 3Sending 100 process cycles:    78 WKC : 3Sending 100 process cycles:    79 WKC : 3Sending 100 process cycles:    80 WKC : 3Sending 100 process cycles:    81 WKC : 3Sending 100 process cycles:    82 WKC : 3Sending 100 process cycles:    83 WKC : 3Sending 100 process cycles:    84 WKC : 3Sending 100 process cycles:    85 WKC : 3Sending 100 process cycles:    86 WKC : 3Sending 100 process cycles:    87 WKC : 3Sending 100 process cycles:    88 WKC : 3Sending 100 process cycles:    89 WKC : 3Sending 100 process cycles:    90 WKC : 3Sending 100 process cycles:    91 WKC : 3Sending 100 process cycles:    92 WKC : 3Sending 100 process cycles:    93 WKC : 3Sending 100 process cycles:    94 WKC : 3Sending 100 process cycles:    95 WKC : 3Sending 100 process cycles:    96 WKC : 3Sending 100 process cycles:    97 WKC : 3Sending 100 process cycles:    98 WKC : 3Sending 100 process cycles:    99 WKC : 3ECAT: Talker started! Synccount needs to reach : 125
 ECAT: Controller Spawned
-WKC:  0( 3)	DiffDC:       104984	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8007760	inSyncCount:    0	
-(Slave 1)CoE State: (0x0218) FAULT!                   	CoE Control:(0x0000) Disable Voltage          
-WKC:  3( 3)	DiffDC:      8008720	inSyncCount:    0	
-(Slave 1)CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
-WKC:  3( 3)	DiffDC:      8008400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8007120	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8012280	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8006801	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005599	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8004880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8016000	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997120	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005600	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005080	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8004880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003599	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8002319	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8006360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8004480	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8026080	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003599	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8002241	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003280	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000040	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8004399	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7986400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8001920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003760	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000080	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8006400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8001680	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8037520	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000960	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8038160	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999520	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999400	inSyncCount:    2	WKC:  3( 3)	DiffDC:      7991520	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7988560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7991680	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7992800	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7972720	inSyncCount:    0	
-(Slave 1)CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  0( 3)	DiffDC:            0	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0006) Shutdown                 
 
-(Slave 1)CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
-WKC:  3( 3)	DiffDC:      7997200	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997200	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7989600	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7990880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7991600	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8040080	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995759	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996320	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8006160	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996960	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996800	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997359	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7962400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996320	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7984640	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999919	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000800	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7800400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7941280	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999521	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7994880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995440	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996239	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7992720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8002080	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999440	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000000	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7982480	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997840	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8004400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999760	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000001	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998480	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999280	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8003040	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000640	inSyncCount:    6	WKC:  3( 3)	DiffDC:      7998880	inSyncCount:   13	WKC:  3( 3)	DiffDC:      8022160	inSyncCount:   19	WKC:  3( 3)	DiffDC:      8004880	inSyncCount:   25	WKC:  3( 3)	DiffDC:      8003240	inSyncCount:   31	WKC:  3( 3)	DiffDC:      7997280	inSyncCount:   38	WKC:  3( 3)	DiffDC:      7996640	inSyncCount:   44	WKC:  3( 3)	DiffDC:      7999040	inSyncCount:   50	WKC:  3( 3)	DiffDC:      7993360	inSyncCount:   56	WKC:  3( 3)	DiffDC:      7996640	inSyncCount:   63	WKC:  3( 3)	DiffDC:      8034560	inSyncCount:   69	WKC:  3( 3)	DiffDC:      7995600	inSyncCount:   75	WKC:  3( 3)	DiffDC:      8046560	inSyncCount:   81	WKC:  3( 3)	DiffDC:      8012720	inSyncCount:   88	WKC:  3( 3)	DiffDC:      8003360	inSyncCount:   94	WKC:  3( 3)	DiffDC:      7995600	inSyncCount:  100	WKC:  3( 3)	DiffDC:      8077360	inSyncCount:  107	WKC:  3( 3)	DiffDC:      7999841	inSyncCount:  113	WKC:  3( 3)	DiffDC:      8016400	inSyncCount:  119	WKC:  3( 3)	DiffDC:      8001520	inSyncCount:  125	WKC:  3( 3)	DiffDC:      8014961	inSyncCount:  132	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0006) Shutdown                 
+WKC:  3( 3)	DiffDC:      8006519	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8004439	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8009721	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8008440	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8037559	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8008919	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8008361	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8003640	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8004761	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8001081	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8005639	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8006640	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8007799	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8003639	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8005159	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8003801	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8004761	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8009239	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8008921	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8060920	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8007001	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002600	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8006361	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8009479	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8012440	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002600	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002520	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002039	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8010679	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8008919	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8006040	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000760	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8001240	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7996920	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8003160	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002841	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002279	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8004440	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8048759	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7996560	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8001401	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7993160	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7994360	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7961159	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7993560	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7990040	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7995240	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7992200	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7994760	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998119	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7994680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997640	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999160	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7995400	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8004281	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8015321	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7996519	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998120	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997160	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997240	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7994680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7996360	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999080	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7995960	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999480	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997960	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998600	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8004999	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997880	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000280	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7984000	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7995000	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998360	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998359	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999960	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999721	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000361	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998520	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998679	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8017719	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000760	inSyncCount:    3	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997800	inSyncCount:    9	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999239	inSyncCount:   15	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7933401	inSyncCount:   21	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7976520	inSyncCount:   28	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7997800	inSyncCount:   34	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999159	inSyncCount:   40	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998520	inSyncCount:   46	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002120	inSyncCount:   53	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8003159	inSyncCount:   59	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000840	inSyncCount:   65	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8002441	inSyncCount:   72	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999400	inSyncCount:   78	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999999	inSyncCount:   84	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8000760	inSyncCount:   90	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7999720	inSyncCount:   97	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7936840	inSyncCount:  103	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      8001960	inSyncCount:  109	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7998001	inSyncCount:  115	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7996199	inSyncCount:  122	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+WKC:  3( 3)	DiffDC:      7993800	inSyncCount:  128	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
 ECAT: Master within sync window. Enabling sync0 generation!
 
 ECAT: Requesting operational state for all slaves
 
-ECAT: Operational state reached for all slaves!
-WKC:  3( 3)	DiffDC:      8143759	inSyncCount:    0	
-Waiting for fault to clear!
-WKC:  3( 3)	DiffDC:      7986360	inSyncCount:    5	
-(Slave 1)CoE State: (0x0218) FAULT!                   	CoE Control:(0x0087) Switch-On                
-WKC:  3( 3)	DiffDC:      7998080	inSyncCount:   12	
-(Slave 1)CoE State: (0x0218) FAULT!                   	CoE Control:(0x0087) Switch-On                
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
 
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0087) Switch-On                
+ECAT: Operational state reached for all slaves!
+WKC:  3( 3)	DiffDC:     11226760	inSyncCount:    0	
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+Reading fault...
+
+Waiting for fault to clear!
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0087) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0087) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0007) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0087) Switch-On                
+
+[Slave 1] CoE State: (0x0218) FAULT!                   	CoE Control:(0x0087) Switch-On                
+
+[Slave 1] CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0087) Switch-On                
 
 Fault cleared!
-WKC:  3( 3)	DiffDC:      7996160	inSyncCount:   19	
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
 
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      8073120	inSyncCount:   25	
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0007) Switch-On                
+Enabling...
+WKC:  3( 3)	DiffDC:      7977880	inSyncCount:    7	
+[Slave 1] CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
 
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Switch-On                
-WKC:  3( 3)	DiffDC:      7999600	inSyncCount:   31	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8001200	inSyncCount:   38	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8057520	inSyncCount:   44	
+[Slave 1] CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
+WKC:  3( 3)	DiffDC:      7999720	inSyncCount:   13	
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999879	inSyncCount:   19	
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000200	inSyncCount:   25	
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7995960	inSyncCount:   32	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7992920	inSyncCount:   38	
 Enabled!
-WKC:  3( 3)	DiffDC:      8002321	inSyncCount:   50	WKC:  3( 3)	DiffDC:      7991760	inSyncCount:   56	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
 
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      8002000	inSyncCount:   63	WKC:  3( 3)	DiffDC:      7998160	inSyncCount:   69	WKC:  3( 3)	DiffDC:      7988640	inSyncCount:   75	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8002560	inSyncCount:   81	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000281	inSyncCount:   44	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      7951400	inSyncCount:   50	
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      8000680	inSyncCount:   57	
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      8000041	inSyncCount:   63	
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7995800	inSyncCount:   69	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7991560	inSyncCount:   76	
 Mode switched!
-WKC:  3( 3)	DiffDC:      8004321	inSyncCount:   88	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7995280	inSyncCount:   94	
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      7982481	inSyncCount:  100	
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7999761	inSyncCount:  107	WKC:  3( 3)	DiffDC:      7999279	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7987040	inSyncCount:    0	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7993200	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998040	inSyncCount:   82	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      7993880	inSyncCount:   88	
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      7999480	inSyncCount:   94	
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      8001960	inSyncCount:  101	
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7995559	inSyncCount:  107	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8001400	inSyncCount:  113	
 ECAT: [HOME] Opmode to homing.
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8001400	inSyncCount:  119	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999801	inSyncCount:  126	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7994520	inSyncCount:  132	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8001240	inSyncCount:  138	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7985800	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7994360	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7991720	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7991960	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999640	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7992120	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7992920	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7992840	inSyncCount:    0	
+[Slave 1] CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
 
 ECAT: [HOME] Updated.
 
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996200	inSyncCount:    0	
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7980199	inSyncCount:    0	
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
 ECAT: [HOME] Target reached.
-WKC:  3( 3)	DiffDC:      7999280	inSyncCount:    0	
-(Slave 1)CoE State: (0x1237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
 
-(Slave 1)CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x1637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7995441	inSyncCount:    0	
-(Slave 1)CoE State: (0x1637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7992561	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7986640	inSyncCount:    0	
-(Slave 1)CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999000	inSyncCount:    0	
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
 
-(Slave 1)CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
 
-(Slave 1)CoE State: (0x0650) Switch-On Disabled       	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7994080	inSyncCount:    0	
-(Slave 1)CoE State: (0x0650) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+[Slave 1] CoE State: (0x1637) Op-Enabled               	CoE Control:(0x0007) Disable Operation        
 
-(Slave 1)CoE State: (0x0631) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      7989280	inSyncCount:    0	
-(Slave 1)CoE State: (0x0631) Ready To Switch-On       	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
 
-(Slave 1)CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7995840	inSyncCount:    0	
-(Slave 1)CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8001761	inSyncCount:    0	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7994960	inSyncCount:    0	
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      7995320	inSyncCount:    0	
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      7995320	inSyncCount:    0	
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x1633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x0007) Disable Operation        
+WKC:  3( 3)	DiffDC:      7997720	inSyncCount:    0	
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0633) Switched-On              	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7992360	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7991320	inSyncCount:    0	
 ECAT: [HOME] Reverted to previous opmode. Finished!
 
 Homed
-WKC:  3( 3)	DiffDC:      7995520	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000320	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8001000	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995680	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996320	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996880	inSyncCount:    0	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7985200	inSyncCount:    0	
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      8000080	inSyncCount:    0	
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7997280	inSyncCount:    0	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8001359	inSyncCount:    0	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7993120	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8001119	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8007679	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995680	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995040	inSyncCount:    0	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7990000	inSyncCount:    0	
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996039	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      8004480	inSyncCount:    0	
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      8005280	inSyncCount:    0	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7994880	inSyncCount:    0	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7997440	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997440	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996000	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7993760	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999120	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7993400	inSyncCount:    1	WKC:  3( 3)	DiffDC:      8003760	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7991520	inSyncCount:    1	WKC:  3( 3)	DiffDC:      7996800	inSyncCount:    5	WKC:  3( 3)	DiffDC:      8003280	inSyncCount:   11	WKC:  3( 3)	DiffDC:      7997919	inSyncCount:   17	WKC:  3( 3)	DiffDC:      7994800	inSyncCount:   24	WKC:  3( 3)	DiffDC:      7996800	inSyncCount:   30	WKC:  3( 3)	DiffDC:      7994560	inSyncCount:   36	WKC:  3( 3)	DiffDC:      7998799	inSyncCount:   42	WKC:  3( 3)	DiffDC:      8001680	inSyncCount:   49	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7987920	inSyncCount:   55	
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      7997760	inSyncCount:   61	
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7999680	inSyncCount:   68	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7991840	inSyncCount:   74	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996840	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7995360	inSyncCount:   80	WKC:  3( 3)	DiffDC:      8002959	inSyncCount:   86	WKC:  3( 3)	DiffDC:      8003360	inSyncCount:   93	WKC:  3( 3)	DiffDC:      8006161	inSyncCount:   99	WKC:  3( 3)	DiffDC:      7999040	inSyncCount:  105	WKC:  3( 3)	DiffDC:      7999680	inSyncCount:  111	WKC:  3( 3)	DiffDC:      7999200	inSyncCount:  118	WKC:  3( 3)	DiffDC:      8004560	inSyncCount:  124	WKC:  3( 3)	DiffDC:      8004239	inSyncCount:  130	WKC:  3( 3)	DiffDC:      7994440	inSyncCount:  137	WKC:  3( 3)	DiffDC:      7997361	inSyncCount:  143	WKC:  3( 3)	DiffDC:      7998240	inSyncCount:  149	WKC:  3( 3)	DiffDC:      7995680	inSyncCount:  155	WKC:  3( 3)	DiffDC:      8005760	inSyncCount:  162	WKC:  3( 3)	DiffDC:      7997680	inSyncCount:  168	WKC:  3( 3)	DiffDC:      7999840	inSyncCount:  174	WKC:  3( 3)	DiffDC:      8003360	inSyncCount:  180	WKC:  3( 3)	DiffDC:      8019680	inSyncCount:  187	WKC:  3( 3)	DiffDC:      7999360	inSyncCount:  193	WKC:  3( 3)	DiffDC:      8000720	inSyncCount:  199	WKC:  3( 3)	DiffDC:      7995280	inSyncCount:  206	WKC:  3( 3)	DiffDC:      7992720	inSyncCount:  212	WKC:  3( 3)	DiffDC:      8000880	inSyncCount:  218	WKC:  3( 3)	DiffDC:      8002639	inSyncCount:  224	WKC:  3( 3)	DiffDC:      8004640	inSyncCount:  231	WKC:  3( 3)	DiffDC:      8007360	inSyncCount:  237	WKC:  3( 3)	DiffDC:      8003520	inSyncCount:  243	WKC:  3( 3)	DiffDC:      8001960	inSyncCount:  249	WKC:  3( 3)	DiffDC:      7993359	inSyncCount:  256	WKC:  3( 3)	DiffDC:      8019680	inSyncCount:  262	WKC:  3( 3)	DiffDC:      8000480	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8050960	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7994400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7992880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7992960	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7992160	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005120	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7988801	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7994680	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7994560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995919	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7993120	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997040	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8045600	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7995200	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7996240	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8012560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000080	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8004079	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998801	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7992161	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8002721	inSyncCount:    0	
-Setting pos = -1260
-WKC:  3( 3)	DiffDC:      7999521	inSyncCount:    0	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x001f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-Setpoint set
-WKC:  3( 3)	DiffDC:      8004040	inSyncCount:    0	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x1237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8000720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8002560	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7988481	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8005520	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7999520	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998720	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998880	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8001360	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8028400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8000160	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8001840	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998400	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8008640	inSyncCount:    0	WKC:  3( 3)	DiffDC:      8002000	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7998640	inSyncCount:    2	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7995800	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7990880	inSyncCount:    8	
-(Slave 1)CoE State: (0x0250) Switch-On Disabled       	CoE Control:(0x0006) Shutdown                 
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0006) Shutdown                 
-WKC:  3( 3)	DiffDC:      7997600	inSyncCount:   14	
-(Slave 1)CoE State: (0x0231) Ready To Switch-On       	CoE Control:(0x0007) Disable Operation        
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
 
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x0007) Disable Operation        
-WKC:  3( 3)	DiffDC:      7999920	inSyncCount:   21	
-(Slave 1)CoE State: (0x0233) Switched-On              	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      7998161	inSyncCount:   27	
-(Slave 1)CoE State: (0x0237) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
-WKC:  3( 3)	DiffDC:      8001839	inSyncCount:   33	WKC:  3( 3)	DiffDC:      8002160	inSyncCount:   39	WKC:  3( 3)	DiffDC:      7999680	inSyncCount:   46	WKC:  3( 3)	DiffDC:      8005680	inSyncCount:   52	WKC:  3( 3)	DiffDC:      7998279	inSyncCount:   58	WKC:  3( 3)	DiffDC:      7996320	inSyncCount:   64	WKC:  3( 3)	DiffDC:      8000721	inSyncCount:   71	WKC:  3( 3)	DiffDC:      7999760	inSyncCount:   77	WKC:  3( 3)	DiffDC:      8001520	inSyncCount:   83	WKC:  3( 3)	DiffDC:      8024960	inSyncCount:   90	WKC:  3( 3)	DiffDC:      8000640	inSyncCount:   96	WKC:  3( 3)	DiffDC:      7998479	inSyncCount:  102	WKC:  3( 3)	DiffDC:      8001680	inSyncCount:  108	WKC:  3( 3)	DiffDC:      8005201	inSyncCount:  115	WKC:  3( 3)	DiffDC:      7999840	inSyncCount:  121	WKC:  3( 3)	DiffDC:      8034160	inSyncCount:  127	WKC:  3( 3)	DiffDC:      7990160	inSyncCount:  133	WKC:  3( 3)	DiffDC:      8008640	inSyncCount:  140	WKC:  3( 3)	DiffDC:      8000080	inSyncCount:  146	WKC:  3( 3)	DiffDC:      7999520	inSyncCount:  152	WKC:  3( 3)	DiffDC:      8002080	inSyncCount:  159	WKC:  3( 3)	DiffDC:      8003520	inSyncCount:  165	WKC:  3( 3)	DiffDC:      8001080	inSyncCount:  171	WKC:  3( 3)	DiffDC:      8002160	inSyncCount:  177	WKC:  3( 3)	DiffDC:      8000160	inSyncCount:  184	WKC:  3( 3)	DiffDC:      8004480	inSyncCount:  190	WKC:  3( 3)	DiffDC:      7999600	inSyncCount:  196	WKC:  3( 3)	DiffDC:      7999359	inSyncCount:  202	WKC:  3( 3)	DiffDC:      8018960	inSyncCount:  209	WKC:  3( 3)	DiffDC:      8005240	inSyncCount:  215	WKC:  3( 3)	DiffDC:      7998720	inSyncCount:  221	WKC:  3( 3)	DiffDC:      8005360	inSyncCount:  228	WKC:  3( 3)	DiffDC:      8028480	inSyncCount:  234	WKC:  3( 3)	DiffDC:      7999840	inSyncCount:  240	WKC:  3( 3)	DiffDC:      8000720	inSyncCount:  246	WKC:  3( 3)	DiffDC:      7997760	inSyncCount:  253	WKC:  3( 3)	DiffDC:      8002080	inSyncCount:  259	WKC:  3( 3)	DiffDC:      7996640	inSyncCount:  265	WKC:  3( 3)	DiffDC:      8000000	inSyncCount:  271	WKC:  3( 3)	DiffDC:      7991600	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7991920	inSyncCount:    0	WKC:  3( 3)	DiffDC:      7997920	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7985080	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996840	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8002921	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7997960	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998600	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999560	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999640	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7997480	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8003161	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000441	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000680	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998120	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999120	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998279	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996919	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7997720	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996200	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000441	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8001000	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998760	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998599	inSyncCount:    0	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996440	inSyncCount:    1	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996761	inSyncCount:    7	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7997960	inSyncCount:   13	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8003879	inSyncCount:   20	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7995080	inSyncCount:   26	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7996040	inSyncCount:   32	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000920	inSyncCount:   38	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000119	inSyncCount:   45	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999160	inSyncCount:   51	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7997001	inSyncCount:   57	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7984999	inSyncCount:   63	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8003639	inSyncCount:   70	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8008681	inSyncCount:   76	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8003721	inSyncCount:   82	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999959	inSyncCount:   89	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8001200	inSyncCount:   95	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7997959	inSyncCount:  101	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8001240	inSyncCount:  107	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8000680	inSyncCount:  114	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999561	inSyncCount:  120	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999200	inSyncCount:  126	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8003239	inSyncCount:  132	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998921	inSyncCount:  139	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7999160	inSyncCount:  145	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      7998200	inSyncCount:  151	
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+
+[Slave 1] CoE State: (0x0637) Op-Enabled               	CoE Control:(0x000f) Enable Operation         
+WKC:  3( 3)	DiffDC:      8002761	inSyncCount:  158	

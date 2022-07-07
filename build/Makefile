@@ -170,6 +170,19 @@ AKD/fast:
 .PHONY : AKD/fast
 
 #=============================================================================
+# Target rules for targets named simpleMtrCtrlx2
+
+# Build rule for target.
+simpleMtrCtrlx2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 simpleMtrCtrlx2
+.PHONY : simpleMtrCtrlx2
+
+# fast build rule for target.
+simpleMtrCtrlx2/fast:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/build
+.PHONY : simpleMtrCtrlx2/fast
+
+#=============================================================================
 # Target rules for targets named simpleMtrCtrl
 
 # Build rule for target.
@@ -236,6 +249,33 @@ src/simpleMtrCtrl.cpp.s:
 	$(MAKE) -f CMakeFiles/simpleMtrCtrl.dir/build.make CMakeFiles/simpleMtrCtrl.dir/src/simpleMtrCtrl.cpp.s
 .PHONY : src/simpleMtrCtrl.cpp.s
 
+src/simpleMtrCtrlx2.o: src/simpleMtrCtrlx2.cpp.o
+
+.PHONY : src/simpleMtrCtrlx2.o
+
+# target to build an object file
+src/simpleMtrCtrlx2.cpp.o:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/src/simpleMtrCtrlx2.cpp.o
+.PHONY : src/simpleMtrCtrlx2.cpp.o
+
+src/simpleMtrCtrlx2.i: src/simpleMtrCtrlx2.cpp.i
+
+.PHONY : src/simpleMtrCtrlx2.i
+
+# target to preprocess a source file
+src/simpleMtrCtrlx2.cpp.i:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/src/simpleMtrCtrlx2.cpp.i
+.PHONY : src/simpleMtrCtrlx2.cpp.i
+
+src/simpleMtrCtrlx2.s: src/simpleMtrCtrlx2.cpp.s
+
+.PHONY : src/simpleMtrCtrlx2.s
+
+# target to generate assembly for a file
+src/simpleMtrCtrlx2.cpp.s:
+	$(MAKE) -f CMakeFiles/simpleMtrCtrlx2.dir/build.make CMakeFiles/simpleMtrCtrlx2.dir/src/simpleMtrCtrlx2.cpp.s
+.PHONY : src/simpleMtrCtrlx2.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -249,6 +289,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... AKD"
+	@echo "... simpleMtrCtrlx2"
 	@echo "... simpleMtrCtrl"
 	@echo "... src/AKDEcatController.o"
 	@echo "... src/AKDEcatController.i"
@@ -256,6 +297,9 @@ help:
 	@echo "... src/simpleMtrCtrl.o"
 	@echo "... src/simpleMtrCtrl.i"
 	@echo "... src/simpleMtrCtrl.s"
+	@echo "... src/simpleMtrCtrlx2.o"
+	@echo "... src/simpleMtrCtrlx2.i"
+	@echo "... src/simpleMtrCtrlx2.s"
 .PHONY : help
 
 
