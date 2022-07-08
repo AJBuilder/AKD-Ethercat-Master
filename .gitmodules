@@ -1,0 +1,3 @@
+[submodule "extern/SOEM"]
+	path = extern/SOEM
+	url = git@github.com:OpenEtherCATsociety/SOEM.git

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo ethercat download -t uint32 0x1010 1 0x65766173 #Sets 1010:1 to ASCII 'save'.
+#sudo ethercat download -t uint32 0x1011 1 0x64616F6C #Sets 1011:1 to ASCII 'load'. 
+                                                     ##Loading from EEPROM will cause the slave to be unresponsive for a bit. Will also output input/output error.
+#echo "Input/Output error is normal"
