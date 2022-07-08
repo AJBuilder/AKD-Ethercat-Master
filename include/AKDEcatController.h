@@ -54,6 +54,7 @@ class AKDController{
     private:
 
     // Const
+    char *ifname;
     uint slaveCount, configuredSlaves;
 
     // PDO buffers
@@ -109,6 +110,7 @@ class AKDController{
     
 
     // Threading
+    pthread_attr_t rt_attr;
     pthread_mutex_t debug, control;
     pthread_cond_t IOUpdated, stateUpdated;
     pthread_t talker, controller;

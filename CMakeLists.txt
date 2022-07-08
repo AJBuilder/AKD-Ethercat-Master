@@ -3,6 +3,7 @@ cmake_policy(SET CMP0048 NEW)
 project(AKDController VERSION 0.1)
 cmake_minimum_required(VERSION 3.9)
 
+# Check to make sure submodule was initialized.
 find_package(Git QUIET)
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 # Update submodules as needed
@@ -21,6 +22,8 @@ endif()
 if(NOT EXISTS "${PROJECT_SOURCE_DIR}/extern/SOEM/CMakeLists.txt")
     message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
 endif()
+
+
 
 #Dependency
 add_subdirectory(extern/SOEM)

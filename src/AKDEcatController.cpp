@@ -102,10 +102,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/queue.h>
+
 #include <inttypes.h>
+
 #include <pthread.h>
+#include <sched.h>
+#include <limits.h>
+#include <sys/mman.h>
 
 #include "AKDEcatController.h"
 #include "ethercat.h"
@@ -154,8 +157,6 @@ void add_timespec(struct timespec *ts, int64 addtime)
    *i = integral;
    return (*d < window) && (*d > (-window)) ; // Return TRUE if error is within window
 }
-
-
 
 #if DEBUG_MODE
 
@@ -564,8 +565,9 @@ bool AKDController::ecat_Init(char *ifname){
    if (ec_init(ifname))
    {
       printf("ECAT: ec_init on %s succeeded.\n", ifname);
-      /* find and auto-config slaves */
+      this->ifname = ifname;
 
+      /* find and auto-config slaves */
       if( ec_config_init(FALSE) > 0 ) {
          this->masterState = ms_stop;
 
@@ -574,10 +576,36 @@ bool AKDController::ecat_Init(char *ifname){
          this->slaves = new ecat_slave [this->slaveCount];
 
          // Initialize threading resources
+         struct sched_param rt_param;
+         rt_param.sched_priority = 21;
+
+         int err = 0;
+         err += mlock(this,sizeof(this));
+         for(int slaveNum = 0; slaveNum < this->slaveCount; slaveNum++){
+            err += mlock(&this->slaves[slaveNum], sizeof(slaves));
+            err += mlock(this->slaves[slaveNum].outUserBuff, this->slaves[slaveNum].totalBytes);
+         }
+         #if DEBUG_MODE
+            for(int i = 0; i < DEBUG_BUFF_SIZE; i++)
+               err += mlock(this->debugBuffer, DEBUG_BUFF_WIDTH);
+         #endif
+
+         if(err != 0){
+            this->masterState = ms_shutdown;
+            delete this->slaves;
+            
+            ec_close(); // stop SOEM, close socket
+         }
+         pthread_attr_init(&this->rt_attr);
+         pthread_attr_setschedpolicy(&rt_attr, SCHED_FIFO);
+         pthread_attr_setschedparam(&rt_attr, &rt_param);
+
          pthread_mutex_init(&this->control, NULL);
          pthread_mutex_init(&this->debug, NULL);
+
          pthread_cond_init(&this->IOUpdated, NULL);
          pthread_cond_init(&this->stateUpdated, NULL);
+
 
          return TRUE;
       }
@@ -865,8 +893,17 @@ bool AKDController::ecat_Start(){
    
 
    // Enable talker to handle slave PDOs in OP
-   pthread_create(&this->talker, NULL, &AKDController::ecat_Talker, this);
-   pthread_create(&this->controller, NULL, &ecat_Controller, this);
+   if(pthread_create(&this->talker, &this->rt_attr, &AKDController::ecat_Talker, this) != 0) {
+      printf("ECAT: Couldn't start talker thread.\n");
+      return FALSE;
+   }
+   if(pthread_create(&this->controller, NULL, &ecat_Controller, this) != 0) {
+      printf("ECAT: Couldn't start controller thread.\n");
+      this->masterState = ms_shutdown; // Set shutdown state to signal talker thread to shutdown.
+      pthread_join(this->talker, nullptr); // Pretty sure this isn't necessary?
+      this->masterState = ms_stop; // Reset to initialized state.
+      return FALSE;
+   }
    printf( "ECAT: Talker started! Synccount needs to reach : %" PRIi64 "\n", (uint64)SYNC_AQTIME_NS / CYCLE_NS);
    pthread_mutex_lock(&this->control);
    while(this->inSyncCount < (uint64)(SYNC_AQTIME_NS / CYCLE_NS)){ // Poll until timing is within acceptable window
@@ -1083,10 +1120,7 @@ bool AKDController::State(ecat_masterStates reqState){
             /* request INIT state for all slaves */
             ec_writestate(0);
 
-            printf("ECAT: End simple test, close socket\n");
-
-            
-
+            printf("ECAT: Shutting down master on %s, close socket\n", this->ifname);
             /* stop SOEM, close socket */
             ec_close();
         }
