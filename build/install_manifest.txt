@@ -1,2 +1,0 @@
-/usr/local/build/simpleMtrCtrl
-/usr/local/build/simpleMtrCtrlx2

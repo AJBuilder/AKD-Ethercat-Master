@@ -1,1 +1,0 @@
-/usr/bin/gcc -g   CMakeFiles/DS402Controller.dir/src/simpleMtrCtrl.c.o  -o DS402Controller   -L/home/bench/EtherCATBench/SOEM/install/lib  -Wl,-rpath,/home/bench/EtherCATBench/SOEM/install/lib: -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread -lDS402EcatController.h 

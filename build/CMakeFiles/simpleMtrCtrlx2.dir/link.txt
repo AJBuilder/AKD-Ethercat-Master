@@ -1,1 +1,0 @@
-/usr/bin/g++  -g   CMakeFiles/simpleMtrCtrlx2.dir/src/simpleMtrCtrlx2.cpp.o CMakeFiles/AKD.dir/src/AKDEcatController.cpp.o  -o simpleMtrCtrlx2  -Wl,-Bstatic -lsoem -Wl,-Bdynamic -lpthread 
