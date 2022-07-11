@@ -47,9 +47,6 @@ class AKDController{
     bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8 out1Mode, uint8 out2Mode);
     bool confUnits(uint slave, uint32 motorRev, uint32 shaftRev);
     bool setOpMode(uint slave, ecat_OpModes reqMode);
-
-    
-
     
     private:
 

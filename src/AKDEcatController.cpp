@@ -71,10 +71,10 @@
 
 ////// Config //////
 //Talker
-#define CYCLE_NS (8*1000*1000) //8ms
-#define SYNC_WINDOW_NS (100*1000) //.1ms
-#define SYNC_AQTIME_NS (1000*1000*1000) // 1000ms
-#define SYNC_DIST (2000*1000) // 2ms
+#define CYCLE_NS (int)(32*62500) //2ms
+#define SYNC_WINDOW_NS (1000) //.1ms
+#define SYNC_AQTIME_NS (100*1000*1000) // 100ms
+#define SYNC_DIST (500*1000) // .5ms
 
 //Controller
 #define CNTRL_CYCLEMS   500
@@ -525,6 +525,9 @@ void* AKDController::ecat_Controller(void* THIS)
       printf("WKC: %2i(%2i)\t", This->wrkCounter, This->expectedWKC);
       printf("DiffDC: %12" PRIi64 "\t", This->diffDCtime);
       printf("inSyncCount: %4i\t", This->inSyncCount);
+      printf("toff: %4i\t", This->gl_toff);
+      printf("delta: %4i\t", This->gl_delta);
+      printf("integral: %4i\t", This->gl_integral);
       //printf("coeStatus: 0x%04"PRIx16"\t", This->coeStatus);
       //printf("CtrlWord: 0x%04"PRIx16"\t", This->coeCtrlWord);
 
@@ -542,7 +545,7 @@ void* AKDController::ecat_Controller(void* THIS)
 
       
 
-      osal_usleep(50000);
+      osal_usleep(50000); //50ms
       
    }
    
@@ -577,7 +580,7 @@ bool AKDController::ecat_Init(char *ifname){
 
          // Initialize threading resources
          struct sched_param rt_param;
-         rt_param.sched_priority = 21;
+         rt_param.sched_priority = 99;
 
          int err = 0;
          err += mlock(this,sizeof(this));
@@ -596,9 +599,19 @@ bool AKDController::ecat_Init(char *ifname){
             
             ec_close(); // stop SOEM, close socket
          }
-         pthread_attr_init(&this->rt_attr);
-         pthread_attr_setschedpolicy(&rt_attr, SCHED_FIFO);
-         pthread_attr_setschedparam(&rt_attr, &rt_param);
+
+         err = 0;
+         err += pthread_attr_init(&this->rt_attr);
+         err += pthread_attr_setinheritsched(&this->rt_attr, PTHREAD_EXPLICIT_SCHED);
+         err += pthread_attr_setschedpolicy(&this->rt_attr, SCHED_FIFO);
+         err += pthread_attr_setschedparam(&this->rt_attr, &rt_param);
+
+         if(err != 0){
+            this->masterState = ms_shutdown;
+            delete this->slaves;
+            
+            ec_close(); // stop SOEM, close socket
+         }
 
          pthread_mutex_init(&this->control, NULL);
          pthread_mutex_init(&this->debug, NULL);
