@@ -5,6 +5,7 @@
 #include <sys/queue.h>
 #include <inttypes.h>
 #include <pthread.h>
+#include <unistd.h>
 
 #include "AKDEcatController.h"
 
@@ -21,7 +22,6 @@ int us_sleep(uint32 usec)
 int main(int argc, char *argv[])
 {
    printf("Starting simpleMtrCtrlx2 wrapper\n");
-
 
    
 
@@ -78,8 +78,9 @@ int main(int argc, char *argv[])
 
 
 
-      
+      printf("\nLocked memory in main(PID: %d) before Init: %dkB\n", getpid(), master1.getLockedMem());
       if(!master1.ecat_Init(argv[1])) return -1;
+      printf("\nLocked memory in main after Init: %dkB\n", master1.getLockedMem());
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
       master1.confSlavePDOs(2, &s2, sizeof(s2), 0x1725, 0,0,0, 0x1B20, 0,0,0);
 

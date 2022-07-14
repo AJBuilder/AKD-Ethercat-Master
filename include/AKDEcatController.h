@@ -48,6 +48,12 @@ class AKDController{
     bool confUnits(uint slave, uint32 motorRev, uint32 shaftRev);
     bool setOpMode(uint slave, ecat_OpModes reqMode);
     
+    #if DEBUG_MODE
+
+        int getLockedMem();
+
+    #endif
+
     private:
 
     // Const
@@ -101,7 +107,7 @@ class AKDController{
     bool inOP;
     uint inSyncCount;
     int8 wrkCounter, expectedWKC;
-    uint64 diffDCtime;
+    int64 diffDCtime;
     ecat_masterStates masterState = ms_shutdown;
 
     
@@ -136,7 +142,7 @@ class AKDController{
 
     // Debug 
     int64 gl_toff, gl_delta;
-    uint8 gl_integral;
+    uint64 gl_integral;
     uint buffHead = 0, buffTail = 0;
     char debugBuffer[DEBUG_BUFF_SIZE][DEBUG_BUFF_WIDTH] = {0};
 

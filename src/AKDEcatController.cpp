@@ -71,10 +71,11 @@
 
 ////// Config //////
 //Talker
-#define CYCLE_NS (int)(32*62500) //2ms
-#define SYNC_WINDOW_NS (1000) //.1ms
-#define SYNC_AQTIME_NS (100*1000*1000) // 100ms
-#define SYNC_DIST (500*1000) // .5ms
+#define CYCLE_NS (int)(16*62500) //2ms
+#define MASTER_SYNCLEAD (300*1000) // .3ms
+#define MASTER_WINDOW_NS (50*1000) //.05ms
+#define MASTER_AQTIME_NS (100*1000*1000) // 100ms
+#define SYNC_DIST (100*1000) // .1ms
 
 //Controller
 #define CNTRL_CYCLEMS   500
@@ -99,7 +100,8 @@
 // Update()
 #define AKD_MOVEERR -1
 
-
+#include <sys/syscall.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -109,6 +111,7 @@
 #include <sched.h>
 #include <limits.h>
 #include <sys/mman.h>
+
 
 #include "AKDEcatController.h"
 #include "ethercat.h"
@@ -147,18 +150,39 @@ void add_timespec(struct timespec *ts, int64 addtime)
 {
    static int64 integral = 0;
    int64 delta;
-   /* set linux sync point 50us later than DC sync, just as example */
    delta = (reftime - dist) % cycletime;
    if(delta > (cycletime / 2)) { delta = delta - cycletime; } // If over half-period, make neg offset behrend next period
    if(delta>0){ integral--; }
    if(delta<0){ integral++; }
-   *offsettime = -(delta / 120) + (integral / 5);
+   *offsettime = -(delta / 20) + (integral / 5);
    *d = delta;
    *i = integral;
    return (*d < window) && (*d > (-window)) ; // Return TRUE if error is within window
 }
 
 #if DEBUG_MODE
+
+int AKDController::getLockedMem(){
+
+   char dir[20];
+   char *line=NULL;
+   size_t n=0;
+
+   sprintf(dir, "/proc/%d/status", getpid());
+   FILE* file = fopen(dir, "r");
+   if(!file) return -1;
+
+   while(getline(&line, &n, file) != -1){
+      if(strstr(line, "VmLck:") != NULL){
+         line[15] = '\n';
+         line += 7;
+         if(fclose(file) == 0) return atoi(line);
+         else return -3;
+      }
+   }
+   fclose(file);
+   return -2;
+}
 
 /** Adds string to a ringbuffer that will be printed by calling printDebugBuff(). Will overwrite if ring buffer overflows
  * @function   addToDebugBuff
@@ -196,7 +220,6 @@ void AKDController::printDebugBuff(){
 
    return;
 }
-
 
 /** Converts CoE status word to a readable string.
  * @function   getReadableStatus
@@ -277,8 +300,10 @@ void* AKDController::ecat_Talker(void* THIS)
    int8 wrkCounterb;
    uint inSyncCountb;
    int64 toff, sync_delta, sync_integral, diffDCtimeb;
-   
 
+   printf("\nLocked memory in talker(PID: %ld): %dkB\n", syscall(__NR_gettid), This->getLockedMem());
+   printf("\nTalker running on CPU %d\n", sched_getcpu());
+   
    clock_gettime(CLOCK_MONOTONIC, &ts);
    ec_send_processdata();
    while(1)
@@ -292,7 +317,7 @@ void* AKDController::ecat_Talker(void* THIS)
       clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &ts, NULL);
 
       /* calulate toff to get linux time and DC synced */
-      if(This->ec_sync(ec_DCtime, CYCLE_NS, &toff, SYNC_DIST, SYNC_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
+      if(This->ec_sync(ec_DCtime, CYCLE_NS, &toff, MASTER_SYNCLEAD + SYNC_DIST, MASTER_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
          if (inSyncCountb != UINT32_MAX) inSyncCountb++; // Count number of cycles in window
       }
       else inSyncCountb = 0;
@@ -406,7 +431,8 @@ void* AKDController::ecat_Controller(void* THIS)
    AKDController* This = (AKDController*)THIS;
    uint currentgroup = 0, noDCCount;
    
-
+   printf("\nLocked memory in controller(PID: %ld): %dkB\n", syscall(__NR_gettid), This->getLockedMem());
+   printf("\nController running on CPU %d\n", sched_getcpu());
    while(1)
    {
       // CONTROL LOCKED
@@ -523,17 +549,18 @@ void* AKDController::ecat_Controller(void* THIS)
       
       printf("\r");
       printf("WKC: %2i(%2i)\t", This->wrkCounter, This->expectedWKC);
-      printf("DiffDC: %12" PRIi64 "\t", This->diffDCtime);
+      printf("DCErr: %12" PRIi64 "\t", CYCLE_NS - This->diffDCtime);
       printf("inSyncCount: %4i\t", This->inSyncCount);
-      printf("toff: %4i\t", This->gl_toff);
-      printf("delta: %4i\t", This->gl_delta);
-      printf("integral: %4i\t", This->gl_integral);
+      printf("toff: %8" PRIi64 "\t", This->gl_toff);
+      printf("delta: %8" PRIi64 "\t", This->gl_delta);
+      printf("integral: %8" PRIi64 "\t", This->gl_integral);
       //printf("coeStatus: 0x%04"PRIx16"\t", This->coeStatus);
       //printf("CtrlWord: 0x%04"PRIx16"\t", This->coeCtrlWord);
 
       
-
-      if(This->gl_toff*((This->gl_toff>0) - (This->gl_toff<0)) > (CYCLE_NS / 2)) printf("\tClock slipping! toff = %" PRIi64 "  CYCLE_NS/2 = %d\n", This->gl_toff, CYCLE_NS / 2);
+      
+      if(((CYCLE_NS - This->diffDCtime)*(((CYCLE_NS - This->diffDCtime) > 0) - ((CYCLE_NS - This->diffDCtime) < 0))) > (CYCLE_NS / 2)) 
+         printf("\tClock slipping! DCErr = %12" PRIi64 "  CYCLE_NS/2 = %d\n", ((CYCLE_NS - This->diffDCtime)*(((CYCLE_NS - This->diffDCtime) > 0) - ((CYCLE_NS - This->diffDCtime) < 0))), CYCLE_NS / 2);
       pthread_mutex_unlock(&This->debug);
       fflush(stdout);
       #endif
@@ -545,7 +572,7 @@ void* AKDController::ecat_Controller(void* THIS)
 
       
 
-      osal_usleep(50000); //50ms
+      osal_usleep(100000); //100ms
       
    }
    
@@ -582,16 +609,18 @@ bool AKDController::ecat_Init(char *ifname){
          struct sched_param rt_param;
          rt_param.sched_priority = 99;
 
+         cpu_set_t cpuset;
+         CPU_ZERO(&cpuset);
+         CPU_SET(7, &cpuset); // Run on cpu 8
+
          int err = 0;
-         err += mlock(this,sizeof(this));
-         for(int slaveNum = 0; slaveNum < this->slaveCount; slaveNum++){
-            err += mlock(&this->slaves[slaveNum], sizeof(slaves));
-            err += mlock(this->slaves[slaveNum].outUserBuff, this->slaves[slaveNum].totalBytes);
-         }
-         #if DEBUG_MODE
-            for(int i = 0; i < DEBUG_BUFF_SIZE; i++)
-               err += mlock(this->debugBuffer, DEBUG_BUFF_WIDTH);
-         #endif
+         err += pthread_attr_init(&this->rt_attr);
+         err += pthread_attr_setinheritsched(&this->rt_attr, PTHREAD_EXPLICIT_SCHED);
+         err += pthread_attr_setschedpolicy(&this->rt_attr, SCHED_FIFO);
+         err += pthread_attr_setschedparam(&this->rt_attr, &rt_param);
+         err += pthread_attr_setaffinity_np(&this->rt_attr, sizeof(cpuset), &cpuset);
+
+         printf("\nMain running on CPU %d\n", sched_getcpu());
 
          if(err != 0){
             this->masterState = ms_shutdown;
@@ -601,10 +630,8 @@ bool AKDController::ecat_Init(char *ifname){
          }
 
          err = 0;
-         err += pthread_attr_init(&this->rt_attr);
-         err += pthread_attr_setinheritsched(&this->rt_attr, PTHREAD_EXPLICIT_SCHED);
-         err += pthread_attr_setschedpolicy(&this->rt_attr, SCHED_FIFO);
-         err += pthread_attr_setschedparam(&this->rt_attr, &rt_param);
+         err += mlockall(MCL_CURRENT | MCL_FUTURE);
+         
 
          if(err != 0){
             this->masterState = ms_shutdown;
@@ -885,7 +912,7 @@ bool AKDController::ecat_Start(){
    printf("ECAT: Configuring DC. Should be in PRE-OP. ");
    printf(ec_statecheck(0, EC_STATE_PRE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_PRE_OP ? "State: PRE_OP\n" : "ERR! NOT IN PRE_OP!\n") ;
    printf(ec_configdc() ? "ECAT: Found slaves with DC.\n" : "ECAT: Did not find slaves with DC.\n") ;
-   ec_dcsync0(1, FALSE, CYCLE_NS, 0);
+   ec_dcsync0(1, FALSE, CYCLE_NS, SYNC_DIST);
    
    
    
@@ -896,14 +923,7 @@ bool AKDController::ecat_Start(){
    printf(ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_SAFE_OP ? "State: SAFE_OP\n" : "ERR! NOT IN SAFE_OP!\n") ;
    this->expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
    printf("ECAT: Calculated workcounter %d\n", this->expectedWKC);
-   /*
-   for(int i = 0 ; i < 100 ; i++){ // Send 10,000 cycles of process data to tune other slaves
-      ec_send_processdata();
-      wkc = ec_receive_processdata(EC_TIMEOUTRET);
-      printf("\rSending 100 process cycles: %5d WKC : %d", i, wkc);
-   }*/
 
-   
 
    // Enable talker to handle slave PDOs in OP
    if(pthread_create(&this->talker, &this->rt_attr, &AKDController::ecat_Talker, this) != 0) {
@@ -917,16 +937,16 @@ bool AKDController::ecat_Start(){
       this->masterState = ms_stop; // Reset to initialized state.
       return FALSE;
    }
-   printf( "ECAT: Talker started! Synccount needs to reach : %" PRIi64 "\n", (uint64)SYNC_AQTIME_NS / CYCLE_NS);
+   printf( "ECAT: Talker started! Synccount needs to reach : %" PRIi64 "\n", (uint64)MASTER_AQTIME_NS / CYCLE_NS);
    pthread_mutex_lock(&this->control);
-   while(this->inSyncCount < (uint64)(SYNC_AQTIME_NS / CYCLE_NS)){ // Poll until timing is within acceptable window
+   while(this->inSyncCount < (uint64)(MASTER_AQTIME_NS / CYCLE_NS)){ // Poll until timing is within acceptable window
       pthread_mutex_unlock(&this->control);
       osal_usleep(100000); // 100ms
       pthread_mutex_lock(&this->control);
    }
    pthread_mutex_unlock(&this->control);
    printf("\nECAT: Master within sync window. Enabling sync0 generation!\n");
-   ec_dcsync0(1, TRUE, CYCLE_NS, 0); //Enable sync0 generation
+   ec_dcsync0(1, TRUE, CYCLE_NS, SYNC_DIST); //Enable sync0 generation
 
 
    // Go into OPERATIONAL mode
@@ -1487,7 +1507,6 @@ void AKDController::confSlavePDOs(uint slave, void* usrControl, int bufferSize, 
 
    pthread_mutex_unlock(&this->control);
 }
-
 
 /** Configure digital outputs.
  * @function   confDigOutputs
