@@ -71,7 +71,7 @@
 
 ////// Config //////
 //Talker
-#define CYCLE_NS (int)(16*62500) //2ms
+#define CYCLE_NS (int)(16*62500) //1ms
 #define MASTER_SYNCLEAD (300*1000) // .3ms
 #define MASTER_WINDOW_NS (50*1000) //.05ms
 #define MASTER_AQTIME_NS (100*1000*1000) // 100ms
@@ -630,7 +630,7 @@ bool AKDController::ecat_Init(char *ifname){
          }
 
          err = 0;
-         err += mlockall(MCL_CURRENT | MCL_FUTURE);
+         //err += mlockall(MCL_CURRENT | MCL_FUTURE);
          
 
          if(err != 0){
