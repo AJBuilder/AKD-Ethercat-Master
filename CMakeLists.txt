@@ -30,7 +30,13 @@ endif()
 add_subdirectory(extern/SOEM)
 
 #Library
-add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
+else()
+    add_library(AKD_ecat OBJECT src/AKDEcatController.cpp)
+    message(STATUS "AKD_Ecat: not creating a library archive (libAKD-ecat.a) when build as dependecy.")
+endif()
+
 target_link_libraries(AKD_ecat PUBLIC soem pthread)
 target_include_directories(AKD_ecat PUBLIC include)
 
