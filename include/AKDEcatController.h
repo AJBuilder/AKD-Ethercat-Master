@@ -14,7 +14,7 @@
 #include <pthread.h>
 #include <vector>
 
-#include "ethercat.h"
+#include "soem/ethercat.h"
 
     
     enum ecat_OpModes:int8{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
