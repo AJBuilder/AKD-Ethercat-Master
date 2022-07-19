@@ -4,7 +4,6 @@
 #include <string.h>
 #include <sys/queue.h>
 #include <inttypes.h>
-#include <pthread.h>
 
 #include "AKDEcatController.h"
 

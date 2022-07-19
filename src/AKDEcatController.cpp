@@ -108,7 +108,7 @@
 #include <pthread.h>
 
 #include "AKDEcatController.h"
-#include "ethercat.h"
+#include "soem/ethercat.h"
 
 
 
