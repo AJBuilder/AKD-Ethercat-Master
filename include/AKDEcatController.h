@@ -6,15 +6,20 @@
 
 #endif
 
+#include <sys/syscall.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/queue.h>
-#include <inttypes.h>
-#include <pthread.h>
-#include <vector>
 
-#include "soem/ethercat.h"
+#include <inttypes.h>
+#include <string.h>
+
+#include <pthread.h>
+#include <sched.h>
+#include <limits.h>
+#include <sys/mman.h>
+
+#include "ethercat.h"
 
     
     enum ecat_OpModes:int8{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};

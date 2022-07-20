@@ -29,13 +29,15 @@ endif()
 #Dependency
 add_subdirectory(extern/SOEM)
 
+
+add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
 #Library
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
-else()
-    add_library(AKD_ecat OBJECT src/AKDEcatController.cpp)
-    message(STATUS "AKD_Ecat: not creating a library archive (libAKD-ecat.a) when build as dependecy.")
-endif()
+#if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+#    add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
+#else()
+#    add_library(AKD_ecat OBJECT src/AKDEcatController.cpp)
+#    message(STATUS "AKD_Ecat: not creating a library archive (libAKD-ecat.a) when build as dependecy.")
+#endif()
 
 target_link_libraries(AKD_ecat PUBLIC soem pthread)
 target_include_directories(AKD_ecat PUBLIC include)
@@ -43,11 +45,26 @@ target_include_directories(AKD_ecat PUBLIC include)
 
 #Tests
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-  add_subdirectory(tests/)
+    add_executable(simpleMtrCtrl tests/simpleMtrCtrl.cpp)
+    add_executable(simpleMtrCtrlx2 tests/simpleMtrCtrlx2.cpp)
+
+    target_link_libraries(simpleMtrCtrl PUBLIC AKD_ecat)
+    target_link_libraries(simpleMtrCtrlx2 PUBLIC AKD_ecat)
+
+    install(TARGETS simpleMtrCtrl DESTINATION tests/)
+    install(TARGETS simpleMtrCtrlx2 DESTINATION tests/)
 else()
   message(STATUS "AKD_Ecat: not building tests when built as dependency")
 endif()
 
 
+set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_LIST_DIR}/install)
+
+install( FILES include/AKDEcatController.h
+    DESTINATION include/
+)
+install( TARGETS AKD_ecat
+    DESTINATION lib/
+)
 
 

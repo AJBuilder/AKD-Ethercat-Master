@@ -100,21 +100,7 @@
 // Update()
 #define AKD_MOVEERR -1
 
-#include <sys/syscall.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <inttypes.h>
-
-#include <pthread.h>
-#include <sched.h>
-#include <limits.h>
-#include <sys/mman.h>
-
-
 #include "AKDEcatController.h"
-#include "soem/ethercat.h"
 
 
 
