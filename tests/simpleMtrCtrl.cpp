@@ -5,6 +5,7 @@
 #include <sys/queue.h>
 #include <inttypes.h>
 
+#include "ethercat.h"
 #include "AKDEcatController.h"
 
 
@@ -23,24 +24,24 @@ int main(int argc, char *argv[])
       struct __attribute__((__packed__)){
          //0x1725
          //rxPDOs
-         uint16   ctrlWord; 
-         uint32   targetPos;
-         uint32   digOutputs;
-         uint16   tqFdFwd;         
-         uint16   maxTorque;
+         uint16_t  ctrlWord; 
+         uint32_t  targetPos;
+         uint32_t  digOutputs;
+         uint16_t  tqFdFwd;         
+         uint16_t  maxTorque;
          
          //0x1B20
          //txPDOs
-         int32    posActual;
-         int32    posFdback2;
-         int32    velActual;
-         uint32   digInputs;
-         int32    followErr;
-         uint32   latchPos;
-         uint16   coeStatus;
-         int16    tqActual;
-         uint16   latchStatus;
-         int16    analogInput;
+         int32_t   posActual;
+         int32_t   posFdback2;
+         int32_t   velActual;
+         uint32_t  digInputs;
+         int32_t   followErr;
+         uint32_t  latchPos;
+         uint16_t  coeStatus;
+         int16_t   tqActual;
+         uint16_t  latchStatus;
+         int16_t   analogInput;
       } s1;
 
 
@@ -50,7 +51,7 @@ int main(int argc, char *argv[])
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
       master1.confUnits(1, 1, 360);
       master1.confMotionTask(1, 2000, 10000, 10000);
-      master1.confProfPos(1, TRUE, FALSE);
+      master1.confProfPos(1, true, FALSE);
       
       //master1.confSlavePDOs(2, &s2, sizeof(s1), 0x1725, 0x1B20);
 
@@ -83,7 +84,7 @@ int main(int argc, char *argv[])
       printf("\nMode switched!\n");
 
       err = master1.Home(1, 0, 0, 6000, 1000, 0, 0, 0);
-      if(err != TRUE){
+      if(err != true){
          printf("\nFailed to home. %i\n", err);
          return -5;
       }
@@ -97,20 +98,20 @@ int main(int argc, char *argv[])
       for(int i = 0; i < 3; i++){
          s1.targetPos = -s1.targetPos;
          printf("\nSetting pos = %d\n", s1.targetPos);
-         master1.Update(1, TRUE, 500000); // 5 sec
+         master1.Update(1, true, 500000); // 5 sec
          printf("\nSetpoint set\n");
          master1.waitForTarget(1,0);
          osal_usleep(5000);
       }
       
       /*
-      master1.QuickStop(1, TRUE); printf("Quickstop!\n");
+      master1.QuickStop(1, true); printf("Quickstop!\n");
       osal_usleep(5000000); // 5 sec
       printf("Re-enable\n");
       master1.QuickStop(1, FALSE);
       */
 
-      master1.Update(1, TRUE, 5000); // 5 sec
+      master1.Update(1, true, 5000); // 5 sec
       printf("Ending\n");
 
       master1.Shutdown();

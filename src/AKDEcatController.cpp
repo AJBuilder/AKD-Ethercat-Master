@@ -100,7 +100,21 @@
 // Update()
 #define AKD_MOVEERR -1
 
+#include <sys/syscall.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <inttypes.h>
+#include <string.h>
+
+#include <pthread.h>
+#include <sched.h>
+#include <limits.h>
+#include <sys/mman.h>
+
 #include "AKDEcatController.h"
+#include "ethercat.h"
 
 
 
@@ -146,7 +160,7 @@ void add_timespec(struct timespec *ts, int64 addtime)
    return (*d < window) && (*d > (-window)) ; // Return TRUE if error is within window
 }
 
-#if DEBUG_MODE
+#if AKD_ECAT_DEBUG_MODE
 
 int AKDController::getLockedMem(){
 
@@ -277,7 +291,7 @@ void* AKDController::ecat_Talker(void* THIS)
    uint8*   output_buff_ptr;
    uint8*   input_buff_ptr;
    bool moveQueued[This->slaveCount] = {FALSE};
-   #if DEBUG_MODE
+   #if AKD_ECAT_DEBUG_MODE
       char buffer[DEBUG_BUFF_WIDTH];
       uint16 prevStatus[This->slaveCount], prevCtrl[This->slaveCount];
    #endif
@@ -287,9 +301,11 @@ void* AKDController::ecat_Talker(void* THIS)
    uint inSyncCountb;
    int64 toff, sync_delta, sync_integral, diffDCtimeb;
 
-   printf("\nLocked memory in talker(PID: %ld): %dkB\n", syscall(__NR_gettid), This->getLockedMem());
-   printf("\nTalker running on CPU %d\n", sched_getcpu());
-   
+   #if AKD_ECAT_DEBUG_MODE
+      printf("\nLocked memory in talker(PID: %ld): %dkB\n", syscall(__NR_gettid), This->getLockedMem());
+      printf("\nTalker running on CPU %d\n", sched_getcpu());
+   #endif
+
    clock_gettime(CLOCK_MONOTONIC, &ts);
    ec_send_processdata();
    while(1)
@@ -376,7 +392,7 @@ void* AKDController::ecat_Talker(void* THIS)
          }         
       }
 
-      #if DEBUG_MODE
+      #if AKD_ECAT_DEBUG_MODE
       // Update debug info
       if(pthread_mutex_lock(&This->debug) == 0){
          This->gl_toff = toff;
@@ -417,8 +433,11 @@ void* AKDController::ecat_Controller(void* THIS)
    AKDController* This = (AKDController*)THIS;
    uint currentgroup = 0, noDCCount;
    
-   printf("\nLocked memory in controller(PID: %ld): %dkB\n", syscall(__NR_gettid), This->getLockedMem());
-   printf("\nController running on CPU %d\n", sched_getcpu());
+   #if AKD_ECAT_DEBUG_MODE
+      printf("\nLocked memory in controller(PID: %ld): %dkB\n", syscall(__NR_gettid), This->getLockedMem());
+      printf("\nController running on CPU %d\n", sched_getcpu());
+   #endif
+
    while(1)
    {
       // CONTROL LOCKED
@@ -528,7 +547,7 @@ void* AKDController::ecat_Controller(void* THIS)
         
       
       
-      #if DEBUG_MODE
+      #if AKD_ECAT_DEBUG_MODE
       pthread_mutex_lock(&This->debug);
 
       This->printDebugBuff();
@@ -1619,12 +1638,12 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
 
 
    if(!setOpMode(slave, homing)) {
-      #if DEBUG_MODE
+      #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [Home] Failed to set homing mode.\n");
       #endif
       return FALSE;
    }
-   #if DEBUG_MODE
+   #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Opmode to homing.\n");
    #endif
 
@@ -1638,12 +1657,12 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       subTimeout = 0;
    }
    if(Update(slave, TRUE, subTimeout) != 0){
-      #if DEBUG_MODE
+      #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [Home] Update() failed.\n");
       #endif
       return FALSE;
    }
-   #if DEBUG_MODE
+   #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Updated.\n");
    #endif
 
@@ -1657,12 +1676,12 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       subTimeout = 0;
    }
    if(!waitForTarget(slave, subTimeout)){
-      #if DEBUG_MODE
+      #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [HOME] Timedout waiting to reach target.\n");
       #endif
       return FALSE;
    }
-   #if DEBUG_MODE
+   #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Target reached.\n");
    #endif
 
@@ -1670,7 +1689,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
    else slaveNum = 0;
    do{ 
       if(!setOpMode(slaveNum+1, prevMode[slaveNum])) {
-         #if DEBUG_MODE
+         #if AKD_ECAT_DEBUG_MODE
             printf("\nECAT: [Home] Failed to revert opmode.\n");
          #endif
          return FALSE;
@@ -1678,7 +1697,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       slaveNum++;
    } while((slaveNum < this->slaveCount) && (slave == 0));
 
-   #if DEBUG_MODE
+   #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Reverted to previous opmode. Finished!\n");
    #endif
 

@@ -1,33 +1,23 @@
-#ifndef DEBUG_MODE
-#define DEBUG_MODE  TRUE
+#ifndef AKD_ECAT_DEBUG_MODE
+#define AKD_ECAT_DEBUG_MODE FALSE
 
 #define DEBUG_BUFF_SIZE 50
 #define DEBUG_BUFF_WIDTH 200
 
 #endif
 
-#include <sys/syscall.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <inttypes.h>
-#include <string.h>
 
-#include <pthread.h>
-#include <sched.h>
-#include <limits.h>
-#include <sys/mman.h>
 
-#include "ethercat.h"
-
-    
-    enum ecat_OpModes:int8{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
+    enum ecat_OpModes{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
 
 class AKDController{
     public:
 
-    enum ecat_masterStates:int8{ms_shutdown, ms_stop, ms_disable, ms_enable};
+    enum ecat_masterStates{ms_shutdown, ms_stop, ms_disable, ms_enable};
     
     bool ecat_Init(char *ifname);
     bool ecat_Start();
@@ -46,14 +36,14 @@ class AKDController{
     bool QuickStop(uint slave, bool enableQuickStop);
     bool waitForTarget(uint slave, uint timeout_ms);
 
-    void confSlavePDOs(uint slave, void* usrControl, int size, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4);
+    void confSlavePDOs(uint slave, void* usrControl, int size, uint16_t rxPDO1, uint16_t rxPDO2, uint16_t rxPDO3, uint16_t rxPDO4, uint16_t txPDO1, uint16_t txPDO2, uint16_t txPDO3, uint16_t txPDO4);
     bool confProfPos(uint slave, bool moveImmediate, bool moveRelative);
     bool confMotionTask(uint slave, uint vel, uint acc, uint dec);
-    bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8 out1Mode, uint8 out2Mode);
-    bool confUnits(uint slave, uint32 motorRev, uint32 shaftRev);
+    bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8_t out1Mode, uint8_t out2Mode);
+    bool confUnits(uint slave, uint32_t motorRev, uint32_t shaftRev);
     bool setOpMode(uint slave, ecat_OpModes reqMode);
     
-    #if DEBUG_MODE
+    #if AKD_ECAT_DEBUG_MODE
 
         int getLockedMem();
 
@@ -66,7 +56,7 @@ class AKDController{
     uint slaveCount, configuredSlaves;
 
     // PDO buffers
-    uint8 IOmap[4096];//[4096];
+    uint8_t IOmap[4096];//[4096];
     
     
     // Slave Data Struct Array
@@ -84,24 +74,24 @@ class AKDController{
             mode = (ecat_OpModes)UNINIT_OPMODE;
         }*/
         // PDO Data
-        uint8 *outUserBuff, *inUserBuff;
-        uint16 *coeCtrlMapPtr, *coeStatusMapPtr;
+        uint8_t *outUserBuff, *inUserBuff;
+        uint16_t *coeCtrlMapPtr, *coeStatusMapPtr;
         int coeCtrlOffset, coeStatusOffset;
 
         // PDO Assign
         struct mappings_t{
-            uint8  numOfPDOs;
-            uint16 mapObject[4];
-            uint8  bytes;
+            uint8_t  numOfPDOs;
+            uint16_t mapObject[4];
+            uint8_t  bytes;
         }rxPDO, txPDO;
-        uint8 totalBytes;
+        uint8_t totalBytes;
 
         // Config
 
         // Slave Control Signals
         bool update, quickStop;
         
-        uint16 coeCtrlWord, coeStatus;
+        uint16_t coeCtrlWord, coeStatus;
 
         // Profile Control
         ecat_OpModes mode;
@@ -111,8 +101,8 @@ class AKDController{
     // Control Signals
     bool inOP;
     uint inSyncCount;
-    int8 wrkCounter, expectedWKC;
-    int64 diffDCtime;
+    int8_t wrkCounter, expectedWKC;
+    int64_t diffDCtime;
     ecat_masterStates masterState = ms_shutdown;
 
     
@@ -123,7 +113,7 @@ class AKDController{
     pthread_cond_t IOUpdated, stateUpdated;
     pthread_t talker, controller;
 
-    #if DEBUG_MODE
+    #if AKD_ECAT_DEBUG_MODE
     char coeStatusReadable[9][23] = {
         "Not Ready To Switch-On",  //0
         "Switch-On Disabled",      //1
@@ -146,22 +136,22 @@ class AKDController{
     };
 
     // Debug 
-    int64 gl_toff, gl_delta;
-    uint64 gl_integral;
+    int64_t gl_toff, gl_delta;
+    uint64_t gl_integral;
     uint buffHead = 0, buffTail = 0;
     char debugBuffer[DEBUG_BUFF_SIZE][DEBUG_BUFF_WIDTH] = {0};
 
     void addToDebugBuff(char *str);
     void printDebugBuff();
-    char* getReadableStatus(uint16 status);
-    char* getReadableCtrl(uint16 ctrl);
+    char* getReadableStatus(uint16_t status);
+    char* getReadableCtrl(uint16_t ctrl);
     
 
     #endif
 
     // Utility Methods
     bool State(ecat_masterStates reqState);
-    bool ec_sync(int64 reftime, uint64 cycletime , int64 *offsettime, int64 dist, int64 window, int64 *d, int64 *i);
+    bool ec_sync(int64_t reftime, uint64_t cycletime , int64_t *offsettime, int64_t dist, int64_t window, int64_t *d, int64_t *i);
     
 
     // Main Methods
