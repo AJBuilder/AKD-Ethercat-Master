@@ -1,7 +1,11 @@
 cmake_policy(SET CMP0048 NEW)
 
 project(AKDController VERSION 0.1)
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.13)
+
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_LIST_DIR}/install)
+endif()
 
 
 # Check to make sure submodule was initialized.
@@ -29,7 +33,6 @@ endif()
 #Dependency
 add_subdirectory(extern/SOEM)
 
-
 add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
 #Library
 #if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -41,7 +44,6 @@ add_library(AKD_ecat STATIC src/AKDEcatController.cpp)
 
 target_link_libraries(AKD_ecat PUBLIC soem pthread)
 target_include_directories(AKD_ecat PUBLIC include)
-
 
 #Tests
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -57,14 +59,13 @@ else()
   message(STATUS "AKD_Ecat: not building tests when built as dependency")
 endif()
 
-
-set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_LIST_DIR}/install)
+message("AKD prefix : ${CMAKE_INSTALL_PREFIX}")
 
 install( FILES include/AKDEcatController.h
-    DESTINATION include/
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/include
 )
 install( TARGETS AKD_ecat
-    DESTINATION lib/
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
 )
 
 
