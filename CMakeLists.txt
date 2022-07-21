@@ -59,7 +59,7 @@ else()
   message(STATUS "AKD_Ecat: not building tests when built as dependency")
 endif()
 
-message("AKD prefix : ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "AKD install prefix : ${CMAKE_INSTALL_PREFIX}")
 
 install( FILES include/AKDEcatController.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include
