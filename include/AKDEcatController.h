@@ -1,15 +1,15 @@
 #ifndef AKD_ECAT_DEBUG_MODE
-#define AKD_ECAT_DEBUG_MODE FALSE
+    #define AKD_ECAT_DEBUG_MODE false
+#endif
 
 #define DEBUG_BUFF_SIZE 50
 #define DEBUG_BUFF_WIDTH 200
-
-#endif
 
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
+#include <string>
 
 
     enum ecat_OpModes{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
@@ -19,7 +19,7 @@ class AKDController{
 
     enum ecat_masterStates{ms_shutdown, ms_stop, ms_disable, ms_enable};
     
-    bool ecat_Init(char *ifname);
+    bool ecat_Init(std::string ifname);
     bool ecat_Start();
 
     bool Enable();
@@ -52,7 +52,7 @@ class AKDController{
     private:
 
     // Const
-    char *ifname;
+    std::string ifname;
     uint slaveCount, configuredSlaves;
 
     // PDO buffers

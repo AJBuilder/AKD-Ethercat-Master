@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAKD_ecat.a  CMakeFiles/AKD_ecat.dir/src/AKDEcatController.cpp.o
+/usr/bin/ranlib libAKD_ecat.a

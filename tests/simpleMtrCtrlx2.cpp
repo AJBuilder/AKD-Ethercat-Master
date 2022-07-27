@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <sys/queue.h>
 #include <inttypes.h>
 
@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
    {
       AKDController master1;
       int err = 0;
+      std::string ifname = argv[1];
+
       
       struct __attribute__((__packed__)){
          //0x1725
@@ -81,7 +83,7 @@ int main(int argc, char *argv[])
          printf("\nLocked memory in main(PID: %d) before Init: %dkB\n", getpid(), master1.getLockedMem());
       #endif
 
-      if(!master1.ecat_Init(argv[1])) return -1;
+      if(!master1.ecat_Init(ifname)) return -1;
 
       #if AKD_ECAT_DEBUG_MODE
          printf("\nLocked memory in main after Init: %dkB\n", master1.getLockedMem());

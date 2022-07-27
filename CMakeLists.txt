@@ -7,6 +7,11 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_LIST_DIR}/install)
 endif()
 
+option(DEBUG_MODE "Will output info on controller state" OFF)
+if(DEBUG_MODE)
+    add_compile_definitions("AKD_ECAT_DEBUG_MODE=true")
+endif()
+
 
 # Check to make sure submodule was initialized.
 find_package(Git QUIET)

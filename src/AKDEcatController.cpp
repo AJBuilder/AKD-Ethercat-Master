@@ -106,7 +106,8 @@
 #include <stdlib.h>
 
 #include <inttypes.h>
-#include <string.h>
+#include <string>
+#include <cstring>
 
 #include <pthread.h>
 #include <sched.h>
@@ -114,7 +115,7 @@
 #include <sys/mman.h>
 
 #include "AKDEcatController.h"
-#include "ethercat.h"
+#include "soem/ethercat.h"
 
 
 
@@ -590,16 +591,16 @@ void* AKDController::ecat_Controller(void* THIS)
  * @param      ifname   Pointer to string holding the name of the ethernet interface to initialize on.
  * @result              Returns TRUE if successful
 */
-bool AKDController::ecat_Init(char *ifname){
+bool AKDController::ecat_Init(std::string ifname){
 
    if(this->masterState != ms_shutdown){
       printf("ECAT: Already initialized. Shutdown before restarting.\n");
       return FALSE;
    }
 
-   if (ec_init(ifname))
+   if (ec_init(ifname.c_str()))
    {
-      printf("ECAT: ec_init on %s succeeded.\n", ifname);
+      printf("ECAT: ec_init on %s succeeded.\n", ifname.c_str());
       this->ifname = ifname;
 
       /* find and auto-config slaves */
@@ -658,7 +659,7 @@ bool AKDController::ecat_Init(char *ifname){
          printf("ECAT: No slaves found!\n");
    }
    else
-      printf("ECAT: No socket connection on %s. Execute as root!\n", ifname);
+      printf("ECAT: No socket connection on %s. Execute as root!\n", ifname.c_str());
 
       return FALSE;
 }
@@ -1158,7 +1159,7 @@ bool AKDController::State(ecat_masterStates reqState){
             /* request INIT state for all slaves */
             ec_writestate(0);
 
-            printf("ECAT: Shutting down master on %s, close socket\n", this->ifname);
+            printf("ECAT: Shutting down master on %s, close socket\n", this->ifname.c_str());
             /* stop SOEM, close socket */
             ec_close();
         }

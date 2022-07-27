@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/simpleMtrCtrlx2.dir/tests/simpleMtrCtrlx2.cpp.o  -o simpleMtrCtrlx2  libAKD_ecat.a extern/SOEM/libsoem.a -lrt -lpthread 

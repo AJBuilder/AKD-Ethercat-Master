@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <string>
 #include <sys/queue.h>
 #include <inttypes.h>
 
@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
    {
       AKDController master1;
       int err = 0;
+      std::string ifname = argv[1];
       
       struct __attribute__((__packed__)){
          //0x1725
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
 
 
       
-      if(!master1.ecat_Init(argv[1])) return -1;
+      if(!master1.ecat_Init(ifname)) return -1;
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
       master1.confUnits(1, 1, 360);
       master1.confMotionTask(1, 2000, 10000, 10000);
