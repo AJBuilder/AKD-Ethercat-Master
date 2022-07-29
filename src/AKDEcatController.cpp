@@ -591,16 +591,16 @@ void* AKDController::ecat_Controller(void* THIS)
  * @param      ifname   Pointer to string holding the name of the ethernet interface to initialize on.
  * @result              Returns TRUE if successful
 */
-bool AKDController::ecat_Init(std::string ifname){
+bool AKDController::ecat_Init(const char* ifname){
 
    if(this->masterState != ms_shutdown){
       printf("ECAT: Already initialized. Shutdown before restarting.\n");
       return FALSE;
    }
 
-   if (ec_init(ifname.c_str()))
+   if (ec_init(ifname))
    {
-      printf("ECAT: ec_init on %s succeeded.\n", ifname.c_str());
+      printf("ECAT: ec_init on %s succeeded.\n", ifname);
       this->ifname = ifname;
 
       /* find and auto-config slaves */
@@ -663,7 +663,7 @@ bool AKDController::ecat_Init(std::string ifname){
          printf("ECAT: No slaves found!\n");
    }
    else
-      printf("ECAT: No socket connection on %s. Execute as root!\n", ifname.c_str());
+      printf("ECAT: No socket connection on %s. Execute as root!\n", ifname);
 
       return FALSE;
 }

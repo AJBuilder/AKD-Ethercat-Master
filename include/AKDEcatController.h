@@ -9,7 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
-#include <string>
 
 
     enum ecat_OpModes{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
@@ -19,7 +18,7 @@ class AKDController{
 
     enum ecat_masterStates{ms_shutdown, ms_stop, ms_disable, ms_enable};
     
-    bool ecat_Init(std::string ifname);
+    bool ecat_Init(const char* ifname);
     bool ecat_Start();
 
     bool Enable();
@@ -36,7 +35,7 @@ class AKDController{
     bool QuickStop(uint slave, bool enableQuickStop);
     bool waitForTarget(uint slave, uint timeout_ms);
 
-    void confSlavePDOs(uint slave, void* usrControl, int size, uint16_t rxPDO1, uint16_t rxPDO2, uint16_t rxPDO3, uint16_t rxPDO4, uint16_t txPDO1, uint16_t txPDO2, uint16_t txPDO3, uint16_t txPDO4);
+    void confSlavePDOs(uint slave, const void* usrControl, int size, uint16_t rxPDO1, uint16_t rxPDO2, uint16_t rxPDO3, uint16_t rxPDO4, uint16_t txPDO1, uint16_t txPDO2, uint16_t txPDO3, uint16_t txPDO4);
     bool confProfPos(uint slave, bool moveImmediate, bool moveRelative);
     bool confMotionTask(uint slave, uint vel, uint acc, uint dec);
     bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8_t out1Mode, uint8_t out2Mode);
@@ -52,7 +51,7 @@ class AKDController{
     private:
 
     // Const
-    std::string ifname;
+    char* ifname;
     uint slaveCount, configuredSlaves;
 
     // PDO buffers
