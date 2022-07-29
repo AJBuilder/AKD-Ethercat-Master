@@ -601,7 +601,7 @@ bool AKDController::ecat_Init(const char* ifname){
    if (ec_init(ifname))
    {
       printf("ECAT: ec_init on %s succeeded.\n", ifname);
-      this->ifname = ifname;
+      this->ifname = (char*)ifname;
 
       /* find and auto-config slaves */
       this->expectedWKC = ec_config_init(FALSE);
@@ -1162,7 +1162,7 @@ bool AKDController::State(ecat_masterStates reqState){
             /* request INIT state for all slaves */
             ec_writestate(0);
 
-            printf("ECAT: Shutting down master on %s, close socket\n", this->ifname.c_str());
+            printf("ECAT: Shutting down master on %s, close socket\n", this->ifname);
             /* stop SOEM, close socket */
             ec_close();
 
@@ -1490,7 +1490,7 @@ bool AKDController::confMotionTask(uint slave, uint vel, uint acc, uint dec){
  * @param      txPDO3      Object index for 3st input(from slave) PDO assignment.
  * @param      txPDO4      Object index for 4st input(from slave) PDO assignment.
 */
-void AKDController::confSlavePDOs(uint slave, void* usrControl, int bufferSize, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4){
+void AKDController::confSlavePDOs(uint slave, const void* usrControl, int bufferSize, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4){
    int slaveNum, rx = 0, tx = 0;
    
    pthread_mutex_lock(&this->control);

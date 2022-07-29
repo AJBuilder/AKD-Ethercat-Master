@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 
 
       
-      if(!master1.ecat_Init(ifname)) return -1;
+      if(!master1.ecat_Init(ifname.c_str())) return -1;
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
       master1.confUnits(1, 1, 360);
       master1.confMotionTask(1, 2000, 10000, 10000);

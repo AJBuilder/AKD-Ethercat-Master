@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
          printf("\nLocked memory in main(PID: %d) before Init: %dkB\n", getpid(), master1.getLockedMem());
       #endif
 
-      if(!master1.ecat_Init(ifname)) return -1;
+      if(!master1.ecat_Init(ifname.c_str())) return -1;
 
       #if AKD_ECAT_DEBUG_MODE
          printf("\nLocked memory in main after Init: %dkB\n", master1.getLockedMem());
