@@ -604,12 +604,16 @@ bool AKDController::ecat_Init(std::string ifname){
       this->ifname = ifname;
 
       /* find and auto-config slaves */
-      if( ec_config_init(FALSE) > 0 ) {
+      this->expectedWKC = ec_config_init(FALSE);
+      if(this->expectedWKC > 0) {
          this->masterState = ms_stop;
 
          // Allocate slave data
          this->slaveCount = ec_slavecount;
          this->slaves = new ecat_slave [this->slaveCount];
+
+         //this->expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
+
 
          // Initialize threading resources
          struct sched_param rt_param;
@@ -927,7 +931,6 @@ bool AKDController::ecat_Start(){
    ec_slave[0].state = EC_STATE_SAFE_OP;
    ec_writestate(0);
    printf(ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_SAFE_OP ? "State: SAFE_OP\n" : "ERR! NOT IN SAFE_OP!\n") ;
-   this->expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
    printf("ECAT: Calculated workcounter %d\n", this->expectedWKC);
 
 
@@ -1162,6 +1165,8 @@ bool AKDController::State(ecat_masterStates reqState){
             printf("ECAT: Shutting down master on %s, close socket\n", this->ifname.c_str());
             /* stop SOEM, close socket */
             ec_close();
+
+            this->inOP = false;
         }
    }
 
@@ -1262,6 +1267,7 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
    pthread_mutex_lock(&this->control);
    if(this->masterState == ms_shutdown) {
       pthread_mutex_unlock(&this->control);
+
       return FALSE;
    }
    pthread_mutex_unlock(&this->control);
@@ -1274,7 +1280,11 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
    timeout.tv_sec += 5;
 
    
-   if(Disable()){ // Don't assign if not disabled 
+   if((this->inOP == false) || Disable()){  // Only change opmode when either the master is not in operation
+                                    // or in operation and has successfully disabled.
+                                    // Disable() shouldn't evaluate if inOp == false.
+                                    // Also, inOP shouldn't need a mutex/lock since it shouldn't be set 
+                                    // outside of Start() and Shutdown(), which are called by the user.
       
       pthread_mutex_lock(&this->control);
       
@@ -1308,8 +1318,9 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
       }while((slaveNum <= this->slaveCount) && (slave == 0));
 
       pthread_mutex_unlock(&this->control);
-      Enable();
-   }
+
+      if(this->inOP == true) Enable();
+   } else return FALSE;
 
    
    
@@ -1331,7 +1342,7 @@ bool AKDController::confProfPos(uint slave, bool moveImmediate, bool moveRelativ
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
-
+   printf("Checking lsaves\n");
    if(slave > this->slaveCount) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
@@ -1343,6 +1354,7 @@ bool AKDController::confProfPos(uint slave, bool moveImmediate, bool moveRelativ
    do{
       if(this->slaves[slaveNum].mode != profPos){
          pthread_mutex_unlock(&this->control);
+         printf("Invalid op mode: %i\n", this->slaves[slaveNum].mode);
          return FALSE;
       }
 
@@ -1419,28 +1431,41 @@ bool AKDController::confMotionTask(uint slave, uint vel, uint acc, uint dec){
    }
    pthread_mutex_unlock(&this->control);
 
+   
    if(slave > this->slaveCount) return FALSE;
 
-   int slaveNum, sdoBuff, sdoBuffSize;
+   uint slaveNum, sdoBuff;
+   int sdoBuffSize, i;
+   bool usingDS402Scaling;
    if(slave != 0) slaveNum = slave;
    else slaveNum = 1;
-   do{ 
-      sdoBuff = acc;
-      ec_SDOwrite(slaveNum, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set acceleration for profile position mode
-      sdoBuff = dec;
-      ec_SDOwrite(slaveNum, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set decceleration for profile position mode
-      sdoBuff = vel;
-      ec_SDOwrite(slaveNum, MT_V, FALSE, 4, &sdoBuff, EC_TIMEOUTRXM); // Set velocity for profile position mode
+   do{
+      
+      i = 0;
+      do{ 
+         sdoBuff = acc; // Set acceleration for profile position mode  
+         //printf("CONFMOTION: Writing to MT_ACC (%i)\n", i);
+         if(i >= 10) return FALSE;
+         else i++;
+      }while(ec_SDOwrite(slaveNum, MT_ACC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM) != 1);
 
-      sdoBuffSize = 4;
-      ec_SDOread(slaveNum, MT_ACC, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
-      if(sdoBuff != acc) return FALSE;
-      sdoBuffSize = 4;
-      ec_SDOread(slaveNum, MT_DEC, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
-      if(sdoBuff != dec)  return FALSE;
-      sdoBuffSize = 4;
-      ec_SDOread(slaveNum, MT_V, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTTXM);
-      if(sdoBuff != vel)  return FALSE;
+      i = 0;
+      do{
+         sdoBuff = dec; // Set decceleration for profile position mode
+         //printf("CONFMOTION: Writing to MT_DEC (%i)\n", i);
+         if(i >= 10) return FALSE;
+         else i++;
+      }while(ec_SDOwrite(slaveNum, MT_DEC , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM) != 1);
+
+      i = 0;
+      do{
+         sdoBuff = vel; // Set velocity for profile position mode
+         //printf("CONFMOTION: Writing to MT_V (%i)\n", i);
+         if(i >= 10) return FALSE;
+         else i++;
+      }while(ec_SDOwrite(slaveNum, MT_V , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM) != 1);
+      
+
    
       slaveNum++;
    } while((slaveNum <= this->slaveCount) && (slave == 0));

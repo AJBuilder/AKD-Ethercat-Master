@@ -7,7 +7,7 @@
 
 
 #include "AKDEcatController.h"
-#include "ethercat.h"
+#include "soem/ethercat.h"
 
 #define USECS_PER_SEC     1000000
 
@@ -92,14 +92,34 @@ int main(int argc, char *argv[])
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
       master1.confSlavePDOs(2, &s2, sizeof(s2), 0x1725, 0,0,0, 0x1B20, 0,0,0);
 
-      master1.confUnits(1, 1, 360);
-      master1.confUnits(2, 1, 360);
+      if(!master1.confUnits(1, 1, 360)) {
+         printf("Couldn't confUnits on 1\n");
+         return -1;
+      }
+      if(!master1.confUnits(2, 1, 360)) {
+         printf("Couldn't confUnits on 2\n");
+         return -2;
+      }
 
-      master1.confMotionTask(0, 2000, 10000, 10000);
+      if(!master1.confMotionTask(0, 2000, 2000, 2000)) {
+         printf("Couldn't confMotionTask\n");
+         return -3;
+      }
 
-      master1.confProfPos(0, true, false);
+      if(!master1.setOpMode(0, profPos)) {
+         printf("Couldn't setOpMode\n");
+         return -3;
+      }
 
-      if (!master1.ecat_Start()) return -2;
+      if(!master1.confProfPos(0, true, false)) {
+         printf("Couldn't confProfPos\n");
+         return -4;
+      }
+
+      if (!master1.ecat_Start()) {
+         printf("Couldn't start\n");
+         return -5;
+      }
       us_sleep(10000);
 
       printf("\nReading fault...\n");
@@ -117,23 +137,23 @@ int main(int argc, char *argv[])
       printf("\nEnabling...\n");
       if(!master1.Enable()){
          printf("\nEnable failed\n");
-         return -3;
+         return -6;
       }
       printf("\nEnabled!\n");
 
       s1.maxTorque = 1000;
       s2.maxTorque = 1000;
 
-      if(!master1.setOpMode(0, profPos)){
-         printf("\nMode switch failed\n");
-         return -4;
-      }
-      printf("\nMode switched!\n");
+      //if(!master1.setOpMode(0, profPos)){
+      //   printf("\nMode switch failed\n");
+      //   return -7;
+      //}
+      //printf("\nMode switched!\n");
 
       err = master1.Home(0, 0, 0, 6000, 1000, 500, 0, 0);
       if(err != true){
          printf("\nFailed to home. %i\n", err);
-         return -5;
+         return -8;
       }
       printf("\nHomed\n");
 
