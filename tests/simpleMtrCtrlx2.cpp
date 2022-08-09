@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
          return -3;
       }
 
-      if(!master1.setOpMode(0, profPos)) {
+      if(!master1.setOpMode(0, AKDController::ecat_OpModes::profPos)) {
          printf("Couldn't setOpMode\n");
          return -3;
       }

@@ -44,9 +44,6 @@ int main(int argc, char *argv[])
          uint16_t  latchStatus;
          int16_t   analogInput;
       } s1;
-
-
-
       
       if(!master1.ecat_Init(ifname.c_str())) return -1;
       master1.confSlavePDOs(1, &s1, sizeof(s1), 0x1725, 0,0,0, 0x1B20, 0,0,0);
@@ -76,7 +73,7 @@ int main(int argc, char *argv[])
 
       s1.maxTorque = 1000;
 
-      if(!master1.setOpMode(1, profPos)){
+      if(!master1.setOpMode(1, AKDController::ecat_OpModes::profPos)){
          printf("\nMode switch failed\n");
          return -4;
       }

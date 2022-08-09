@@ -4,10 +4,20 @@
 
 //////////////////// PDO Assignment Objects ////////////////////
 #define rxPDOEnable 0x1C12, 0
-#define rxPDOAssign1 0x1C12
+#define rxPDOAssign 0x1C12
 
 #define txPDOEnable 0x1C13, 0
-#define txPDOAssign1 0x1C13
+#define txPDOAssign 0x1C13
+
+#define rxFlexPDO1   0x1600
+#define rxFlexPDO2   0x1601
+#define rxFlexPDO3   0x1602
+#define rxFlexPDO4   0x1603
+
+#define txFlexPDO1   0x1a00
+#define txFlexPDO2   0x1a01
+#define txFlexPDO3   0x1a02
+#define txFlexPDO4   0x1a03
 
 ///////////////// Control and Status Objects //////////////////
 #define COControl    0x6040
@@ -108,6 +118,7 @@
 #include <inttypes.h>
 #include <string>
 #include <cstring>
+#include <vector>
 
 #include <pthread.h>
 #include <sched.h>
@@ -328,7 +339,7 @@ void* AKDController::ecat_Talker(void* THIS)
       
       if(pthread_mutex_trylock(&This->control) == 0){
          // CONTROL LOCKED
-         if(This->masterState == ms_shutdown) {
+         if(This->masterState == ecat_masterStates::ms_shutdown) {
             pthread_mutex_unlock(&This->control);
             break;
          }
@@ -359,7 +370,7 @@ void* AKDController::ecat_Talker(void* THIS)
                This->slaves[slaveNum].update = FALSE;
             }
             else {
-               if(This->slaves[slaveNum].mode == profPos || This->slaves[slaveNum].mode == homing) // If in ProfPos or Homing only
+               if(This->slaves[slaveNum].mode == ecat_OpModes::profPos || This->slaves[slaveNum].mode == ecat_OpModes::homing) // If in ProfPos or Homing only
                   This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit
                   This->slaves[slaveNum].coeCtrlWord |= *This->slaves[slaveNum].coeCtrlMapPtr & (1 << 4); // Copy move bit from talker controled IOmap.
             }
@@ -443,13 +454,13 @@ void* AKDController::ecat_Controller(void* THIS)
    {
       // CONTROL LOCKED
       pthread_mutex_lock(&This->control);
-      if(This->masterState == ms_shutdown){
+      if(This->masterState == ecat_masterStates::ms_shutdown){
          pthread_mutex_unlock(&This->control);  
          break;
       }
       if(This->diffDCtime == 0) noDCCount++;
       else noDCCount = 0;
-      if(noDCCount > 20) This->masterState = ms_stop;
+      if(noDCCount > 20) This->masterState = ecat_masterStates::ms_stop;
 
 
       for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
@@ -462,17 +473,17 @@ void* AKDController::ecat_Controller(void* THIS)
                switch(This->slaves[slaveNum].coeStatus & 0b01001111){
                   case NOTRDY2SWCH  & 0b01001111: 
                   case SWCHDISABLED & 0b01001111:
-                     if(This->masterState != ms_shutdown)This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; break; // Ready2Switch : 0bx---x110
+                     if(This->masterState != ecat_masterStates::ms_shutdown)This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; break; // Ready2Switch : 0bx---x110
                      break;
                   case RDY2SWITCH   & 0b01001111:
                   case SWITCHEDON   & 0b01001111:
                   case OP_ENABLED   & 0b11011111:
                      switch(This->masterState){
                         default :
-                        case ms_shutdown :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111);          break; // SwitchOnDisabled : 0bx---xx0x
-                        case ms_stop     :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; break; // Ready2Switch : 0bx---x110
-                        case ms_disable  :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; break; // SwitchedOn/OpDisable : 0bx---0111
-                        case ms_enable   :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b1111; break; // OpEnabled : 0bx---1111
+                        case ecat_masterStates::ms_shutdown :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111);          break; // SwitchOnDisabled : 0bx---xx0x
+                        case ecat_masterStates::ms_stop     :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00000111) | 0b0110; break; // Ready2Switch : 0bx---x110
+                        case ecat_masterStates::ms_disable  :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; break; // SwitchedOn/OpDisable : 0bx---0111
+                        case ecat_masterStates::ms_enable   :  This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b1111; break; // OpEnabled : 0bx---1111
                      }
                      break;
                   case FAULT : This->slaves[slaveNum].coeCtrlWord = (This->slaves[slaveNum].coeCtrlWord & ~0b00001111) | 0b0111; // SwitchedOn/OpDisable : 0bx---0111
@@ -593,7 +604,7 @@ void* AKDController::ecat_Controller(void* THIS)
 */
 bool AKDController::ecat_Init(const char* ifname){
 
-   if(this->masterState != ms_shutdown){
+   if(this->masterState != ecat_masterStates::ms_shutdown){
       printf("ECAT: Already initialized. Shutdown before restarting.\n");
       return FALSE;
    }
@@ -606,7 +617,19 @@ bool AKDController::ecat_Init(const char* ifname){
       /* find and auto-config slaves */
       this->expectedWKC = ec_config_init(FALSE);
       if(this->expectedWKC > 0) {
-         this->masterState = ms_stop;
+         this->masterState = ecat_masterStates::ms_stop;
+
+         printf("ECAT: Putting slaves into PRE_OP state... ");
+         ec_slave[0].state = EC_STATE_PRE_OP;
+         ec_writestate(0);
+         if(ec_statecheck(0, EC_STATE_PRE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_PRE_OP)
+            printf( "State: PRE_OP\n");
+         else{
+            printf("ERR! NOT IN PRE_OP!\n");
+            this->masterState = ecat_masterStates::ms_shutdown;
+            ec_close();
+            return false;
+         }
 
          // Allocate slave data
          this->slaveCount = ec_slavecount;
@@ -633,7 +656,7 @@ bool AKDController::ecat_Init(const char* ifname){
          printf("\nMain running on CPU %d\n", sched_getcpu());
 
          if(err != 0){
-            this->masterState = ms_shutdown;
+            this->masterState = ecat_masterStates::ms_shutdown;
             delete this->slaves;
             
             ec_close(); // stop SOEM, close socket
@@ -644,7 +667,7 @@ bool AKDController::ecat_Init(const char* ifname){
          
 
          if(err != 0){
-            this->masterState = ms_shutdown;
+            this->masterState = ecat_masterStates::ms_shutdown;
             delete this->slaves;
             
             ec_close(); // stop SOEM, close socket
@@ -686,7 +709,7 @@ bool AKDController::ecat_Start(){
    struct ecat_slave::mappings_t *pdoMappings;
    
 
-   if(this->masterState == ms_shutdown){
+   if(this->masterState == ecat_masterStates::ms_shutdown){
       printf("ECAT: Not initialized. Call ecat_Init()\n");
       return FALSE;
    }
@@ -700,7 +723,7 @@ bool AKDController::ecat_Start(){
 
    // Configure PDO assignments
    printf("ECAT: %d slaves found. Configuring PDO assigments...\n",slaveCount);
-
+   printf("ECAT: Mode: %i\n", ec_slave[1].state);
 
    for(int slaveNum = 1 ; slaveNum <= this->slaveCount ; slaveNum++){
       
@@ -721,11 +744,11 @@ bool AKDController::ecat_Start(){
          //Write
          for(int j = 0 ; j < this->slaves[slaveNum - 1].rxPDO.numOfPDOs ; j++){
             sdoBuff = this->slaves[slaveNum - 1].rxPDO.mapObject[j];
-            ec_SDOwrite(slaveNum, rxPDOAssign1, j + 1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
+            ec_SDOwrite(slaveNum, rxPDOAssign, j + 1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign rxPDO1
          }
          for(int j = 0 ; j < this->slaves[slaveNum - 1].txPDO.numOfPDOs ; j++){
             sdoBuff = this->slaves[slaveNum - 1].txPDO.mapObject[j];
-            ec_SDOwrite(slaveNum, txPDOAssign1, j + 1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign txPDO1
+            ec_SDOwrite(slaveNum, txPDOAssign, j + 1, FALSE, 2, &sdoBuff, EC_TIMEOUTRXM); // Assign txPDO1
          }
 
          // Set num of pdos
@@ -758,13 +781,13 @@ bool AKDController::ecat_Start(){
          for(int j = 0 ; j < this->slaves[slaveNum - 1].rxPDO.numOfPDOs ; j++){
             sdoBuffSize = 2;
             sdoBuff = 0;
-            ec_SDOread(slaveNum, rxPDOAssign1, j + 1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Read rxPDO1
+            ec_SDOread(slaveNum, rxPDOAssign, j + 1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Read rxPDO1
             if(sdoBuff != this->slaves[slaveNum - 1].rxPDO.mapObject[j]) sdosNotConfigured++;
          }
          for(int j = 0 ; j < this->slaves[slaveNum - 1].txPDO.numOfPDOs ; j++){
             sdoBuffSize = 2;
             sdoBuff = 0;
-            ec_SDOread(slaveNum, txPDOAssign1, j + 1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Read txPDO1
+            ec_SDOread(slaveNum, txPDOAssign, j + 1, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Read txPDO1
             if(sdoBuff != this->slaves[slaveNum - 1].txPDO.mapObject[j]) sdosNotConfigured++;
          }
 
@@ -801,14 +824,15 @@ bool AKDController::ecat_Start(){
 
    ecx_context.manualstatechange = 1; // Prevents putting slaves into SAFEOP when configuring IOmap.
    ec_config_map(&this->IOmap); // Set up IOmap.
+   printf("ECAT: Mode: %i\n", ec_slave[1].state);
    
    // Check to make sure user buffer is sized appropriately. Find CoE control and status words. Finally, finish setting up user buffer.
-   for(int slaveNum = 1 ; slaveNum <= this->slaveCount ; slaveNum++){
+    for(int slaveNum = 1 ; slaveNum <= this->slaveCount ; slaveNum++){
       this->slaves[slaveNum - 1].rxPDO.bytes = ec_slave[slaveNum].Obytes;
       this->slaves[slaveNum - 1].txPDO.bytes = ec_slave[slaveNum].Ibytes;
 
       if(this->slaves[slaveNum-1].totalBytes != (this->slaves[slaveNum - 1].rxPDO.bytes + this->slaves[slaveNum - 1].txPDO.bytes)){
-         printf("ECAT: Input struct is of incorrect size. Is %i. Needs to be %i.\n", slaves[slaveNum-1].totalBytes, (this->slaves[slaveNum - 1].rxPDO.bytes + this->slaves[slaveNum - 1].txPDO.bytes));
+         printf("ECAT: Input struct of slave %i is of incorrect size. Is %i. Needs to be %i.\n", slaveNum, slaves[slaveNum-1].totalBytes, (this->slaves[slaveNum - 1].rxPDO.bytes + this->slaves[slaveNum - 1].txPDO.bytes));
          return FALSE;
       }
 
@@ -816,7 +840,7 @@ bool AKDController::ecat_Start(){
       slaves[slaveNum-1].coeStatusOffset = -1;
 
       pdoMappings = &slaves[slaveNum - 1].rxPDO;
-      PDOAssign = rxPDOAssign1;
+      PDOAssign = rxPDOAssign;
       while(1){
 
          bytesTillCoE = 0;
@@ -858,7 +882,7 @@ bool AKDController::ecat_Start(){
                      ec_SDOread(slaveNum, pdoObject, (uint8)subidxloop, FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM);
                      
                      //extract bitlength of SDO
-                     if(PDOAssign == rxPDOAssign1){
+                     if(PDOAssign == rxPDOAssign){
                         if(((sdoBuff & 0xFFFF0000) >> 16) == COControl){
                            if(slaves[slaveNum-1].coeCtrlOffset!= -1){
                               printf("ECAT: Found multiple CoE control word mappings when reading Slave %i's mapping. Aborting Start().\n", slaveNum);
@@ -898,8 +922,8 @@ bool AKDController::ecat_Start(){
 
          // Repeat but with txPDOs
          pdoMappings = &slaves[slaveNum - 1].txPDO;
-         if(PDOAssign == txPDOAssign1) break;
-         PDOAssign = txPDOAssign1;
+         if(PDOAssign == txPDOAssign) break;
+         PDOAssign = txPDOAssign;
          
       }
    
@@ -917,12 +941,25 @@ bool AKDController::ecat_Start(){
 
 
    
+   printf("ECAT: Mode: %i\n", ec_slave[1].state);
 
    // Config DC (In PREOP)
    printf("ECAT: Configuring DC. Should be in PRE-OP. ");
-   printf(ec_statecheck(0, EC_STATE_PRE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_PRE_OP ? "State: PRE_OP\n" : "ERR! NOT IN PRE_OP!\n") ;
-   printf(ec_configdc() ? "ECAT: Found slaves with DC.\n" : "ECAT: Did not find slaves with DC.\n") ;
-   ec_dcsync0(1, FALSE, CYCLE_NS, SYNC_DIST);
+
+   if(ec_statecheck(0, EC_STATE_PRE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_PRE_OP)
+      printf( "State: PRE_OP\n");
+   else{
+      printf("ERR! NOT IN PRE_OP!\n");
+      return false;
+   }
+
+   if(ec_configdc())
+      printf("ECAT: Found slaves with DC.\n");
+   else{
+      printf("ECAT: Did not find slaves with DC.\n");
+      return false;
+   }
+   ec_dcsync0(1, FALSE, CYCLE_NS, 0);
    
    
    
@@ -930,7 +967,11 @@ bool AKDController::ecat_Start(){
    printf("ECAT: Slaves mapped, state to SAFE_OP... ");
    ec_slave[0].state = EC_STATE_SAFE_OP;
    ec_writestate(0);
-   printf(ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_SAFE_OP ? "State: SAFE_OP\n" : "ERR! NOT IN SAFE_OP!\n") ;
+   if(ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 4) == EC_STATE_SAFE_OP)
+      printf( "State: SAFE_OP\n");
+   else 
+      printf("ERR! NOT IN SAFE_OP!\n");
+
    printf("ECAT: Calculated workcounter %d\n", this->expectedWKC);
 
 
@@ -941,9 +982,9 @@ bool AKDController::ecat_Start(){
    }
    if(pthread_create(&this->controller, NULL, &ecat_Controller, this) != 0) {
       printf("ECAT: Couldn't start controller thread.\n");
-      this->masterState = ms_shutdown; // Set shutdown state to signal talker thread to shutdown.
+      this->masterState = ecat_masterStates::ms_shutdown; // Set shutdown state to signal talker thread to shutdown.
       pthread_join(this->talker, nullptr); // Pretty sure this isn't necessary?
-      this->masterState = ms_stop; // Reset to initialized state.
+      this->masterState = ecat_masterStates::ms_stop; // Reset to initialized state.
       return FALSE;
    }
    printf( "ECAT: Talker started! Synccount needs to reach : %" PRIi64 "\n", (uint64)MASTER_AQTIME_NS / CYCLE_NS);
@@ -955,7 +996,7 @@ bool AKDController::ecat_Start(){
    }
    pthread_mutex_unlock(&this->control);
    printf("\nECAT: Master within sync window. Enabling sync0 generation!\n");
-   ec_dcsync0(1, TRUE, CYCLE_NS, SYNC_DIST); //Enable sync0 generation
+   ec_dcsync0(1, TRUE, CYCLE_NS, 0); //Enable sync0 generation
 
 
    // Go into OPERATIONAL mode
@@ -980,7 +1021,6 @@ bool AKDController::ecat_Start(){
       ec_readstate();
       for(int i = 1; i <= this->slaveCount ; i++)
       {
-         ec_dcsync0(i+1, FALSE, 0, 0); // SYNC0,1
          if(ec_slave[i].state != EC_STATE_OPERATIONAL)
          {
             printf("ECAT: Slave %d State=0x%2.2x StatusCode=0x%4.4x : %s\n",
@@ -1004,7 +1044,7 @@ bool AKDController::ecat_Start(){
 int AKDController::Update(uint slave, bool move, int timeout_ms){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1027,7 +1067,7 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
    do{ // Set update flag (And possibly bit 4)
 
       this->slaves[slaveNum].update = TRUE;
-      if(move && (slaves[slaveNum].mode == homing || slaves[slaveNum].mode == profPos || slaves[slaveNum].mode == intPos) ) 
+      if(move && (slaves[slaveNum].mode == ecat_OpModes::homing || slaves[slaveNum].mode == ecat_OpModes::profPos || slaves[slaveNum].mode == ecat_OpModes::intPos) ) 
          this->slaves[slaveNum].coeCtrlWord |= 0b0010000; // Should only be used if in homing, interpolated or profPos mode.
 
       slaveNum++;
@@ -1091,7 +1131,7 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
 bool AKDController::State(ecat_masterStates reqState){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1103,7 +1143,7 @@ bool AKDController::State(ecat_masterStates reqState){
    ecat_masterStates oldState;
 
    if(this->masterState != reqState){
-         if(reqState != ms_shutdown){
+         if(reqState != ecat_masterStates::ms_shutdown){
 
             oldState = this->masterState;
             this->masterState = reqState;
@@ -1112,13 +1152,13 @@ bool AKDController::State(ecat_masterStates reqState){
             timeout.tv_sec += 5; // 5 sec timeout
             
             switch(reqState){ //Wait for talker thread to confirm update
-               case ms_stop :
+               case ecat_masterStates::ms_stop :
                   waitingFor = RDY2SWITCH & 0b11001111;
                break;
-               case ms_disable :
+               case ecat_masterStates::ms_disable :
                   waitingFor = SWITCHEDON & 0b11001111;
                break;
-               case ms_enable :
+               case ecat_masterStates::ms_enable :
                   waitingFor = OP_ENABLED & 0b11001111;
                break;
                default :
@@ -1144,7 +1184,7 @@ bool AKDController::State(ecat_masterStates reqState){
             }
          }
         else{// Shutdown threads
-            this->masterState = ms_shutdown;
+            this->masterState = ecat_masterStates::ms_shutdown;
             pthread_mutex_unlock(&this->control);
             pthread_join(this->talker, NULL);
             pthread_join(this->controller, NULL);
@@ -1182,7 +1222,7 @@ bool AKDController::State(ecat_masterStates reqState){
  * @see AKDController::State
 */
 bool AKDController::Enable(){
-   return AKDController::State(ms_enable);
+   return AKDController::State(ecat_masterStates::ms_enable);
 }
 
 /** Tries to put master into disable state. Can block for 5 seconds max.
@@ -1192,7 +1232,7 @@ bool AKDController::Enable(){
  * @see AKDController::State
 */
 bool AKDController::Disable(){
-   return AKDController::State(ms_disable);
+   return AKDController::State(ecat_masterStates::ms_disable);
 }
 
 /** Tries to put master into stop state. Can block for 5 seconds max.
@@ -1202,7 +1242,7 @@ bool AKDController::Disable(){
  * @see AKDController::State
 */
 bool AKDController::Stop(){
-   return AKDController::State(ms_stop);
+   return AKDController::State(ecat_masterStates::ms_stop);
 }
 
 /** Tries to put master into shutdown state. Resources are freed. Can block for 5 seconds max.
@@ -1212,7 +1252,7 @@ bool AKDController::Stop(){
  * @see AKDController::State
 */
 bool AKDController::Shutdown(){
-   return AKDController::State(ms_shutdown);
+   return AKDController::State(ecat_masterStates::ms_shutdown);
 }
 
 /** Enables/disables quickstop for specified slave(s).
@@ -1226,7 +1266,7 @@ bool AKDController::Shutdown(){
 bool AKDController::QuickStop(uint slave, bool enableQuickStop){ 
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1265,7 +1305,7 @@ bool AKDController::QuickStop(uint slave, bool enableQuickStop){
 bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
 
       return FALSE;
@@ -1296,7 +1336,7 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
    
             do{
                sdoBuffSize = 1;
-               sdoBuff = reqMode;
+               sdoBuff = (int)reqMode;
                ec_SDOwrite(slaveNum, REQOPMODE, FALSE, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM); // Assign Operational Mode
 
                sdoBuffSize = 1; // Check if drive has acknowledged
@@ -1309,7 +1349,7 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
                   return FALSE;
                }
 
-            } while(sdoBuff != reqMode);
+            } while(sdoBuff != (int)reqMode);
 
             this->slaves[slaveNum-1].mode = reqMode;
          }
@@ -1338,7 +1378,7 @@ bool AKDController::setOpMode(uint slave, ecat_OpModes reqMode){
 bool AKDController::confProfPos(uint slave, bool moveImmediate, bool moveRelative){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1352,9 +1392,9 @@ bool AKDController::confProfPos(uint slave, bool moveImmediate, bool moveRelativ
    if(slave != 0) slaveNum = slave - 1;
    else slaveNum = 0;
    do{
-      if(this->slaves[slaveNum].mode != profPos){
+      if(this->slaves[slaveNum].mode != ecat_OpModes::profPos){
          pthread_mutex_unlock(&this->control);
-         printf("Invalid op mode: %i\n", this->slaves[slaveNum].mode);
+         printf("Invalid op mode: %i\n", (int)this->slaves[slaveNum].mode);
          return FALSE;
       }
 
@@ -1382,7 +1422,7 @@ bool AKDController::confProfPos(uint slave, bool moveImmediate, bool moveRelativ
 bool AKDController::confUnits(uint slave, uint32 motorRev, uint32 shaftRev){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1425,7 +1465,7 @@ bool AKDController::confUnits(uint slave, uint32 motorRev, uint32 shaftRev){
 bool AKDController::confMotionTask(uint slave, uint vel, uint acc, uint dec){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1491,10 +1531,10 @@ bool AKDController::confMotionTask(uint slave, uint vel, uint acc, uint dec){
  * @param      txPDO4      Object index for 4st input(from slave) PDO assignment.
 */
 void AKDController::confSlavePDOs(uint slave, const void* usrControl, int bufferSize, uint16 rxPDO1, uint16 rxPDO2, uint16 rxPDO3, uint16 rxPDO4, uint16 txPDO1, uint16 txPDO2, uint16 txPDO3, uint16 txPDO4){
-   int slaveNum, rx = 0, tx = 0;
+   int rx = 0, tx = 0;
    
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return;
    }
@@ -1511,32 +1551,202 @@ void AKDController::confSlavePDOs(uint slave, const void* usrControl, int buffer
    if(txPDO3 != 0) tx++;
    if(txPDO4 != 0) tx++;
 
-   if(slave != 0) slaveNum = slave - 1;
-   else slaveNum = 0;
-   do{
 
-      slaves[slaveNum].rxPDO.numOfPDOs = rx;
-      slaves[slaveNum].txPDO.numOfPDOs = tx;
+   slaves[slave-1].rxPDO.numOfPDOs = rx;
+   slaves[slave-1].txPDO.numOfPDOs = tx;
 
-      slaves[slaveNum].rxPDO.mapObject[0] = rxPDO1;
-      slaves[slaveNum].rxPDO.mapObject[1] = rxPDO2;
-      slaves[slaveNum].rxPDO.mapObject[2] = rxPDO3;
-      slaves[slaveNum].rxPDO.mapObject[3] = rxPDO4;
+   slaves[slave-1].rxPDO.mapObject[0] = rxPDO1;
+   slaves[slave-1].rxPDO.mapObject[1] = rxPDO2;
+   slaves[slave-1].rxPDO.mapObject[2] = rxPDO3;
+   slaves[slave-1].rxPDO.mapObject[3] = rxPDO4;
+   
+   slaves[slave-1].txPDO.mapObject[0] = txPDO1;
+   slaves[slave-1].txPDO.mapObject[1] = txPDO2;
+   slaves[slave-1].txPDO.mapObject[2] = txPDO3;
+   slaves[slave-1].txPDO.mapObject[3] = txPDO4;
+
+   slaves[slave-1].totalBytes = bufferSize;
+
+   slaves[slave-1].outUserBuff = (uint8*)usrControl;
       
-      slaves[slaveNum].txPDO.mapObject[0] = txPDO1;
-      slaves[slaveNum].txPDO.mapObject[1] = txPDO2;
-      slaves[slaveNum].txPDO.mapObject[2] = txPDO3;
-      slaves[slaveNum].txPDO.mapObject[3] = txPDO4;
-
-      slaves[slaveNum].totalBytes = bufferSize;
-
-      slaves[slaveNum].outUserBuff = (uint8*)usrControl;
-      
-      slaveNum++;
-   } while((slaveNum < this->slaveCount) && (slave == 0));
    
 
    pthread_mutex_unlock(&this->control);
+}
+
+/** Configures slave flexible PDO entry objects. (Used by overloaded functions)
+ * @function   _confSlaveEntries
+ * @abstract               Configures slave flexible PDO entry objects.
+ *                         Also stores pointer to the buffer that the user will use to interface with the slave.
+ * @param      slave       Specifies slave to be configured. When = 0, update all slaves.
+ * @param   flexPdoObject  Object index to map entries. Can only be 0x1600, 0x1601, 0x1602, 0x1603 for txPDOs and 0x1a00, 0x1a01, 0x1a02, 0x1a03 for rxPDOs. (See manual pg 44)
+ * @param      objEntries  Array of object indexes for Nth PDO entry.
+ * @param      subIEntries Array of subindexes for Nth PDO entry.
+*/
+bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int numOfRx, ecat_pdoEntry_t *txEntries, int numOfTx){
+
+   int slaveNum, sdoBuff, sdoBuffSize, errCnt, totalBits, wkc;
+   int mapObject, assignObject;
+   int entrySizes[numOfRx + numOfTx];
+   ecat_pdoEntry_t *entries;
+   int numOfEntries, numOfPDOs;
+   
+   pthread_mutex_lock(&this->control);
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
+      pthread_mutex_unlock(&this->control);
+      return false;
+   }
+   pthread_mutex_unlock(&this->control);
+
+   if(slave != 0) slaveNum = slave;
+   else slaveNum = 1;
+   do{
+
+      // Check size of object entries
+      entries = rxEntries;
+      numOfEntries = numOfRx;
+      int entry = 0;
+      for(int tx = 0; tx <= 1; tx++){ // Check rx first then tx.
+         totalBits = 0;
+         int pdoEntry = 0;
+         while(pdoEntry < numOfEntries){
+            errCnt = 0;
+            do{ 
+               sdoBuffSize = 4;
+               if(errCnt > 10) return false;
+               else errCnt++;
+            }while(ec_SDOread(slaveNum, entries[pdoEntry].index, entries[pdoEntry].subIndex , FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM) != 1);
+            entrySizes[entry] = sdoBuffSize * 8;
+            totalBits += sdoBuffSize * 8;
+            entry++;
+            pdoEntry++;
+         }
+         if(tx){
+            if(totalBits > (32*8)) return false; //If too many tx bits, fail.
+         }else{
+            if(totalBits > (20*8)) return false; //If too many rx bits, fail.
+         }
+
+         entries = txEntries;
+         numOfEntries = numOfTx;
+      }
+
+      // Disable all assignment and mapping objects. Preps for writing.
+      assignObject = rxPDOAssign;
+      mapObject = rxFlexPDO1;
+      for(int tx = 0; tx <= 1; tx++){ // Loop rx first then tx.
+
+         // Disable assignment object
+         sdoBuff = 0;
+         errCnt = 0;
+         do{
+            if(errCnt > 10) return false;
+            else errCnt++;
+            wkc = ec_SDOwrite(slaveNum, assignObject, 0 , false, 1, &sdoBuff, EC_TIMEOUTRXM);
+         }while(wkc != 1);
+         
+         // Disable all flex mapping objects
+         while(1){
+
+            sdoBuff = 0;
+            errCnt = 0;
+            do{
+               if(errCnt > 10) return false;
+               else errCnt++;
+               wkc = ec_SDOwrite(slaveNum, mapObject, 0 , false, 1, &sdoBuff, EC_TIMEOUTRXM);
+            }while(wkc != 1);
+
+            if(tx){
+               if(mapObject == txFlexPDO4) break;
+            }
+            else{
+               if(mapObject == rxFlexPDO4) break;
+            }
+            mapObject++;
+         }
+
+         assignObject = txPDOAssign;
+         mapObject = txFlexPDO1;
+      }
+
+      assignObject = rxPDOAssign;
+      mapObject = rxFlexPDO1;
+      entries = rxEntries;
+      numOfEntries = numOfRx;
+      for(int tx = 0; tx <= 1; tx++){ // Loop rx first then tx.
+
+         // Cycle through every map object
+         int entry = 0;
+         int numOfPDOs = 0;
+         while(1){
+
+            totalBits = 0;
+            int pdoEntry = 0;
+            // Cycle through every entry mapping and fill flexible pdo object map with (entry,subindex,size)
+            while(1){
+
+               // If the PDO is full (max of 8 entries),
+               // OR the next entry doesn't exist,
+               // OR the next entry will exceed the PDOs size of 8 bytes,
+               if((pdoEntry > 8) || (entry >= numOfEntries) || ((entrySizes[entry] + totalBits) > (8*8))){
+                  // procceed to use the next PDO.
+
+                  // But first, enable all the entries of previous map
+                  errCnt = 0;
+                  if(pdoEntry > 8) sdoBuff = 8;
+                  else sdoBuff = pdoEntry;
+                  do{ 
+                     if(errCnt > 10) return false;
+                     else errCnt++;
+                  }while(ec_SDOwrite(slaveNum, mapObject, 0 , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM) != 1);
+
+                  if(pdoEntry > 0) numOfPDOs++;
+
+                  break;
+               }
+               pdoEntry++;
+               
+               sdoBuff = (entries[entry].index << 16) + (entries[entry].subIndex << 8) + (entrySizes[entry]);
+               #if AKD_ECAT_DEBUG_MODE
+                  printf("confSlaveEntries: Slave %i PDO %04x Entry %i = 0x%08x\n", slaveNum, mapObject, pdoEntry, sdoBuff);
+               #endif
+
+               errCnt = 0;
+               do{
+                  if(errCnt > 10) return false;
+                  else errCnt++;
+               }while(ec_SDOwrite(slaveNum, mapObject, pdoEntry , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM) != 1);
+
+               totalBits += entrySizes[entry];
+               entry++;
+            }
+
+            if(((mapObject == txFlexPDO4) && tx) || ((mapObject == rxFlexPDO4) && !tx)){
+               if(entry != numOfEntries) return false; // If the entries won't fit in the given order, fail.
+               else break;
+            }
+            mapObject++;            
+         }
+
+         errCnt = 0;
+         sdoBuff = numOfPDOs;
+         do{
+            if(errCnt > 10) return false;
+            else errCnt++;
+         }while(ec_SDOwrite(slaveNum, assignObject, 0 , FALSE, 1, &sdoBuff, EC_TIMEOUTRXM) != 1);
+
+
+         assignObject = txPDOAssign;
+         mapObject = txFlexPDO1;
+         entries = txEntries;
+         numOfEntries = numOfTx;
+      }
+   
+   slaveNum++;
+   } while((slaveNum <= this->slaveCount) && (slave == 0));
+
+
+   return true;
 }
 
 /** Configure digital outputs.
@@ -1552,7 +1762,7 @@ void AKDController::confSlavePDOs(uint slave, const void* usrControl, int buffer
 bool AKDController::confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8 out1Mode, uint8 out2Mode){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1608,7 +1818,7 @@ bool AKDController::confDigOutputs(uint slave, bool enableOut1, bool enableOut2,
 bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int dist, int pos, int timeout_ms){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1663,7 +1873,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
    pthread_mutex_unlock(&this->control);
 
 
-   if(!setOpMode(slave, homing)) {
+   if(!setOpMode(slave, ecat_OpModes::homing)) {
       #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [Home] Failed to set homing mode.\n");
       #endif
@@ -1740,7 +1950,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
 bool AKDController::waitForTarget(uint slave, uint timeout_ms){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1762,12 +1972,12 @@ bool AKDController::waitForTarget(uint slave, uint timeout_ms){
       else slaveNum = 0;
       do{
          // Check target reached bit
-         if ( !(this->slaves[slaveNum].coeStatus & (1 << 10)) && ((this->slaves[slaveNum].mode == profPos) || (this->slaves[slaveNum].mode == homing) || (this->slaves[slaveNum].mode == profVel))){
+         if ( !(this->slaves[slaveNum].coeStatus & (1 << 10)) && ((this->slaves[slaveNum].mode == ecat_OpModes::profPos) || (this->slaves[slaveNum].mode == ecat_OpModes::homing) || (this->slaves[slaveNum].mode == ecat_OpModes::profVel))){
             allFin = FALSE;
             break;
          }
          // Check internal limit active bit
-         if ( (this->slaves[slaveNum].coeStatus & (1 << 11)) && ((this->slaves[slaveNum].mode == profPos) || (this->slaves[slaveNum].mode == homing) || (this->slaves[slaveNum].mode == profVel))){
+         if ( (this->slaves[slaveNum].coeStatus & (1 << 11)) && ((this->slaves[slaveNum].mode == ecat_OpModes::profPos) || (this->slaves[slaveNum].mode == ecat_OpModes::homing) || (this->slaves[slaveNum].mode == ecat_OpModes::profVel))){
             err = -1; // If internal limit active, return -1;
             break;
          }
@@ -1789,7 +1999,7 @@ bool AKDController::waitForTarget(uint slave, uint timeout_ms){
 bool AKDController::readFault(uint slave){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1822,7 +2032,7 @@ bool AKDController::readFault(uint slave){
 bool AKDController::clearFault(uint slave, bool persistClear){
 
    pthread_mutex_lock(&this->control);
-   if(this->masterState == ms_shutdown) {
+   if(this->masterState == ecat_masterStates::ms_shutdown) {
       pthread_mutex_unlock(&this->control);
       return FALSE;
    }
@@ -1831,7 +2041,7 @@ bool AKDController::clearFault(uint slave, bool persistClear){
    int err = 0, slaveNum;
    bool noFaults;
    struct timespec timeout;
-   clock_gettime(CLOCK_MONOTONIC, &timeout);
+   clock_gettime(CLOCK_REALTIME, &timeout);
    timeout.tv_sec += 5;
 
    // Loop through all slaves and set clear fault bit

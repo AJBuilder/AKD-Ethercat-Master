@@ -11,12 +11,17 @@
 #include <inttypes.h>
 
 
-    enum ecat_OpModes{profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
+    
 
 class AKDController{
     public:
 
-    enum ecat_masterStates{ms_shutdown, ms_stop, ms_disable, ms_enable};
+    enum class ecat_OpModes {profPos = 1, profVel = 3, profTor = 4, homing = 6, intPos = 7, syncPos = 8};
+    enum class ecat_masterStates{ms_shutdown, ms_stop, ms_disable, ms_enable};
+    struct ecat_pdoEntry_t{
+        uint16_t index;
+        uint8_t  subIndex;
+    };
     
     bool ecat_Init(const char* ifname);
     bool ecat_Start();
@@ -36,6 +41,8 @@ class AKDController{
     bool waitForTarget(uint slave, uint timeout_ms);
 
     void confSlavePDOs(uint slave, const void* usrControl, int size, uint16_t rxPDO1, uint16_t rxPDO2, uint16_t rxPDO3, uint16_t rxPDO4, uint16_t txPDO1, uint16_t txPDO2, uint16_t txPDO3, uint16_t txPDO4);
+    bool confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int numOfRx, ecat_pdoEntry_t *txEntries, int numOfTx);
+
     bool confProfPos(uint slave, bool moveImmediate, bool moveRelative);
     bool confMotionTask(uint slave, uint vel, uint acc, uint dec);
     bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8_t out1Mode, uint8_t out2Mode);
@@ -70,7 +77,7 @@ class AKDController{
             digOut2Mode = DEFAULT_DIGOUT;
             update = FALSE;
             quickStop = FALSE;
-            mode = (ecat_OpModes)UNINIT_OPMODE;
+            mode = (ecat_OpModes_t)UNINIT_OPMODE;
         }*/
         // PDO Data
         uint8_t *outUserBuff, *inUserBuff;
@@ -102,7 +109,7 @@ class AKDController{
     uint inSyncCount;
     int8_t wrkCounter, expectedWKC;
     int64_t diffDCtime;
-    ecat_masterStates masterState = ms_shutdown;
+    ecat_masterStates masterState = ecat_masterStates::ms_shutdown;
 
     
 
@@ -151,6 +158,7 @@ class AKDController{
     // Utility Methods
     bool State(ecat_masterStates reqState);
     bool ec_sync(int64_t reftime, uint64_t cycletime , int64_t *offsettime, int64_t dist, int64_t window, int64_t *d, int64_t *i);
+    
     
 
     // Main Methods
