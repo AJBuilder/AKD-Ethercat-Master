@@ -48,6 +48,8 @@ class AKDController{
     bool confDigOutputs(uint slave, bool enableOut1, bool enableOut2, uint8_t out1Mode, uint8_t out2Mode);
     bool confUnits(uint slave, uint32_t motorRev, uint32_t shaftRev);
     bool setOpMode(uint slave, ecat_OpModes reqMode);
+
+    bool writeObject(uint slave, uint16_t object, uint8_t subIndex, uint32_t data);
     
     #if AKD_ECAT_DEBUG_MODE
 
@@ -96,12 +98,12 @@ class AKDController{
 
         // Slave Control Signals
         bool update, quickStop;
+        bool targetReached;
         
         uint16_t coeCtrlWord, coeStatus;
 
         // Profile Control
         ecat_OpModes mode;
-        bool moveFin, moveAck, moveErr;
     } *slaves;
 
     // Control Signals

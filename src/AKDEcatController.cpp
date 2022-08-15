@@ -302,7 +302,7 @@ void* AKDController::ecat_Talker(void* THIS)
    uint8*   input_map_ptr;
    uint8*   output_buff_ptr;
    uint8*   input_buff_ptr;
-   bool moveQueued[This->slaveCount] = {FALSE};
+   bool moveQueued[This->slaveCount], newTarget[This->slaveCount] = {FALSE};
    #if AKD_ECAT_DEBUG_MODE
       char buffer[DEBUG_BUFF_WIDTH];
       uint16 prevStatus[This->slaveCount], prevCtrl[This->slaveCount];
@@ -311,6 +311,7 @@ void* AKDController::ecat_Talker(void* THIS)
    // Buffers (To outside of thread)
    int8 wrkCounterb;
    uint inSyncCountb;
+   bool targetReachedb[This->slaveCount] = {FALSE};
    int64 toff, sync_delta, sync_integral, diffDCtimeb;
 
    #if AKD_ECAT_DEBUG_MODE
@@ -350,9 +351,15 @@ void* AKDController::ecat_Talker(void* THIS)
          
          for(int slaveNum = 0 ; slaveNum < This->slaveCount ; slaveNum++){
             
+            This->slaves[slaveNum].targetReached = targetReachedb[slaveNum];
+
             if(This->slaves[slaveNum].update){        
 
-               if(This->slaves[slaveNum].coeCtrlWord & (1 << 4)) moveQueued[slaveNum] = TRUE;
+               if(This->slaves[slaveNum].coeCtrlWord & (1 << 4)) {
+                  moveQueued[slaveNum] = true; // Make sure that a rising edge of setpoint ack bit is detected
+                  newTarget[slaveNum] = true; // Make sure the a rising edge of target reached bit is detected
+                  targetReachedb[slaveNum] = false; // Reset for a new target
+               }
                
                output_buff_ptr = This->slaves[slaveNum].outUserBuff;
                input_buff_ptr = This->slaves[slaveNum].inUserBuff;
@@ -366,20 +373,22 @@ void* AKDController::ecat_Talker(void* THIS)
                // Update inputs from user buffers to IOmap
                memcpy(input_buff_ptr, input_map_ptr, This->slaves[slaveNum].txPDO.bytes);
 
+               // Update target flag
+               This->slaves[slaveNum].targetReached = targetReachedb[slaveNum];
+
                // Reset update flag
-               This->slaves[slaveNum].update = FALSE;
+               This->slaves[slaveNum].update = false;
             }
             else {
-               if(This->slaves[slaveNum].mode == ecat_OpModes::profPos || This->slaves[slaveNum].mode == ecat_OpModes::homing) // If in ProfPos or Homing only
+               if(This->slaves[slaveNum].mode == ecat_OpModes::profPos || This->slaves[slaveNum].mode == ecat_OpModes::homing){ // If in ProfPos or Homing only
                   This->slaves[slaveNum].coeCtrlWord &= ~0b0010000; // Clear move bit
                   This->slaves[slaveNum].coeCtrlWord |= *This->slaves[slaveNum].coeCtrlMapPtr & (1 << 4); // Copy move bit from talker controled IOmap.
+               }
             }
-
             // Overwrite CoE control and status words with controllers data.
             memcpy(This->slaves[slaveNum].coeCtrlMapPtr, &This->slaves[slaveNum].coeCtrlWord, sizeof(This->slaves[slaveNum].coeCtrlWord));
             memcpy(&This->slaves[slaveNum].coeStatus, This->slaves[slaveNum].coeStatusMapPtr, sizeof(This->slaves[slaveNum].coeStatus));
             
-               
          }
          
 
@@ -393,6 +402,7 @@ void* AKDController::ecat_Talker(void* THIS)
          // CONTROL UNLOCKED
       }
 
+      // Detect rising edges of flags
       for(int slaveNum = 0; slaveNum < This->slaveCount; slaveNum++){
          if(moveQueued[slaveNum]){
             if(!(*This->slaves[slaveNum].coeStatusMapPtr & (1 << 12))){ // If buffering setpoint...
@@ -401,8 +411,17 @@ void* AKDController::ecat_Talker(void* THIS)
          }
          else if(*This->slaves[slaveNum].coeStatusMapPtr & (1 << 12)){ // If no longer buffering, and setpoint ack
             *This->slaves[slaveNum].coeCtrlMapPtr &= ~(1 << 4); // Clear move bit. So there are no double setpoints
-         }         
+         }    
+
+         if(newTarget[slaveNum]){
+            if(!(*This->slaves[slaveNum].coeStatusMapPtr & (1 << 10))){ // If target is not reached...
+               newTarget[slaveNum] = FALSE; // Wait for it to be reached
+            }
+         } else if(*This->slaves[slaveNum].coeStatusMapPtr & (1 << 10)){
+            targetReachedb[slaveNum] = true;
+         }
       }
+
 
       #if AKD_ECAT_DEBUG_MODE
       // Update debug info
@@ -821,7 +840,7 @@ bool AKDController::ecat_Start(){
 
    }
 
-
+   //ec_reconfig_slave(0, EC_TIMEOUTRET3); Repopulate ec_slave data with new PDO asssignment configuration. NOT WORKING???
    ecx_context.manualstatechange = 1; // Prevents putting slaves into SAFEOP when configuring IOmap.
    ec_config_map(&this->IOmap); // Set up IOmap.
    printf("ECAT: Mode: %i\n", ec_slave[1].state);
@@ -1076,9 +1095,18 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
 
    allUpdated = FALSE;
    while(!allUpdated && err == 0){ // Check and make sure all slave update flags were recognized.
-
+      #if AKD_ECAT_DEBUG_MODE 
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff(); 
+         pthread_mutex_unlock(&this->debug);
+      #endif
       if(timeout_ms != 0) err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to IOmap
       else pthread_cond_wait(&this->IOUpdated, &this->control);
+      #if AKD_ECAT_DEBUG_MODE 
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff(); 
+         pthread_mutex_unlock(&this->debug); 
+      #endif
 
       allUpdated = TRUE;
       if(slave != 0) slaveNum = slave - 1;
@@ -1093,12 +1121,30 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
 
    }
 
+   #if AKD_ECAT_DEBUG_MODE 
+      pthread_mutex_lock(&this->debug);
+      printDebugBuff(); 
+      printf("\nUpdate(): Slaves Updated\n");
+      printDebugBuff();
+      pthread_mutex_unlock(&this->debug);
+   #endif
+   
+
    allUpdated = FALSE;
    while(!allUpdated && err == 0 && move){ // Check to see if move was processed or error (ie err bit = 1)
 
-      
+      #if AKD_ECAT_DEBUG_MODE 
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff(); 
+         pthread_mutex_unlock(&this->debug); 
+      #endif
       if(timeout_ms != 0) err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to move status.
       else pthread_cond_wait(&this->IOUpdated, &this->control);
+      #if AKD_ECAT_DEBUG_MODE 
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff(); 
+         pthread_mutex_unlock(&this->debug);  
+      #endif
 
       allUpdated = TRUE;
       if(slave != 0) slaveNum = slave - 1;
@@ -1117,6 +1163,13 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
       }while((slaveNum < this->slaveCount) && (slave == 0));
          
    }
+   #if AKD_ECAT_DEBUG_MODE 
+      pthread_mutex_lock(&this->debug);
+      printDebugBuff(); 
+      printf("\nUpdate(): Move was processed\n");
+      printDebugBuff(); 
+      pthread_mutex_unlock(&this->debug);
+   #endif
    
    pthread_mutex_unlock(&this->control);
    return err; // Return err
@@ -1587,8 +1640,9 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
 
    int slaveNum, sdoBuff, sdoBuffSize, errCnt, totalBits, wkc;
    int mapObject, assignObject;
-   int entrySizes[numOfRx + numOfTx];
+   int txSizes[numOfTx], rxSizes[numOfRx], *sizes;
    ecat_pdoEntry_t *entries;
+   int entry, pdoEntry;
    int numOfEntries, numOfPDOs;
    
    pthread_mutex_lock(&this->control);
@@ -1604,22 +1658,21 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
 
       // Check size of object entries
       entries = rxEntries;
+      sizes = rxSizes;
       numOfEntries = numOfRx;
-      int entry = 0;
       for(int tx = 0; tx <= 1; tx++){ // Check rx first then tx.
+      entry = 0;
          totalBits = 0;
-         int pdoEntry = 0;
-         while(pdoEntry < numOfEntries){
+         while(entry < numOfEntries){
             errCnt = 0;
-            do{ 
+            do{
                sdoBuffSize = 4;
                if(errCnt > 10) return false;
                else errCnt++;
-            }while(ec_SDOread(slaveNum, entries[pdoEntry].index, entries[pdoEntry].subIndex , FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM) != 1);
-            entrySizes[entry] = sdoBuffSize * 8;
+            }while(ec_SDOread(slaveNum, entries[entry].index, entries[entry].subIndex , FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM) != 1);
+            sizes[entry] = sdoBuffSize * 8;
             totalBits += sdoBuffSize * 8;
             entry++;
-            pdoEntry++;
          }
          if(tx){
             if(totalBits > (32*8)) return false; //If too many tx bits, fail.
@@ -1628,6 +1681,7 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
          }
 
          entries = txEntries;
+         sizes = txSizes;
          numOfEntries = numOfTx;
       }
 
@@ -1672,23 +1726,24 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
       assignObject = rxPDOAssign;
       mapObject = rxFlexPDO1;
       entries = rxEntries;
+      sizes = rxSizes;
       numOfEntries = numOfRx;
       for(int tx = 0; tx <= 1; tx++){ // Loop rx first then tx.
 
          // Cycle through every map object
-         int entry = 0;
-         int numOfPDOs = 0;
+         entry = 0;
+         numOfPDOs = 0;
          while(1){
 
             totalBits = 0;
-            int pdoEntry = 0;
+            pdoEntry = 0;
             // Cycle through every entry mapping and fill flexible pdo object map with (entry,subindex,size)
             while(1){
 
                // If the PDO is full (max of 8 entries),
                // OR the next entry doesn't exist,
                // OR the next entry will exceed the PDOs size of 8 bytes,
-               if((pdoEntry > 8) || (entry >= numOfEntries) || ((entrySizes[entry] + totalBits) > (8*8))){
+               if((pdoEntry > 8) || (entry >= numOfEntries) || ((sizes[entry] + totalBits) > (8*8))){
                   // procceed to use the next PDO.
 
                   // But first, enable all the entries of previous map
@@ -1706,9 +1761,9 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
                }
                pdoEntry++;
                
-               sdoBuff = (entries[entry].index << 16) + (entries[entry].subIndex << 8) + (entrySizes[entry]);
+               sdoBuff = (entries[entry].index << 16) + (entries[entry].subIndex << 8) + (sizes[entry]);
                #if AKD_ECAT_DEBUG_MODE
-                  printf("confSlaveEntries: Slave %i PDO %04x Entry %i = 0x%08x\n", slaveNum, mapObject, pdoEntry, sdoBuff);
+                  printf("ECAT: confSlaveEntries: Slave %i PDO %04x Entry %i = 0x%08x\n", slaveNum, mapObject, pdoEntry, sdoBuff);
                #endif
 
                errCnt = 0;
@@ -1717,7 +1772,7 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
                   else errCnt++;
                }while(ec_SDOwrite(slaveNum, mapObject, pdoEntry , FALSE, 4, &sdoBuff, EC_TIMEOUTRXM) != 1);
 
-               totalBits += entrySizes[entry];
+               totalBits += sizes[entry];
                entry++;
             }
 
@@ -1739,6 +1794,7 @@ bool AKDController::confSlaveEntries(uint slave, ecat_pdoEntry_t *rxEntries, int
          assignObject = txPDOAssign;
          mapObject = txFlexPDO1;
          entries = txEntries;
+         sizes = txSizes;
          numOfEntries = numOfTx;
       }
    
@@ -1877,7 +1933,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [Home] Failed to set homing mode.\n");
       #endif
-      return FALSE;
+      return false;
    }
    #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Opmode to homing.\n");
@@ -1896,7 +1952,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [Home] Update() failed.\n");
       #endif
-      return FALSE;
+      return false;
    }
    #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Updated.\n");
@@ -1915,7 +1971,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       #if AKD_ECAT_DEBUG_MODE
          printf("\nECAT: [HOME] Timedout waiting to reach target.\n");
       #endif
-      return FALSE;
+      return false;
    }
    #if AKD_ECAT_DEBUG_MODE
       printf("\nECAT: [HOME] Target reached.\n");
@@ -1928,7 +1984,7 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
          #if AKD_ECAT_DEBUG_MODE
             printf("\nECAT: [Home] Failed to revert opmode.\n");
          #endif
-         return FALSE;
+         return false;
       }
       slaveNum++;
    } while((slaveNum < this->slaveCount) && (slave == 0));
@@ -1937,12 +1993,12 @@ bool AKDController::Home(uint slave, int mode, int dir, int speed, int acc, int 
       printf("\nECAT: [HOME] Reverted to previous opmode. Finished!\n");
    #endif
 
-   return TRUE;
+   return true;
 }
 
-/** Blocking function that waits for the current move target to be reached.
+/** Blocking function that waits for the current position target to be reached.
  * @function   waitForTarget
- * @abstract               Blocking function that waits for the current move target to be reached.
+ * @abstract               Blocking function that waits for the current position target to be reached.
  * @param      slave       Specifies slave(s) to wait on. When = 0, wait for all slaves.
  * @param      timeout_ms  Timeout in milliseconds. If = 0, no timeout. 
  * @result                 Returns TRUE if successful. Returns FALSE if timed out.
@@ -1961,29 +2017,46 @@ bool AKDController::waitForTarget(uint slave, uint timeout_ms){
    clock_gettime(CLOCK_REALTIME, &timeout);
    add_timespec(&timeout, (int64)timeout_ms * 1000 * 1000);
 
-   
+   #if AKD_ECAT_DEBUG_MODE
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff();
+         pthread_mutex_unlock(&this->debug);
+   #endif
+
    while(!allFin && err == 0){ // Check to see if update was acknowledged or error
 
+      
       if(timeout_ms != 0) err = pthread_cond_timedwait(&this->IOUpdated, &this->control, &timeout); //Wait for talker thread to confirm update to move status.
       else err = pthread_cond_wait(&this->IOUpdated, &this->control);
+      #if AKD_ECAT_DEBUG_MODE
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff();
+         pthread_mutex_unlock(&this->debug);
+      #endif
 
       allFin = TRUE;
       if(slave != 0) slaveNum = slave - 1;
       else slaveNum = 0;
       do{
          // Check target reached bit
-         if ( !(this->slaves[slaveNum].coeStatus & (1 << 10)) && ((this->slaves[slaveNum].mode == ecat_OpModes::profPos) || (this->slaves[slaveNum].mode == ecat_OpModes::homing) || (this->slaves[slaveNum].mode == ecat_OpModes::profVel))){
+         if (!(this->slaves[slaveNum].targetReached) && ((this->slaves[slaveNum].mode == ecat_OpModes::profPos) || (this->slaves[slaveNum].mode == ecat_OpModes::homing) || (this->slaves[slaveNum].mode == ecat_OpModes::profVel))){
             allFin = FALSE;
-            break;
-         }
-         // Check internal limit active bit
-         if ( (this->slaves[slaveNum].coeStatus & (1 << 11)) && ((this->slaves[slaveNum].mode == ecat_OpModes::profPos) || (this->slaves[slaveNum].mode == ecat_OpModes::homing) || (this->slaves[slaveNum].mode == ecat_OpModes::profVel))){
-            err = -1; // If internal limit active, return -1;
+
+            // Check internal limit active bit
+            if (this->slaves[slaveNum].coeStatus & (1 << 11)){ // UNTESTED
+               err = -1; // If internal limit active, return -1;
+            }
             break;
          }
 
          slaveNum++;
       }while((slaveNum < this->slaveCount) && (slave == 0));
+
+      #if AKD_ECAT_DEBUG_MODE
+         pthread_mutex_lock(&this->debug);
+         printDebugBuff();
+         pthread_mutex_unlock(&this->debug);
+      #endif
    }
 
    pthread_mutex_unlock(&this->control);
@@ -2080,4 +2153,33 @@ bool AKDController::clearFault(uint slave, bool persistClear){
 
 
    return err == 0;
+}
+
+bool AKDController::writeObject(uint slave, uint16_t object, uint8 subIndex, uint32_t data){
+
+   uint32 sdoBuff;
+   int sdoBuffSize, errCnt, slaveNum;
+
+   if(slave == 0) slaveNum = 1;
+   else slaveNum = slave;
+   do{
+      errCnt = 0;
+      do{
+         sdoBuffSize = 4;
+         if(errCnt > 10) return false;
+         else errCnt++;
+      }while(ec_SDOread(slaveNum, object, subIndex , FALSE, &sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM) != 1);
+      
+      sdoBuff = data;
+      errCnt = 0;
+      do{
+         if(errCnt > 10) return false;
+         else errCnt++;
+      }while(ec_SDOwrite(slaveNum, object, subIndex , false, sdoBuffSize, &sdoBuff, EC_TIMEOUTRXM) != 1);
+
+   slaveNum++;
+   } while((slaveNum <= this->slaveCount) && (slave == 0));
+
+   return true;
+
 }
