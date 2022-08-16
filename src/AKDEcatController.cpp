@@ -391,7 +391,6 @@ void* AKDController::ecat_Talker(void* THIS)
             memcpy(&This->slaves[slaveNum].coeStatus, This->slaves[slaveNum].coeStatusMapPtr, sizeof(This->slaves[slaveNum].coeStatus));
             
          }
-         
 
          // Signal that IOmap has been updated (Possibly user buff)
          // Called before unlocking control so that whatever is waiting
@@ -602,8 +601,6 @@ void* AKDController::ecat_Controller(void* THIS)
       printf("integral: %8" PRIi64 "\t", This->gl_integral);
       //printf("coeStatus: 0x%04"PRIx16"\t", This->coeStatus);
       //printf("CtrlWord: 0x%04"PRIx16"\t", This->coeCtrlWord);
-
-      
       
       if(((CYCLE_NS - This->diffDCtime)*(((CYCLE_NS - This->diffDCtime) > 0) - ((CYCLE_NS - This->diffDCtime) < 0))) > (CYCLE_NS / 2)) 
          printf("\tClock slipping! DCErr = %12" PRIi64 "  CYCLE_NS/2 = %d\n", ((CYCLE_NS - This->diffDCtime)*(((CYCLE_NS - This->diffDCtime) > 0) - ((CYCLE_NS - This->diffDCtime) < 0))), CYCLE_NS / 2);
@@ -615,8 +612,6 @@ void* AKDController::ecat_Controller(void* THIS)
       // CONTROL UNLOCKED
 
       pthread_cond_signal(&This->stateUpdated);
-
-      
 
       osal_usleep(100000); //100ms
       
@@ -1089,7 +1084,6 @@ int AKDController::Update(uint slave, bool move, int timeout_ms){
 
    clock_gettime(CLOCK_REALTIME, &timeout);
    add_timespec(&timeout, (int64)timeout_ms * 1000 * 1000);
-
 
    if(slave != 0) slaveNum = slave - 1;
    else slaveNum = 0;
