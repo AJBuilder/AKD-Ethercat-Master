@@ -130,12 +130,12 @@
 
 
 
-void add_timespec(struct timespec *ts, int64 addtime)
+void add_timespec(struct timespec *ts, int64 addns)
 {
    int64 sec, nsec;
 
-   nsec = addtime % NSEC_PER_SEC;
-   sec = (addtime - nsec) / NSEC_PER_SEC;
+   nsec = addns % NSEC_PER_SEC;
+   sec = (addns - nsec) / NSEC_PER_SEC;
    ts->tv_sec += sec;
    ts->tv_nsec += nsec;
    if ( ts->tv_nsec >= NSEC_PER_SEC )
@@ -296,8 +296,8 @@ void* AKDController::ecat_Talker(void* THIS)
    AKDController* This = (AKDController*)THIS;
 
    // Local variables
-   struct timespec   ts;
-   uint64 prevDCtime;
+   struct timespec   cycle_ts, control1_ts, control2_ts, controlOpTime_ts;
+   uint64 prevDCtime, controlOpTime;
    uint8*   output_map_ptr;
    uint8*   input_map_ptr;
    uint8*   output_buff_ptr;
@@ -319,27 +319,28 @@ void* AKDController::ecat_Talker(void* THIS)
       printf("\nTalker running on CPU %d\n", sched_getcpu());
    #endif
 
-   clock_gettime(CLOCK_MONOTONIC, &ts);
+   clock_gettime(CLOCK_MONOTONIC, &cycle_ts);
    ec_send_processdata();
    while(1)
    {
       wrkCounterb = ec_receive_processdata(EC_TIMEOUTRET);
       
-      /* calculate next cycle start */
-      add_timespec(&ts, CYCLE_NS+ toff);
-
-      /* wait to cycle start */
-      clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &ts, NULL);
-
       /* calulate toff to get linux time and DC synced */
       if(This->ec_sync(ec_DCtime, CYCLE_NS, &toff, MASTER_SYNCLEAD + SYNC_DIST, MASTER_WINDOW_NS, &sync_delta, &sync_integral)){ // If withing sync window
          if (inSyncCountb != UINT32_MAX) inSyncCountb++; // Count number of cycles in window
       }
       else inSyncCountb = 0;
       
-      
+      /* calculate next cycle start */
+      add_timespec(&cycle_ts, CYCLE_NS+ toff);
+
+      /* wait to cycle start */
+      clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &cycle_ts, NULL);
+
       if(pthread_mutex_trylock(&This->control) == 0){
          // CONTROL LOCKED
+         clock_gettime(CLOCK_MONOTONIC, &control1_ts); //Record time it takes to operate with control lock.
+         
          if(This->masterState == ecat_masterStates::ms_shutdown) {
             pthread_mutex_unlock(&This->control);
             break;
@@ -400,6 +401,15 @@ void* AKDController::ecat_Talker(void* THIS)
 
          pthread_mutex_unlock(&This->control);
          // CONTROL UNLOCKED
+
+         clock_gettime(CLOCK_MONOTONIC, &control2_ts); //Record time it takes to operate with control lock.
+         controlOpTime = ((control2_ts.tv_sec - control1_ts.tv_sec) * NSEC_PER_SEC) + (control2_ts.tv_nsec - control1_ts.tv_nsec);
+      }else{
+         // Possibly useless
+         controlOpTime_ts.tv_sec = 0;
+         controlOpTime_ts.tv_nsec = 0;
+         add_timespec(&controlOpTime_ts, controlOpTime);
+         clock_nanosleep(CLOCK_MONOTONIC, 0, &controlOpTime_ts, NULL);
       }
 
       // Detect rising edges of flags
@@ -659,7 +669,7 @@ bool AKDController::ecat_Init(const char* ifname){
 
          // Initialize threading resources
          struct sched_param rt_param;
-         rt_param.sched_priority = 99;
+         rt_param.sched_priority = 99; // RT priority
 
          cpu_set_t cpuset;
          CPU_ZERO(&cpuset);
