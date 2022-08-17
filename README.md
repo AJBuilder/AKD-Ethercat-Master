@@ -1,12 +1,19 @@
-# EthercatBench
+# AKD Ethercat Master
 
-Main library: AKDEcatController.cpp
+## Building
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+Debug mode will print more data to stdout. If you would like to build in debug mode, replace the cmake command with : 
+```
+cmake -DDEBUG_MODE=ON ..
+```
 
-Two tests are included!
+# Using for ROS
 
+If you'd like to use this in a ROS enviroment without having to install the library on the system, I wrote a [ROS wrapper](https://github.com/AJBuilder/AKD-Ethercat-Master) for the library.
 
-
-Future improvements
-
-I'd like to test to see what the jitter looks like between a sync0 signal and a master process data cycle. I suspect that the master jitter sometimes interferes with the sync0 signal?
-To test you'd have to splice some kind of wireshark monitoring between the first slave and the next? Since you can't see sync signals from the master. Can't see the sync packets, but why would the master need them? Also, the clocks sync fine anyway, but they will be within 1,000 ns at 1ms cycle but randomly fall out of PLL lock when error is >40,000ns. This just generates a quick warning, but this shouldn't be happening...
+Also, a [ROS example](https://github.com/AJBuilder/joystick_ecat_demo).
